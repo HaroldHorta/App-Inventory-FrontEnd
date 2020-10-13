@@ -1,0 +1,27 @@
+<div [class.expanded]='expanded'>
+    <button [class.not-shown]='!products.length || expanded' type="button" class="circle" (click)="onCartClick()">
+           <div><span>{{numProducts}}</span></div>
+    </button>
+    <div [style.height]="expanded ? expandedHeight : inherit" [class.not-shown]='!products.length' [class.animate-plop]='animatePlop' [class.shown]='animatePopout && !expanded'>
+      <div [class.shown]='expanded'>
+        <h3>Esta es tu lista de compras:</h3>
+        <div *ngFor="let item of products">
+          <div class="row">
+            <div>
+              <p>{{item.quantity}} x {{item.product.name}}</p>
+            </div>
+            <div>
+              <p>{{item.quantity*item.product.parsedPrice | currency:'USD':'symbol':'1.0-0' }}</p>
+            </div>
+          </div>
+          <button (click)='deleteProduct(item.product)'>x</button>
+        </div>
+        <button type="button">Pagar {{cartTotal | currency:'USD':'symbol':'1.0-0'}}</button>
+      </div>
+      <button type="button" *ngIf='expanded' (click)="onCartClick()">Cerrar</button>
+    </div>
+  </div>
+  <div [class.shown]='expanded'>
+  
+  </div>
+  

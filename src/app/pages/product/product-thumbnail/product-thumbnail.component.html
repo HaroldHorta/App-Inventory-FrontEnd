@@ -1,0 +1,33 @@
+
+  <div class="col-12 grid-margin stretch-card">
+      <div class="card card-statistics">
+          <div class="card-body">
+              <div class="clearfix">
+                  <div class="float-left">
+                      <i class="mdi mdi-receipt text-warning icon-lg"></i>
+                  </div>
+                  <div>
+                      <div class="fluid-container">
+                          <h3 class="font-weight-medium text-center mb-0">{{ product.name }}</h3>
+                          <div class="text-center">
+                              <img class="img" src="{{'data:image/jpg;base64,' + product.photo.data}}" />
+                          </div>
+                    
+                          <p class="text-muted mt-3 mb-0">
+                              <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>Existencias: {{ product.unit }}
+                          </p>
+                      </div>
+                  </div>
+              </div>
+              <div>
+                  <p class="text-muted mt-3 mb-0">
+                      <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>Descripción: {{ product.description }}
+                  </p>
+              </div>
+              <div class=" mx-auto row justify-content-center align-items-center" style="margin-top: 15px">
+                  <input type="hidden" value="{{product.id}}" #id>
+                  <button class="btn btn-outline-primary" ng-disabled="buttonDisabled" (click)="onAddToCart()">Agregar al carrito</button>
+              </div>
+          </div>
+      </div>
+  </div>
