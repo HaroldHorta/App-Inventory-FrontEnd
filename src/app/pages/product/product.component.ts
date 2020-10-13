@@ -120,7 +120,6 @@ export class ProductComponent implements OnInit {
             passCategoryFilter = this.mainFilter.categories.reduce((found, category) => {
               return found || product_category === category.id;
             }, false);
-
           }
         });
         if (!passCategoryFilter) {
