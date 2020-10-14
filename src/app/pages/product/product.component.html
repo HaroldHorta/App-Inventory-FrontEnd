@@ -1,35 +1,31 @@
 <div class="main-container">
-  <div class="container">
-    <div class="row">
-      <div class="col-3">
-        <div class="filters-wrngxer">
-                   <ngx-cart></ngx-cart>
-          <ngx-filters #filtersComponent [categories]='categories' 
-         (filterChange)='onFilterChange($event)'></ngx-filters>
-        </div>
-      </div>
-      <div class="col-9">
+    <div class="container">
         <div class="row">
-          <div class="col-8">
-            <div class="sort-filters-wrngxer">
-              <ngx-sort-filters [filters]='sortFilters' (sortChange)='sortProducts($event)'></ngx-sort-filters>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <div class="sort-filters-wrngxer">
+                            <ngx-sort-filters [filters]='sortFilters' (sortChange)='sortProducts($event)'></ngx-sort-filters>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <ngx-search-bar #searchComponent (searchChange)='onSearchChange($event)'></ngx-search-bar>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ngx-showcase [products]='originalDataProduct'></ngx-showcase>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-4">
-            <ngx-search-bar #searchComponent (searchChange)='onSearchChange($event)'></ngx-search-bar>
-          </div>
+            <div class="col-3">
+                <div class="filters-wrngxer">
+                    <ngx-cart></ngx-cart>
+                    <ngx-filters #filtersComponent [categories]='categories' (filterChange)='onFilterChange($event)'>
+                    </ngx-filters>
+                </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <ngx-showcase [products]='originalDataProduct'></ngx-showcase>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
