@@ -15,7 +15,7 @@ export class ProductComponent implements OnInit {
 
 
   originalDataProduct: ResponseProduct[] = new Array();
-  products1: ResponseProduct[];
+  //products1: ResponseProduct[];
   categories: ResponseCategory[] = new Array();
   mainFilter: any;
 
@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
           search: '',
           categories: this.categories.slice(0),
         };
-        this.products1 = this.originalDataProduct.slice(0);
+        this.originalDataProduct = this.originalDataProduct.slice(0);
         this.sortProducts('name');
       },
     );
@@ -96,15 +96,15 @@ export class ProductComponent implements OnInit {
 
   updateProducts(filter) {
     let productsSource = this.originalDataProduct;
-    const prevProducts = this.products1;
+    const prevProducts = this.originalDataProduct;
     let filterAllData = true;
     if ((filter.type === 'search' && filter.change === 1) || (filter.type === 'category' && filter.change === -1)) {
-      productsSource = this.products1;
+      productsSource = this.originalDataProduct;
       filterAllData = false;
     }
     // console.log('filtering ' + productsSource.length + ' products')
 
-    this.products1 = productsSource.filter(product => {
+    this.originalDataProduct = productsSource.filter(product => {
       // Filter by search
       if (filterAllData || filter.type === 'search') {
         if (!product.name.match(new RegExp(this.mainFilter.search, 'i'))) {
@@ -131,7 +131,7 @@ export class ProductComponent implements OnInit {
 
     // If the number of products increased after the filter has been applied then sort again
     // If the number of products remained equal, there's a high chance that the items have been reordered.
-    if (prevProducts.length <= this.products1.length && this.products1.length > 1) {
+    if (prevProducts.length <= this.originalDataProduct.length && this.originalDataProduct.length > 1) {
       this.sortProducts(this.currentSorting);
     }
 
@@ -143,7 +143,7 @@ export class ProductComponent implements OnInit {
 
   sortProducts(criteria) {
     // console.log('sorting ' + this.products.length + ' products')
-    this.products1.sort((a, b) => {
+    this.originalDataProduct.sort((a, b) => {
       const priceComparison = a.priceSell - b.priceSell;
       if (criteria === 'priceDes') {
         return -priceComparison;
