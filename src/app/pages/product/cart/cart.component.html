@@ -16,7 +16,7 @@
                 </div>
                 <button class="btn btn-outline-danger form-group" (click)='deleteProduct(item.product)'>x</button>
             </div>
-            <button class="btn btn-outline-primary form-group" type="button">Pagar {{cartTotal | currency:'USD':'symbol':'1.0-0'}}</button>
+            <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button">Pagar {{cartTotal | currency:'USD':'symbol':'1.0-0'}}</button>
         </div>
         <button type="button" *ngIf='expanded' (click)="onCartClick()">Cerrar</button>
     </div>
