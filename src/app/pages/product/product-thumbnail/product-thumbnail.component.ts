@@ -26,7 +26,6 @@ export class ProductThumbnailComponent implements OnInit {
     this.detailViewActive = !this.detailViewActive;
   }
 
-
   onAddToCart() {
     this.cartService.addProductToCart(this.product);
   }
