@@ -1,32 +1,44 @@
 <div class="col-12 grid-margin stretch-card">
     <div class="card card-statistics">
-        <div class="card-body">
+        <div class="card">
             <div class="clearfix">
-                <div class="float-left">
-                    <i class="mdi mdi-receipt text-warning icon-lg"></i>
-                </div>
                 <div>
-                    <div class="fluid-container">
-                        <h5 class="font-weight-medium text-center mb-0">{{ product.name }}</h5>
+                    <div>
+                        <p class="font-weight-medium text-center mb-0 titulos">{{ product.name }}</p>
                         <div class="text-center">
-                            <img class="img" src="{{'data:image/jpg;base64,' + product.photo.data}}" />
+                            <img class="img-card" src="{{'data:image/jpg;base64,' + product.photo.data}}" />
                         </div>
-
-                        <p class="text-muted mt-3 mb-0">
-                            <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>Existencias: {{ product.unit }}
-                        </p>
                     </div>
+
+                    <p class="text-muted mt-3 mb-0 espacio-lateral">
+                        Existencias: {{ product.unit }}
+                    </p>
                 </div>
             </div>
             <div>
-                <p class="text-muted mt-3 mb-0">
-                    <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>Descripción: {{ product.description }}
+                <p class="text-muted puntos-suspensivos espacio-lateral mt-3 mb-0">
+                    Descripción: <br>{{ product.description }}
                 </p>
             </div>
-            <div class=" mx-auto row justify-content-center align-items-center" style="margin-top: 15px">
+            <div class=" mx-auto row justify-content-center align-items-center contenedor-boton" *ngIf="mostrarAgregarCarrito">
                 <input type="hidden" value="{{product.id}}" #id>
-                <button class="btn btn-outline-primary" ng-disabled="buttonDisabled" (click)="onAddToCart()">Agregar al carrito</button>
+                <button class="btn btn-outline-primary boton" ng-disabled="buttonDisabled" (click)="onAddToCart()">Agregar al carrito</button>
             </div>
+
+            <div class="row" *ngIf="!mostrarAgregarCarrito">
+                <div class="col-lg-12">
+                    <nb-card>
+                        <nb-card-body>
+                            <div class="buttons-row">
+                                <button class="col-3 btn btn-danger mb-2" (click)="disminuir()">-</button>
+                                <input class="col-3 btn form-control" value="{{cantidad}}" disabled>
+                                <button class="col-3 btn btn-success mb-2" (click)="aumentar()">+</button>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
