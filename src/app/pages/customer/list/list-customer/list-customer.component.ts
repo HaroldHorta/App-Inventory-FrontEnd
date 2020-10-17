@@ -5,7 +5,7 @@ import { CustomerService } from '../../../../core/services/customer.service';
 @Component({
   selector: 'ngx-list-customer',
   templateUrl: './list-customer.component.html',
-  styleUrls: ['./list-customer.component.scss']
+  styleUrls: ['./list-customer.component.scss'],
 })
 export class ListCustomerComponent implements OnInit {
 
@@ -18,12 +18,11 @@ export class ListCustomerComponent implements OnInit {
     this.getCustomersList();
   }
 
-  getCustomersList(){
+  getCustomersList() {
     this.serviceCustomer.getCustomers().subscribe(
-      customers =>{
+      customers => {
         this.customers = customers;
-        console.log("Listado de customers", this.customers)
-      }
-    )
+      },
+    );
   }
 }

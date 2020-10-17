@@ -8,7 +8,6 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { ListCategoryComponent } from './pages/category/list/list-category/list-category.component';
 
 export const routes: Routes = [
   {
