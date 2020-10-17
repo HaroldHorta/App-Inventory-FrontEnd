@@ -6,7 +6,8 @@
                     <div class="col-1"></div>
                     <div class="col-5">
                         <div class="sort-filters-wrngxer">
-                            <ngx-sort-filters [filters]='sortFilters' (sortChange)='sortProducts($event)'></ngx-sort-filters>
+                            <ngx-sort-filters [filters]='sortFilters' (sortChange)='sortProducts($event)'>
+                            </ngx-sort-filters>
                         </div>
                     </div>
                     <div class="col-6">
@@ -15,6 +16,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        <h2 class="text-center">Lista de productos</h2>
                         <ngx-showcase [products]='originalDataProduct'></ngx-showcase>
                     </div>
                 </div>

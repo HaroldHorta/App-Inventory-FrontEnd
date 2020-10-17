@@ -10,8 +10,12 @@ import { ProductService } from '../../../core/services/product.service';
 })
 export class ProductThumbnailComponent implements OnInit {
 
+  @Input() existencias: ResponseProduct;
   @Input() product: ResponseProduct;
 
+  agregarOdisminuir: boolean = true;
+  cantidad: number = 0;
+  mostrarAgregarCarrito: boolean;
   detailViewActive: boolean;
 
   constructor(private serviceProduct: ProductService, private cartService: CartService) { }
@@ -20,6 +24,11 @@ export class ProductThumbnailComponent implements OnInit {
   errores: string[];
 
   ngOnInit(): void {
+    if (this.cantidad === 0) {
+      this.mostrarAgregarCarrito = true;
+    } else {
+      this.mostrarAgregarCarrito = false;
+    }
   }
 
   onProductClick() {
@@ -27,7 +36,30 @@ export class ProductThumbnailComponent implements OnInit {
   }
 
   onAddToCart() {
-    this.cartService.addProductToCart(this.product);
+    this.mostrarAgregarCarrito = false;
+    this.cartService.addProductToCart(this.product, this.agregarOdisminuir, this.cantidad);
   }
 
+
+  aumentar(): number {
+    this.cantidad = this.cantidad++;
+    this.cartService.addProductToCart(this.product, this.agregarOdisminuir, this.cantidad);
+    return this.cantidad;
+
+  }
+
+  disminuir(): number {
+    this.cantidad = this.cantidad--;
+    this.agregarOdisminuir = false;
+    this.cartService.addProductToCart(this.product, this.agregarOdisminuir, this.cantidad);
+
+    if (this.cantidad === 0) {
+      this.mostrarAgregarCarrito = true;
+      return this.cantidad = 0;
+
+    } else {
+
+      return this.cantidad;
+    }
+  }
 }

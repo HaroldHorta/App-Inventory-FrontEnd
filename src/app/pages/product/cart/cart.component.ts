@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef) {
     this.changeDetectorRef = changeDetectorRef;
-   }
+  }
 
   ngOnInit(): void {
     this.expandedHeight = '0';
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
       this.products = data.products;
       this.cartTotal = data.cartTotal;
       this.numProducts = data.products.reduce((acc, product) => {
-        acc += product.quantity;
+        acc = product.quantity;
         return acc;
       }, 0);
 
@@ -50,13 +50,17 @@ export class CartComponent implements OnInit {
       this.expandedHeight = (this.products.length * PRODUCT_HEIGHT + OFFSET_HEIGHT) + 'px';
       if (!this.products.length) {
         this.expanded = false;
-      }
-      this.changeDetectorRef.detectChanges();
-    });
+      }  
+    
+            this.changeDetectorRef.detectChanges();
+    });   
+
   }
 
+
   deleteProduct(product) {
-    this.cartService.deleteProductFromCart(product);
+      this.cartService.deleteProductFromCart(product);
+    
   }
 
   onCartClick() {

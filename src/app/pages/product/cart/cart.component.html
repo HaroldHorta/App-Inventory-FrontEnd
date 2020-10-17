@@ -14,7 +14,7 @@
                         <p>{{item.quantity*item.product.parsedPrice | currency:'USD':'symbol':'1.0-0' }}</p>
                     </div>
                 </div>
-                <button class="btn btn-outline-danger form-group" (click)='deleteProduct(item.product)'>x</button>
+                <button class="btn btn-outline-danger form-group" (click)='deleteProduct(item.product,item.quantity)'>x</button>
             </div>
             <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button">Pagar {{cartTotal | currency:'USD':'symbol':'1.0-0'}}</button>
         </div>
