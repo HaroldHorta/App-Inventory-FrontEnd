@@ -13,8 +13,7 @@ export class ProductThumbnailComponent implements OnInit {
   @Input() existencias: ResponseProduct;
   @Input() product: ResponseProduct;
 
-  agregarOdisminuir: boolean = true;
-  cantidad: number = 0;
+  cantidad: number;
   mostrarAgregarCarrito: boolean;
   detailViewActive: boolean;
 
@@ -24,10 +23,10 @@ export class ProductThumbnailComponent implements OnInit {
   errores: string[];
 
   ngOnInit(): void {
-    if (this.cantidad === 0) {
-      this.mostrarAgregarCarrito = true;
-    } else {
+    if (this.cantidad >= 1) {
       this.mostrarAgregarCarrito = false;
+    } else {
+      this.mostrarAgregarCarrito = true;
     }
   }
 
@@ -36,29 +35,28 @@ export class ProductThumbnailComponent implements OnInit {
   }
 
   onAddToCart() {
+    this.cantidad = 1;
     this.mostrarAgregarCarrito = false;
-    this.cartService.addProductToCart(this.product, this.agregarOdisminuir, this.cantidad);
+    this.cartService.addProductToCart(this.product);
   }
 
 
   aumentar(): number {
-    this.cantidad = this.cantidad++;
-    this.cartService.addProductToCart(this.product, this.agregarOdisminuir, this.cantidad);
+    this.cantidad = this.cantidad +1;
+    this.cartService.addProductToCart(this.product);
     return this.cantidad;
 
   }
 
   disminuir(): number {
-    this.cantidad = this.cantidad--;
-    this.agregarOdisminuir = false;
-    this.cartService.addProductToCart(this.product, this.agregarOdisminuir, this.cantidad);
-
+    this.cantidad = this.cantidad -1;
+    this.cartService.deleteProductToCart(this.product);
+    
     if (this.cantidad === 0) {
       this.mostrarAgregarCarrito = true;
-      return this.cantidad = 0;
-
+      this.cartService.deleteProductFromCart(this.product);
+      return this.cantidad = 1;
     } else {
-
       return this.cantidad;
     }
   }

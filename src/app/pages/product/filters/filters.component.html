@@ -1,6 +1,5 @@
 <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="sideShown = true">Filtros</button>
 <div class="filters" [class.side-shown]="sideShown">
-    <button class="btn btn-outline-danger form-group" type="button" class="close-side-btn" (click)="sideShown = false">x</button>
     <h5>Filtrar por categoría</h5>
     <form *ngIf="showFilters">
         <div class="form-check" *ngFor='let filter of categories'>
