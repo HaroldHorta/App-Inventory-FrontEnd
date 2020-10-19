@@ -50,17 +50,16 @@ export class CartComponent implements OnInit {
       this.expandedHeight = (this.products.length * PRODUCT_HEIGHT + OFFSET_HEIGHT) + 'px';
       if (!this.products.length) {
         this.expanded = false;
-      }  
-    
-            this.changeDetectorRef.detectChanges();
-    });   
+      }
+      this.changeDetectorRef.detectChanges();
+    });
 
   }
 
 
   deleteProduct(product) {
-      this.cartService.deleteProductFromCart(product);
-    
+    this.cartService.deleteProductFromCart(product);
+
   }
 
   onCartClick() {

@@ -4,13 +4,13 @@
             <div class="clearfix">
                 <div>
                     <div>
-                        <p class="font-weight-medium text-center mb-0 titulos">{{ product.name }}</p>
+                        <p class="font-weight-medium puntos-suspensivos text-center mb-0 titulos">{{ product.name }}</p>
                         <div class="text-center">
                             <img class="img-card" src="{{'data:image/jpg;base64,' + product.photo.data}}" />
                         </div>
                     </div>
 
-                    <p class="text-muted mt-3 mb-0 espacio-lateral">
+                    <p class="text-muted  mt-3 mb-0 espacio-lateral">
                         Existencias: {{ product.unit }}
                     </p>
                 </div>
@@ -30,9 +30,9 @@
                     <nb-card>
                         <nb-card-body>
                             <div class="buttons-row">
-                                <button class="col-3 btn btn-danger mb-2" (click)="disminuir()">-</button>
-                                <input class="col-3 btn form-control" value="{{cantidad}}" disabled>
-                                <button class="col-3 btn btn-success mb-2" (click)="aumentar()">+</button>
+                                <button class="col-3 btn btn-outline-danger mb-2 text-center" (click)="disminuir()">-</button>
+                                <input class="col-4 btn form-control" value="{{cantidad}}" disabled>
+                                <button class="col-3 btn btn-outline-success mb-2" style="padding: auto;" (click)="aumentar()">+</button>
                             </div>
                         </nb-card-body>
                     </nb-card>
