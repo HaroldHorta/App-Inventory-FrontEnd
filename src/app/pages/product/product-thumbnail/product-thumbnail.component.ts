@@ -42,16 +42,16 @@ export class ProductThumbnailComponent implements OnInit {
 
 
   aumentar(): number {
-    this.cantidad = this.cantidad +1;
+    this.cantidad = this.cantidad + 1;
     this.cartService.addProductToCart(this.product);
     return this.cantidad;
 
   }
 
   disminuir(): number {
-    this.cantidad = this.cantidad -1;
+    this.cantidad = this.cantidad - 1;
     this.cartService.deleteProductToCart(this.product);
-    
+
     if (this.cantidad === 0) {
       this.mostrarAgregarCarrito = true;
       this.cartService.deleteProductFromCart(this.product);

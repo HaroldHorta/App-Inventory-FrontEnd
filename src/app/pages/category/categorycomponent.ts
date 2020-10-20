@@ -1,88 +1,76 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
-import { Customer, Representative } from './customer';
-import { CustomerService } from './customer.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalDataSource } from 'ng2-smart-table';
+import { RequestCategory } from '../../core/models/Request/category/RequestCategory';
+import { ResponseCategory } from '../../core/models/Response/category/ResponseCategory.module';
+import { CategoryService } from '../../core/services/category.service';
 
 
 @Component({
-  selector: 'ngx-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss'],
+    selector: 'ngx-category',
+    templateUrl: './category.component.html',
+    styleUrls: ['./category.component.scss'],
 })
-export class CategoryComponent implements OnInit {
-  customers: Customer[];
+export class CategoryComponent {
+    categories: ResponseCategory[];
 
-  representatives: Representative[];
+    settings = {
+        add: {
+            addButtonContent: '<i class="nb-plus"></i>',
+            createButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+            confirmCreate: true,
+        },
+        edit: {
+            editButtonContent: '<i class="nb-edit"></i>',
+            saveButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+        },
+        delete: {
+            deleteButtonContent: '<i class="nb-trash"></i>',
+            confirmDelete: true,
+        },
+        columns: {
+            description: {
+                title: 'description',
+                type: 'string',
+            },
+        },
+    };
 
-  statuses: any[];
+    source: LocalDataSource = new LocalDataSource();
 
-  loading: boolean = true;
+    constructor(private router: Router, private serviceCategory: CategoryService) {
+        this.getCategoryList();
+    }
 
-  @ViewChild('dt') table: Table;
+    public caregory: RequestCategory = new RequestCategory();
 
-  constructor(private customerService: CustomerService) { }
+    getCategoryList() {
+        this.serviceCategory.getCategories().subscribe(
+            categories => {
+                this.categories = categories;
+                const data = this.categories;
+                this.source.load(data);
+            },
+        );
+    }
 
-  ngOnInit() {
-      this.customerService.getCustomersLarge().then(customers => {
-          this.customers = customers;
-          this.loading = false;
-      });
 
-      this.representatives = [
-          {name: 'Amy Elsner', image: 'amyelsner.png'},
-          {name: 'Anna Fali', image: 'annafali.png'},
-          {name: 'Asiya Javayant', image: 'asiyajavayant.png'},
-          {name: 'Bernardo Dominic', image: 'bernardodominic.png'},
-          {name: 'Elwin Sharvill', image: 'elwinsharvill.png'},
-          {name: 'Ioni Bowcher', image: 'ionibowcher.png'},
-          {name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png'},
-          {name: 'Onyama Limba', image: 'onyamalimba.png'},
-          {name: 'Stephen Shaw', image: 'stephenshaw.png'},
-          {name: 'XuXue Feng', image: 'xuxuefeng.png'},
-      ];
+    onCreateConfirm(event): void {
+        // tslint:disable-next-line:no-console
+        console.log('enta aqu', event.newData);
+        this.serviceCategory.create(event.newData).subscribe(() => {
+            this.router.navigate(['/category']);
+        });
+    }
 
-      this.statuses = [
-          {label: 'Unqualified', value: 'unqualified'},
-          {label: 'Qualified', value: 'qualified'},
-          {label: 'New', value: 'new'},
-          {label: 'Negotiation', value: 'negotiation'},
-          {label: 'Renewal', value: 'renewal'},
-          {label: 'Proposal', value: 'proposal'},
-      ];
-  }
+    onDeleteConfirm(event): void {
+        if (window.confirm('Are you sure you want to delete?')) {
+            event.confirm.resolve();
+        } else {
+            event.confirm.reject();
+        }
+    }
 
-  onActivityChange(event) {
-      const value = event.target.value;
-      if (value && value.trim().length) {
-          // tslint:disable-next-line:radix
-          const activity = parseInt(value);
-
-          if (!isNaN(activity)) {
-              this.table.filter(activity, 'activity', 'gte');
-          }
-      }
-  }
-
-  onDateSelect(value) {
-      this.table.filter(this.formatDate(value), 'date', 'equals');
-  }
-
-  formatDate(date) {
-      let month = date.getMonth() + 1;
-      let day = date.getDate();
-
-      if (month < 10) {
-          month = '0' + month;
-      }
-
-      if (day < 10) {
-          day = '0' + day;
-      }
-
-      return date.getFullYear() + '-' + month + '-' + day;
-  }
-
-  onRepresentativeChange(event) {
-      this.table.filter(event.value, 'representative', 'in');
-  }
 }

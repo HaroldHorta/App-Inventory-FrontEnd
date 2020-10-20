@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ResponseCategory } from '../models/Response/category/ResponseCategory.module';
+import { RequestCategory } from '../models/Request/category/RequestCategory';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
 
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<ResponseCategory[]> {
@@ -24,11 +25,11 @@ export class CategoryService {
     return this.http.get<ResponseCategory>(`${endpoint.Category}/${id}`);
   }
 
-  // create(category: RequestCategory) : Observable<ResponseCategory> {
-  //   return this.http.post<ResponseCategory>(endpoint.Category, category, {headers: this.httpHeaders})
-  // }
+  create(category: RequestCategory): Observable<RequestCategory> {
+    return this.http.post<RequestCategory>(endpoint.Category, category, { headers: this.httpHeaders });
+  }
 
   update(category: ResponseCategory): Observable<ResponseCategory> {
-    return this.http.put<ResponseCategory>(endpoint.Category, category, {headers: this.httpHeaders});
+    return this.http.put<ResponseCategory>(endpoint.Category, category, { headers: this.httpHeaders });
   }
 }

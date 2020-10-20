@@ -1,5 +1,7 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NbCardModule, NbMenuModule } from '@nebular/theme';
+import { NgModule } from '@angular/core';
+import { NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule  } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 
 import { ThemeModule } from '../theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -39,6 +41,9 @@ import {ProgressBarModule} from 'primeng/progressbar';
     CalendarModule,
     DropdownModule,
     ProgressBarModule,
+    Ng2SmartTableModule,
+    NbIconModule,
+    NbInputModule, NbTreeGridModule,
   ],
   exports: [CartComponent],
   declarations: [

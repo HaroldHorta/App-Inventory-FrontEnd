@@ -1,69 +1,4 @@
 {
-<<<<<<< HEAD
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "app-inventory": {
-      "root": "",
-      "sourceRoot": "src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "aot": true,
-            "preserveSymlinks": true,
-            "rebaseRootRelativeCssUrls": true,
-            "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              "src/favicon.png",
-              {
-                "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images",
-                "output": "/assets/img/markers"
-              }
-            ],
-            "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/typeface-exo/index.css",
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
-              "node_modules/ionicons/scss/ionicons.scss",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/socicon/css/socicon.css",
-              "node_modules/nebular-icons/scss/nebular-icons.scss",
-              "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-              "node_modules/leaflet/dist/leaflet.css",
-              "src/app/theme/styles/styles.scss",
-              "node_modules/primeicons/primeicons.css",
-"node_modules/primeng/resources/themes/saga-blue/theme.css",
-"node_modules/primeng/resources/primeng.min.css"
-            ],
-            "scripts": [
-              "node_modules/pace-js/pace.min.js",
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/tinymce/themes/modern/theme.min.js",
-              "node_modules/tinymce/plugins/link/plugin.min.js",
-              "node_modules/tinymce/plugins/paste/plugin.min.js",
-              "node_modules/tinymce/plugins/table/plugin.min.js",
-              "node_modules/echarts/dist/echarts.min.js",
-              "node_modules/echarts/dist/extension/bmap.min.js",
-              "node_modules/chart.js/dist/Chart.min.js"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-=======
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "newProjectRoot": "projects",
@@ -208,7 +143,6 @@
                         "typeCheck": true,
                         "exclude": []
                     }
->>>>>>> origin/develop
                 }
             }
         },
