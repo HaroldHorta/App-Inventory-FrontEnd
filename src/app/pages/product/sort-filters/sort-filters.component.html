@@ -1,15 +1,8 @@
-<!-- <div>
-  <label for=""><b>Ordenar por</b></label>
-  <select (change)='onSelectChange($event)'>
-    <option *ngFor='let filter of filters' [value]="filter.value">{{filter.name}}</option>
-  </select>
-  <div class="triangle"></div>
-</div> -->
-<div class="input-group" style="margin-top: 8px;">
+<div class="form-group input-group col-sm-12 col-md-12">
     <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Ordenar por</label>
+        <label class="input-group-text col-sm-11 col-md-6" for="inputGroupSelect01">Ordenar por</label>
+        <select (change)='onSelectChange($event)'>
+          <option class="col-sm-11 col-md-6" *ngFor='let filter of filters' [value]="filter.value">{{filter.name}}</option>
+        </select>
     </div>
-    <select (change)='onSelectChange($event)'>
-      <option *ngFor='let filter of filters' [value]="filter.value">{{filter.name}}</option>
-    </select>
 </div>

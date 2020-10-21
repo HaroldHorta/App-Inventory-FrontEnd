@@ -4,7 +4,8 @@
     <form *ngIf="showFilters">
         <div class="form-check" *ngFor='let filter of categories'>
             <label class="fake-checkbox">
-                <input type="checkbox" class="form-check-input" checked (change)='onInputChange($event, filter, "category")'>
+                <input type="checkbox" class="form-check-input" checked
+                    (change)='onInputChange($event, filter, "category")'>
                 <span class="square"><span class="fill"></span></span>
                 <span class="label" style="margin-left: 5px;">{{filter.description}}</span>
             </label>
