@@ -8,6 +8,7 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { CategoryComponent } from './pages/category/categorycomponent';
 
 export const routes: Routes = [
   {

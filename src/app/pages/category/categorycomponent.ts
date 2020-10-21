@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
 import { LocalDataSource } from 'ng2-smart-table';
 import { RequestCategory } from '../../core/models/Request/category/RequestCategory';
 import { ResponseCategory } from '../../core/models/Response/category/ResponseCategory.module';
@@ -12,6 +13,12 @@ import { CategoryService } from '../../core/services/category.service';
     styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent {
+    index = 1;
+    destroyByClick = true;
+    duration = 2000;
+    hasIcon = true;
+    position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
+    preventDuplicates = false;
     categories: ResponseCategory[];
 
     settings = {
@@ -25,6 +32,7 @@ export class CategoryComponent {
             editButtonContent: '<i class="nb-edit"></i>',
             saveButtonContent: '<i class="nb-checkmark"></i>',
             cancelButtonContent: '<i class="nb-close"></i>',
+            confirmSave: true,
         },
         delete: {
             deleteButtonContent: '<i class="nb-trash"></i>',
@@ -40,11 +48,9 @@ export class CategoryComponent {
 
     source: LocalDataSource = new LocalDataSource();
 
-    constructor(private router: Router, private serviceCategory: CategoryService) {
+    constructor(private router: Router, private serviceCategory: CategoryService, private toastrService: NbToastrService) {
         this.getCategoryList();
     }
-
-    public caregory: RequestCategory = new RequestCategory();
 
     getCategoryList() {
         this.serviceCategory.getCategories().subscribe(
@@ -58,18 +64,75 @@ export class CategoryComponent {
 
 
     onCreateConfirm(event): void {
-        // tslint:disable-next-line:no-console
-        console.log('enta aqu', event.newData);
-        this.serviceCategory.create(event.newData).subscribe(() => {
-            this.router.navigate(['/category']);
-        });
+        if (event.newData.description === '') {
+            const type = 'danger';
+            const quote = { title: null, body: 'La Categoría no puede ir vacia' };
+
+            this.showToast(type, quote.title, quote.body);
+        } else {
+
+            if (window.confirm('¿Esta seguro de agregar la categoria?')) {
+                this.serviceCategory.create(event.newData).subscribe(() => { });
+                event.confirm.resolve();
+                const type = 'success';
+                const quote = { title: null, body: 'Categoria agregada correctamente' };
+                this.showToast(type, quote.title, quote.body);
+            } else {
+                event.confirm.reject();
+            }
+        }
+    }
+
+    private showToast(type: NbComponentStatus, title: string, body: string) {
+        const config = {
+            status: type,
+            destroyByClick: this.destroyByClick,
+            duration: this.duration,
+            hasIcon: this.hasIcon,
+            position: this.position,
+            preventDuplicates: this.preventDuplicates,
+        };
+        const titleContent = title ? `. ${title}` : '';
+
+        this.toastrService.show(
+            body,
+            `Alerta ${titleContent}`,
+            config);
     }
 
     onDeleteConfirm(event): void {
+        // tslint:disable-next-line:no-console
+        console.log('pasa aqui', event);
         if (window.confirm('Are you sure you want to delete?')) {
+            this.serviceCategory.delete(event.data.id).subscribe(data => {
+                const type = 'success';
+                const quote = { title: null, body: 'Categoria eliminada correctamente' };
+                this.showToast(type, quote.title, quote.body);
+            });
             event.confirm.resolve();
         } else {
             event.confirm.reject();
+        }
+    }
+
+    onSaveConfirm(event): void {
+
+        if (event.newData.description === '') {
+            const type = 'danger';
+            const quote = { title: null, body: 'La Categoría no puede ir vacia' };
+            this.showToast(type, quote.title, quote.body);
+        } else {
+            if (window.confirm('¿Esta seguro de actualizar la categoria?')) {
+                this.serviceCategory.update(event.newData).subscribe(() => {
+                });
+                const type = 'success';
+                const quote = { title: null, body: 'Categoria actualizada correctamente' };
+                this.showToast(type, quote.title, quote.body);
+                event.confirm.resolve();
+
+            } else {
+                event.confirm.reject();
+            }
         }
     }
 
