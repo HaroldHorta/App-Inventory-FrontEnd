@@ -7,8 +7,6 @@ import { ThemeModule } from '../theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { AddCustomerComponent } from './customer/add/add-customer/add-customer.component';
-import { ListCustomerComponent } from './customer/list/list-customer/list-customer.component';
 import { AddOrderComponent } from './order/add/add-order/add-order.component';
 import { ListOrderComponent } from './order/list/list-order/list-order.component';
 import { AddTicketComponent } from './ticket/add/add-ticket/add-ticket.component';
@@ -28,6 +26,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {ProgressBarModule} from 'primeng/progressbar';
+import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
   imports: [
@@ -48,8 +47,6 @@ import {ProgressBarModule} from 'primeng/progressbar';
   exports: [CartComponent],
   declarations: [
     PagesComponent,
-    AddCustomerComponent,
-    ListCustomerComponent,
     AddOrderComponent,
     ListOrderComponent,
     AddTicketComponent,
@@ -64,6 +61,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
     SortFiltersComponent,
     SearchBarComponent,
     CategoryComponent,
+    CustomerComponent,
   ],
 })
 export class PagesModule {
