@@ -20,6 +20,7 @@ export class CategoryComponent {
     position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
     preventDuplicates = false;
     categories: ResponseCategory[];
+    errorMessage = '';
 
     settings = {
         add: {
@@ -68,48 +69,42 @@ export class CategoryComponent {
             const type = 'danger';
             const quote = { title: null, body: 'La Categoría no puede ir vacia' };
 
-            this.showToast(type, quote.title, quote.body);
+            this.serviceCategory.showToast(type, quote.title, quote.body);
         } else {
 
             if (window.confirm('¿Esta seguro de agregar la categoria?')) {
-                this.serviceCategory.create(event.newData).subscribe(() => { });
-                event.confirm.resolve();
-                const type = 'success';
-                const quote = { title: null, body: 'Categoria agregada correctamente' };
-                this.showToast(type, quote.title, quote.body);
+                this.serviceCategory.create(event.newData).subscribe(() => {
+                    event.confirm.resolve();
+                    const type = 'success';
+                    const quote = { title: null, body: 'Categoria agregada correctamente' };
+                    this.serviceCategory.showToast(type, quote.title, quote.body);
+                },
+                    (err) => {
+                        const type = 'danger';
+                        const quote = { title: null, body: err.error.detailMessage };
+                        this.serviceCategory.showToast(type, quote.title, quote.body);
+                    },
+                );
             } else {
                 event.confirm.reject();
             }
         }
     }
 
-    private showToast(type: NbComponentStatus, title: string, body: string) {
-        const config = {
-            status: type,
-            destroyByClick: this.destroyByClick,
-            duration: this.duration,
-            hasIcon: this.hasIcon,
-            position: this.position,
-            preventDuplicates: this.preventDuplicates,
-        };
-        const titleContent = title ? `. ${title}` : '';
-
-        this.toastrService.show(
-            body,
-            `Alerta ${titleContent}`,
-            config);
-    }
-
     onDeleteConfirm(event): void {
-        // tslint:disable-next-line:no-console
-        console.log('pasa aqui', event);
         if (window.confirm('Are you sure you want to delete?')) {
             this.serviceCategory.delete(event.data.id).subscribe(data => {
                 const type = 'success';
                 const quote = { title: null, body: 'Categoria eliminada correctamente' };
-                this.showToast(type, quote.title, quote.body);
-            });
-            event.confirm.resolve();
+                this.serviceCategory.showToast(type, quote.title, quote.body);
+                event.confirm.resolve();
+            },
+                (err) => {
+                    const type = 'danger';
+                    const quote = { title: null, body: err.error.detailMessage };
+                    this.serviceCategory.showToast(type, quote.title, quote.body);
+                },
+            );
         } else {
             event.confirm.reject();
         }
@@ -120,15 +115,15 @@ export class CategoryComponent {
         if (event.newData.description === '') {
             const type = 'danger';
             const quote = { title: null, body: 'La Categoría no puede ir vacia' };
-            this.showToast(type, quote.title, quote.body);
+            this.serviceCategory.showToast(type, quote.title, quote.body);
         } else {
             if (window.confirm('¿Esta seguro de actualizar la categoria?')) {
                 this.serviceCategory.update(event.newData).subscribe(() => {
+                    const type = 'success';
+                    const quote = { title: null, body: 'Categoria actualizada correctamente' };
+                    this.serviceCategory.showToast(type, quote.title, quote.body);
+                    event.confirm.resolve();
                 });
-                const type = 'success';
-                const quote = { title: null, body: 'Categoria actualizada correctamente' };
-                this.showToast(type, quote.title, quote.body);
-                event.confirm.resolve();
 
             } else {
                 event.confirm.reject();
@@ -137,3 +132,4 @@ export class CategoryComponent {
     }
 
 }
+
