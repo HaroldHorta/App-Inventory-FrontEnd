@@ -12,6 +12,8 @@ import {
 import { UserData } from './data/users';
 import { UserService } from './mock/users.service';
 import { MockDataModule } from './mock/mock-data.module';
+import { StatsProgressBarData } from './data/stats-progress-bar';
+import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 
 const socialLinks = [
   {
@@ -33,6 +35,7 @@ const socialLinks = [
 
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
+  { provide: StatsProgressBarData, useClass: StatsProgressBarService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

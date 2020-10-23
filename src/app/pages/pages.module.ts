@@ -21,11 +21,6 @@ import { FiltersComponent } from './product/filters/filters.component';
 import { SortFiltersComponent } from './product/sort-filters/sort-filters.component';
 import { SearchBarComponent } from './product/search-bar/search-bar.component';
 import { CategoryComponent } from './category/categorycomponent';
-import {TableModule} from 'primeng/table';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {CalendarModule} from 'primeng/calendar';
-import {DropdownModule} from 'primeng/dropdown';
-import {ProgressBarModule} from 'primeng/progressbar';
 import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
@@ -35,11 +30,6 @@ import { CustomerComponent } from './customer/customer.component';
     NbMenuModule,
     DashboardModule,
     NbCardModule,
-    TableModule,
-    MultiSelectModule,
-    CalendarModule,
-    DropdownModule,
-    ProgressBarModule,
     Ng2SmartTableModule,
     NbIconModule,
     NbInputModule, NbTreeGridModule,
