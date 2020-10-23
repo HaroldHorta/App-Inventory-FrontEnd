@@ -2,7 +2,7 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Dashboard',
+    title: 'Escritorio',
     icon: 'home-outline',
     link: '/pages/dashboard',
     home: true,
@@ -13,7 +13,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'category',
   },
   {
-    title: 'Customers',
+    title: 'Clientes',
     icon: 'people-outline',
     link: 'customer',
   },
@@ -38,27 +38,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'ticket',
   },
   {
-    title: 'FEATURES',
+    title: 'Cuenta',
     group: true,
   },
   {
-    title: 'Auth',
+    title: 'Autorización',
     icon: 'lock-outline',
     children: [
       {
-        title: 'Login',
+        title: 'Ingresar',
         link: '/auth/login',
       },
       {
-        title: 'Register',
+        title: 'Registrar',
         link: '/auth/register',
       },
       {
-        title: 'Request Password',
+        title: 'Solicitud de contraseña',
         link: '/auth/request-password',
       },
       {
-        title: 'Reset Password',
+        title: 'Cambiar contraseña',
         link: '/auth/reset-password',
       },
     ],
