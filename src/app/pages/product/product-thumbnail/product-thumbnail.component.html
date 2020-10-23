@@ -31,7 +31,7 @@
                             <div class="buttons-row">
                                 <button class="col-3 btn btn-outline-danger mb-2 text-center" (click)="disminuir()">-</button>
                                 <input class="col-4 btn form-control" value="{{cantidad}}" disabled>
-                                <button class="col-3 btn btn-outline-success mb-2" style="padding: auto;" (click)="aumentar()">+</button>
+                                <button class="col-3 btn btn-outline-success mb-2" style="padding: auto;" (click)="aumentar()" [disabled]="disableAdd">+</button>
                             </div>
                         </nb-card-body>
                     </nb-card>

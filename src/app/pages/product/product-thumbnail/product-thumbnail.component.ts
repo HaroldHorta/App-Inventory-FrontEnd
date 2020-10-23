@@ -16,6 +16,7 @@ export class ProductThumbnailComponent implements OnInit {
   cantidad: number;
   mostrarAgregarCarrito: boolean;
   detailViewActive: boolean;
+  disableAdd: boolean = false;
 
   constructor(private serviceProduct: ProductService, private cartService: CartService) { }
 
@@ -38,12 +39,14 @@ export class ProductThumbnailComponent implements OnInit {
     this.cantidad = 1;
     this.mostrarAgregarCarrito = false;
     this.cartService.addProductToCart(this.product);
+    this.diableAdd();
   }
 
 
   aumentar(): number {
     this.cantidad = this.cantidad + 1;
     this.cartService.addProductToCart(this.product);
+    this.diableAdd();
     return this.cantidad;
 
   }
@@ -51,13 +54,21 @@ export class ProductThumbnailComponent implements OnInit {
   disminuir(): number {
     this.cantidad = this.cantidad - 1;
     this.cartService.deleteProductToCart(this.product);
-
+    this.diableAdd();
     if (this.cantidad === 0) {
       this.mostrarAgregarCarrito = true;
       this.cartService.deleteProductFromCart(this.product);
       return this.cantidad = 1;
     } else {
       return this.cantidad;
+    }
+  }
+
+  diableAdd(){
+    if(this.cantidad >= this.product.unit){
+      this.disableAdd = true;
+    }else{
+      this.disableAdd = false;
     }
   }
 }
