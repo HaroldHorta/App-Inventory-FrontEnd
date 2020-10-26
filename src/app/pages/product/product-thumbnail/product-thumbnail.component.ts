@@ -20,7 +20,6 @@ export class ProductThumbnailComponent implements OnInit {
 
   constructor(private serviceProduct: ProductService, private cartService: CartService) { }
 
-  products: ResponseProduct[];
   errores: string[];
 
   ngOnInit(): void {
@@ -64,10 +63,10 @@ export class ProductThumbnailComponent implements OnInit {
     }
   }
 
-  diableAdd(){
-    if(this.cantidad >= this.product.unit){
+  diableAdd() {
+    if (this.cantidad >= this.product.unit) {
       this.disableAdd = true;
-    }else{
+    } else {
       this.disableAdd = false;
     }
   }

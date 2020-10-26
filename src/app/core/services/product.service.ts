@@ -19,6 +19,9 @@ export class ProductService {
     );
   }
 
+  getProductByid(id): Observable<ResponseProduct[]> {
+    return this.http.get<ResponseProduct[]>(`${endpoint.Product}/${id}`);
+  }
   getProductByCategory(id): Observable<ResponseProduct[]> {
     return this.http.get<ResponseProduct[]>(`${endpoint.Product}/category/${id}`);
   }

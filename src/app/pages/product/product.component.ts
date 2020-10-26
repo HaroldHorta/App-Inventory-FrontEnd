@@ -13,9 +13,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 })
 export class ProductComponent implements OnInit {
 
-
   originalDataProduct: ResponseProduct[] = new Array();
-  //products1: ResponseProduct[];
   categories: ResponseCategory[] = new Array();
   mainFilter: any;
 

@@ -18,22 +18,20 @@ export class CartService {
     // tslint:disable-next-line:no-console
     console.log('llega al cart service');
     let exists = false;
-    const parsedPrice = product.priceSell;
-    this.cartTotal += parsedPrice;
-    // Search this product on the cart and increment the quantity
+    this.cartTotal += product.priceSell;
+    // Search this product on the cart and increment the unit
     this.products = this.products.map(_product => {
       if (_product.product.id === product.id) {
-        _product.quantity++;
+        _product.unit++;
         exists = true;
       }
       return _product;
     });
     // Add a new product to the cart if it's a new product
     if (!exists) {
-      product.parsedPrice = parsedPrice;
       this.products.push({
         product: product,
-        quantity: 1,
+        unit: 1,
       });
     }
     this.productAddedSource.next({ products: this.products, cartTotal: this.cartTotal });
@@ -43,12 +41,11 @@ export class CartService {
     // tslint:disable-next-line:no-console
     console.log('llega al cart service');
     let exists = false;
-    const parsedPrice = product.priceSell;
-    this.cartTotal -= parsedPrice;
-    // Search this product on the cart and increment the quantity
+    this.cartTotal -= product.priceSell;
+    // Search this product on the cart and increment the unit
     this.products = this.products.map(_product => {
       if (_product.product.id === product.id) {
-        _product.quantity--;
+        _product.unit--;
         exists = true;
       }
       return _product;
@@ -61,7 +58,7 @@ export class CartService {
 
     this.products = this.products.filter(_product => {
       if (_product.product.id === product.id) {
-        this.cartTotal -= _product.product.parsedPrice * _product.quantity;
+        this.cartTotal -= _product.product.product.priceSell * _product.unit;
         return false;
       }
       return true;

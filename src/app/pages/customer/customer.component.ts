@@ -7,7 +7,7 @@ import { CustomerService } from '../../core/services/customer.service';
 @Component({
   selector: 'ngx-customer',
   templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss']
+  styleUrls: ['./customer.component.scss'],
 })
 export class CustomerComponent {
 

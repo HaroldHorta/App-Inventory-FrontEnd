@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
+import { NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
 import { LocalDataSource } from 'ng2-smart-table';
-import { RequestCategory } from '../../core/models/Request/category/RequestCategory';
 import { ResponseCategory } from '../../core/models/Response/category/ResponseCategory.module';
 import { CategoryService } from '../../core/services/category.service';
+import { GeneralService } from '../../core/services/general.service';
 
 
 @Component({
@@ -49,7 +49,7 @@ export class CategoryComponent {
 
     source: LocalDataSource = new LocalDataSource();
 
-    constructor(private router: Router, private serviceCategory: CategoryService, private toastrService: NbToastrService) {
+    constructor(private router: Router, private serviceCategory: CategoryService, private toastrService: GeneralService) {
         this.getCategoryList();
     }
 
@@ -69,7 +69,7 @@ export class CategoryComponent {
             const type = 'danger';
             const quote = { title: null, body: 'La Categoría no puede ir vacia' };
 
-            this.serviceCategory.showToast(type, quote.title, quote.body);
+            this.toastrService.showToast(type, quote.title, quote.body);
         } else {
 
             if (window.confirm('¿Esta seguro de agregar la categoria?')) {
@@ -77,12 +77,12 @@ export class CategoryComponent {
                     event.confirm.resolve();
                     const type = 'success';
                     const quote = { title: null, body: 'Categoria agregada correctamente' };
-                    this.serviceCategory.showToast(type, quote.title, quote.body);
+                    this.toastrService.showToast(type, quote.title, quote.body);
                 },
                     (err) => {
                         const type = 'danger';
                         const quote = { title: null, body: err.error.detailMessage };
-                        this.serviceCategory.showToast(type, quote.title, quote.body);
+                        this.toastrService.showToast(type, quote.title, quote.body);
                     },
                 );
             } else {
@@ -96,13 +96,13 @@ export class CategoryComponent {
             this.serviceCategory.delete(event.data.id).subscribe(data => {
                 const type = 'success';
                 const quote = { title: null, body: 'Categoria eliminada correctamente' };
-                this.serviceCategory.showToast(type, quote.title, quote.body);
+                this.toastrService.showToast(type, quote.title, quote.body);
                 event.confirm.resolve();
             },
                 (err) => {
                     const type = 'danger';
                     const quote = { title: null, body: err.error.detailMessage };
-                    this.serviceCategory.showToast(type, quote.title, quote.body);
+                    this.toastrService.showToast(type, quote.title, quote.body);
                 },
             );
         } else {
@@ -115,13 +115,13 @@ export class CategoryComponent {
         if (event.newData.description === '') {
             const type = 'danger';
             const quote = { title: null, body: 'La Categoría no puede ir vacia' };
-            this.serviceCategory.showToast(type, quote.title, quote.body);
+            this.toastrService.showToast(type, quote.title, quote.body);
         } else {
             if (window.confirm('¿Esta seguro de actualizar la categoria?')) {
                 this.serviceCategory.update(event.newData).subscribe(() => {
                     const type = 'success';
                     const quote = { title: null, body: 'Categoria actualizada correctamente' };
-                    this.serviceCategory.showToast(type, quote.title, quote.body);
+                    this.toastrService.showToast(type, quote.title, quote.body);
                     event.confirm.resolve();
                 });
 

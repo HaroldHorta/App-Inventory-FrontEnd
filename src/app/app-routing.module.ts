@@ -9,6 +9,7 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { CategoryComponent } from './pages/category/categorycomponent';
+import { CheckoutComponent } from './pages/product/cart/checkout/checkout.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,7 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: 'pages/checkout', component: CheckoutComponent },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];

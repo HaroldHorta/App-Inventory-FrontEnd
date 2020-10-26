@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ListOrderComponent } from './order/list/list-order/list-order.component';
 import { ListTicketComponent } from './ticket/list/list-ticket/list-ticket.component';
 import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/categorycomponent';
 import { CustomerComponent } from './customer/customer.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [{
   path: '',
@@ -32,7 +32,7 @@ const routes: Routes = [{
     },
     {
       path: 'order',
-      component: ListOrderComponent,
+      component: OrderComponent,
     },
     {
       path: 'product',
@@ -43,7 +43,9 @@ const routes: Routes = [{
       component: ListTicketComponent,
     },
   ],
-}];
+},
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

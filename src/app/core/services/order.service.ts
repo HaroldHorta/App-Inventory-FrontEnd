@@ -4,18 +4,21 @@ import { Observable } from 'rxjs';
 import { ResponseOrder } from '../models/Response/order/ResponseOrder.module';
 import { map } from 'rxjs/operators';
 import { endpoint } from '../infraestructure/endpoint/endpoint';
+import { RequestOrder } from '../models/Request/order/RequestOrder';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
 
-  private httHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
   getOrders(): Observable<ResponseOrder[]> {
-    return this.http.get(endpoint.Order).pipe(
-      map(response => response as ResponseOrder[])
-    );
+    return this.http.get<ResponseOrder[]>(endpoint.Order);
+  }
+
+  create(order: any): Observable<RequestOrder> {
+    return this.http.post<RequestOrder>(endpoint.Order, order, { headers: this.httpHeaders });
   }
 }
