@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/categorycomponent';
 import { CustomerComponent } from './customer/customer.component';
 import { OrderComponent } from './order/order.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 const routes: Routes = [{
   path: '',
@@ -41,6 +42,10 @@ const routes: Routes = [{
     {
       path: 'ticket',
       component: ListTicketComponent,
+    },
+    {
+      path: 'inventory',
+      component: InventoryComponent,
     },
   ],
 },

@@ -1,0 +1,43 @@
+<div class="lists row">
+    <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="open()">Agregar producto</button>
+    <div class="col-md-12">
+        <nb-card class="list-card">
+            <nb-card-header style="text-align: center;">Lista de Productos</nb-card-header>
+            <nb-card-body style="padding: 0% !important;">
+                <!-- <nb-card-header>
+                    <span class="col-md-2" style="font-size: 11px;">Identificación</span>
+                    <span class="col-md-1" style="font-size: 11px;">Nombre</span>
+                    <span class="col-md-1" style="font-size: 11px;">Descripción</span>
+                    <span class="col-md-1" style="font-size: 11px;">Categoria</span>
+                    <span class="col-md-1" style="font-size: 11px;">Estado</span>
+                    <span class="col-md-1" style="font-size: 11px;">Creación</span>
+                    <span class="col-md-1" style="font-size: 11px;">Actualización</span>
+                    <span class="col-md-1" style="font-size: 11px;">Precio de compra</span>
+                    <span class="col-md-1" style="font-size: 11px;">Precio de venta</span>
+                    <span class="col-md-1" style="font-size: 11px;">Unidades</span>
+                    <span class="col-md-1" style="font-size: 11px;">Acciones</span>
+                </nb-card-header> -->
+                <nb-list>
+                    <nb-list-item class="sombra" *ngFor="let item of product">
+                        <span class="col-md-2 puntos-suspensivos">{{ item.id }}</span>
+                        <span class="col-md-1">{{ item.name }}</span>
+                        <span class="col-md-1">{{ item.description }}</span>
+                        <span *ngFor="let cat of item.category" class="col-md-1">{{ cat.description }}</span>
+                        <span class="col-md-1">{{ item.status }}</span>
+                        <span class="col-md-1">{{ item.createAt }}</span>
+                        <span class="col-md-1">{{ item.updateAt }}</span>
+                        <span class="col-md-1">{{ item.priceBuy }}</span>
+                        <span class="col-md-1">{{ item.priceSell }}</span>
+                        <span class="col-md-1">{{ item.unit }}</span>
+                        <span class="col-md-1">
+                            <nb-icon class="btn-outline-warning" (click)="update(item)" icon="edit-2-outline"></nb-icon>
+                            <nb-icon class="btn-outline-danger" icon="trash-2-outline"></nb-icon>
+                            
+                        </span>
+                    </nb-list-item>
+
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

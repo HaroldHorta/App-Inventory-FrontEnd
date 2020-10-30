@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ResponseProduct } from '../models/Response/product/ResponseProduct.module';
+import { RequestAddProduct } from '../models/Request/product/RequestAddProduct';
 
 @Injectable({
   providedIn: 'root',
@@ -26,4 +27,11 @@ export class ProductService {
     return this.http.get<ResponseProduct[]>(`${endpoint.Product}/category/${id}`);
   }
 
+  create(product): Observable<RequestAddProduct> {
+    return this.http.post<RequestAddProduct>(endpoint.Product, product, { headers: this.httpHeaders });
+  }
+
+  update(product:RequestAddProduct):Observable<RequestAddProduct> {
+    return this.http.put<RequestAddProduct>(endpoint.Product, product, { headers: this.httpHeaders})
+  }
 }

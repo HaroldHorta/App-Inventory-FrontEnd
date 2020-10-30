@@ -1,0 +1,21 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Ingrese el nombre del producto</nb-card-header>
+    <nb-card-body>
+        <input nbInput class="form-group" type="text" fullWidth placeholder="Nombre">
+        <div class="full-name-inputs form-group">
+            <input nbInput class="form-group" type="text" fullWidth formControlName="priceBuy" placeholder="Precio de compra">
+            <input nbInput class="form-group" type="text" fullWidth formControlName="priceSell" placeholder="Precio de venta">
+        </div>
+        <div class="full-name-inputs form-group">
+            <input nbInput type="text" formControlName="unit" placeholder="Existencias">
+            <nb-select style="width: 50%; padding-left: 5%;" placeholder="Categoria" formControlName="categoryId">
+                <nb-option *ngFor="let item of categoria" [value]="item">{{item.description}}</nb-option>
+            </nb-select>
+        </div>
+        <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" placeholder="Descripción"></textarea>
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="width: 45%;" class="btn btn-outline-success form-group" type="submit" (click)="addProduct(checkOutForm.value)">Enviar</button>
+        <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cancel</button>
+    </nb-card-footer>
+</nb-card>

@@ -28,6 +28,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'product',
   },
   {
+    title: 'Inventory',
+    icon: 'archive-outline',
+    link: 'inventory',
+  },
+  {
     title: 'Reportes',
     icon: 'bar-chart-outline',
     link: '/pages/reportes/add/add-reportes',

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-   NbTableModule, NbAccordionModule, NbListModule  } from '@nebular/theme';
+   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbDialogModule, NbDialogRef  } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
@@ -23,6 +23,9 @@ import { CategoryComponent } from './category/categorycomponent';
 import { CustomerComponent } from './customer/customer.component';
 import { CheckoutComponent } from './product/cart/checkout/checkout.component';
 import { OrderComponent} from './order/order.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { PopupComponent } from './inventory/popup/popup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -37,6 +40,8 @@ import { OrderComponent} from './order/order.component';
     Ng2SmartTableModule,
     NbIconModule,
     NbInputModule, NbTreeGridModule,
+    NbSelectModule,
+    ReactiveFormsModule,
   ],
   exports: [CartComponent],
   declarations: [
@@ -56,6 +61,9 @@ import { OrderComponent} from './order/order.component';
     CustomerComponent,
     CheckoutComponent,
     OrderComponent,
+    InventoryComponent,
+    PopupComponent,
+    
   ],
 })
 export class PagesModule {

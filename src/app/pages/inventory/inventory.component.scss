@@ -1,0 +1,15 @@
+.puntos-suspensivos {
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.sombra {
+    background-color: white;
+    transition: background-color .5s;
+}
+
+.sombra:hover {
+    background-color: #EDF1F7;
+}
