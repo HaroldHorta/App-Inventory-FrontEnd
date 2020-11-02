@@ -1,7 +1,7 @@
 <nb-card [formGroup]="checkOutForm">
     <nb-card-header>Ingrese el nombre del producto</nb-card-header>
     <nb-card-body>
-        <input nbInput class="form-group" type="text" fullWidth placeholder="Nombre">
+        <input nbInput class="form-group" type="text" formControlName="name" fullWidth placeholder="Nombre">
         <div class="full-name-inputs form-group">
             <input nbInput class="form-group" type="text" fullWidth formControlName="priceBuy" placeholder="Precio de compra">
             <input nbInput class="form-group" type="text" fullWidth formControlName="priceSell" placeholder="Precio de venta">

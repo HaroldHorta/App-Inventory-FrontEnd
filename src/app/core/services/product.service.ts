@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ResponseProduct } from '../models/Response/product/ResponseProduct.module';
 import { RequestAddProduct } from '../models/Request/product/RequestAddProduct';
+import { Status } from '../models/Response/enum/Status.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,8 @@ export class ProductService {
 
   update(product:RequestAddProduct):Observable<RequestAddProduct> {
     return this.http.put<RequestAddProduct>(endpoint.Product, product, { headers: this.httpHeaders})
+  }
+  updateStatus(id:string, status:Status):Observable<any> {
+    return this.http.patch<ResponseProduct>(`${endpoint.Product}/${id}/status/${status}`, {headers:this.httpHeaders});
   }
 }

@@ -1,5 +1,6 @@
 <div class="lists row">
-    <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="open()">Agregar producto</button>
+    <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="open()">Agregar
+        producto</button>
     <div class="col-md-12">
         <nb-card class="list-card">
             <nb-card-header style="text-align: center;">Lista de Productos</nb-card-header>
@@ -23,16 +24,15 @@
                         <span class="col-md-1">{{ item.name }}</span>
                         <span class="col-md-1">{{ item.description }}</span>
                         <span *ngFor="let cat of item.category" class="col-md-1">{{ cat.description }}</span>
-                        <span class="col-md-1">{{ item.status }}</span>
                         <span class="col-md-1">{{ item.createAt }}</span>
                         <span class="col-md-1">{{ item.updateAt }}</span>
                         <span class="col-md-1">{{ item.priceBuy }}</span>
                         <span class="col-md-1">{{ item.priceSell }}</span>
                         <span class="col-md-1">{{ item.unit }}</span>
                         <span class="col-md-1">
-                            <nb-icon class="btn-outline-warning" (click)="update(item)" icon="edit-2-outline"></nb-icon>
-                            <nb-icon class="btn-outline-danger" icon="trash-2-outline"></nb-icon>
-                            
+                            <nb-icon status="warning" (click)="update(item)" icon="edit-2-outline"></nb-icon>
+                            <!-- <nb-checkbox *ngFor="let sta of status" [checked]="sta" (checkedChange)="toggle($event)">Toggle me</nb-checkbox> -->
+                            <nb-checkbox status="success" [checked]="status" (checkedChange)="updateStatus($event,item.id)"></nb-checkbox>                            
                         </span>
                     </nb-list-item>
 

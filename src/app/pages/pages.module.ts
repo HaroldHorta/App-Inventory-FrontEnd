@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbDialogModule, NbDialogRef  } from '@nebular/theme';
+   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbDialogModule, NbDialogRef, NbCheckboxModule  } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
@@ -42,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbInputModule, NbTreeGridModule,
     NbSelectModule,
     ReactiveFormsModule,
+    NbCheckboxModule
   ],
   exports: [CartComponent],
   declarations: [
