@@ -25,19 +25,17 @@
                         <span class="col-md-1">{{ item.description }}</span>
                         <span *ngFor="let cat of item.category" class="col-md-1">{{ cat.description }}</span>
                         <span class="col-md-1">{{ item.createAt }}</span>
-                        <span class="col-md-1">{{ item.updateAt }}</span>
                         <span class="col-md-1">{{ item.priceBuy }}</span>
                         <span class="col-md-1">{{ item.priceSell }}</span>
                         <span class="col-md-1">{{ item.unit }}</span>
                         <span class="col-md-1">
-                            <nb-icon status="warning" (click)="update(item)" icon="edit-2-outline"></nb-icon>
-                            <!-- <nb-checkbox *ngFor="let sta of status" [checked]="sta" (checkedChange)="toggle($event)">Toggle me</nb-checkbox> -->
-                            <nb-checkbox status="success" [checked]="status" (checkedChange)="updateStatus($event,item.id)"></nb-checkbox>                            
+                            <nb-icon status="warning" (click)="openModal(item)" icon="edit-2-outline"></nb-icon>
+                            <nb-checkbox [status]="item.status === 'ACTIVE' ? 'success' : 'danger'" [checked]="item.status === 'ACTIVE'" (checkedChange)="updateStatus($event,item.id)">{{item.status}}</nb-checkbox>                            
                         </span>
                     </nb-list-item>
-
                 </nb-list>
             </nb-card-body>
         </nb-card>
     </div>
 </div>
+

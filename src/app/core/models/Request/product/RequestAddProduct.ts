@@ -1,7 +1,6 @@
 import { ResponseCategory } from '../../Response/category/ResponseCategory.module';
-import { ResponseProduct } from'../../Response/product/ResponseProduct.module';
 
-export class RequestAddProduct{
+export class RequestAddProduct {
     name: string;
     description: string;
     categoryId: ResponseCategory[];

@@ -3,7 +3,6 @@ import { ResponseCategory } from '../../core/models/Response/category/ResponseCa
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
 import { CategoryService } from '../../core/services/category.service';
 import { ProductService } from '../../core/services/product.service';
-import { FiltersComponent } from './filters/filters.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @Component({
@@ -18,9 +17,6 @@ export class ProductComponent implements OnInit {
   mainFilter: any;
 
   currentSorting: string;
-
-  @ViewChild('filtersComponent')
-  filtersComponent: FiltersComponent;
 
   @ViewChild('searchComponent')
   searchComponent: SearchBarComponent;

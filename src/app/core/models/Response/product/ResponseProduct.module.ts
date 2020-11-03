@@ -24,4 +24,5 @@ export class ResponseProduct {
   unit: number;
 
   photo: FileInfo;
+
 }

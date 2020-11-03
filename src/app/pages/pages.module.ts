@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbDialogModule, NbDialogRef, NbCheckboxModule  } from '@nebular/theme';
+   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbDialogModule, NbDialogRef, NbCheckboxModule, NbSpinnerModule  } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
@@ -16,7 +16,6 @@ import { ProductComponent } from './product/product.component';
 import { ShowcaseComponent } from './product/showcase/showcase.component';
 import { ProductThumbnailComponent } from './product/product-thumbnail/product-thumbnail.component';
 import { CartComponent } from './product/cart/cart.component';
-import { FiltersComponent } from './product/filters/filters.component';
 import { SortFiltersComponent } from './product/sort-filters/sort-filters.component';
 import { SearchBarComponent } from './product/search-bar/search-bar.component';
 import { CategoryComponent } from './category/categorycomponent';
@@ -29,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
+    NbSpinnerModule,
     NbListModule,
     NbTableModule,
     NbAccordionModule,
@@ -42,7 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbInputModule, NbTreeGridModule,
     NbSelectModule,
     ReactiveFormsModule,
-    NbCheckboxModule
+    NbCheckboxModule,
   ],
   exports: [CartComponent],
   declarations: [
@@ -55,7 +55,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShowcaseComponent,
     ProductThumbnailComponent,
     CartComponent,
-    FiltersComponent,
     SortFiltersComponent,
     SearchBarComponent,
     CategoryComponent,
@@ -64,7 +63,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     OrderComponent,
     InventoryComponent,
     PopupComponent,
-    
   ],
 })
 export class PagesModule {
