@@ -57,7 +57,7 @@ export class CartService {
 
     this.products = this.products.filter(_product => {
       if (_product.product.id === product.id) {
-        this.cartTotal -= _product.product.product.priceSell * _product.unit;
+        this.cartTotal = 0;
         return false;
       }
       return true;
