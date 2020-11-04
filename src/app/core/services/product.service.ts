@@ -22,6 +22,12 @@ export class ProductService {
     );
   }
 
+  getProductsFilters(): Observable<ResponseProduct[]> {
+    return this.http.get(`${endpoint.Product}/products`).pipe(
+      map(response => response as ResponseProduct[]),
+    );
+  }
+
   getProductByid(id: string): Observable<ResponseProduct> {
     return this.http.get<ResponseProduct>(`${endpoint.Product}/${id}`);
   }

@@ -38,7 +38,7 @@ export class ProductComponent implements OnInit {
   }
   // metodo para llamar la lista de productos
   getProductsList() {
-    this.serviceProduct.getProducts().subscribe(
+    this.serviceProduct.getProductsFilters().subscribe(
       product => {
         this.originalDataProduct = product;
         this.mainFilter = {
