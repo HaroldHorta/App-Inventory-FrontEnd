@@ -31,12 +31,12 @@ export class PopupComponent implements OnInit {
     private generalService: GeneralService, protected ref: NbDialogRef<PopupComponent>,
     private serviceCategory: CategoryService, private formBuilder: FormBuilder, private productService: ProductService) {
     this.checkOutForm = this.formBuilder.group({
-      name: '',
+      name: ['', [Validators.required]],
       description: '',
       categoryId: '',
       priceBuy: '',
       priceSell: '',
-      unit: '',
+      unit: ['', [Validators.required]],
     });
   }
 
