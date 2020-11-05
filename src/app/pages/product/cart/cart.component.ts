@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RequestOrder } from '../../../core/models/Request/order/RequestOrder';
 import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { CartService } from '../../../core/services/cart.service';
 import { GeneralService } from '../../../core/services/general.service';
@@ -15,6 +14,7 @@ const PRODUCT_HEIGHT = 48;
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  idOrder: string;
   products: ResponseProduct;
   cartTotal = 0;
   changeDetectorRef: ChangeDetectorRef;
@@ -54,16 +54,17 @@ export class CartComponent implements OnInit {
 
   checkOut(productsF: ResponseProduct, cartTotal) {
     const data = [];
-    data.push({ id: this.generaNss(), products: productsF });
+    this.idOrder = this.generaNss();
+    data.push({ id: this.idOrder, products: productsF });
     if (cartTotal !== 0) {
       this.orderService.create(JSON.stringify(data[0])).subscribe(c => {
+        this.router.navigate(['pages/checkout', this.idOrder]);
       },
         (err) => {
           const type = 'danger';
           const quote = { title: null, body: err.error.detailMessage };
           this.toastrService.showToast(type, quote.title, quote.body);
         });
-      this.router.navigate(['pages/checkout']);
 
     } else {
 

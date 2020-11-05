@@ -47,7 +47,7 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'pages/checkout', component: CheckoutComponent },
+  { path: 'pages/checkout/:idOrder', component: CheckoutComponent },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];

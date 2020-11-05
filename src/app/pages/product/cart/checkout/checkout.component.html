@@ -1,1 +1,30 @@
-<p>checkout works!</p>
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-accordion multi>
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          <nb-list>
+            <nb-list-item class="item">
+              <span>{{ order?.id }}</span>
+              <span>{{ order?.paymentType }}</span>
+              <span>{{order?.orderStatus}}</span>
+            </nb-list-item>
+          </nb-list>
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <nb-list>
+            <nb-list-item class="item" *ngFor="let ord of order?.products">
+              <span>{{ord.product.name}}</span>
+              <span>{{ord.product.priceSell}}</span>
+              <span>{{ord.product.description}}</span>
+              <span>{{ord.total}}</span>
+              <span>{{ord.unit}}</span>
+
+            </nb-list-item>
+          </nb-list>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+</div>
