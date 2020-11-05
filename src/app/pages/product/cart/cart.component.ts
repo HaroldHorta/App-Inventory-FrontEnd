@@ -55,9 +55,6 @@ export class CartComponent implements OnInit {
   checkOut(productsF: ResponseProduct, cartTotal) {
     const data = [];
     data.push({ id: this.generaNss(), products: productsF });
-
-    // tslint:disable-next-line:no-console
-    console.log(JSON.stringify(data[0]));
     if (cartTotal !== 0) {
       this.orderService.create(JSON.stringify(data[0])).subscribe(c => {
       },

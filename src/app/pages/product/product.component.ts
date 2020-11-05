@@ -96,7 +96,6 @@ export class ProductComponent implements OnInit {
       productsSource = this.originalDataProduct;
       filterAllData = false;
     }
-    // console.log('filtering ' + productsSource.length + ' products')
 
     this.originalDataProduct = productsSource.filter(product => {
       // Filter by search
@@ -136,7 +135,6 @@ export class ProductComponent implements OnInit {
   }
 
   sortProducts(criteria) {
-    // console.log('sorting ' + this.products.length + ' products')
     this.originalDataProduct.sort((a, b) => {
       const priceComparison = a.priceSell - b.priceSell;
       if (criteria === 'priceDes') {

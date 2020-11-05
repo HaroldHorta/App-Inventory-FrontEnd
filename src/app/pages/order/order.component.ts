@@ -34,8 +34,6 @@ export class OrderComponent implements OnInit {
     this.serviceOrder.getOrders().subscribe(
       orders => {
         this.orders = orders;
-         // tslint:disable-next-line:no-console
-         console.log(orders);
       },
     );
   }
@@ -50,19 +48,3 @@ export class OrderComponent implements OnInit {
   }
 }
 
-/*
-
-     orders.forEach((p, index) => {
-          p.products[index].id = this.orders[index].products[index].id;
-        });
-
-this.serviceProduct.getProductByid( p.products[index].id).subscribe(product => {
-  this.product = product;
-   // tslint:disable-next-line:no-console
-console.log('product', product);
-},
-(err) => {
-    const type = 'danger';
-    const quote = { title: null, body: err.error.detailMessage };
-    this.toastrService.showToast(type, quote.title, quote.body);
-});*/
