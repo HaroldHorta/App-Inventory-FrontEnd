@@ -37,8 +37,6 @@ export class CartService {
   }
 
   deleteProductToCart(product) {
-    // tslint:disable-next-line:no-console
-    console.log('llega al cart service');
     let exists = false;
     this.cartTotal -= product.priceSell;
     // Search this product on the cart and increment the unit

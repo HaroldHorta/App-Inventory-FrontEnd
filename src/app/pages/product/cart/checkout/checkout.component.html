@@ -1,1 +1,99 @@
-<p>checkout works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card" [formGroup]="checkOutForm">
+      <nb-card-header>Cliente</nb-card-header>
+      <nb-card-body>
+        <div class="form-inline">
+          <input type="text" nbInput fullWidth formControlName="nroDocument" placeholder="Numero de documento">
+          <button class="btn btn-outline-info form-group" type="submit" (click)="findByNroDocument(checkOutForm.value)"
+            [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
+            [disabled]="!checkOutForm.valid || disabledUpdate">Consultar</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<div *ngIf="hideAddCustomer">
+<span class="posicion"><strong>El cliente consultado no existe, de click en el boton para agregar. </strong></span>
+<button class="btn btn-outline-success form-group posicion" type="submit" (click)="addCustomer()">Agregar</button>
+</div>
+
+<div *ngIf="hideCustomer">
+  <nb-card>
+    <nb-card-header>Cliente</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputFirstName" class="label">Nombre Completo: </label>
+            <span class="posicion">{{customer?.name}}</span>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Tipo de documento: <br></label>
+            <span class="posicion">{{customer?.typeDocument}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Numero de documento:  <br></label>
+            <span  class="posicion">{{customer?.nroDocument}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputEmail" class="label">Email: <br></label>
+            <span  class="posicion">{{customer?.email}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputWebsite" class="label">Dirección: <br></label>
+            <span  class="posicion">{{customer?.address}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputWebsite" class="label">Telefono: <br></label>
+            <span  class="posicion">{{customer?.phone}}</span>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-accordion multi>
+      <nb-accordion-item>
+        <nb-accordion-item-header>
+          <nb-list>
+            <nb-list-item class="item">
+              <span>{{ order?.id }}</span>
+              <span>{{ order?.paymentType }}</span>
+              <span>{{order?.orderStatus}}</span>
+            </nb-list-item>
+          </nb-list>
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <nb-list>
+            <nb-list-item class="item" *ngFor="let ord of order?.products">
+              <span>{{ord.product.name}}</span>
+              <span>{{ord.product.priceSell}}</span>
+              <span>{{ord.product.description}}</span>
+              <span>{{ord.total}}</span>
+              <span>{{ord.unit}}</span>
+
+            </nb-list-item>
+          </nb-list>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+</div>

@@ -18,6 +18,10 @@ export class OrderService {
     return this.http.get<ResponseOrder[]>(endpoint.Order);
   }
 
+  getOrder(id): Observable<ResponseOrder> {
+    return this.http.get<ResponseOrder>(`${endpoint.Order}/${id}`);
+  }
+
   create(order: any): Observable<RequestOrder> {
     return this.http.post<RequestOrder>(endpoint.Order, order, { headers: this.httpHeaders });
   }

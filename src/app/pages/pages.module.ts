@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbDialogModule, NbDialogRef, NbCheckboxModule, NbSpinnerModule  } from '@nebular/theme';
+import {
+  NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
+  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule,
+} from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
@@ -21,7 +23,7 @@ import { SearchBarComponent } from './product/search-bar/search-bar.component';
 import { CategoryComponent } from './category/categorycomponent';
 import { CustomerComponent } from './customer/customer.component';
 import { CheckoutComponent } from './product/cart/checkout/checkout.component';
-import { OrderComponent} from './order/order.component';
+import { OrderComponent } from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +33,7 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
 
 @NgModule({
   imports: [
+    NbAlertModule,
     NbSpinnerModule,
     NbListModule,
     NbTableModule,
