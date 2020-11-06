@@ -72,7 +72,7 @@ export class PopupComponent implements OnInit {
     data.push({ id: product.categoryId.id, description: product.categoryId.description });
     product.categoryId = data;
     this.productService.create(JSON.stringify(product)).subscribe(
-      newProduct => {
+      () => {
         this.ref.close(product);
         this.loadingLargeGroup = false;
         this.disabledUpdate = false;
@@ -91,7 +91,7 @@ export class PopupComponent implements OnInit {
     data.push({ id: product.categoryId.id, description: product.categoryId.description });
     product.categoryId = data;
     this.productService.update(id, product).subscribe(
-      newProduct => {
+      () => {
         this.loadingLargeGroup = false;
         this.disabledUpdate = false;
         const type = 'success';

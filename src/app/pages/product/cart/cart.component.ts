@@ -18,6 +18,8 @@ export class CartComponent implements OnInit {
   products: ResponseProduct;
   cartTotal = 0;
   changeDetectorRef: ChangeDetectorRef;
+  loadingLargeGroup = false;
+  disabledUpdate = false;
 
   constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef, private router: Router,
     private toastrService: GeneralService, private orderService: OrderService) {
@@ -53,11 +55,15 @@ export class CartComponent implements OnInit {
   }
 
   checkOut(productsF: ResponseProduct, cartTotal) {
+    this.loadingLargeGroup = true;
+    this.disabledUpdate = true;
     const data = [];
     this.idOrder = this.generaNss();
     data.push({ id: this.idOrder, products: productsF });
     if (cartTotal !== 0) {
-      this.orderService.create(JSON.stringify(data[0])).subscribe(c => {
+      this.orderService.create(JSON.stringify(data[0])).subscribe(() => {
+        this.loadingLargeGroup = false;
+        this.disabledUpdate = false;
         this.router.navigate(['pages/checkout', this.idOrder]);
       },
         (err) => {
@@ -68,6 +74,8 @@ export class CartComponent implements OnInit {
 
     } else {
 
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
       const type = 'danger';
       const quote = { title: null, body: 'El carrito esta vacio' };
       this.toastrService.showToast(type, quote.title, quote.body);

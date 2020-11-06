@@ -11,6 +11,7 @@
     </div>
   </div>
   <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button"
-    (click)="checkOut(products,cartTotal)"> ir a pagar
+    (click)="checkOut(products,cartTotal)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
+    [disabled]="disabledUpdate"> ir a pagar
     {{cartTotal | currency:'USD':'symbol':'1.0-0'}}</button>
 </div>
