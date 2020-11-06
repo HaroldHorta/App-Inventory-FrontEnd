@@ -23,6 +23,7 @@ export class InventoryComponent implements OnInit {
   names: string[] = [];
   changeDetectorRef: ChangeDetectorRef;
   checked = false;
+  hideListProduct = false;
 
 
   constructor(private serviceProduct: ProductService, changeDetectorRef: ChangeDetectorRef,
@@ -39,6 +40,9 @@ export class InventoryComponent implements OnInit {
     this.serviceProduct.getProducts().subscribe(
       product => {
         this.product = product;
+        if (this.product.length === 0) {
+          this.hideListProduct = true;
+        }
         this.changeDetectorRef.reattach();
       },
     );

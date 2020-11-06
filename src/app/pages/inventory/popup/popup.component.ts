@@ -43,7 +43,6 @@ export class PopupComponent implements OnInit {
   ngOnInit(): void {
     this.getCategoryList();
     this.productEdit;
-    this.selectedItem = this.productEdit.category[0].description;
   }
 
   getCategoryList() {
