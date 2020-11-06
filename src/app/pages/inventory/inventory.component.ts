@@ -4,6 +4,7 @@ import { Status } from '../../core/models/Response/enum/Status.enum';
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
 import { GeneralService } from '../../core/services/general.service';
 import { ProductService } from '../../core/services/product.service';
+import { PopDetailsComponent } from './pop-details/pop-details.component';
 import { PopupComponent } from './popup/popup.component';
 
 
@@ -15,7 +16,7 @@ import { PopupComponent } from './popup/popup.component';
 export class InventoryComponent implements OnInit {
 
   @Input() receivedParentMessage: string;
-
+  @Input() products: ResponseProduct;
   @Output() messageToEmit = new EventEmitter<string>();
 
   messageToSendC: string = 'Hello Parent!';
@@ -53,6 +54,9 @@ export class InventoryComponent implements OnInit {
 
   openModal(item) {
     this.dialog.open(PopupComponent, { context: { productEdit: item } });
+  }
+  openModalDetails(item) {
+    this.dialog.open(PopDetailsComponent, { context: { productDetails: item } });
   }
 
   updateStatus(event, id) {

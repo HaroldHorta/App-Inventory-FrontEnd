@@ -6,30 +6,15 @@
             <nb-card-header style="text-align: center;" *ngIf="product.length">Lista de Productos</nb-card-header>
             <nb-card-header style="text-align: center;" *ngIf="!product.length">No hay productos registrados</nb-card-header>
             <nb-card-body style="padding: 0% !important;">
-                <!-- <nb-card-header>
-                    <span class="col-md-2" style="font-size: 11px;">Identificación</span>
-                    <span class="col-md-1" style="font-size: 11px;">Nombre</span>
-                    <span class="col-md-1" style="font-size: 11px;">Descripción</span>
-                    <span class="col-md-1" style="font-size: 11px;">Categoria</span>
-                    <span class="col-md-1" style="font-size: 11px;">Estado</span>
-                    <span class="col-md-1" style="font-size: 11px;">Creación</span>
-                    <span class="col-md-1" style="font-size: 11px;">Actualización</span>
-                    <span class="col-md-1" style="font-size: 11px;">Precio de compra</span>
-                    <span class="col-md-1" style="font-size: 11px;">Precio de venta</span>
-                    <span class="col-md-1" style="font-size: 11px;">Unidades</span>
-                    <span class="col-md-1" style="font-size: 11px;">Acciones</span>
-                </nb-card-header> -->
                 <nb-list>
                     <nb-list-item class="sombra" *ngFor="let item of product">
-                        <span class="col-md-2 puntos-suspensivos">{{ item.id }}</span>
-                        <span class="col-md-1">{{ item.name }}</span>
-                        <span class="col-md-1">{{ item.description }}</span>
-                        <span *ngFor="let cat of item.category" class="col-md-1">{{ cat.description }}</span>
-                        <span class="col-md-1">{{ item.createAt }}</span>
-                        <span class="col-md-1">{{ item.priceBuy }}</span>
-                        <span class="col-md-1">{{ item.priceSell }}</span>
+                        <span class="col-md-1"><nb-icon icon="eye-outline" (click)="openModalDetails(item)"></nb-icon></span>
+                        <span class="col-md-1"><img class="img-card" src="{{'data:image/jpg;base64,' + item.photo.data}}" /></span>
+                        <span class="col-md-2">{{ item.name }}</span>
+                        <span class="col-md-2">{{ item.description }}</span>
+                        <span *ngFor="let cat of item.category" class="col-md-2">{{ cat.description }}</span>
                         <span class="col-md-1">{{ item.unit }}</span>
-                        <span class="col-md-1">
+                        <span class="col-md-2">
                             <nb-icon status="warning" (click)="openModal(item)" icon="edit-2-outline"></nb-icon>
                             <nb-checkbox [status]="item.status === 'ACTIVE' ? 'success' : 'danger'" [checked]="item.status === 'ACTIVE'" (checkedChange)="updateStatus($event,item.id)">{{item.status}}</nb-checkbox>                            
                         </span>

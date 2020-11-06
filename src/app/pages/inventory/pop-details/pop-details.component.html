@@ -1,0 +1,24 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Productos detalladamente</nb-card-header>
+    <nb-card-body>
+        <div class="full-name-inputs form-group">
+            <input nbInput class="form-group" style="width: 32%;" type="text" formControlName="id" [ngModel]="productDetails.id">
+            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="name" [ngModel]="productDetails.name">
+            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="status" [ngModel]="productDetails.status">
+        </div>
+        <div class="full-name-inputs form-group">
+            <input nbInput class="form-group" style="width: 32%;" type="text" formControlName="createAt" [ngModel]="productDetails.createAt">
+            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="priceBuy" [ngModel]="productDetails.priceBuy">
+            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="priceSell" [ngModel]="productDetails.priceSell">
+        </div>
+        <div class="full-name-inputs form-group">
+            <input nbInput class="form-group" style="width: 32%;" type="text" formControlName="category" [ngModel]="productDetails.category">
+            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="unit" [ngModel]="productDetails.unit">
+            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="updateAt" [ngModel]="productDetails.updateAt">
+        </div>
+        <div class="full-name-inputs form-group">
+            <textarea nbInput rows="5" style="width: 45%;" formControlName="description" shape="round" [ngModel]="productDetails.description"></textarea>
+            <img class="img-card" style="width: 45%; margin-left: 10%;" src="{{'data:image/jpg;base64,' + productDetails.photo.data}}" />
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -25,6 +25,9 @@ import { OrderComponent} from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PopDetailsComponent } from './inventory/pop-details/pop-details.component';
+import { PopUpdateImageComponent } from './inventory/pop-update-image/pop-update-image.component';
+import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update-units.component';
 
 @NgModule({
   imports: [
@@ -63,6 +66,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     OrderComponent,
     InventoryComponent,
     PopupComponent,
+    PopDetailsComponent,
+    PopUpdateImageComponent,
+    PopUpdateUnitsComponent,
   ],
 })
 export class PagesModule {
