@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
+import { RequestAddTicket } from '../../../../core/models/Request/ticket/RequestAddTicket';
 import { ResponseCustomer } from '../../../../core/models/Response/customer/ResponseCustomer.module';
 import { ResponseOrder } from '../../../../core/models/Response/order/ResponseOrder.module';
 import { CustomerService } from '../../../../core/services/customer.service';
@@ -25,8 +26,8 @@ export class CheckoutComponent implements OnInit {
   customer: ResponseCustomer;
   hideCustomer = false;
   hideAddCustomer = false;
-  reloadOne = false;
-  nroDocument: string;
+  idTicket: string;
+
 
 
   constructor(private generalService: GeneralService, private router: ActivatedRoute,
@@ -69,11 +70,6 @@ export class CheckoutComponent implements OnInit {
       this.disabledUpdate = false;
       this.hideAddCustomer = true;
       this.hideCustomer = false;
-      if (this.reloadOne) {
-        window.onload = () => {
-          this.reloadOne = true;
-        };
-      }
     },
     );
 
@@ -83,10 +79,14 @@ export class CheckoutComponent implements OnInit {
     this.dialog.open(CreateCustomerPopupComponent);
   }
 
-  generarTicket(ticket) {
+  generarTicket(ticket: RequestAddTicket) {
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
-    this.serviceTicket.create(ticket).subscribe(() => {
+    const data = [];
+    this.idTicket = this.generalService.generaNss();
+    data.push({ id: this.idTicket,  customerId: ticket.customerId, order: ticket.order});
+
+    this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
       this.loadingLargeGroup = false;
       this.disabledUpdate = false;
       const type = 'success';

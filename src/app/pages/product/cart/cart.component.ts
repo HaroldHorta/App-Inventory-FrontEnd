@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   disabledUpdate = false;
 
   constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef, private router: Router,
-    private toastrService: GeneralService, private orderService: OrderService) {
+    private generalService: GeneralService, private orderService: OrderService) {
     this.changeDetectorRef = changeDetectorRef;
   }
 
@@ -34,16 +34,7 @@ export class CartComponent implements OnInit {
     });
 
   }
-  generaNss() {
-    let result = '';
-    const characters = 'FPQRSYZbclmwy012456789';
-    const charactersLength = characters.length;
-    for (let i = 0; i < charactersLength; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
 
-    return result;
-  }
 
   getRandom(): number {
     return Math.random() * (1 - 100000) + 1;
@@ -58,7 +49,7 @@ export class CartComponent implements OnInit {
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
-    this.idOrder = this.generaNss();
+    this.idOrder = this.generalService.generaNss();
     data.push({ id: this.idOrder, products: productsF });
     if (cartTotal !== 0) {
       this.orderService.create(JSON.stringify(data[0])).subscribe(() => {
@@ -69,7 +60,7 @@ export class CartComponent implements OnInit {
         (err) => {
           const type = 'danger';
           const quote = { title: null, body: err.error.detailMessage };
-          this.toastrService.showToast(type, quote.title, quote.body);
+          this.generalService.showToast(type, quote.title, quote.body);
         });
 
     } else {
@@ -78,7 +69,7 @@ export class CartComponent implements OnInit {
       this.disabledUpdate = false;
       const type = 'danger';
       const quote = { title: null, body: 'El carrito esta vacio' };
-      this.toastrService.showToast(type, quote.title, quote.body);
+      this.generalService.showToast(type, quote.title, quote.body);
 
     }
   }
