@@ -5,7 +5,9 @@ import { NbDialogService } from '@nebular/theme';
 import { ResponseCustomer } from '../../../../core/models/Response/customer/ResponseCustomer.module';
 import { ResponseOrder } from '../../../../core/models/Response/order/ResponseOrder.module';
 import { CustomerService } from '../../../../core/services/customer.service';
+import { GeneralService } from '../../../../core/services/general.service';
 import { OrderService } from '../../../../core/services/order.service';
+import { TicketService } from '../../../../core/services/ticket.service';
 import { CreateCustomerPopupComponent } from '../../../customer/create-customer-popup/create-customer-popup.component';
 
 @Component({
@@ -17,21 +19,27 @@ export class CheckoutComponent implements OnInit {
   idProduct: string;
   order: ResponseOrder;
   checkOutForm: FormGroup;
+  checkOutFormTicket: FormGroup;
   loadingLargeGroup = false;
   disabledUpdate = false;
   customer: ResponseCustomer;
   hideCustomer = false;
   hideAddCustomer = false;
   reloadOne = false;
-  nroDocument: string[] = [];
+  nroDocument: string;
 
 
-  constructor(private router: ActivatedRoute, private formBuilder: FormBuilder, private orderService: OrderService,
-    private customerService: CustomerService, private dialog: NbDialogService) {
+  constructor(private generalService: GeneralService, private router: ActivatedRoute,
+    private formBuilder: FormBuilder, private orderService: OrderService,
+    private customerService: CustomerService, private dialog: NbDialogService, private serviceTicket: TicketService) {
     this.checkOutForm = this.formBuilder.group({
       nroDocument: ['', [Validators.required]],
     });
 
+    this.checkOutFormTicket = this.formBuilder.group({
+      customerId: ['', [Validators.required]],
+      order: ['', [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
@@ -72,9 +80,24 @@ export class CheckoutComponent implements OnInit {
   }
 
   openAddCustomer() {
-    this.dialog.open(CreateCustomerPopupComponent).onClose.subscribe(
-      nroDocument => nroDocument && this.nroDocument.push(nroDocument),
-    );
+    this.dialog.open(CreateCustomerPopupComponent);
+  }
+
+  generarTicket(ticket) {
+    this.loadingLargeGroup = true;
+    this.disabledUpdate = true;
+    this.serviceTicket.create(ticket).subscribe(() => {
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
+      const type = 'success';
+      const quote = { title: null, body: 'Ticket agregado correctamente' };
+      this.generalService.showToast(type, quote.title, quote.body);
+    },
+    (err) => {
+        const type = 'danger';
+        const quote = { title: null, body: err.error.detailMessage };
+        this.generalService.showToast(type, quote.title, quote.body);
+    });
   }
 
 }

@@ -6,10 +6,11 @@
           <nb-card-header>Cliente</nb-card-header>
           <nb-card-body>
             <div class="form-inline">
-              <input #va type="text" nbInput fullWidth formControlName="nroDocument" placeholder="Numero de documento">
+              <input type="text" nbInput fullWidth formControlName="nroDocument" placeholder="Numero de documento">
+              
               <button class="btn btn-outline-info form-group" type="submit"
                 (click)="findByNroDocument(checkOutForm.value)" [nbSpinner]="loadingLargeGroup"
-                nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
+                nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage=""
                 [disabled]="!checkOutForm.valid || disabledUpdate">Consultar</button>
             </div>
           </nb-card-body>
@@ -21,7 +22,7 @@
       <span class="posicion"><strong>El cliente consultado no existe, de click en el boton para agregar.
         </strong></span>
       <button class="btn btn-outline-success form-group posicion" type="button"
-        (click)="openAddCustomer(va.value)">Agregar</button>
+        (click)="openAddCustomer()">Agregar</button>
     </div>
 
     <div *ngIf="hideCustomer">
@@ -72,6 +73,10 @@
       </nb-card>
     </div>
 
+    <div [formGroup]="checkOutFormTicket">
+      <input type="hidden" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
+      <input type="hidden" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
+    </div>
 
     <div class="row">
       <div class="col-md-12">
@@ -100,6 +105,12 @@
           </nb-accordion-item>
         </nb-accordion>
       </div>
+    </div>
+
+    <div style="width: 95%; margin-left: 2.5em;margin-top: 40px;" class="row form-group">
+     
+        <button class="btn btn-outline-success btn-md btn-block" type="button" [disabled]="!checkOutFormTicket.valid" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" (click) ="generarTicket(checkOutFormTicket.value)">Generar tikcet</button>
+  
     </div>
   </nb-layout-column>
 </nb-layout>
