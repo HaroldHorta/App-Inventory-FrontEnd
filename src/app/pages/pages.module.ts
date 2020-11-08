@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule,
+  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule, NbLayoutModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
@@ -27,9 +27,11 @@ import { OrderComponent } from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
 
 @NgModule({
   imports: [
+    NbLayoutModule,
     NbAlertModule,
     NbSpinnerModule,
     NbListModule,
@@ -66,6 +68,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     OrderComponent,
     InventoryComponent,
     PopupComponent,
+    CreateCustomerPopupComponent,
   ],
 })
 export class PagesModule {

@@ -1,6 +1,6 @@
 import { ResponseCategory } from '../category/ResponseCategory.module';
-import { Status } from '../enum/Status.enum';
 import { FileInfo } from '../../Request/base/FileInfo.module';
+import { Status } from '../../enum/Status.enum';
 
 export class ResponseProduct {
   id: string;

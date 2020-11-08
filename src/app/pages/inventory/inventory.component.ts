@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { Status } from '../../core/models/Response/enum/Status.enum';
+import { Status } from '../../core/models/enum/Status.enum';
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
 import { GeneralService } from '../../core/services/general.service';
 import { ProductService } from '../../core/services/product.service';

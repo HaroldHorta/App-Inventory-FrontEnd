@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
 import { ResponseCustomer } from '../../core/models/Response/customer/ResponseCustomer.module';
 import { CustomerService } from '../../core/services/customer.service';
 import { GeneralService } from '../../core/services/general.service';
@@ -40,7 +40,7 @@ export class CustomerComponent {
     },
     columns: {
       name: {
-        title: 'NAME',
+        title: 'NOMBRE',
         type: 'string',
       },
       typeDocument: {
@@ -56,11 +56,11 @@ export class CustomerComponent {
         type: 'string',
       },
       address: {
-        title: 'ADDRESS',
+        title: 'DIRECCIÓN',
         type: 'string',
       },
       phone: {
-        title: 'PHONE',
+        title: 'TELEFONO',
         type: 'string',
       },
     },
@@ -68,7 +68,7 @@ export class CustomerComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private serviceCustomer: CustomerService, private toastrService: GeneralService) {
+  constructor( private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService) {
     this.getCustomerList();
   }
 

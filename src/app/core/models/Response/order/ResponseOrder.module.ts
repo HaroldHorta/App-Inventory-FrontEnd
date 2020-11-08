@@ -1,5 +1,5 @@
-import { PaymentType } from '../enum/PaymentType.enum';
-import { OrderStatus } from '../enum/OrderStatus.enum';
+import { OrderStatus } from '../../enum/OrderStatus.enum';
+import { PaymentType } from '../../enum/PaymentType.enum';
 import { RequestOrderProductItems } from '../../Request/order/RequestOrderProductItems';
 
 export class ResponseOrder {

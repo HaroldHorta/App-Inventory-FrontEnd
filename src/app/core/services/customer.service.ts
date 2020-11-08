@@ -25,7 +25,7 @@ export class CustomerService {
     return this.http.get<ResponseCustomer>(`${endpoint.Customer}/nroDocument/${nroDocument}`);
   }
 
-  create(customer: ResponseCustomer): Observable<RequestCustomer> {
+  create(customer): Observable<RequestCustomer> {
     return this.http.post<RequestCustomer>(endpoint.Customer, customer, { headers: this.httpHeaders });
   }
 

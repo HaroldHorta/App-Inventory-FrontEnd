@@ -5,8 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ResponseProduct } from '../models/Response/product/ResponseProduct.module';
 import { RequestAddProduct } from '../models/Request/product/RequestAddProduct';
-import { Status } from '../models/Response/enum/Status.enum';
 import { RequestUpdateProduct } from '../models/Request/product/RequestUpdateProduct';
+import { Status } from '../models/enum/Status.enum';
 
 @Injectable({
   providedIn: 'root',
