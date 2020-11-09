@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { RequestAddTicket } from '../../../../core/models/Request/ticket/RequestAddTicket';
 import { ResponseCustomer } from '../../../../core/models/Response/customer/ResponseCustomer.module';
@@ -28,9 +28,7 @@ export class CheckoutComponent implements OnInit {
   hideAddCustomer = false;
   idTicket: string;
 
-
-
-  constructor(private generalService: GeneralService, private router: ActivatedRoute,
+  constructor(private generalService: GeneralService, private activeRouter: ActivatedRoute, private router: Router,
     private formBuilder: FormBuilder, private orderService: OrderService,
     private customerService: CustomerService, private dialog: NbDialogService, private serviceTicket: TicketService) {
     this.checkOutForm = this.formBuilder.group({
@@ -45,7 +43,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.idProduct = this.router.snapshot.paramMap.get('idOrder');
+    this.idProduct = this.activeRouter.snapshot.paramMap.get('idOrder');
     this.getOrder(this.idProduct);
     this.order;
   }
@@ -92,6 +90,7 @@ export class CheckoutComponent implements OnInit {
       const type = 'success';
       const quote = { title: null, body: 'Ticket agregado correctamente' };
       this.generalService.showToast(type, quote.title, quote.body);
+      this.router.navigate(['pages/ticket', this.idTicket]);
     },
     (err) => {
         const type = 'danger';

@@ -10,8 +10,6 @@ import { ThemeModule } from '../theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { AddTicketComponent } from './ticket/add/add-ticket/add-ticket.component';
-import { ListTicketComponent } from './ticket/list/list-ticket/list-ticket.component';
 import { AddUserComponent } from './user/add/add-user/add-user.component';
 import { ListUserComponent } from './user/list/list-user/list-user.component';
 import { ProductComponent } from './product/product.component';
@@ -28,6 +26,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-generator.component';
 
 @NgModule({
   imports: [
@@ -52,8 +52,6 @@ import { CreateCustomerPopupComponent } from './customer/create-customer-popup/c
   exports: [CartComponent],
   declarations: [
     PagesComponent,
-    AddTicketComponent,
-    ListTicketComponent,
     AddUserComponent,
     ListUserComponent,
     ProductComponent,
@@ -69,6 +67,8 @@ import { CreateCustomerPopupComponent } from './customer/create-customer-popup/c
     InventoryComponent,
     PopupComponent,
     CreateCustomerPopupComponent,
+    TicketComponent,
+    TicketGeneratorComponent,
   ],
 })
 export class PagesModule {
