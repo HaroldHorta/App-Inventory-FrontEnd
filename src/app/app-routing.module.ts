@@ -10,6 +10,8 @@ import {
 } from '@nebular/auth';
 import { CategoryComponent } from './pages/category/categorycomponent';
 import { CheckoutComponent } from './pages/product/cart/checkout/checkout.component';
+import { TicketComponent } from './pages/ticket/ticket.component';
+import { TicketGeneratorComponent } from './pages/ticket/ticket-generator/ticket-generator.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +50,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'pages/checkout/:idOrder', component: CheckoutComponent },
+  { path: 'pages/ticket/:idTicket', component: TicketGeneratorComponent },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];

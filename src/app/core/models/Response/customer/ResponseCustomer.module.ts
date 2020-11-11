@@ -1,5 +1,5 @@
-import { Status } from '../enum/Status.enum';
-import { TypeDocument } from '../enum/TypeDocument';
+import { Status } from '../../enum/Status.enum';
+import { TypeDocument } from '../../enum/TypeDocument';
 
 export class ResponseCustomer {
   id: string;

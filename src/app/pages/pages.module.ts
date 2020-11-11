@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
   NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule,
+  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule, NbLayoutModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
@@ -10,8 +10,6 @@ import { ThemeModule } from '../theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { AddTicketComponent } from './ticket/add/add-ticket/add-ticket.component';
-import { ListTicketComponent } from './ticket/list/list-ticket/list-ticket.component';
 import { AddUserComponent } from './user/add/add-user/add-user.component';
 import { ListUserComponent } from './user/list/list-user/list-user.component';
 import { ProductComponent } from './product/product.component';
@@ -30,9 +28,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PopDetailsComponent } from './inventory/pop-details/pop-details.component';
 import { PopUpdateImageComponent } from './inventory/pop-update-image/pop-update-image.component';
 import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update-units.component';
+import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-generator.component';
 
 @NgModule({
   imports: [
+    NbLayoutModule,
     NbAlertModule,
     NbSpinnerModule,
     NbListModule,
@@ -54,8 +56,6 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
   exports: [CartComponent],
   declarations: [
     PagesComponent,
-    AddTicketComponent,
-    ListTicketComponent,
     AddUserComponent,
     ListUserComponent,
     ProductComponent,
@@ -73,6 +73,9 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
     PopDetailsComponent,
     PopUpdateImageComponent,
     PopUpdateUnitsComponent,
+    CreateCustomerPopupComponent,
+    TicketComponent,
+    TicketGeneratorComponent,
   ],
 })
 export class PagesModule {

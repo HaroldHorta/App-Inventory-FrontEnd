@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NbDialogService,NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
-import { Status } from '../../core/models/Response/enum/Status.enum';
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
 import { GeneralService } from '../../core/services/general.service';
 import { ProductService } from '../../core/services/product.service';
@@ -44,7 +43,7 @@ export class InventoryComponent {
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
   constructor(private serviceProduct : ProductService, private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
-    this.dataSource = this.dataSourceBuilder.create(this.data);
+    // this.dataSource = this.dataSourceBuilder.create(this.data);
   }
 
   getProductList() {
@@ -73,20 +72,20 @@ export class InventoryComponent {
 
 
 
-  private data: TreeNode<FSEntry>[] = [
-    this.product.forEach ( p => {})
-      data: { Nombre: 'Projects', Categoria: '1.8 MB', Estado: '5',Descripcion:'asd', Existencias: 5 },
-    },
-      {
-      data: { Nombre: 'Haorld', Categoria: '7.2 MB', Estado: '4',Descripcion:'asd', Existencias : 5 },
-    },
-  ];
+  // private data: TreeNode<FSEntry>[] = [
+  //   this.product.forEach ( p => {})
+  //     data: { Nombre: 'Projects', Categoria: '1.8 MB', Estado: '5',Descripcion:'asd', Existencias: 5 },
+  //   },
+  //     {
+  //     data: { Nombre: 'Haorld', Categoria: '7.2 MB', Estado: '4',Descripcion:'asd', Existencias : 5 },
+  //   },
+  // ];
 
-  getShowOn(index: number) {
-    const minWithForMultipleColumns = 400;
-    const nextColumnStep = 100;
-    return minWithForMultipleColumns + (nextColumnStep * index);
-  }
+  // getShowOn(index: number) {
+  //   const minWithForMultipleColumns = 400;
+  //   const nextColumnStep = 100;
+  //   return minWithForMultipleColumns + (nextColumnStep * index);
+  // }
 }
 
 

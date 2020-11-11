@@ -29,4 +29,14 @@ export class GeneralService {
             `Alerta ${titleContent}`,
             config);
     }
+
+    generaNss() {
+        let result = '';
+        const characters = 'FPQRSYZbclmwy012456789';
+        const charactersLength = characters.length;
+        for (let i = 0; i < charactersLength; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
 }
