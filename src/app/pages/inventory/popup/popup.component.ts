@@ -32,10 +32,10 @@ export class PopupComponent implements OnInit {
     private serviceCategory: CategoryService, private formBuilder: FormBuilder, private productService: ProductService) {
     this.checkOutForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      description: '',
-      categoryId: '',
-      priceBuy: '',
-      priceSell: '',
+      description: ['',[Validators.required]],
+      categoryId: ['',[Validators.required]],
+      priceBuy: ['',[Validators.required]],
+      priceSell: ['',[Validators.required]],
       unit: ['', [Validators.required]],
     });
   }

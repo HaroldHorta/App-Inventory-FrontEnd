@@ -49,6 +49,7 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
     NbSelectModule,
     ReactiveFormsModule,
     NbCheckboxModule,
+    NbTableModule,
   ],
   exports: [CartComponent],
   declarations: [
@@ -58,7 +59,7 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
     AddUserComponent,
     ListUserComponent,
     ProductComponent,
-    ShowcaseComponent,
+    ShowcaseComponent,    
     ProductThumbnailComponent,
     CartComponent,
     SortFiltersComponent,

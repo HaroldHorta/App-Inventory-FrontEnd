@@ -1,24 +1,47 @@
 <nb-card [formGroup]="checkOutForm">
     <nb-card-header>Productos detalladamente</nb-card-header>
     <nb-card-body>
-        <div class="full-name-inputs form-group">
-            <input nbInput class="form-group" style="width: 32%;" type="text" formControlName="id" [ngModel]="productDetails.id">
-            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="name" [ngModel]="productDetails.name">
-            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="status" [ngModel]="productDetails.status">
+        <div class="contenedorImg">
+            <img class="img-card" src="{{'data:image/jpg;base64,' + productDetails.photo.data}}" />
         </div>
-        <div class="full-name-inputs form-group">
-            <input nbInput class="form-group" style="width: 32%;" type="text" formControlName="createAt" [ngModel]="productDetails.createAt">
-            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="priceBuy" [ngModel]="productDetails.priceBuy">
-            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="priceSell" [ngModel]="productDetails.priceSell">
-        </div>
-        <div class="full-name-inputs form-group">
-            <input nbInput class="form-group" style="width: 32%;" type="text" formControlName="category" [ngModel]="productDetails.category">
-            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="unit" [ngModel]="productDetails.unit">
-            <input nbInput class="form-group" style="width: 32%; margin-left:2%;" type="text" formControlName="updateAt" [ngModel]="productDetails.updateAt">
-        </div>
-        <div class="full-name-inputs form-group">
-            <textarea nbInput rows="5" style="width: 45%;" formControlName="description" shape="round" [ngModel]="productDetails.description"></textarea>
-            <img class="img-card" style="width: 45%; margin-left: 10%;" src="{{'data:image/jpg;base64,' + productDetails.photo.data}}" />
+        <div class="contenedorDetalles">
+            <p class="espacio"><b>Nombre: </b> {{productDetails.name}}</p>
+            <p class="espacio"><b>Estado: </b>{{productDetails.status}}</p>
+            <p class="espacio"><b>Existencias: </b>{{productDetails.unit}}</p>
+            <p class="espacio"><b>Precio de compra: </b>{{productDetails.priceBuy}}</p>
+            <p class="espacio"><b>Precio de venta: </b>{{productDetails.priceSell}}</p>
+            <p class="espacio" *ngFor="let category of productDetails.category"><b>Categoria:
+                </b>{{category.description}}</p>
+            <p class="espacio"><b>Fecha de creación: </b>{{productDetails.createAt}}</p>
+            <p class="espacio"><b>Ultima actualización: </b>{{productDetails.updateAt}}</p>
+            <p class="espacio"><b>Descripción: </b>{{productDetails.description}}</p>
         </div>
     </nb-card-body>
+    <nb-card-footer>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cerrar</button>
+    </nb-card-footer>
 </nb-card>
+<!-- <div>
+    <div class="tamanoId">Es es el id -{{productDetails.id}}</div>
+</div>
+<div>
+    <div class="tamanoName marginTop">{{productDetails.name}}</div>
+    <div class="tamanoName marginTop spacio">{{productDetails.status}}</div>
+</div>
+<div>
+    <div class="tamanoUnit marginTop">{{productDetails.unit}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.priceBuy}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.priceSell}}</div>
+</div>
+<div>
+    <div class="tamanoUnit marginTop" *ngFor="let category of productDetails.category">{{category.description}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.createAt}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.updateAt}}</div>
+</div>
+<div>
+    <div class="tamanoTextArea marginTop">{{productDetails.description}}</div>
+    <div class="marginTop" style="width: 50%;float: left;">
+        <img class="img-card" src="{{'data:image/jpg;base64,' + productDetails.photo.data}}" />
+    </div>
+</div>
+<button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cerrar</button> -->

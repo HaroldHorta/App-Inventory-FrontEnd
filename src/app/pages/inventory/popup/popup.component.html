@@ -5,17 +5,21 @@
         <input nbInput class="form-group" type="text" formControlName="name" fullWidth placeholder="Nombre">
 
         <div class="full-name-inputs form-group">
+            <p *ngIf="checkOutForm.get('priceBuy').errors && checkOutForm.get('priceBuy').dirty" class="messageError">* Campo Obligatorio</p>
             <input nbInput class="form-group" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" fullWidth formControlName="priceBuy" placeholder="Precio de compra">
-            <input nbInput class="form-group" type="text" fullWidth formControlName="priceSell" placeholder="Precio de venta">
+            <p *ngIf="checkOutForm.get('priceSell').errors && checkOutForm.get('priceSell').dirty" class="messageError">* Campo Obligatorio</p>
+            <input nbInput class="form-group" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" fullWidth formControlName="priceSell" placeholder="Precio de venta">
         </div>
         <div class="full-name-inputs form-group">
             <p *ngIf="checkOutForm.get('unit').errors && checkOutForm.get('unit').dirty" class="messageError">* Campo Obligatorio</p>
             <input nbInput type="text" formControlName="unit" placeholder="Existencias">
 
+            <p *ngIf="checkOutForm.get('categoryId').errors && checkOutForm.get('categoryId').dirty" class="messageError">* Campo Obligatorio</p>
             <nb-select style="width: 50%; padding-left: 5%;" placeholder="Categoria" formControlName="categoryId">
                 <nb-option *ngFor="let item of categoria" [value]="item">{{item.description}}</nb-option>
             </nb-select>
         </div>
+        <p *ngIf="checkOutForm.get('description').errors && checkOutForm.get('description').dirty" class="messageError">* Campo Obligatorio</p>
         <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" placeholder="Descripción"></textarea>
     </nb-card-body>
     <nb-card-body *ngIf="productEdit">

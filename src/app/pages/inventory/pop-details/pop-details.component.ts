@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NbDialogRef } from '@nebular/theme';
 import { ResponseCategory } from '../../../core/models/Response/category/ResponseCategory.module';
 import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { CategoryService } from '../../../core/services/category.service';
@@ -20,12 +21,13 @@ export class PopDetailsComponent implements OnInit {
   @Input() products: ResponseProduct;
 
   constructor(private serviceProduct:ProductService, private serviceCategory:CategoryService,
+    protected ref: NbDialogRef<PopDetailsComponent>,
     private formBuilder: FormBuilder) { 
     this.checkOutForm = this.formBuilder.group({
       id: [''],
       name: [''],    
       description: [''],    
-      category: [''],    
+      categoryId: [''],    
       status: [''],
       createAt: [''],    
       updateAt: [''],    
@@ -39,8 +41,8 @@ export class PopDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getCategoryList();
     this.productDetails;
-    console.log('ESte es el nombre',this.productDetails);
     this.selectedItem = this.productDetails.category[0].description;
+    console.log("Este es la categoria",this.selectedItem);
   }
 
   getProductList(){
@@ -49,6 +51,9 @@ export class PopDetailsComponent implements OnInit {
         this.product = product;
       }
     )
+  }
+  cancel() {
+    this.ref.close();
   }
 
   getCategoryList(){

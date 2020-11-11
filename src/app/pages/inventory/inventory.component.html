@@ -1,6 +1,9 @@
-<div class="lists row">
+<!-- <div class="lists row">
     <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="open()">Agregar
         producto</button>
+    <label class="search-label" for="search">Search:</label>
+    <input nbInput [nbFilterInput]="product" id="search" class="search-input">
+
     <div class="col-md-12">
         <nb-card class="list-card">
             <nb-card-header style="text-align: center;" *ngIf="!hideListProduct">Lista de Productos</nb-card-header>
@@ -8,7 +11,7 @@
             <nb-card-body style="padding: 0% !important;">
                 <nb-list>
                     <nb-list-item class="sombra" *ngFor="let item of product">
-                        <span class="col-md-1"><nb-icon icon="eye-outline" (click)="openModalDetails(item)"></nb-icon></span>
+                        <span class="col-md-1"><nb-icon status="primary" icon="eye-outline" (click)="openModalDetails(item)"></nb-icon></span>
                         <span class="col-md-1"><img class="img-card" src="{{'data:image/jpg;base64,' + item.photo.data}}" /></span>
                         <span class="col-md-2">{{ item.name }}</span>
                         <span class="col-md-2">{{ item.description }}</span>
@@ -23,4 +26,36 @@
             </nb-card-body>
         </nb-card>
     </div>
-</div>
+</div> -->
+
+<nb-card>
+    <nb-card-body>
+
+        <label class="search-label" for="search">Search:</label>
+        <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
+
+        <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+
+            <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+            <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+            <ng-container [nbTreeGridColumnDef]="customColumn">
+                <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+                    1 {{customColumn}}
+                </th>
+                <td nbTreeGridCell *nbTreeGridCellDef="let row">
+                    2 {{row.data[customColumn]}}
+                </td>
+            </ng-container>
+
+            <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column" [showOn]="getShowOn(index)">
+                <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+                    3 {{column}}
+                </th>
+                <td nbTreeGridCell *nbTreeGridCellDef="let row">4 {{row.data[column] || '-'}}</td>
+            </ng-container>
+
+        </table>
+
+    </nb-card-body>
+</nb-card>
