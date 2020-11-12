@@ -9,32 +9,32 @@ import { ProductService } from '../../../core/services/product.service';
 @Component({
   selector: 'ngx-pop-details',
   templateUrl: './pop-details.component.html',
-  styleUrls: ['./pop-details.component.scss']
+  styleUrls: ['./pop-details.component.scss'],
 })
 export class PopDetailsComponent implements OnInit {
 
   product: ResponseProduct[];
   category: ResponseCategory[];
-  productDetails:ResponseProduct;
+  productDetails: ResponseProduct;
   checkOutForm: FormGroup;
   selectedItem;
   @Input() products: ResponseProduct;
 
-  constructor(private serviceProduct:ProductService, private serviceCategory:CategoryService,
+  constructor(private serviceProduct: ProductService, private serviceCategory: CategoryService,
     protected ref: NbDialogRef<PopDetailsComponent>,
-    private formBuilder: FormBuilder) { 
+    private formBuilder: FormBuilder) {
     this.checkOutForm = this.formBuilder.group({
       id: [''],
-      name: [''],    
-      description: [''],    
-      categoryId: [''],    
+      name: [''],
+      description: [''],
+      categoryId: [''],
       status: [''],
-      createAt: [''],    
-      updateAt: [''],    
-      priceBuy: [''],    
-      priceSell: [''],    
-      unit: [''],    
-      photo: ['']    
+      createAt: [''],
+      updateAt: [''],
+      priceBuy: [''],
+      priceSell: [''],
+      unit: [''],
+      photo: [''],
     });
   }
 
@@ -42,25 +42,22 @@ export class PopDetailsComponent implements OnInit {
     this.getCategoryList();
     this.productDetails;
     this.selectedItem = this.productDetails.category[0].description;
-    console.log("Este es la categoria",this.selectedItem);
   }
 
-  getProductList(){
+  getProductList() {
     this.serviceProduct.getProducts().subscribe(
       product => {
         this.product = product;
-      }
-    )
+      });
   }
   cancel() {
     this.ref.close();
   }
 
-  getCategoryList(){
+  getCategoryList() {
     this.serviceCategory.getCategories().subscribe(
       category => {
         this.category = category;
-      }
-    )
+      });
   }
 }

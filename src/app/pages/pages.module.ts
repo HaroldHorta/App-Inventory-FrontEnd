@@ -24,16 +24,18 @@ import { CheckoutComponent } from './product/cart/checkout/checkout.component';
 import { OrderComponent } from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopDetailsComponent } from './inventory/pop-details/pop-details.component';
 import { PopUpdateImageComponent } from './inventory/pop-update-image/pop-update-image.component';
 import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update-units.component';
 import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-generator.component';
+import { FilterPipe } from './inventory/file/filter.pipe';
 
 @NgModule({
   imports: [
+    FormsModule,
     NbLayoutModule,
     NbAlertModule,
     NbSpinnerModule,
@@ -55,11 +57,12 @@ import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-gener
   ],
   exports: [CartComponent],
   declarations: [
+    FilterPipe,
     PagesComponent,
     AddUserComponent,
     ListUserComponent,
     ProductComponent,
-    ShowcaseComponent,    
+    ShowcaseComponent,
     ProductThumbnailComponent,
     CartComponent,
     SortFiltersComponent,
