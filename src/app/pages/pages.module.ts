@@ -4,7 +4,7 @@ import {
   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule, NbLayoutModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ThemeModule } from '../theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -31,7 +31,6 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
 import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-generator.component';
-import { FilterPipe } from './inventory/file/filter.pipe';
 
 @NgModule({
   imports: [
@@ -54,10 +53,10 @@ import { FilterPipe } from './inventory/file/filter.pipe';
     ReactiveFormsModule,
     NbCheckboxModule,
     NbTableModule,
+    Ng2SearchPipeModule,
   ],
   exports: [CartComponent],
   declarations: [
-    FilterPipe,
     PagesComponent,
     AddUserComponent,
     ListUserComponent,

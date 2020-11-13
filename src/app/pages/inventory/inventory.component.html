@@ -1,60 +1,39 @@
-<div class="lists row">
-    <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="open()">Agregar
-        producto</button>
-
-  
-    <!-- <label class="search-label" for="search">Search:</label>
-    <input nbInput [(ngModel)] = cityName [formControl]="cityName" id="search" class="search-input">  -->
-
-    <div class="col-md-12">
-        <nb-card class="list-card">
-            <nb-card-header style="text-align: center;" *ngIf="!hideListProduct">Lista de Productos</nb-card-header>
-            <nb-card-header style="text-align: center;" *ngIf="hideListProduct">No hay productos registrados</nb-card-header>
-            <nb-card-body style="padding: 0% !important;">
-                <nb-list>
-                    <nb-list-item class="sombra" *ngFor="let item of product">
-                        <span class="col-md-1"><nb-icon status="primary" icon="eye-outline" (click)="openModalDetails(item)"></nb-icon></span>
-                        <span class="col-md-1"><img class="img-card" src="{{'data:image/jpg;base64,' + item.photo.data}}" /></span>
-                        <span class="col-md-2">{{ item.name }}</span>
-                        <span class="col-md-2">{{ item.description }}</span>
-                        <span *ngFor="let cat of item.category" class="col-md-2">{{ cat.description }}</span>
-                        <span class="col-md-1">{{ item.unit }}</span>
-                        <span class="col-md-2">
-                            <nb-icon status="warning" (click)="openModal(item)" icon="edit-2-outline"></nb-icon>
-                            <nb-checkbox [status]="item.status === 'ACTIVE' ? 'success' : 'danger'" [checked]="item.status === 'ACTIVE'" (checkedChange)="updateStatus($event,item.id)">{{item.status}}</nb-checkbox>                            
-                        </span>
-                    </nb-list-item>
-                </nb-list>
-            </nb-card-body>
-        </nb-card>
+<button class="btn btn-outline-primary btn-lg btn-block form-group" type="button" (click)="open()">Agregar
+  producto</button>
+<div class="container">
+    <div class="row">
+        <div class="search-hero">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="off" placeholder="Buscar">
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="center">Ver más</th>
+                    <th class="center">Foto</th>
+                    <th class="center">Nombre</th>
+                    <th class="center">Descripción</th>
+                    <th class="center">Categoria</th>
+                    <th class="center">Unidades</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of productList | filter:searchProduct">
+                    <td class="center">
+                        <nb-icon status="primary" icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
+                    </td>
+                    <td class="center"><img class="pru" src="{{'data:image/jpg;base64,' + product.photo.data}}" /></td>
+                    <td class="center">{{product.name}}</td>
+                    <td class="center">{{product.description}}</td>
+                    <td class="center" *ngFor="let cat of product.category">{{cat.description}}</td>
+                    <td class="center">{{product.unit}}</td>
+                    <td>
+                        <nb-icon status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
+                        <nb-checkbox [status]="product.status === 'ACTIVE' ? 'primary' : 'primary'" [checked]="product.status === 'ACTIVE'" (checkedChange)="updateStatus($event,product.id)">
+                        </nb-checkbox>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-
-
-<div class="main">
-    <h2>Prueba de conceptos</h2>
-    <div class="card">
-      <div class="input-wrap">
-        <input type="search" [(ngModel)] = "mostrarprueba" placeholder="Find thy city">
-      </div>
-      <div *ngFor="let productPrueba of productPrueba | FilterPipe: mostrarprueba" class="city" >
-        {{productPrueba.name}}
-      </div>
-    </div>
-  </div>
-
-<div class="main">
-    <h2>Find Thy City</h2>
-    <div class="card">
-      <div class="input-wrap">
-      
-        <input type="search" [(ngModel)] = cityName placeholder="Find thy city">
-      </div>
-      <div *ngFor="let city of cities | FilterPipe: cityName" class="city" >
-        {{city}}
-      </div>
-    </div>
-  </div>
-
-
-  

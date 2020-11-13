@@ -17,37 +17,29 @@ import { PopupComponent } from './popup/popup.component';
 export class InventoryComponent implements OnInit {
 
   product: ResponseProduct[];
-  names: string[] = [];
   changeDetectorRef: ChangeDetectorRef;
   hideListProduct = false;
 
 
   constructor(private serviceProduct: ProductService, changeDetectorRef: ChangeDetectorRef,
-    private generalService: GeneralService, httpClient: HttpClient,
+    private generalService: GeneralService,
     private dialog: NbDialogService) {
-      this.mostrarprueba;
-      console.log('filtro' , this.mostrarprueba);
     this.changeDetectorRef = changeDetectorRef;
-    this.httpClient = httpClient;
   }
 
   ngOnInit(): void {
     this.getProductList();
-    this.pruebaCiudades();
-
   }
 
-  productPrueba = [];
-  mostrarprueba = '';
+  productList = [];
+  searchProduct;
   getProductList() {
     this.serviceProduct.getProducts().subscribe(
       product => {
         this.product = product;
         this.product.forEach(p => {
-          this.productPrueba.push(p);
+          this.productList.push(p);
         });
-        console.log('prodcut' , this.productPrueba);
-      
         if (this.product.length === 0) {
           this.hideListProduct = true;
         }
@@ -67,7 +59,7 @@ export class InventoryComponent implements OnInit {
     this.dialog.open(PopupComponent, { context: { productEdit: item } });
   }
   openModalDetails(item) {
-    this.dialog.open(PopDetailsComponent, { context: { productDetails: item } });
+    this.dialog.open(PopDetailsComponent, { context: { idProduct: item } });
   }
 
   updateStatus(event, id) {
@@ -86,30 +78,8 @@ export class InventoryComponent implements OnInit {
         const type = 'success';
         const quote = { title: null, body: message };
         this.generalService.showToast(type, quote.title, quote.body);
-        this.getProductList();
+        // this.getProductList();
       },
     );
-  }
-
-
-
-
-  httpClient: any;
-  states: any;
-  cities = [];
-  cityName = '';
-  pruebaCiudades() {
-    this.httpClient.get('../../../assets/cities.json').subscribe(data => {
-
-      if (data) {
-        
-        this.states = Object.entries(data);
-        this.states.forEach((state) => {
-          state[1].forEach(city => this.cities.push(city + ', ' + state[0]));
-          
-        });
-      }
-      console.log('pasa' , this.cities);
-    });
   }
 }

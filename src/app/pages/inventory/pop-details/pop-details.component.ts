@@ -16,38 +16,28 @@ export class PopDetailsComponent implements OnInit {
   product: ResponseProduct[];
   category: ResponseCategory[];
   productDetails: ResponseProduct;
+  idProduct: string;
   checkOutForm: FormGroup;
   selectedItem;
   @Input() products: ResponseProduct;
 
   constructor(private serviceProduct: ProductService, private serviceCategory: CategoryService,
     protected ref: NbDialogRef<PopDetailsComponent>,
-    private formBuilder: FormBuilder) {
-    this.checkOutForm = this.formBuilder.group({
-      id: [''],
-      name: [''],
-      description: [''],
-      categoryId: [''],
-      status: [''],
-      createAt: [''],
-      updateAt: [''],
-      priceBuy: [''],
-      priceSell: [''],
-      unit: [''],
-      photo: [''],
-    });
+  ) {
+
   }
 
   ngOnInit(): void {
     this.getCategoryList();
-    this.productDetails;
-    this.selectedItem = this.productDetails.category[0].description;
+    this.idProduct;
+    this.getProductById(this.idProduct);
+
   }
 
-  getProductList() {
-    this.serviceProduct.getProducts().subscribe(
+  getProductById(id) {
+    this.serviceProduct.getProductByid(id).subscribe(
       product => {
-        this.product = product;
+        this.productDetails = product;
       });
   }
   cancel() {
