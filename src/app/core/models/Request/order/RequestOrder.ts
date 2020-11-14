@@ -8,4 +8,5 @@ export class RequestOrder {
             product: ResponseProduct[],
             unit: number,
         };
+    totalOrder: number;
 }

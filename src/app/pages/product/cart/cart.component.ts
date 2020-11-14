@@ -50,7 +50,7 @@ export class CartComponent implements OnInit {
     this.disabledUpdate = true;
     const data = [];
     this.idOrder = this.generalService.generaNss();
-    data.push({ id: this.idOrder, products: productsF });
+    data.push({ id: this.idOrder, products: productsF, totalOrder: cartTotal });
     if (cartTotal !== 0) {
       this.orderService.create(JSON.stringify(data[0])).subscribe(() => {
         this.loadingLargeGroup = false;
