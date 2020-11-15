@@ -31,6 +31,8 @@ import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update
 import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-generator.component';
+import { HeaderTicketComponent } from './ticket/ticket-generator/header-ticket/header-ticket.component';
+
 
 @NgModule({
   imports: [
@@ -78,6 +80,8 @@ import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-gener
     CreateCustomerPopupComponent,
     TicketComponent,
     TicketGeneratorComponent,
+    HeaderTicketComponent,
+
   ],
 })
 export class PagesModule {
