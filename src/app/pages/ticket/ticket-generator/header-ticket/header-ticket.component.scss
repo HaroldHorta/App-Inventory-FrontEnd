@@ -1,0 +1,81 @@
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '../../../../theme/styles/themes';
+
+@include nb-install-component() {
+  overflow: auto;
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > * {
+      flex: 1;
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .delta {
+    display: flex;
+    align-items: center;
+
+    &.down {
+      color: nb-theme(color-danger-default);
+    }
+
+    &.up {
+      color: nb-theme(color-success-default);
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    ngx-traffic-bar {
+      display: none;
+    }
+  }
+
+  
+  .form-inline [fullWidth] {
+    flex: 1;
+  }
+  
+  .form-inline > * {
+    margin: 0 1.5rem 1.5rem 0;
+  }
+  
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+
+  .posicion {
+    margin-left: 5%;
+  }
+
+  .posicionLogo {
+    margin-left: 15%;
+    float: left;
+  }
+
+  .posicionInfo{
+    width: 30%;
+    margin-left: 25%;
+    margin-bottom: 0%;
+    font-size: 12px;
+    text-align: center;
+    padding: 0%;
+  }
+
+  .label {
+      width: 20%;
+  }
+
+  .pru {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+}
+}
