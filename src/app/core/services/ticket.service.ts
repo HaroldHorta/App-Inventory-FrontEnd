@@ -20,6 +20,10 @@ export class TicketService {
     );
   }
 
+  getTicketById(id): Observable<ResponseTicket> {
+    return this.http.get<ResponseTicket>(`${endpoint.Ticket}/${id}`);
+  }
+
   create(ticket): Observable<RequestAddTicket> {
     return this.http.post<RequestAddTicket>(endpoint.Ticket, ticket, { headers: this.httpHeaders });
   }
