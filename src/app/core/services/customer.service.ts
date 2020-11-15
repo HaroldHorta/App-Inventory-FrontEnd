@@ -21,7 +21,10 @@ export class CustomerService {
     );
   }
 
-  findCustomerByNroDocument(nroDocument): Observable<ResponseCustomer> {
+  findCustomerById(id: string): Observable<ResponseCustomer> {
+    return this.http.get<ResponseCustomer>(`${endpoint.Customer}/${id}`);
+  }
+  findCustomerByNroDocument(nroDocument: string): Observable<ResponseCustomer> {
     return this.http.get<ResponseCustomer>(`${endpoint.Customer}/nroDocument/${nroDocument}`);
   }
 
