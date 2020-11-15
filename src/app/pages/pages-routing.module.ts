@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ListCategoryComponent } from './category/list/list-category/list-category.component';
-import { ListCustomerComponent } from '../pages/customer/list/list-customer/list-customer.component';
-import { ListOrderComponent } from './order/list/list-order/list-order.component';
-import { ListTicketComponent } from './ticket/list/list-ticket/list-ticket.component';
 import { ProductComponent } from './product/product.component';
+import { CategoryComponent } from './category/categorycomponent';
+import { CustomerComponent } from './customer/customer.component';
+import { OrderComponent } from './order/order.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { TicketComponent } from './ticket/ticket.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,15 +25,15 @@ const routes: Routes = [{
     },
     {
       path: 'category',
-      component: ListCategoryComponent,
+      component: CategoryComponent,
     },
     {
       path: 'customer',
-      component: ListCustomerComponent,
+      component: CustomerComponent,
     },
     {
       path: 'order',
-      component: ListOrderComponent,
+      component: OrderComponent,
     },
     {
       path: 'product',
@@ -40,10 +41,16 @@ const routes: Routes = [{
     },
     {
       path: 'ticket',
-      component: ListTicketComponent,
+      component: TicketComponent,
+    },
+    {
+      path: 'inventory',
+      component: InventoryComponent,
     },
   ],
-}];
+},
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

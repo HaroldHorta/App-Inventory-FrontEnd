@@ -20,6 +20,9 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,9 +31,10 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    FormsModule,
+    ReactiveFormsModule,
     ThemeModule.forRoot(),
-
+    Ng2SearchPipeModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),

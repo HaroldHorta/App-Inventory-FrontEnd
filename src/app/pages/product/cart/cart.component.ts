@@ -1,5 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { CartService } from '../../../core/services/cart.service';
+import { GeneralService } from '../../../core/services/general.service';
+import { OrderService } from '../../../core/services/order.service';
 
 const OFFSET_HEIGHT = 170;
 const PRODUCT_HEIGHT = 48;
@@ -10,56 +14,63 @@ const PRODUCT_HEIGHT = 48;
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  products: any[] = [];
-  expanded = false;
-  numProducts = 0;
-  expandedHeight: string;
-  inherit: string;
-  animatePlop = false;
-  animatePopout = false;
+  idOrder: string;
+  products: ResponseProduct;
   cartTotal = 0;
-
   changeDetectorRef: ChangeDetectorRef;
+  loadingLargeGroup = false;
+  disabledUpdate = false;
 
-  constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef) {
+  constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef, private router: Router,
+    private generalService: GeneralService, private orderService: OrderService) {
     this.changeDetectorRef = changeDetectorRef;
-   }
+  }
 
   ngOnInit(): void {
-    this.expandedHeight = '0';
     this.cartService.productAdded$.subscribe(data => {
       this.products = data.products;
       this.cartTotal = data.cartTotal;
-      this.numProducts = data.products.reduce((acc, product) => {
-        acc += product.quantity;
-        return acc;
-      }, 0);
-
-      // Make a plop animation
-      if (this.numProducts > 1) {
-        this.animatePlop = true;
-        setTimeout(() => {
-          this.animatePlop = false;
-        }, 160);
-      } else if (this.numProducts === 1) {
-        this.animatePopout = true;
-        setTimeout(() => {
-          this.animatePopout = false;
-        }, 300);
-      }
-      this.expandedHeight = (this.products.length * PRODUCT_HEIGHT + OFFSET_HEIGHT) + 'px';
-      if (!this.products.length) {
-        this.expanded = false;
-      }
       this.changeDetectorRef.detectChanges();
     });
+
+  }
+
+
+  getRandom(): number {
+    return Math.random() * (1 - 100000) + 1;
   }
 
   deleteProduct(product) {
     this.cartService.deleteProductFromCart(product);
+
   }
 
-  onCartClick() {
-    this.expanded = !this.expanded;
+  checkOut(productsF: ResponseProduct, cartTotal) {
+    this.loadingLargeGroup = true;
+    this.disabledUpdate = true;
+    const data = [];
+    this.idOrder = this.generalService.generaNss();
+    data.push({ id: this.idOrder, products: productsF, totalOrder: cartTotal });
+    if (cartTotal !== 0) {
+      this.orderService.create(JSON.stringify(data[0])).subscribe(() => {
+        this.loadingLargeGroup = false;
+        this.disabledUpdate = false;
+        this.router.navigate(['pages/checkout', this.idOrder]);
+      },
+        (err) => {
+          const type = 'danger';
+          const quote = { title: null, body: err.error.detailMessage };
+          this.generalService.showToast(type, quote.title, quote.body);
+        });
+
+    } else {
+
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
+      const type = 'danger';
+      const quote = { title: null, body: 'El carrito esta vacio' };
+      this.generalService.showToast(type, quote.title, quote.body);
+
+    }
   }
 }

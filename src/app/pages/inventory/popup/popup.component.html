@@ -1,0 +1,44 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Producto</nb-card-header>
+    <nb-card-body *ngIf="!productEdit">
+        <p *ngIf="checkOutForm.get('name').errors && checkOutForm.get('name').dirty" class="messageError">* Campo Obligatorio</p>
+        <input nbInput class="form-group" type="text" formControlName="name" fullWidth placeholder="Nombre">
+
+        <div class="full-name-inputs form-group">
+            <p *ngIf="checkOutForm.get('priceBuy').errors && checkOutForm.get('priceBuy').dirty" class="messageError">* Campo Obligatorio</p>
+            <input nbInput class="form-group" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" fullWidth formControlName="priceBuy" placeholder="Precio de compra">
+            <p *ngIf="checkOutForm.get('priceSell').errors && checkOutForm.get('priceSell').dirty" class="messageError">* Campo Obligatorio</p>
+            <input nbInput class="form-group" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" fullWidth formControlName="priceSell" placeholder="Precio de venta">
+        </div>
+        <div class="full-name-inputs form-group">
+            <p *ngIf="checkOutForm.get('unit').errors && checkOutForm.get('unit').dirty" class="messageError">* Campo Obligatorio</p>
+            <input nbInput type="text" formControlName="unit" placeholder="Existencias">
+
+            <p *ngIf="checkOutForm.get('categoryId').errors && checkOutForm.get('categoryId').dirty" class="messageError">* Campo Obligatorio</p>
+            <nb-select style="width: 50%; padding-left: 5%;" placeholder="Categoria" formControlName="categoryId">
+                <nb-option *ngFor="let item of categoria" [value]="item">{{item.description}}</nb-option>
+            </nb-select>
+        </div>
+        <p *ngIf="checkOutForm.get('description').errors && checkOutForm.get('description').dirty" class="messageError">* Campo Obligatorio</p>
+        <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" placeholder="Descripción"></textarea>
+    </nb-card-body>
+    <nb-card-body *ngIf="productEdit">
+        <input nbInput class="form-group" type="text" formControlName="name" fullWidth [ngModel]="productEdit.name">
+        <div class="full-name-inputs form-group">
+            <input nbInput class="form-group" type="text" fullWidth formControlName="priceBuy" [ngModel]="productEdit.priceBuy">
+            <input nbInput class="form-group" type="text" fullWidth formControlName="priceSell" [ngModel]="productEdit.priceSell">
+        </div>
+        <div class="full-name-inputs form-group">
+            <nb-select formControlName="categoryId" [(selected)]="selectedItem">
+                <nb-option *ngFor="let item of categoria" [value]="item">{{item.description}}</nb-option>
+            </nb-select>
+        </div>
+        <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" [ngModel]="productEdit.description"></textarea>
+    </nb-card-body>
+    <nb-card-footer>
+        <button *ngIf="!productEdit" style="width: 45%;" class="btn btn-outline-success form-group" type="submit" (click)="addProduct(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Enviar</button>
+        <button *ngIf="productEdit" style="width: 45%;" class="btn btn-outline-warning form-group" type="submit" (click)="updateProduct(productEdit.id,checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
+            [disabled]="disabledUpdate">Actualizar</button>
+        <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cancel</button>
+    </nb-card-footer>
+</nb-card>

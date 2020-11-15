@@ -12,6 +12,14 @@ import {
 import { UserData } from './data/users';
 import { UserService } from './mock/users.service';
 import { MockDataModule } from './mock/mock-data.module';
+import { StatsProgressBarData } from './data/stats-progress-bar';
+import { StatsProgressBarService } from './mock/stats-progress-bar.service';
+import { OrdersChartData } from './data/orders-chart';
+import { ProfitChartData } from './data/profit-chart';
+import { OrdersChartService } from './mock/orders-chart.service';
+import { ProfitChartService } from './mock/profit-chart.service';
+import { OrdersProfitChartData } from './mock/orders-profit-chart';
+import { OrdersProfitChartService } from './services/orders-profit-chart.service';
 
 const socialLinks = [
   {
@@ -33,6 +41,10 @@ const socialLinks = [
 
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
+  { provide: StatsProgressBarData, useClass: StatsProgressBarService },
+  { provide: OrdersChartData, useClass: OrdersChartService },
+  { provide: ProfitChartData, useClass: ProfitChartService },
+  { provide: OrdersProfitChartData, useClass: OrdersProfitChartService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

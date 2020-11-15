@@ -1,4 +1,46 @@
-.img {
-    width: 50%;
-    height: 50%;
+.img-card {
+    margin-top: 5%;
+    width: 150px;
+    height: 100px;
+}
+
+.card {
+    width: 200px;
+    height: 350px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.puntos-suspensivos {
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.contenedor-boton {
+    margin-top: 20px;
+}
+
+.boton {
+    font-size: 15px;
+}
+
+.espacio-lateral {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.titulos {
+    font-size: 15px;
+    padding: 7px;
+    background: rgb(112, 179, 241);
+    height: 100%;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.spaces-add {
+    padding: 0px 0px;
 }

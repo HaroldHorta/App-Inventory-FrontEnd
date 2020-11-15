@@ -1,6 +1,6 @@
-export class FileInfo{
-    id:string;
-    name:string;
-    type:string;
+export class FileInfo {
+    id: string;
+    name: string;
+    type: string;
     data: string;
 }

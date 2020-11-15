@@ -1,0 +1,47 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Productos detalladamente</nb-card-header>
+    <nb-card-body>
+        <div class="contenedorImg">
+            <img class="img-card" src="{{'data:image/jpg;base64,' + productDetails.photo.data}}" />
+        </div>
+        <div class="contenedorDetalles">
+            <p class="espacio"><b>Nombre: </b> {{productDetails.name}}</p>
+            <p class="espacio"><b>Estado: </b>{{productDetails.status}}</p>
+            <p class="espacio"><b>Existencias: </b>{{productDetails.unit}}</p>
+            <p class="espacio"><b>Precio de compra: </b>{{productDetails.priceBuy}}</p>
+            <p class="espacio"><b>Precio de venta: </b>{{productDetails.priceSell}}</p>
+            <p class="espacio" *ngFor="let category of productDetails.category"><b>Categoria:
+                </b>{{category.description}}</p>
+            <p class="espacio"><b>Fecha de creación: </b>{{productDetails.createAt}}</p>
+            <p class="espacio"><b>Ultima actualización: </b>{{productDetails.updateAt}}</p>
+            <p class="espacio"><b>Descripción: </b>{{productDetails.description}}</p>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cerrar</button>
+    </nb-card-footer>
+</nb-card>
+<!-- <div>
+    <div class="tamanoId">Es es el id -{{productDetails.id}}</div>
+</div>
+<div>
+    <div class="tamanoName marginTop">{{productDetails.name}}</div>
+    <div class="tamanoName marginTop spacio">{{productDetails.status}}</div>
+</div>
+<div>
+    <div class="tamanoUnit marginTop">{{productDetails.unit}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.priceBuy}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.priceSell}}</div>
+</div>
+<div>
+    <div class="tamanoUnit marginTop" *ngFor="let category of productDetails.category">{{category.description}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.createAt}}</div>
+    <div class="tamanoUnit marginTop spacio">{{productDetails.updateAt}}</div>
+</div>
+<div>
+    <div class="tamanoTextArea marginTop">{{productDetails.description}}</div>
+    <div class="marginTop" style="width: 50%;float: left;">
+        <img class="img-card" src="{{'data:image/jpg;base64,' + productDetails.photo.data}}" />
+    </div>
+</div>
+<button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cerrar</button> -->

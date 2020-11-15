@@ -1,0 +1,44 @@
+  <nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Producto</nb-card-header>
+    <nb-card-body>
+      <div class="full-name-input form-group">
+        <p *ngIf="checkOutForm.get('name').errors && checkOutForm.get('name').dirty" class="messageError">* Campo
+          Obligatorio</p>
+        <input nbInput class=" form-group" type="text" formControlName="name" fullWidth placeholder="Nombre">
+      </div>
+      <div class="full-name-input form-group">
+        <nb-select style="width: 45%;" placeholder="Tipo de documento" formControlName="typeDocument">
+          <nb-option *ngFor="let item of typeDocument" [value]="item">{{item}}</nb-option>
+        </nb-select>
+        <p *ngIf="checkOutForm.get('nroDocument').errors && checkOutForm.get('nroDocument').dirty" class="messageError">
+          *
+          Campo Obligatorio</p>
+        <input #nroDocument style="width: 50%; margin-left: 5%;" nbInput type="text" formControlName="nroDocument"
+          placeholder="Numero de documento">
+      </div>
+      <p *ngIf="checkOutForm.get('email').errors && checkOutForm.get('email').dirty" class="messageError">
+        *
+        Campo Obligatorio</p>
+      <input class="form-group" nbInput type="text" formControlName="email" fullWidth placeholder="Email">
+
+
+      <p *ngIf="checkOutForm.get('address').errors && checkOutForm.get('address').dirty" class="messageError">
+        *
+        Campo Obligatorio</p>
+      <input class="form-group" nbInput type="text" formControlName="address" fullWidth placeholder="Dirección">
+
+
+      <p *ngIf="checkOutForm.get('email').errors && checkOutForm.get('email').dirty" class="messageError">
+        *
+        Campo Obligatorio</p>
+      <input class="form-group" nbInput type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" formControlName="phone" fullWidth placeholder="Telefono">
+    </nb-card-body>
+
+    <nb-card-footer>
+      <button style="width: 45%;" class="btn btn-outline-success form-group"
+        (click)="addCustomer(checkOutForm.value, nroDocument.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning"
+        nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Guardar</button>
+      <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton
+        (click)="cancel()">Cancel</button>
+    </nb-card-footer>
+  </nb-card>
