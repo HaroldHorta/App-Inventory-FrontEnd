@@ -1,22 +1,25 @@
-<div class="col-12 grid-margin stretch-card">
-  <div class="card card-statistics">
-    <div class="card">
+<nb-card accent="info" status="info">
+  <nb-card-body>
+
+    <div class="cards">
       <div class="clearfix">
         <div>
           <div>
-            <p class="font-weight-medium puntos-suspensivos text-center mb-0 titulos">{{ product.name }}</p>
+
             <div class="text-center">
               <img class="img-card" src="{{'data:image/jpg;base64,' + product.photo.data}}" />
             </div>
           </div>
           <p class="text-muted  mt-3 mb-0 espacio-lateral">
-            Existencias: {{ product.unit }}
+            Unidades: {{ product.unit }}
           </p>
         </div>
       </div>
       <div>
-        <p class="text-muted puntos-suspensivos espacio-lateral mt-3 mb-0">
-          Descripción: <br>{{ product.description }}
+        <p class="text-muted puntos-suspensivos espacio-lateral mt-3 mb-0"><strong>$ {{ product.priceSell }}</strong> </p>
+        <p class="text-muted puntos-suspensivos espacio-lateral mb-0">{{ product.name }}</p>
+        <p class="text-muted puntos-suspensivos espacio-lateral mb-0">
+          {{ product.description }}
         </p>
       </div>
       <div class=" mx-auto row justify-content-center align-items-center contenedor-boton"
@@ -30,26 +33,27 @@
         <div class="col-lg-12">
           <nb-card-body>
             <div class="buttons-row offset-md-2">
-            
-            <div class="row show-grid">
-              <div class="spaces-add  col-6 col-md-2">
-                <div> <button class="btn btn-outline-danger" (click)="disminuir()">-</button>
+
+              <div class="row show-grid">
+                <div class="spaces-add  col-6 col-md-2">
+                  <div> <button class="btn btn-outline-danger" (click)="disminuir()">-</button>
+                  </div>
+                </div>
+                <div class="spaces-add col-6 col-md-6">
+                  <div style="margin-left:3px ;" class="form-control text-center" disabled> {{cantidad}} </div>
+                </div>
+                <div style="margin-left:4px ;" class="spaces-add  col-6 col-md-1">
+                  <div> <button class="btn btn-outline-success" (click)="aumentar()" [disabled]="disableAdd">+</button>
+                  </div>
                 </div>
               </div>
-              <div class="spaces-add col-6 col-md-6">
-                <div class="form-control text-center"disabled> {{cantidad}} </div>
-              </div>
-              <div class="spaces-add  col-6 col-md-1">
-                <div> <button class="btn btn-outline-success"
-                    (click)="aumentar()" [disabled]="disableAdd">+</button></div>
-              </div>
             </div>
-        </div>
           </nb-card-body>
 
         </div>
       </div>
 
     </div>
-  </div>
-</div>
+
+  </nb-card-body>
+</nb-card>
