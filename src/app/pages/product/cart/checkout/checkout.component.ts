@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
+import { PaymentType } from '../../../../core/models/enum/PaymentType.enum';
 import { RequestAddTicket } from '../../../../core/models/Request/ticket/RequestAddTicket';
 import { ResponseCustomer } from '../../../../core/models/Response/customer/ResponseCustomer.module';
 import { ResponseOrder } from '../../../../core/models/Response/order/ResponseOrder.module';
@@ -27,6 +28,11 @@ export class CheckoutComponent implements OnInit {
   hideCustomer = false;
   hideAddCustomer = false;
   idTicket: string;
+  typePayment = ['CASH', 'TRANSACTION', 'CREDIT'];
+  payment: string = 'CASH';
+  credit: number;
+  hideCredit = false;
+
 
   constructor(private generalService: GeneralService, private activeRouter: ActivatedRoute, private router: Router,
     private formBuilder: FormBuilder, private orderService: OrderService,
@@ -38,6 +44,8 @@ export class CheckoutComponent implements OnInit {
     this.checkOutFormTicket = this.formBuilder.group({
       customerId: ['', [Validators.required]],
       order: ['', [Validators.required]],
+      paymentType: ['', [Validators.required]],
+      creditCapital: ['0'],
     });
   }
 
@@ -78,12 +86,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   generarTicket(ticket: RequestAddTicket) {
+
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
     this.idTicket = this.generalService.generaNss();
-    data.push({ id: this.idTicket,  customerId: ticket.customerId, order: ticket.order});
-
+    data.push({
+      id: this.idTicket, customerId: ticket.customerId, order: ticket.order,
+      paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? '0' : ticket.creditCapital,
+    });
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
       this.loadingLargeGroup = false;
       this.disabledUpdate = false;
@@ -97,6 +108,28 @@ export class CheckoutComponent implements OnInit {
         const quote = { title: null, body: err.error.detailMessage };
         this.generalService.showToast(type, quote.title, quote.body);
     });
+  }
+
+  public changedValueCredit(): void {
+    const credit = {
+      fieldName: this.credit,
+    };
+    // this.formGroup.patchValue(newVal);
+  }
+
+  public changedValuePayment(): void {
+
+    const newVal = {
+      fieldName: this.payment,
+    };
+    if (this.payment === 'CREDIT') {
+      this.hideCredit = true;
+    }
+    if (!(this.payment === 'CREDIT')) {
+      this.hideCredit = false;
+      this.credit = undefined;
+    }
+    // this.formGroup.patchValue(newVal);
   }
 
 }

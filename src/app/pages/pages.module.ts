@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import {
   NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
-  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule, NbSpinnerModule, NbAlertModule, NbLayoutModule,
+  NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule,
+  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -36,6 +37,7 @@ import { HeaderTicketComponent } from './ticket/ticket-generator/header-ticket/h
 
 @NgModule({
   imports: [
+    NbRadioModule,
     FormsModule,
     NbLayoutModule,
     NbAlertModule,

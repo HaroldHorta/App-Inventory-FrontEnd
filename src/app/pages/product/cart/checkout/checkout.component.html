@@ -6,7 +6,8 @@
           <nb-card-header>Cliente</nb-card-header>
           <nb-card-body>
             <div class="form-inline">
-              <input type="text" class="col-md-4" nbInput fullWidth formControlName="nroDocument" placeholder="Numero de documento">
+              <input type="text" class="col-md-4" nbInput fullWidth formControlName="nroDocument"
+                placeholder="Numero de documento">
 
               <button class="btn btn-outline-info form-group" type="submit"
                 (click)="findByNroDocument(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
@@ -28,6 +29,29 @@
         </div>
       </nb-card-body>
     </nb-card>
+
+    <nb-card>
+      <nb-card-body>
+        <div>
+          <span class="posicion">Seleccione el tipo de pago: </span>
+          <nb-radio-group [(value)]="payment" class="Groupradiobox"  [(ngModel)]="payment" (ngModelChange)="changedValuePayment()">
+            <nb-radio class="radiobox" *ngFor="let type of typePayment" [value]="type">
+              {{type}}
+            </nb-radio>
+          </nb-radio-group>
+
+          <input *ngIf="hideCredit" type="text" class="col-md-4" nbInput fullWidth [(ngModel)]="credit" (ngModelChange)="changedValueCredit()"
+          placeholder="Numero de documento">
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <div [formGroup]="checkOutFormTicket">
+    <input type="text" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
+    <input type="text" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
+    <input type="text" nbInput fullWidth formControlName="paymentType" [ngModel]="payment">
+    <input type="text" nbInput fullWidth formControlName="creditCapital" [ngModel]="credit">
+    </div>
 
     <div *ngIf="hideCustomer">
       <nb-card>
@@ -75,11 +99,6 @@
           </div>
         </nb-card-body>
       </nb-card>
-    </div>
-
-    <div [formGroup]="checkOutFormTicket">
-      <input type="hidden" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
-      <input type="hidden" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
     </div>
 
     <div class="row">
