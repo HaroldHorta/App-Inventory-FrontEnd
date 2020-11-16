@@ -1,4 +1,4 @@
-<nb-layout>
+<nb-layout class="classname">
   <nb-layout-column>
     <div class="row">
       <div class="col-md-12">
@@ -47,10 +47,10 @@
     </nb-card>
 
     <div [formGroup]="checkOutFormTicket">
-    <input type="text" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
-    <input type="text" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
-    <input type="text" nbInput fullWidth formControlName="paymentType" [ngModel]="payment">
-    <input type="text" nbInput fullWidth formControlName="creditCapital" [ngModel]="credit">
+    <input type="hidden" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
+    <input type="hidden" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
+    <input type="hidden" nbInput fullWidth formControlName="paymentType" [ngModel]="payment">
+    <input type="hidden" nbInput fullWidth formControlName="creditCapital" [ngModel]="credit">
     </div>
 
     <div *ngIf="hideCustomer">
