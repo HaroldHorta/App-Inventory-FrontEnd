@@ -1,25 +1,23 @@
 <div class="row show-grid">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <div class="row show-grid">
       <div class="col-md-6">
         <ngx-sort-filters [filters]='sortFilters' (sortChange)='sortProducts($event)'>
         </ngx-sort-filters>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <ngx-search-bar #searchComponent (searchChange)='onSearchChange($event)'></ngx-search-bar>
       </div>
+      <div  class="col-md-2">
+        <ngx-cart class="col-md-12"></ngx-cart>
+      </div>
     </div>
-    <div style="margin-top: 5%;" class="row show-grid">
+    <div class="row show-grid">
       <div class="col-md-12">
         <ngx-showcase [products]='products'></ngx-showcase>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="row show-grid">
-      <div class="col-md-12">
-        <ngx-cart></ngx-cart>
-      </div>
-    </div>
-  </div>
+  
+   
 </div>

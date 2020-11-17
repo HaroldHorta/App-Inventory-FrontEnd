@@ -18,6 +18,7 @@ export class ProductThumbnailComponent implements OnInit {
   detailViewActive: boolean;
   disableAdd: boolean = false;
 
+
   constructor(private serviceProduct: ProductService, private cartService: CartService) { }
 
   errores: string[];
@@ -40,7 +41,6 @@ export class ProductThumbnailComponent implements OnInit {
     this.cartService.addProductToCart(this.product);
     this.diableAdd();
   }
-
 
   aumentar(): number {
     this.cantidad = this.cantidad + 1;

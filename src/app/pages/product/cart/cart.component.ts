@@ -1,12 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { CartService } from '../../../core/services/cart.service';
 import { GeneralService } from '../../../core/services/general.service';
 import { OrderService } from '../../../core/services/order.service';
-
-const OFFSET_HEIGHT = 170;
-const PRODUCT_HEIGHT = 48;
 
 @Component({
   selector: 'ngx-cart',
@@ -16,10 +13,14 @@ const PRODUCT_HEIGHT = 48;
 export class CartComponent implements OnInit {
   idOrder: string;
   products: ResponseProduct;
+  prueba: ResponseProduct[];
   cartTotal = 0;
   changeDetectorRef: ChangeDetectorRef;
   loadingLargeGroup = false;
   disabledUpdate = false;
+  numProducts: number;
+
+  @ViewChild('item', { static: true }) accordion;
 
   constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef, private router: Router,
     private generalService: GeneralService, private orderService: OrderService) {
@@ -29,7 +30,13 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.productAdded$.subscribe(data => {
       this.products = data.products;
+
       this.cartTotal = data.cartTotal;
+      this.prueba = data.products;
+      this.numProducts = data.products.reduce((acc, product) => {
+        acc += product.unit;
+        return acc;
+      }, 0);
       this.changeDetectorRef.detectChanges();
     });
 
@@ -72,5 +79,9 @@ export class CartComponent implements OnInit {
       this.generalService.showToast(type, quote.title, quote.body);
 
     }
+  }
+
+  toggle() {
+    this.accordion.toggle();
   }
 }
