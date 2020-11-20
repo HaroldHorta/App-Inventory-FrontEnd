@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopUpdateImageComponent implements OnInit {
 
+  photo: string;
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

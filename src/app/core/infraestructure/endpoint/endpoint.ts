@@ -6,4 +6,5 @@ export const endpoint = {
     Order: `${environment.serverUrl}/order`,
     Product: `${environment.serverUrl}/product`,
     Ticket: `${environment.serverUrl}/ticket`,
+    ProductoWhitPhoto: `${environment.serverUrl}/file/upload`,
 };

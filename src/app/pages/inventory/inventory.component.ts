@@ -3,9 +3,11 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { NbDialogService, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import { Status } from '../../core/models/enum/Status.enum';
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
+import { FileUploadService } from '../../core/services/file-upload.service';
 import { GeneralService } from '../../core/services/general.service';
 import { ProductService } from '../../core/services/product.service';
 import { PopDetailsComponent } from './pop-details/pop-details.component';
+import { PopUpdateImageComponent } from './pop-update-image/pop-update-image.component';
 import { PopupComponent } from './popup/popup.component';
 
 @Component({
@@ -23,7 +25,8 @@ export class InventoryComponent implements OnInit {
 
   constructor(private serviceProduct: ProductService, changeDetectorRef: ChangeDetectorRef,
     private generalService: GeneralService,
-    private dialog: NbDialogService) {
+    private dialog: NbDialogService,
+    private fileUpload: FileUploadService) {
     this.changeDetectorRef = changeDetectorRef;
   }
 
@@ -48,9 +51,7 @@ export class InventoryComponent implements OnInit {
     );
   }
   open() {
-    this.dialog.open(PopupComponent).onClose.subscribe(() => {
-      this.getProductList();
-    });
+    this.dialog.open(PopupComponent).onClose.subscribe(() => {});
   }
 
   title: string;
@@ -61,7 +62,9 @@ export class InventoryComponent implements OnInit {
   openModalDetails(item) {
     this.dialog.open(PopDetailsComponent, { context: { idProduct: item } });
   }
-
+  openModalImage(item) {
+    this.dialog.open(PopUpdateImageComponent, { context: { photo: item } });
+  }
   updateStatus(event, id) {
     let message;
     let status;
@@ -81,5 +84,30 @@ export class InventoryComponent implements OnInit {
         // this.getProductList();
       },
     );
+  }
+  urls = [];
+  onSelectFile(idProduct,event) {
+    if (event.target.files && event.target.files[0]) {
+      for (let i = 0; i < 1; i++) {
+        var reader = new FileReader();
+
+        reader.onload = (event: any) => {
+          
+          this.urls.push(event.target.result);
+         
+          const obj = {idProduct: idProduct, dataPhoto: this.urls[0] }
+
+
+          this.fileUpload.create(obj).subscribe(data => {
+            console.log("Este es el data", data);
+            
+            this.urls = [];
+          })
+        }
+
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+
   }
 }
