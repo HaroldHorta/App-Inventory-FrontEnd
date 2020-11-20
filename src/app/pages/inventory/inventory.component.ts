@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { NbDialogService, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import { Status } from '../../core/models/enum/Status.enum';
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
@@ -21,6 +21,9 @@ export class InventoryComponent implements OnInit {
   product: ResponseProduct[];
   changeDetectorRef: ChangeDetectorRef;
   hideListProduct = false;
+  urls = [];
+  productList = [];
+  searchProduct;
 
 
   constructor(private serviceProduct: ProductService, changeDetectorRef: ChangeDetectorRef,
@@ -34,8 +37,6 @@ export class InventoryComponent implements OnInit {
     this.getProductList();
   }
 
-  productList = [];
-  searchProduct;
   getProductList() {
     this.serviceProduct.getProducts().subscribe(
       product => {
@@ -50,11 +51,13 @@ export class InventoryComponent implements OnInit {
       },
     );
   }
-  open() {
-    this.dialog.open(PopupComponent).onClose.subscribe(() => {});
-  }
 
-  title: string;
+  open() {
+    this.dialog.open(PopupComponent).onClose.subscribe(() => {
+      this.productList = [];
+      this.getProductList();
+    });
+  }
 
   openModal(item) {
     this.dialog.open(PopupComponent, { context: { productEdit: item } });
@@ -65,6 +68,7 @@ export class InventoryComponent implements OnInit {
   openModalImage(item) {
     this.dialog.open(PopUpdateImageComponent, { context: { photo: item } });
   }
+
   updateStatus(event, id) {
     let message;
     let status;
@@ -81,33 +85,25 @@ export class InventoryComponent implements OnInit {
         const type = 'success';
         const quote = { title: null, body: message };
         this.generalService.showToast(type, quote.title, quote.body);
-        // this.getProductList();
       },
     );
   }
-  urls = [];
-  onSelectFile(idProduct,event) {
+
+  onSelectFile(idProduct, event) {
     if (event.target.files && event.target.files[0]) {
       for (let i = 0; i < 1; i++) {
-        var reader = new FileReader();
-
-        reader.onload = (event: any) => {
-          
-          this.urls.push(event.target.result);
-         
-          const obj = {idProduct: idProduct, dataPhoto: this.urls[0] }
-
-
-          this.fileUpload.create(obj).subscribe(data => {
-            console.log("Este es el data", data);
-            
+        const reader = new FileReader();
+        reader.onload = (events: any) => {
+          this.urls.push(events.target.result);
+          const obj = { idProduct: idProduct, dataPhoto: this.urls[0] };
+          this.fileUpload.create(obj).subscribe(() => {
             this.urls = [];
-          })
-        }
-
+            this.productList = [];
+            this.getProductList();
+          });
+        };
         reader.readAsDataURL(event.target.files[0]);
       }
     }
-
   }
 }
