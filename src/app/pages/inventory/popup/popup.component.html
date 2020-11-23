@@ -34,6 +34,7 @@
             </nb-select>
         </div>
         <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" [ngModel]="productEdit.description"></textarea>
+        <input nbInput class="form-group" type="text" fullWidth formControlName="unit" [ngModel]="productEdit.unit">
     </nb-card-body>
     <nb-card-footer>
         <button *ngIf="!productEdit" style="width: 45%;" class="btn btn-outline-success form-group" type="submit" (click)="addProduct(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Enviar</button>
