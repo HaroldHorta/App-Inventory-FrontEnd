@@ -9,6 +9,7 @@ import { ProductService } from '../../core/services/product.service';
 import { PopDetailsComponent } from './pop-details/pop-details.component';
 import { PopUpdateImageComponent } from './pop-update-image/pop-update-image.component';
 import { PopupComponent } from './popup/popup.component';
+import { PopUpdateUnitsComponent } from './pop-update-units/pop-update-units.component';
 
 @Component({
   selector: 'ngx-inventory',
@@ -60,13 +61,23 @@ export class InventoryComponent implements OnInit {
   }
 
   openModal(item) {
-    this.dialog.open(PopupComponent, { context: { productEdit: item } });
+    this.dialog.open(PopupComponent, { context: { productEdit: item } }).onClose.subscribe(() => {
+      this.productList = [];
+      this.getProductList();
+    });
   }
   openModalDetails(item) {
     this.dialog.open(PopDetailsComponent, { context: { idProduct: item } });
   }
   openModalImage(item) {
     this.dialog.open(PopUpdateImageComponent, { context: { photo: item } });
+  }
+  unitModal(item){
+    this.dialog.open(PopUpdateUnitsComponent, { context: { units: item } }).onClose.subscribe(() => {
+      this.productList = [];
+      this.getProductList();
+
+    });
   }
 
   updateStatus(event, id) {

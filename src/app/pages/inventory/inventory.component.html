@@ -1,53 +1,48 @@
 <div class="container">
-  <div class="row col-md-12">
     <div class="row col-md-12">
-      <div class="col-md-6">
-        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="off"
-          placeholder="Buscar">
-      </div>
-      <div class="col-md-6">
-        <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="open()">Agregar
-          producto</button>
-      </div>
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="off" placeholder="Buscar">
+            </div>
+            <div class="col-md-6">
+                <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="open()">Agregar
+                    producto</button>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="center">Ver más</th>
+                    <th class="center">Foto</th>
+                    <th class="center">Nombre</th>
+                    <th class="center">Descripción</th>
+                    <th class="center">Categoria</th>
+                    <th class="center">Unidades</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of productList | filter:searchProduct">
+                    <td class="center">
+                        <nb-icon class="changeMouse" status="primary" icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
+                    </td>
+                    <td class="center">
+                        <label>
+                            <img for="boton-archivo" class="pru changeMouse" src="{{product?.photo}}" />
+                            <input type='file' id="boton-archivo" class="imagen-para-archivo"
+                                (change)="onSelectFile(product.id , $event)">
+                        </label>
+                    </td>
+                    <td class="center">{{product?.name}}</td>
+                    <td class="center">{{product?.description}}</td>
+                    <td class="center" *ngFor="let cat of product.category">{{cat?.description}}</td>
+                    <td class="center changeMouse" (click)="unitModal(product)">{{product?.unit}}</td>
+                    <td>
+                        <nb-icon class="changeMouse" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
+                        <nb-checkbox class="checkBox" [status]="product.status === 'ACTIVE' ? 'primary' : 'primary'" [checked]="product.status === 'ACTIVE'" (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="center">Ver más</th>
-          <th class="center">Foto</th>
-          <th class="center">Nombre</th>
-          <th class="center">Descripción</th>
-          <th class="center">Categoria</th>
-          <th class="center">Unidades</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of productList | filter:searchProduct">
-          <td class="center">
-            <nb-icon style="cursor: pointer;" status="primary" icon="eye-outline"
-              (click)="openModalDetails(product.id)"></nb-icon>
-          </td>
-          <td class="center">
-            <label>
-              <img for="boton-archivo" style="cursor: pointer;" class="pru" src="{{product?.photo}}" />
-              <input type='file' id="boton-archivo" class="imagen-para-archivo"
-                (change)="onSelectFile(product.id , $event)">
-            </label>
-          </td>
-          <td class="center">{{product?.name}}</td>
-          <td class="center">{{product?.description}}</td>
-          <td class="center" *ngFor="let cat of product.category">{{cat?.description}}</td>
-          <td class="center">{{product?.unit}}</td>
-          <td>
-            <nb-icon style="cursor: pointer;" status="warning" (click)="openModal(product)" icon="edit-2-outline">
-            </nb-icon>
-            <nb-checkbox style="cursor: pointer;" [status]="product.status === 'ACTIVE' ? 'primary' : 'primary'"
-              [checked]="product.status === 'ACTIVE'" (checkedChange)="updateStatus($event,product.id)">
-            </nb-checkbox>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
