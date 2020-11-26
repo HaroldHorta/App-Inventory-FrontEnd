@@ -5,6 +5,7 @@ import { RequestAddProduct } from '../../../core/models/Request/product/RequestA
 import { ResponseCategory } from '../../../core/models/Response/category/ResponseCategory.module';
 import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { CategoryService } from '../../../core/services/category.service';
+import { FileUploadService } from '../../../core/services/file-upload.service';
 import { GeneralService } from '../../../core/services/general.service';
 import { ProductService } from '../../../core/services/product.service';
 import { InventoryComponent } from '../inventory.component';
@@ -27,7 +28,7 @@ export class PopupComponent implements OnInit {
   loadingLargeGroup = false;
   disabledUpdate = false;
 
-  constructor(private serviceProduct: ProductService,
+  constructor(private serviceProduct: ProductService, private fileUpload: FileUploadService,
     private generalService: GeneralService, protected ref: NbDialogRef<PopupComponent>,
     private serviceCategory: CategoryService, private formBuilder: FormBuilder, private productService: ProductService) {
     this.checkOutForm = this.formBuilder.group({
@@ -37,6 +38,7 @@ export class PopupComponent implements OnInit {
       priceBuy: ['', [Validators.required]],
       priceSell: ['', [Validators.required]],
       unit: ['', [Validators.required]],
+      photo: [''],
     });
   }
 
@@ -65,7 +67,22 @@ export class PopupComponent implements OnInit {
     this.ref.close();
   }
 
+  urls = [];
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      for (let i = 0; i < 1; i++) {
+        const reader = new FileReader();
+        reader.onload = (events: any) => {
+          this.urls.push(events.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+  }
+
   addProduct(product) {
+    product.photo = this.urls[0];
+
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];

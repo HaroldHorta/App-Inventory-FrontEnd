@@ -21,6 +21,7 @@
         </div>
         <p *ngIf="checkOutForm.get('description').errors && checkOutForm.get('description').dirty" class="messageError">* Campo Obligatorio</p>
         <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" placeholder="Descripción"></textarea>
+        <input nbInput type="file" formControlName="photo" class="form-group" fullWidth (change)="onSelectFile($event)">
     </nb-card-body>
     <nb-card-body *ngIf="productEdit">
         <input nbInput class="form-group" type="text" formControlName="name" fullWidth [ngModel]="productEdit.name">

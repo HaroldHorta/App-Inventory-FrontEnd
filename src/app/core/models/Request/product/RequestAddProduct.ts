@@ -7,4 +7,5 @@ export class RequestAddProduct {
     priceBuy: string;
     priceSell: string;
     unit: number;
+    photo: string;
 }
