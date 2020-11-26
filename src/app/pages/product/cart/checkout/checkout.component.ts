@@ -93,7 +93,7 @@ export class CheckoutComponent implements OnInit {
     this.idTicket = this.generalService.generaNss();
     data.push({
       id: this.idTicket, customerId: ticket.customerId, order: ticket.order,
-      paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? '0' : ticket.creditCapital,
+      paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? 0 : ticket.creditCapital,
     });
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
       this.loadingLargeGroup = false;
@@ -103,11 +103,11 @@ export class CheckoutComponent implements OnInit {
       this.generalService.showToast(type, quote.title, quote.body);
       this.router.navigate(['pages/ticket', this.idTicket]);
     },
-    (err) => {
+      (err) => {
         const type = 'danger';
         const quote = { title: null, body: err.error.detailMessage };
         this.generalService.showToast(type, quote.title, quote.body);
-    });
+      });
   }
 
   public changedValueCredit(): void {
