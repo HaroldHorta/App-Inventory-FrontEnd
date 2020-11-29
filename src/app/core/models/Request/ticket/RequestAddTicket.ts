@@ -6,4 +6,5 @@ export class RequestAddTicket {
     order: string;
     paymentType: PaymentType;
     creditCapital: number;
+    creditPaymentType: PaymentType;
 }

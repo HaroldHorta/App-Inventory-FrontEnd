@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { PaymentType } from '../../../../core/models/enum/PaymentType.enum';
 import { RequestAddTicket } from '../../../../core/models/Request/ticket/RequestAddTicket';
 import { ResponseCustomer } from '../../../../core/models/Response/customer/ResponseCustomer.module';
 import { ResponseOrder } from '../../../../core/models/Response/order/ResponseOrder.module';
@@ -29,7 +28,9 @@ export class CheckoutComponent implements OnInit {
   hideAddCustomer = false;
   idTicket: string;
   typePayment = ['CASH', 'TRANSACTION', 'CREDIT'];
+  typePaymentCredit = ['CASH', 'TRANSACTION'];
   payment: string = 'CASH';
+  paymentCredit: string = 'CASH';
   credit: number;
   hideCredit = false;
 
@@ -45,7 +46,8 @@ export class CheckoutComponent implements OnInit {
       customerId: ['', [Validators.required]],
       order: ['', [Validators.required]],
       paymentType: ['', [Validators.required]],
-      creditCapital: ['0'],
+      creditCapital: [''],
+      creditPaymentType: [''],
     });
   }
 
@@ -86,7 +88,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   generarTicket(ticket: RequestAddTicket) {
-
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
@@ -94,6 +95,7 @@ export class CheckoutComponent implements OnInit {
     data.push({
       id: this.idTicket, customerId: ticket.customerId, order: ticket.order,
       paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? 0 : ticket.creditCapital,
+      creditPaymentType: ticket.creditPaymentType,
     });
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
       this.loadingLargeGroup = false;
@@ -129,6 +131,14 @@ export class CheckoutComponent implements OnInit {
       this.hideCredit = false;
       this.credit = undefined;
     }
+    // this.formGroup.patchValue(newVal);
+  }
+
+  public changedValuePaymentCredit(): void {
+
+    const newV = {
+      fieldName: this.paymentCredit,
+    };
     // this.formGroup.patchValue(newVal);
   }
 
