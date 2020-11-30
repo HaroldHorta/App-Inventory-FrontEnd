@@ -5,7 +5,7 @@
 @include nb-install-component() {
   overflow: auto;
 
-  .item {
+   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,10 +47,19 @@
     margin: 0 1.5rem 1.5rem 0;
   }
 
-  nb-card.inline-form-card nb-card-body {
+  nb-card {
+    margin-bottom: 2px;
     padding-bottom: 0;
+
+  }
+  nb-card-body {
+    padding-bottom: 0;
+
   }
 
+  .htmlData {
+    margin-top: 0px;
+  }
   .posicion {
     margin-left: 5%;
   }
@@ -79,9 +88,12 @@
     border-radius: 20px;
   }
 
-  .classname{
-    max-height: 80%;
-      overflow-y: scroll;
+ 
+  .classname {
+    background-color: #EDF1F7;
+    height: 650px;
+    overflow: auto;
+    margin-top: 0;
   }
   .header {
     font-size: 30px;
@@ -89,5 +101,6 @@
     margin: 0 0 20px 0;
     border-bottom: 1px solid #e5e5e5;
     color: #3aabf0;
+    margin-top: 0px;
   }
 }

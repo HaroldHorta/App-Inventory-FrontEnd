@@ -47,8 +47,11 @@
     margin: 0 1.5rem 1.5rem 0;
   }
   
-  nb-card.inline-form-card nb-card-body {
+
+  nb-card {
+    margin-bottom: 2px;
     padding-bottom: 0;
+
   }
 
   .posicion {

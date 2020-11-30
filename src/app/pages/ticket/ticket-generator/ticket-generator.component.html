@@ -1,9 +1,9 @@
-<div class="classname">
-  <nb-layout class="classname">
+<nb-layout class="classname">
   <nb-layout-column class="classname">
-    <div id="htmlData" #htmlData>
 
-      <ngx-header-ticket class="header" ></ngx-header-ticket>
+    <div class="htmlData" id="htmlData" #htmlData>
+
+      <ngx-header-ticket class="header"></ngx-header-ticket>
       <nb-card>
         <nb-card-body>
           <div class="row">
@@ -23,28 +23,25 @@
         </nb-card-body>
       </nb-card>
 
-
-
-
       <nb-card>
         <nb-card-body>
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="inputFirstName" class="label">Nombre Completo: </label>
-                <span class="posicion">{{customer?.name}}</span>
+                <span class="posicion">{{ticket?.customer?.name}}</span>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="inputLastName" class="label">Tipo de documento: <br></label>
-                <span class="posicion">{{customer?.typeDocument}}</span>
+                <span class="posicion">{{ticket?.customer?.typeDocument}}</span>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="inputLastName" class="label">Numero de documento: <br></label>
-                <span class="posicion">{{customer?.nroDocument}}</span>
+                <span class="posicion">{{ticket?.customer?.nroDocument}}</span>
               </div>
             </div>
           </div>
@@ -52,25 +49,24 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="inputEmail" class="label">Email: <br></label>
-                <span class="posicion">{{customer?.email}}</span>
+                <span class="posicion">{{ticket?.customer?.email}}</span>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="inputWebsite" class="label">Dirección: <br></label>
-                <span class="posicion">{{customer?.address}}</span>
+                <span class="posicion">{{ticket?.customer?.address}}</span>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="inputWebsite" class="label">Telefono: <br></label>
-                <span class="posicion">{{customer?.phone}}</span>
+                <span class="posicion">{{ticket?.customer?.phone}}</span>
               </div>
             </div>
           </div>
         </nb-card-body>
       </nb-card>
-
 
 
 
@@ -84,7 +80,6 @@
             <span>Precio Con IVA</span>
             <span>Vlr Total</span>
             <span>Vlr Total con IVA</span>
-
           </nb-list-item>
         </nb-card-header>
         <nb-card-body>
@@ -101,9 +96,6 @@
           </nb-list>
         </nb-card-body>
       </nb-card>
-
-
-
 
       <nb-card>
         <nb-card-body>
@@ -132,17 +124,18 @@
                 <span class="posicion">{{ticket?.ticketCost}}</span>
               </div>
             </div>
+
           </div>
         </nb-card-body>
       </nb-card>
 
     </div>
- 
-      <button class="btn btn-success btn-block" (click)="downloadPDF()" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage=""
-      [disabled]="disabledUpdate">Download PDF</button>
+
+
+      <button class="btn btn-success btn-block" (click)="downloadPDF()" [nbSpinner]="loadingLargeGroup"
+      nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="disabledUpdate">Download
+      PDF</button>
+
 
   </nb-layout-column>
 </nb-layout>
-
-</div>
-

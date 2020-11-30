@@ -33,15 +33,7 @@ export class TicketGeneratorComponent implements OnInit {
   getTicketById(id) {
     this.ticketService.getTicketById(id).subscribe(data => {
       this.ticket = data;
-      this.findByNroDocument(data.customer);
     });
-  }
-
-  findByNroDocument(id: string) {
-    this.customerService.findCustomerById(id).subscribe(data => {
-      this.customer = data;
-    });
-
   }
 
   downloadPDF() {
