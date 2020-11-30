@@ -17,6 +17,8 @@ export class CashRegisterComponent implements OnInit {
   checkOutForm: FormGroup;
   cashBase: ResponseCashBase;
   cashRegister: ResponseCashRegister;
+  cashRegisters: ResponseCashRegister[];
+
 
   hideBase = false;
   hideArqueo = false;
@@ -71,10 +73,20 @@ export class CashRegisterComponent implements OnInit {
     },
       (err) => {
         const type = 'danger';
-        const quote = { title: null, body: 'error al actualizar' };
+        const quote = { title: null, body: err.error.detailMessage };
         this.generalService.showToast(type, quote.title, quote.body);
       });
 
+  }
+
+  hiddenHistory(){
+    this.hideBase = false;
+    this.hideArqueo = false;
+    this.cashBaseService.getCashRegister().subscribe(data => {
+      this.hideHistory = !this.hideHistory;
+      this.cashRegisters = data
+      console.log(this.cashRegisters)
+    });
   }
 
 }

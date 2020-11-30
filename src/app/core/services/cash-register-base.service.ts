@@ -21,6 +21,12 @@ export class CashRegisterBaseService {
     );
   }
 
+  getCashRegister(): Observable<ResponseCashRegister[]> {
+    return this.http.get(endpoint.CashRegister).pipe(
+      map(response => response as ResponseCashRegister[]),
+    );
+  }
+
   createCashBase(cashBase): Observable<ResponseCashBase> {
     return this.http.post<ResponseCashBase>(`${endpoint.CashBase}/${cashBase}`, { headers: this.httpHeaders });
   }
