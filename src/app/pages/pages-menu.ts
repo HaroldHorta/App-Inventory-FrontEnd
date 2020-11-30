@@ -33,6 +33,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'inventory',
   },
   {
+    title: 'Gastos',
+    icon: 'archive-outline',
+    link: 'expenses',
+  },
+  {
     title: 'Arqueo de caja',
     icon: 'inbox-outline',
     link: 'cashRegister',
