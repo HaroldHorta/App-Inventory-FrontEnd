@@ -1,1 +1,103 @@
-<p>cash-register works!</p>
+<div class="row col-md-12">
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="success" (click)="hiddenBase()">Insertar base</button>
+  </div>
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="info" (click)="hiddenArqueo()">Generar arqueo diario</button>
+  </div>
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="primary">Consultar histórico</button>
+  </div>
+</div>
+
+
+<div *ngIf="hideArqueo" class="space-top">
+  <nb-card class="inline-form-card">
+    <nb-card-header>Base</nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Fecha: <br></label>
+            <span class="posicion">{{cashRegister?.createAt}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputFirstName" class="label">Base registrada: </label>
+            <span class="posicion">{{cashRegister?.dailyCashBase}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Ventas en efectivo: <br></label>
+            <span class="posicion">{{cashRegister?.dailyCashSales}}</span>
+          </div>
+        </div>    
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Ventas en transacciones: <br></label>
+            <span class="posicion">{{cashRegister?.dailyTransactionsSales}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputEmail" class="label">Ventas a crédito: <br></label>
+            <span class="posicion">{{cashRegister?.dailyCreditSales}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputWebsite" class="label"> Total Gastos Registrados: <br></label>
+            <span class="posicion">{{cashRegister?.moneyOut}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputWebsite" class="label">Abonos en efectivo: <br></label>
+            <span class="posicion">{{cashRegister?.cashCreditCapital}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputFirstName" class="label">Abonos en transacciones: </label>
+            <span class="posicion">{{cashRegister?.transactionCreditCapital}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputLastName" class="label">Ventas totales: <br></label>
+            <span class="posicion">{{cashRegister?.totalSales}}</span>
+          </div>
+        </div>
+
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+
+
+<div *ngIf="hideBase" class="space-top">
+  <nb-card class="inline-form-card">
+    <nb-card-header>Base</nb-card-header>
+    <nb-card-body>
+
+      <p><strong>La base actual es de: ${{cashBase?.dailyCashBase}} pesos, insertada el dia
+          {{cashBase?.createAt}}</strong></p>
+
+      <div class="form-inline" [formGroup]="checkOutForm">
+        <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="col-md-4"
+          formControlName="cashBase" nbInput fullWidth formControlName="cashBase"
+          placeholder="¿Cuanto es la base del día?">
+        <button nbButton outline status="primary" class="form-group space" [nbSpinner]="loadingLargeGroup"
+          nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="" (click)="addCashBase(checkOutForm.value)"
+          [disabled]="!checkOutForm.valid || disabledUpdate">Insertar</button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
