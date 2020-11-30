@@ -33,7 +33,7 @@ import { CreateCustomerPopupComponent } from './customer/create-customer-popup/c
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-generator.component';
 import { HeaderTicketComponent } from './ticket/ticket-generator/header-ticket/header-ticket.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -58,6 +58,7 @@ import { HeaderTicketComponent } from './ticket/ticket-generator/header-ticket/h
     NbCheckboxModule,
     NbTableModule,
     Ng2SearchPipeModule,
+    NgxPaginationModule,
   ],
   exports: [CartComponent],
   declarations: [
