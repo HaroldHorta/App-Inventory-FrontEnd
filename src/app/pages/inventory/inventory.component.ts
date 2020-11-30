@@ -25,7 +25,8 @@ export class InventoryComponent implements OnInit {
   urls = [];
   productList = [];
   searchProduct;
-
+  cp: number = 1;
+  total: number = 0;
 
   constructor(private serviceProduct: ProductService, changeDetectorRef: ChangeDetectorRef,
     private generalService: GeneralService,
@@ -42,6 +43,7 @@ export class InventoryComponent implements OnInit {
     this.serviceProduct.getProducts().subscribe(
       product => {
         this.product = product;
+        this.total = product.length;
         this.product.forEach(p => {
           this.productList.push(p);
         });

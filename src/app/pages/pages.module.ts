@@ -35,6 +35,7 @@ import { TicketGeneratorComponent } from './ticket/ticket-generator/ticket-gener
 import { HeaderTicketComponent } from './ticket/ticket-generator/header-ticket/header-ticket.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
 
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -60,6 +61,7 @@ import { CashRegisterComponent } from './cash-register/cash-register.component';
     NbCheckboxModule,
     NbTableModule,
     Ng2SearchPipeModule,
+    NgxPaginationModule,
   ],
   exports: [CartComponent],
   declarations: [
