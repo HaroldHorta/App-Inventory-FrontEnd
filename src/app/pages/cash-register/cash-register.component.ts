@@ -12,9 +12,6 @@ import { GeneralService } from '../../core/services/general.service';
 })
 export class CashRegisterComponent implements OnInit {
 
-  loadingLargeGroup = false;
-  disabledUpdate = false;
-
   hideBase = false;
   hideArqueo = false;
   hideHistory = false;

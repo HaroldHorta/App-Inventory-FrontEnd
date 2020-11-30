@@ -14,6 +14,10 @@ export class CashRegisterBaseComponent implements OnInit {
   cashBase: ResponseCashBase;
   checkOutForm: FormGroup;
 
+  
+  loadingLargeGroup = false;
+  disabledUpdate = false;
+
 
   constructor(private formBuilder: FormBuilder, private cashBaseService: CashRegisterBaseService, private generalService: GeneralService) { 
     this.checkOutForm = this.formBuilder.group({
