@@ -28,9 +28,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'product',
   },
   {
-    title: 'Inventory',
+    title: 'Inventario',
     icon: 'archive-outline',
     link: 'inventory',
+  },
+  {
+    title: 'Arqueo de caja',
+    icon: 'inbox-outline',
+    link: 'cashRegister',
   },
   {
     title: 'Reportes',
