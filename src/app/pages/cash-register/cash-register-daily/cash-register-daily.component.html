@@ -1,0 +1,68 @@
+<div  class="space-top">
+    <nb-card class="inline-form-card">
+      <nb-card-header>Arqueo de caja</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputLastName" class="label">Fecha: <br></label>
+              <span class="posicion">{{cashRegister?.createAt}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputFirstName" class="label">Base registrada: </label>
+              <span class="posicion">{{cashRegister?.dailyCashBase}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputLastName" class="label">Ventas en efectivo: <br></label>
+              <span class="posicion">{{cashRegister?.dailyCashSales}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputLastName" class="label">Ventas en transacciones: <br></label>
+              <span class="posicion">{{cashRegister?.dailyTransactionsSales}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputEmail" class="label">Ventas a crédito: <br></label>
+              <span class="posicion">{{cashRegister?.dailyCreditSales}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputWebsite" class="label"> Total Gastos Registrados: <br></label>
+              <span class="posicion">{{cashRegister?.moneyOut}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputWebsite" class="label">Abonos en efectivo: <br></label>
+              <span class="posicion">{{cashRegister?.cashCreditCapital}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputFirstName" class="label">Abonos en transacciones: </label>
+              <span class="posicion">{{cashRegister?.transactionCreditCapital}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputLastName" class="label">Ventas totales: <br></label>
+              <span class="posicion">{{cashRegister?.totalSales}}</span>
+            </div>
+          </div>
+  
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>

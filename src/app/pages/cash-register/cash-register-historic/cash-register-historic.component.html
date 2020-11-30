@@ -1,0 +1,28 @@
+<div  class="space-top">
+    <nb-card size="medium">
+      <nb-card-header class="item">
+        <span>Fecha</span>
+        <span>Base registrada</span>
+        <span>Ventas en efectivo</span>
+        <span>Ventas en transacciones</span>
+        <span>Ventas a crédito</span>
+        <span>Gastos</span>
+        <span>Abonos en efectivo</span>
+        <span>Abonos en transacciones</span>
+        <span>Venta total</span>
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item class="item" *ngFor="let listRegister of cashRegisters">
+          <span>{{ listRegister?.createAt }}</span>
+          <span>$ {{ listRegister?.dailyCashBase }}</span>
+          <span>$ {{ listRegister?.dailyCashSales }}</span>
+          <span>$ {{ listRegister?.dailyTransactionsSales }}</span>
+          <span>$ {{ listRegister?.dailyCreditSales }}</span>
+          <span>$ {{ listRegister?.moneyOut }}</span>
+          <span>$ {{ listRegister?.cashCreditCapital }}</span>
+          <span>$ {{ listRegister?.transactionCreditCapital }}</span>
+          <span>$ {{ listRegister?.totalSales }}</span>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>

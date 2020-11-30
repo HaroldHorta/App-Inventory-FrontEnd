@@ -36,6 +36,9 @@ import { HeaderTicketComponent } from './ticket/ticket-generator/header-ticket/h
 import { CashRegisterComponent } from './cash-register/cash-register.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { CashRegisterBaseComponent } from './cash-register/cash-register-base/cash-register-base.component';
+import { CashRegisterDailyComponent } from './cash-register/cash-register-daily/cash-register-daily.component';
+import { CashRegisterHistoricComponent } from './cash-register/cash-register-historic/cash-register-historic.component';
 
 @NgModule({
   imports: [
@@ -88,6 +91,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     TicketGeneratorComponent,
     HeaderTicketComponent,
     CashRegisterComponent,
+    CashRegisterBaseComponent,
+    CashRegisterDailyComponent,
+    CashRegisterHistoricComponent,
 
   ],
 })
