@@ -22,6 +22,7 @@ export class PopupComponent implements OnInit {
   product: ResponseProduct;
   categoria: ResponseCategory[];
   checkOutForm: FormGroup;
+  checkOutFormEdit: FormGroup;
   checkOutCategory: FormGroup;
   productEdit: ResponseProduct;
   selectedItem;
@@ -39,6 +40,14 @@ export class PopupComponent implements OnInit {
       priceSell: ['', [Validators.required]],
       unit: ['', [Validators.required]],
       photo: [''],
+    });
+    this.checkOutFormEdit = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      categoryId: ['', [Validators.required]],
+      priceBuy: ['', [Validators.required]],
+      priceSell: ['', [Validators.required]],
+      unit: ['', [Validators.required]],
     });
   }
 
