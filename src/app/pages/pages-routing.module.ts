@@ -10,6 +10,7 @@ import { OrderComponent } from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 const routes: Routes = [{
   path: '',
@@ -51,6 +52,10 @@ const routes: Routes = [{
     {
       path: 'cashRegister',
       component: CashRegisterComponent,
+    },
+    {
+      path: 'expenses',
+      component: ExpensesComponent,
     },
   ],
 },

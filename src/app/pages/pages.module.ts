@@ -39,6 +39,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { CashRegisterBaseComponent } from './cash-register/cash-register-base/cash-register-base.component';
 import { CashRegisterDailyComponent } from './cash-register/cash-register-daily/cash-register-daily.component';
 import { CashRegisterHistoricComponent } from './cash-register/cash-register-historic/cash-register-historic.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 @NgModule({
   imports: [
@@ -94,6 +95,7 @@ import { CashRegisterHistoricComponent } from './cash-register/cash-register-his
     CashRegisterBaseComponent,
     CashRegisterDailyComponent,
     CashRegisterHistoricComponent,
+    ExpensesComponent,
 
   ],
 })
