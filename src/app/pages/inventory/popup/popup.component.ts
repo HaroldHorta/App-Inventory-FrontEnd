@@ -20,14 +20,20 @@ export class PopupComponent implements OnInit {
 
   products: ResponseProduct[];
   product: ResponseProduct;
-  categoria: ResponseCategory[];
+  categoria: ResponseCategory[] = [];
   checkOutForm: FormGroup;
   checkOutFormEdit: FormGroup;
   checkOutCategory: FormGroup;
   productEdit: ResponseProduct;
   selectedItem;
+  selectedItemEdit;
   loadingLargeGroup = false;
   disabledUpdate = false;
+
+  ngOnInit(): void {
+    this.getCategoryList();
+    this.productEdit;
+  }
 
   constructor(private serviceProduct: ProductService, private fileUpload: FileUploadService,
     private generalService: GeneralService, protected ref: NbDialogRef<PopupComponent>,
@@ -51,15 +57,12 @@ export class PopupComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getCategoryList();
-    this.productEdit;
-  }
-
   getCategoryList() {
     this.serviceCategory.getCategories().subscribe(
       categorias => {
         this.categoria = categorias;
+        this.categoria.push(this.productEdit.category[0]);
+        this.selectedItemEdit = this.categoria[this.categoria.length - 1];
       },
     );
   }
@@ -111,6 +114,10 @@ export class PopupComponent implements OnInit {
 
 
   updateProduct(id, product) {
+    if (product.categoryId[0] === undefined) {
+      const obj = { id: this.selectedItemEdit.id, description: this.selectedItemEdit.description };
+      product.categoryId = obj;
+    }
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
