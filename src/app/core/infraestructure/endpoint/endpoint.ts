@@ -11,5 +11,7 @@ export const endpoint = {
     Units: `${environment.serverUrl}/inventory`,
     CashBase: `${environment.serverUrl}/cash`,
     CashRegister: `${environment.serverUrl}/cash/cashRegisterHistory`,
+    Expenses: `${environment.serverUrl}/expenses`,
+
 
 };

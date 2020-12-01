@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header>Detalles del gasto</nb-card-header>
+    <nb-card-body>
+
+
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12 py-3">
+                <h2 class="pb-2">Past Events</h2>
+                <ngb-carousel>
+                  <ng-template ngbSlide >
+                    <img class="img-card" *ngFor="let url of expense?.images" [src]="url"/>
+                  </ng-template>
+                </ngb-carousel>
+              </div>
+            </div>
+          </div>
+
+        <!-- <div class="contenedorImg">
+
+            <img class="img-card" *ngFor="let url of expense?.images" [src]="url"/>
+        </div> -->
+        <div class="contenedorDetalles">
+            <p class="espacio"><b>Fecha de creado: </b>{{expense?.createAt}}</p>
+            <p class="espacio"><b>Description: </b> {{expense?.description}}</p>
+            <p class="espacio"><b>Valor factura: </b>{{expense?.price}}</p>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cerrar</button>
+    </nb-card-footer>
+</nb-card>

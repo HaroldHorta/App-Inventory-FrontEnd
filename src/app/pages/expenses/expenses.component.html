@@ -1,1 +1,37 @@
-<p>expenses works!</p>
+<div class="row col-md-12">
+    <div class="col-md-6">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="off"
+            placeholder="Buscar">
+    </div>
+    <div class="col-md-6">
+        <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="open()">Agregar
+            Gasto</button>
+    </div>
+</div>
+<div *ngIf="!expenses">
+    <h2>No existen gastos registrados</h2>
+</div>
+<div class="space-top" *ngIf="expenses">
+    <nb-card size="medium">
+        <nb-card-header class="item">
+            <span>Fecha</span>
+            <span>description</span>
+            <span>price</span>
+            <span>ver más</span>
+
+        </nb-card-header>
+        <nb-list>
+            <nb-list-item class="item" *ngFor="let expenses of expenses">
+                <span>{{ expenses?.createAt }}</span>
+                <span>{{ expenses?.description }}</span>
+                <span>$ {{ expenses?.price }}</span>
+                <span>
+                    <nb-icon class="changeMouse" status="primary" icon="eye-outline"
+                        (click)="openModalDetails(expenses)"></nb-icon>
+
+                </span>
+
+            </nb-list-item>
+        </nb-list>
+    </nb-card>
+</div>

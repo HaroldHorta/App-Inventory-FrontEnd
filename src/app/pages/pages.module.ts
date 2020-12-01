@@ -40,6 +40,8 @@ import { CashRegisterBaseComponent } from './cash-register/cash-register-base/ca
 import { CashRegisterDailyComponent } from './cash-register/cash-register-daily/cash-register-daily.component';
 import { CashRegisterHistoricComponent } from './cash-register/cash-register-historic/cash-register-historic.component';
 import { ExpensesComponent } from './expenses/expenses.component';
+import { PopCreateExpensesComponent } from './expenses/pop-create-expenses/pop-create-expenses.component';
+import { PopDetailsExpensesComponent } from './expenses/pop-details-expenses/pop-details-expenses.component';
 
 @NgModule({
   imports: [
@@ -96,6 +98,8 @@ import { ExpensesComponent } from './expenses/expenses.component';
     CashRegisterDailyComponent,
     CashRegisterHistoricComponent,
     ExpensesComponent,
+    PopCreateExpensesComponent,
+    PopDetailsExpensesComponent,
 
   ],
 })
