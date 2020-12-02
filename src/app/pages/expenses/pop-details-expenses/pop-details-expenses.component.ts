@@ -6,7 +6,7 @@ import { ExpensesService } from '../../../core/services/expenses.service';
 @Component({
   selector: 'ngx-pop-details-expenses',
   templateUrl: './pop-details-expenses.component.html',
-  styleUrls: ['./pop-details-expenses.component.scss']
+  styleUrls: ['./pop-details-expenses.component.scss'],
 })
 export class PopDetailsExpensesComponent implements OnInit {
 
@@ -20,7 +20,6 @@ export class PopDetailsExpensesComponent implements OnInit {
     this.event_list = this.expense.images;
     }
 
- 
 
 
   cancel() {
