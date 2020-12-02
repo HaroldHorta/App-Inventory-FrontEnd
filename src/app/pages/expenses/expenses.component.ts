@@ -19,6 +19,11 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getExpenses();
+
+  }
+
+  getExpenses() {
     this.expensesService.getCustomers().subscribe(data => {
       this.expenses = data;
     })
@@ -26,7 +31,8 @@ export class ExpensesComponent implements OnInit {
 
   open() {
     this.dialog.open(PopCreateExpensesComponent).onClose.subscribe(() => {
- 
+      this.expenses = [];
+      this.getExpenses();
     });
   }
 

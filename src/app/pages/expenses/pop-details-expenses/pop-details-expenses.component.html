@@ -5,10 +5,12 @@
     <div class="contenedorImg">
       <nb-stepper orientation="horizontal">
         <nb-step *ngFor="let url of expense?.images" [label]="labelOne">
-          <ng-template #labelOne>First step</ng-template>
+         
           <img class="img-card" [src]="url" />
+         <div>
           <button nbButton nbStepperPrevious>prev</button>
           <button class="sep-botton" nbButton nbStepperNext>next</button>
+         </div>
         </nb-step>
       </nb-stepper>
     </div>

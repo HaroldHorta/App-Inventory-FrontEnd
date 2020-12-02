@@ -17,7 +17,7 @@
             *
             Campo Obligatorio</p>
         <img *ngFor="" alt="">
-        <input nbInput type="text" formControlName="price" class="form-group" fullWidth>
+        <input nbInput type="text" formControlName="price" class="form-group" fullWidth onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 
     </nb-card-body>
     <nb-card-footer>

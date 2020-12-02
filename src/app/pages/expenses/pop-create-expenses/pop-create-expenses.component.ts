@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { ExpensesService } from '../../../core/services/expenses.service';
+import { GeneralService } from '../../../core/services/general.service';
 
 @Component({
   selector: 'ngx-pop-create-expenses',
@@ -15,7 +16,7 @@ export class PopCreateExpensesComponent implements OnInit {
   disabledUpdate = false;
 
   constructor(private formBuilder: FormBuilder, protected ref: NbDialogRef<PopCreateExpensesComponent>,
-    private expensesService: ExpensesService) {
+    private generalService: GeneralService, private expensesService: ExpensesService) {
     this.checkOutForm = this.formBuilder.group({
 
       description: ['', [Validators.required]],
@@ -40,7 +41,6 @@ export class PopCreateExpensesComponent implements OnInit {
         var reader = new FileReader();
 
         reader.onload = (event: any) => {
-          console.log(event.target.result);
           this.urls.push(event.target.result);
         }
         reader.readAsDataURL(event.target.files[i]);
@@ -50,12 +50,19 @@ export class PopCreateExpensesComponent implements OnInit {
 
   addExpenses(expenses) {
 
+    this.loadingLargeGroup = true;
+    this.disabledUpdate = true;
     expenses.images = this.urls;
     console.log(this.urls);
-
     this.expensesService.create(expenses).subscribe(() => {
+      this.ref.close(expenses);
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
+      const type = 'success';
+      const quote = { title: null, body: 'Producto agregado correctamente' };
+      this.generalService.showToast(type, quote.title, quote.body);
 
-    })
+    });
   }
 
 }
