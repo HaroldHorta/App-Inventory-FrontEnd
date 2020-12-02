@@ -1,18 +1,20 @@
 .img-card {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 250px;
 }
 
 .contenedorImg {
-    width: 60%;
-    float: left;
+    width: 600px;
 }
 
-.contenedorDetalles {
-    min-width: 250px;
-    width: 40%;
+.contenedorDetalles {   
+    width: 80%;
 }
 
 .espacio {
     padding-left: 5%;
+}
+
+.sep-botton {
+    margin-left: 500px;
 }

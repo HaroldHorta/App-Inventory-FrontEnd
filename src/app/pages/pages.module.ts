@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {
   NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule,
-  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule, NbButtonModule,
+  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule, NbButtonModule, NbStepperModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -68,6 +68,7 @@ import { PopDetailsExpensesComponent } from './expenses/pop-details-expenses/pop
     NbTableModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,
+    NbStepperModule,
   ],
   exports: [CartComponent],
   declarations: [
