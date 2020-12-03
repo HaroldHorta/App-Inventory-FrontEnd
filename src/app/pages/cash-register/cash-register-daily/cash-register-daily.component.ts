@@ -6,21 +6,22 @@ import { GeneralService } from '../../../core/services/general.service';
 @Component({
   selector: 'ngx-cash-register-daily',
   templateUrl: './cash-register-daily.component.html',
-  styleUrls: ['./cash-register-daily.component.scss']
+  styleUrls: ['./cash-register-daily.component.scss'],
 })
 export class CashRegisterDailyComponent implements OnInit {
 
   cashRegister: ResponseCashRegister;
+  hiddenArqueo = false;
 
   constructor(private cashBaseService: CashRegisterBaseService, private generalService: GeneralService) { }
 
   ngOnInit(): void {
     this.cashBaseService.createCashRegister().subscribe(data => {
+      this.hiddenArqueo = true;
       this.cashRegister = data;
+
     }, (err) => {
-      const type = 'danger';
-      const quote = { title: null, body: err.error.detailMessage };
-      this.generalService.showToast(type, quote.title, quote.body);
+      this.hiddenArqueo = false;
     });
   }
 
