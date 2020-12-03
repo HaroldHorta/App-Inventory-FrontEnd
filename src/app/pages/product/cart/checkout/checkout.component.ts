@@ -87,7 +87,8 @@ export class CheckoutComponent implements OnInit {
     this.dialog.open(CreateCustomerPopupComponent);
   }
 
-  generarTicket(ticket: RequestAddTicket) {
+  generarTicket(ticket) {
+
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
@@ -97,6 +98,7 @@ export class CheckoutComponent implements OnInit {
       paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? 0 : ticket.creditCapital,
       creditPaymentType: ticket.creditPaymentType,
     });
+
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
       this.loadingLargeGroup = false;
       this.disabledUpdate = false;
