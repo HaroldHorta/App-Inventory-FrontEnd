@@ -9,6 +9,7 @@ import { ResponseProduct } from '../../../core/models/Response/product/ResponseP
 export class ShowcaseComponent implements OnInit {
 
   @Input() products: ResponseProduct[];
+  cp: number = 1;
 
   constructor() { }
 

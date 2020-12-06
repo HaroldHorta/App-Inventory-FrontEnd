@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ResponseCategory } from '../../core/models/Response/category/ResponseCategory.module';
 import { ResponseProduct } from '../../core/models/Response/product/ResponseProduct.module';
 import { CategoryService } from '../../core/services/category.service';
 import { ProductService } from '../../core/services/product.service';
@@ -13,9 +12,18 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 export class ProductComponent implements OnInit {
 
   products: ResponseProduct[];
-  originalDataProduct: any[];
+  productsFilters: ResponseProduct[];
+  pagination: any[];
+  page: number = 0;
+  preview = [1];
+  hiddenFilters = false;
+
+
+  originalDataProduct: any;
 
   mainFilter: any;
+  cp: number = 1;
+  next = true;
 
   currentSorting: string;
 
@@ -32,23 +40,45 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.pagination;
     this.getProductsList();
+    this.getProductFilter();
   }
   // metodo para llamar la lista de productos
   getProductsList() {
-    this.serviceProduct.getProductsFilters().subscribe(
+    this.serviceProduct.getProductsFilters(this.page).subscribe(
       product => {
-        this.originalDataProduct = product;
-        this.mainFilter = {
-          search: '',
-        };
-        this.products = this.originalDataProduct.slice(0);
-        this.sortProducts('name');
+        this.pagination = new Array(Math.ceil(product.count / 10));
+        this.products = product.products;
+
       },
     );
   }
 
+  getProductFilter() {
+    this.serviceProduct.getProductsFilter().subscribe(data => {
+      this.originalDataProduct = data;
+      this.pagination = new Array(Math.ceil(data.count / 10));
+      this.mainFilter = {
+        search: '',
+      };
+      this.productsFilters = this.originalDataProduct.products.slice(0);
+
+      this.sortProducts('name');
+
+    });
+  }
+
+  setPage(i) {
+    this.hiddenFilters = false;
+    this.page = i;
+    this.getProductsList();
+  }
+
   onSearchChange(search) {
+    if (search.search === '') {
+      this.hiddenFilters = false;
+    }
     this.mainFilter.search = search.search;
 
     this.updateProducts({
@@ -59,15 +89,16 @@ export class ProductComponent implements OnInit {
 
   updateProducts(filter) {
 
-    let productsSource = this.originalDataProduct;
-    const prevProducts = this.products;
+    let productsSource = this.originalDataProduct.products;
+    const prevProducts = this.productsFilters;
     let filterAllData = true;
     if ((filter.type === 'search' && filter.change === 1)) {
-      productsSource = this.products;
+      this.hiddenFilters = true;
+      productsSource = this.productsFilters;
       filterAllData = false;
     }
 
-    this.products = productsSource.filter(product => {
+    this.productsFilters = productsSource.filter(product => {
       // Filter by search
       if (filterAllData || filter.type === 'search') {
         if (!product.name.match(new RegExp(this.mainFilter.search, 'i'))) {
@@ -78,16 +109,16 @@ export class ProductComponent implements OnInit {
       return true;
     });
 
-   // If the number of products increased after the filter has been applied then sort again
-   // If the number of products remained equal, there's a high chance that the items have been reordered.
-    if (prevProducts.length <= this.originalDataProduct.length && this.originalDataProduct.length > 1) {
+    // If the number of products increased after the filter has been applied then sort again
+    // If the number of products remained equal, there's a high chance that the items have been reordered.
+    if (prevProducts.length <= this.originalDataProduct.products.length && this.originalDataProduct.products.length > 1) {
       this.sortProducts(this.currentSorting);
     }
 
   }
 
   sortProducts(criteria) {
-    this.products.sort((a, b) => {
+    this.productsFilters.sort((a, b) => {
       const priceComparison = a.priceSell - b.priceSell;
       if (criteria === 'name') {
         const nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();

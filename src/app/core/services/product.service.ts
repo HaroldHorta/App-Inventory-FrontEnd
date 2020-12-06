@@ -7,6 +7,7 @@ import { ResponseProduct } from '../models/Response/product/ResponseProduct.modu
 import { RequestAddProduct } from '../models/Request/product/RequestAddProduct';
 import { RequestUpdateProduct } from '../models/Request/product/RequestUpdateProduct';
 import { Status } from '../models/enum/Status.enum';
+import { ResponseProductPagination } from '../models/Response/product/ResponseProductPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +23,17 @@ export class ProductService {
     );
   }
 
-  getProductsFilters(): Observable<ResponseProduct[]> {
-    return this.http.get(`${endpoint.Product}/products`).pipe(
-      map(response => response as ResponseProduct[]),
+
+  getProductsFilter(): Observable<ResponseProductPagination> {
+    return this.http.get(`${endpoint.Product}/productsFilter`).pipe(
+      map(response => response as ResponseProductPagination),
+    );
+  }
+
+
+  getProductsFilters(page): Observable<ResponseProductPagination> {
+    return this.http.get(`${endpoint.Product}/products/?page=${page}`).pipe(
+      map(response => response as ResponseProductPagination),
     );
   }
 

@@ -8,16 +8,26 @@
       <div class="col-md-4">
         <ngx-search-bar #searchComponent (searchChange)='onSearchChange($event)'></ngx-search-bar>
       </div>
-      <div  class="col-md-2">
+      <div class="col-md-2">
         <ngx-cart class="col-md-12"></ngx-cart>
       </div>
     </div>
     <div class="row show-grid">
-      <div class="col-md-12">
+      <div class="col-md-12" *ngIf="!hiddenFilters">
         <ngx-showcase [products]='products'></ngx-showcase>
+      </div>
+      <div class="col-md-12"  *ngIf="hiddenFilters">
+        <ngx-showcase [products]='productsFilters'></ngx-showcase>
       </div>
     </div>
   </div>
-  
-   
+</div>
+
+<div class="col-md-6 offset-md-3">
+  <ul class="pagination">
+    <li><a (click)="setPage(page-1)" *ngIf = "page !== 0">« Previous</a></li>
+    <li *ngFor="let p of pagination; let i = index"> <a style="cursor: pointer;" (click)="setPage(i)"
+        [ngClass]="{active: i === page }">{{ i+1 }}&nbsp;&nbsp;</a></li>
+    <li><a (click)="setPage(page+1)" *ngIf = "page !== (pagination?.length -1)">Next »</a></li>
+  </ul>
 </div>
