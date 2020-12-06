@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of productList | filter:searchProduct | paginate: { itemsPerPage: 3, currentPage: cp }">
+                <tr *ngFor="let product of productList | filter:searchProduct | paginate: { itemsPerPage: 7, currentPage: cp }">
                     <td class="center">
                         <nb-icon class="changeMouse" status="primary" icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
                     </td>

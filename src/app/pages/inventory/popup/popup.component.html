@@ -17,7 +17,7 @@
     <div class="full-name-inputs form-group">
       <p *ngIf="checkOutForm.get('unit').errors && checkOutForm.get('unit').dirty" class="messageError">* Campo
         Obligatorio</p>
-      <input nbInput type="text" formControlName="unit" placeholder="Existencias">
+      <input nbInput type="text" formControlName="unit" placeholder="Existencias" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
       <p *ngIf="checkOutForm.get('categoryId').errors && checkOutForm.get('categoryId').dirty" class="messageError">*
         Campo Obligatorio</p>
       <nb-select style="width: 50%; padding-left: 5%;" placeholder="Categoria" formControlName="categoryId">

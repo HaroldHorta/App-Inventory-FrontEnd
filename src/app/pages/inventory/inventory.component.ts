@@ -74,7 +74,7 @@ export class InventoryComponent implements OnInit {
   openModalImage(item) {
     this.dialog.open(PopUpdateImageComponent, { context: { photo: item } });
   }
-  unitModal(item){
+  unitModal(item) {
     this.dialog.open(PopUpdateUnitsComponent, { context: { units: item } }).onClose.subscribe(() => {
       this.productList = [];
       this.getProductList();

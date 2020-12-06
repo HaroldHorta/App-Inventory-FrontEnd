@@ -61,10 +61,10 @@ export class PopupComponent implements OnInit {
     this.serviceCategory.getCategories().subscribe(
       categorias => {
         this.categoria = categorias;
-       
+
         this.selectedItemEdit = this.productEdit.category[0];
 
-        this.categoria = this.categoria.filter(c=> c.id !== this.selectedItemEdit.id)
+        this.categoria = this.categoria.filter(c => c.id !== this.selectedItemEdit.id);
 
         this.categoria.push(this.productEdit.category[0]);
       },
