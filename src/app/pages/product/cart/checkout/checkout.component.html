@@ -44,8 +44,8 @@
       <nb-card>
         <nb-card-body  [formGroup]="checkOutFormTicket">
          
-            <input type="text" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
-            <input type="text" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
+            <input type="hidden" nbInput fullWidth formControlName="customerId" [ngModel]="customer?.id">
+            <input type="hidden" nbInput fullWidth formControlName="order" [ngModel]="idProduct">
            
             <span class="posicion">Tipo de pago: </span>
             <nb-radio-group  formControlName="paymentType"  [(value)]="payment" class="Groupradiobox" [(ngModel)]="payment"
@@ -65,7 +65,7 @@
       </nb-card>
     </div>
 
-    <div *ngIf="hideCustomer">
+    <div *ngIf="!hideAddCustomer">
       <nb-card>
         <nb-card-header>Cliente</nb-card-header>
         <nb-card-body>

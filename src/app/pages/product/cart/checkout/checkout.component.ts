@@ -17,6 +17,7 @@ import { CreateCustomerPopupComponent } from '../../../customer/create-customer-
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
+
   idProduct: string;
   order: ResponseOrder;
   checkOutForm: FormGroup;
@@ -24,7 +25,6 @@ export class CheckoutComponent implements OnInit {
   loadingLargeGroup = false;
   disabledUpdate = false;
   customer: ResponseCustomer;
-  hideCustomer = false;
   hideAddCustomer = false;
   idTicket: string;
   typePayment = ['CASH', 'TRANSACTION', 'CREDIT'];
@@ -56,6 +56,8 @@ export class CheckoutComponent implements OnInit {
     this.idProduct = this.activeRouter.snapshot.paramMap.get('idOrder');
     this.getOrder(this.idProduct);
     this.order;
+    this.customer;
+
   }
 
   getOrder(id) {
@@ -70,14 +72,12 @@ export class CheckoutComponent implements OnInit {
     this.customerService.findCustomerByNroDocument(nroDocument.nroDocument).subscribe(data => {
       this.loadingLargeGroup = false;
       this.disabledUpdate = false;
-      this.hideCustomer = true;
       this.hideAddCustomer = false;
       this.customer = data;
     }, (err) => {
       this.loadingLargeGroup = false;
       this.disabledUpdate = false;
       this.hideAddCustomer = true;
-      this.hideCustomer = false;
     },
     );
 
@@ -96,7 +96,7 @@ export class CheckoutComponent implements OnInit {
     data.push({
       id: this.idTicket, customerId: ticket.customerId, order: ticket.order,
       paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? 0 : ticket.creditCapital,
-      creditPaymentType: ticket.creditPaymentType,
+      creditPaymentType : ticket.creditPaymentType === '' ? 'CASH' : ticket.creditPaymentType,
     });
 
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
