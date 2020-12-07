@@ -1,4 +1,19 @@
-<ul *ngFor="let tic of ticket">
-    <li>{{tic.id}}</li>
-    <li>{{tic.createAt}}</li>
-</ul>
+<div class="row col-md-12">
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="danger" (click)="hiddenConsultCredit()">Consultar cuentas a cobrar</button>
+  </div>
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="info" (click)="hiddenConsultCustomer()">Consultar cuentas por cliente</button>
+  </div>
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="primary" (click)="hiddenHistory()">Consultar histórico</button>
+  </div>
+</div>
+
+<div class="space-top">
+  <ngx-ticket-historic *ngIf="hideHistory" [ticket] = "ticket"></ngx-ticket-historic>
+  <ngx-ticket-consult-customer *ngIf="hideConsultCustomer"></ngx-ticket-consult-customer>
+  <ngx-ticket-consult-credit *ngIf="hideTicketCredit" [ticket] = "ticket"></ngx-ticket-consult-credit>
+</div>
+
+

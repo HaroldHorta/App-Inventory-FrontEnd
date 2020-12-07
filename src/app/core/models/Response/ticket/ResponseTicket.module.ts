@@ -9,4 +9,5 @@ export class ResponseTicket {
   createAt: string;
   ticketCost: number;
   ticketCostWithoutIVA: number;
+  ticketStatus: string;
  }

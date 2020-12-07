@@ -9,20 +9,42 @@ import { TicketService } from '../../core/services/ticket.service';
 })
 export class TicketComponent implements OnInit {
 
+  hideHistory = false;
+  hideConsultCustomer = false;
+  hideTicketCredit = false;
   ticket: ResponseTicket[];
 
   constructor(private serviceTicket: TicketService) { }
 
 
   ngOnInit(): void {
-    this.getTicketsList();
+    this.getTickets();
   }
 
-  getTicketsList() {
+  hiddenHistory() {
+    this.hideConsultCustomer = false;
+    this.hideTicketCredit = false;
+    this.hideHistory = !this.hideHistory;
+  }
+
+  getTickets() {
     this.serviceTicket.getTickets().subscribe(
       ticket => {
         this.ticket = ticket;
       });
   }
+
+  hiddenConsultCustomer() {
+    this.hideConsultCustomer = !this.hideConsultCustomer;
+    this.hideHistory = false;
+    this.hideTicketCredit = false;
+  }
+
+  hiddenConsultCredit() {
+    this.hideTicketCredit = !this.hideTicketCredit;
+    this.hideHistory = false;
+    this.hideConsultCustomer = false;
+  }
+
 
 }

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card size="medium">
+      <nb-card-header class="item">
+        <span>Ver más</span>
+        <span>Fecha</span>
+        <span>Cliente</span>
+        <span>Tipo de pago</span>
+        <span>Estado del ticket</span>
+        <span>Número de productos</span>
+        <span>Valor</span>
+        <span>Acciones</span>
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item class="item" *ngFor="let item of ticket">
+          <nb-icon class="changeMouse" status="primary" icon="eye-outline" (click)="openDetails(item)"></nb-icon>
+          <span>{{ item?.createAt }}</span>
+          <span>{{item?.customer.name}}</span>
+          <span>{{ item?.paymentType }}</span>
+          <span
+            [ngClass]="{active: item.ticketStatus === 'PAYED', inactive: item.ticketStatus !== 'PAYED'}">{{item?.ticketStatus}}</span>
+          <span>{{item?.order?.products?.length}}</span>
+          <span>$ {{item?.ticketCost}}</span>
+          <nb-icon class="changeMouse" status="danger" nbTooltip="Click para abonar" nbTooltipStatus="danger"
+            *ngIf="item.ticketStatus === 'CREDIT'" icon="trending-up-outline"></nb-icon>
+          <nb-icon class="changeMouse" status="primary" nbTooltip="Ticket pagado" nbTooltipStatus="primary"
+            *ngIf="item.ticketStatus === 'PAYED'" icon="done-all-outline"></nb-icon>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>

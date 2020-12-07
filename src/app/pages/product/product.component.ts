@@ -46,8 +46,7 @@ export class ProductComponent implements OnInit {
   }
   // metodo para llamar la lista de productos
   getProductsList() {
-    this.serviceProduct.getProductsFilters(this.page).subscribe(
-      product => {
+    this.serviceProduct.getProductsFilters(this.page).subscribe( async product => {
         this.pagination = new Array(Math.ceil(product.count / 10));
         this.products = product.products;
 
@@ -56,7 +55,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProductFilter() {
-    this.serviceProduct.getProductsFilter().subscribe(data => {
+    this.serviceProduct.getProductsFilter().subscribe(async data => {
       this.originalDataProduct = data;
       this.pagination = new Array(Math.ceil(data.count / 10));
       this.mainFilter = {

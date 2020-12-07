@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {
   NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule,
-  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule, NbButtonModule, NbStepperModule,
+  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule, NbButtonModule, NbStepperModule, NbTooltipModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -42,9 +42,14 @@ import { CashRegisterHistoricComponent } from './cash-register/cash-register-his
 import { ExpensesComponent } from './expenses/expenses.component';
 import { PopCreateExpensesComponent } from './expenses/pop-create-expenses/pop-create-expenses.component';
 import { PopDetailsExpensesComponent } from './expenses/pop-details-expenses/pop-details-expenses.component';
+import { TicketHistoricComponent } from './ticket/ticket-historic/ticket-historic.component';
+import { TicketConsultCreditComponent } from './ticket/ticket-consult-credit/ticket-consult-credit.component';
+import { TicketConsultCustomerComponent } from './ticket/ticket-consult-customer/ticket-consult-customer.component';
+import { TicketHistoryDetailsComponent } from './ticket/ticket-historic/ticket-history-details/ticket-history-details.component';
 
 @NgModule({
   imports: [
+    NbTooltipModule,
     NbButtonModule,
     NbRadioModule,
     FormsModule,
@@ -101,6 +106,10 @@ import { PopDetailsExpensesComponent } from './expenses/pop-details-expenses/pop
     ExpensesComponent,
     PopCreateExpensesComponent,
     PopDetailsExpensesComponent,
+    TicketHistoricComponent,
+    TicketConsultCreditComponent,
+    TicketConsultCustomerComponent,
+    TicketHistoryDetailsComponent,
 
   ],
 })

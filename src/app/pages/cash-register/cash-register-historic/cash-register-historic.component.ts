@@ -6,18 +6,17 @@ import { GeneralService } from '../../../core/services/general.service';
 @Component({
   selector: 'ngx-cash-register-historic',
   templateUrl: './cash-register-historic.component.html',
-  styleUrls: ['./cash-register-historic.component.scss']
+  styleUrls: ['./cash-register-historic.component.scss'],
 })
 export class CashRegisterHistoricComponent implements OnInit {
-  
+
   cashRegisters: ResponseCashRegister[];
 
   constructor(private cashBaseService: CashRegisterBaseService, private generalService: GeneralService) { }
 
   ngOnInit(): void {
     this.cashBaseService.getCashRegister().subscribe(data => {
-      this.cashRegisters = data
-      console.log(this.cashRegisters)
+      this.cashRegisters = data;
     });
   }
 
