@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { ResponseTicket } from '../../../core/models/Response/ticket/ResponseTicket.module';
-import { TicketService } from '../../../core/services/ticket.service';
+import { TicketCreditCapitalsComponent } from './ticket-credit-capitals/ticket-credit-capitals.component';
 import { TicketHistoryDetailsComponent } from './ticket-history-details/ticket-history-details.component';
 
 @Component({
@@ -23,6 +23,12 @@ export class TicketHistoricComponent implements OnInit {
 
   openDetails(ticket) {
     this.dialog.open(TicketHistoryDetailsComponent, { context: { ticket: ticket } }).onClose.subscribe(() => {
+    });
+  }
+
+  openCreditCapital(ticket) {
+    this.dialog.open(TicketCreditCapitalsComponent, { context: { ticket: ticket } }).onClose.subscribe(() => {
+      this.ngOnInit();
     });
   }
 

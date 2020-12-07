@@ -54,7 +54,7 @@
                 {{type}}
               </nb-radio>
             </nb-radio-group>
-            <input formControlName="creditCapital" *ngIf="hideCredit" type="text" class="col-md-2" nbInput fullWidth [(ngModel)]="credit"
+            <input formControlName="creditCapital" *ngIf="hideCredit" type="text" class="col-md-2" nbInput fullWidth
               (ngModelChange)="changedValueCredit()" placeholder="¿Desea abonar?">
             <nb-select class="Groupradiobox" *ngIf="hideCredit" style="width: 40%;" formControlName="creditPaymentType"
               placeholder="Tipo de pago del abono:">

@@ -12,7 +12,7 @@ export class InventoryService {
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
-  update(requestUpdateUnit:RequestUpdateUnit):Observable<RequestUpdateUnit>{
+  update(requestUpdateUnit: RequestUpdateUnit): Observable<RequestUpdateUnit> {
     return this.http.patch<RequestUpdateUnit>(`${endpoint.Units}/unit`, requestUpdateUnit, { headers: this.httpHeaders });
   }
 }

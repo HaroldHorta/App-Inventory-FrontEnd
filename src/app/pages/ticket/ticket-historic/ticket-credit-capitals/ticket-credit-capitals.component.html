@@ -1,0 +1,24 @@
+<div>
+    <nb-card>
+      <nb-card-body  [formGroup]="checkOutForm">      
+          <input formControlName="idTicket" type="hidden" class="col-md-6" nbInput fullWidth [(ngModel)]="ticket.id">  
+        <div  class="col-md-12">
+            <span class="posicion">Tipo de pago: </span>
+            <nb-radio-group  formControlName="creditPayment"  [(value)]="payment" class="Groupradiobox" [(ngModel)]="payment"
+              (ngModelChange)="changedValuePayment()">
+              <nb-radio class="radiobox" *ngFor="let type of typePayment" [value]="type">
+                {{type}}
+              </nb-radio>
+            </nb-radio-group>
+        </div>
+          <input formControlName="creditCapital" type="text" class="col-md-12" nbInput fullWidth
+          placeholder="¿Cuanto desea abonar?">    
+      </nb-card-body>
+      <nb-card-footer>
+        <button style="margin-left: 20%;" class="btn btn-outline-success" type="submit"
+        [disabled]="!checkOutForm.valid" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success"
+        nbSpinnerSize="large" nbSpinnerMessage="" (click)="saveCredit(checkOutForm.value)">Guardar avance</button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+  
