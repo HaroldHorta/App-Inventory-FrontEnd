@@ -24,11 +24,11 @@
             <tbody>
                 <tr *ngFor="let product of productList | filter:searchProduct | paginate: { itemsPerPage: 7, currentPage: cp }">
                     <td class="center">
-                        <nb-icon class="changeMouse" status="primary" icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
+                        <nb-icon class="changeMouse" nbTooltip="Ver más" nbTooltipStatus="primary" status="primary" icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
                     </td>
                     <td class="center">
                         <label>
-                            <img for="boton-archivo" class="pru changeMouse" src="{{product?.photo}}" />
+                            <img for="boton-archivo" class="pru changeMouse" nbTooltip="Actualizar imagen" nbTooltipStatus="warning" src="{{product?.photo}}" />
                             <input type='file' id="boton-archivo" class="imagen-para-archivo"
                                 (change)="onSelectFile(product.id , $event)">
                         </label>
@@ -36,10 +36,10 @@
                     <td class="center">{{product?.name}}</td>
                     <td class="center">{{product?.description}}</td>
                     <td class="center" *ngFor="let cat of product.category">{{cat?.description}}</td>
-                    <td class="center changeMouse" (click)="unitModal(product)">{{product?.unit}}</td>
+                    <td class="center changeMouse" nbTooltip="Actualizar unidades" nbTooltipStatus="warning" (click)="unitModal(product)">{{product?.unit}}</td>
                     <td>
-                        <nb-icon class="changeMouse" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
-                        <nb-checkbox class="checkBox" [status]="product.status === 'ACTIVE' ? 'primary' : 'primary'" [checked]="product.status === 'ACTIVE'" (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
+                        <nb-icon class="changeMouse" nbTooltip="Editar" nbTooltipStatus="warning" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
+                        <nb-checkbox class="checkBox" nbTooltip="Desactivar" nbTooltipStatus="danger" [status]="product.status === 'ACTIVE' ? 'primary' : 'primary'" [checked]="product.status === 'ACTIVE'" (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
                     </td>
                 </tr>
             </tbody>

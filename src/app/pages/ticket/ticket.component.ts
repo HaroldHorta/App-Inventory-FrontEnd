@@ -12,7 +12,7 @@ export class TicketComponent implements OnInit {
   hideHistory = false;
   hideConsultCustomer = false;
   hideTicketCredit = false;
-  ticket: ResponseTicket[];
+  ticket: ResponseTicket[] = [];
 
   constructor(private serviceTicket: TicketService) { }
 
@@ -30,7 +30,29 @@ export class TicketComponent implements OnInit {
   getTickets() {
     this.serviceTicket.getTickets().subscribe(
       ticket => {
-        this.ticket = ticket;
+        ticket.forEach(
+          t => {
+            let cantidad = Object.values(t.order.products).length;
+            this.ticket.push({
+              id: t.id,
+              order: t.order,
+              customer: t.customer,
+              createAt: t.createAt,
+              paymentType: t.paymentType,
+              ticketStatus: t.ticketStatus,
+              creditCapitals: t.creditCapitals,
+              ticketCost: t.ticketCost,
+              ticketCostWithoutIVA: t.ticketCostWithoutIVA,
+              outstandingBalance: t.outstandingBalance,
+              cashPayment: t.cashPayment,
+              transactionPayment: t.transactionPayment,
+              creditPayment: t.creditPayment,
+              cashRegister: t.cashRegister,
+              items: cantidad,
+            });
+          }
+        )
+        console.log("este es ticket: ",this.ticket);
       });
   }
 
