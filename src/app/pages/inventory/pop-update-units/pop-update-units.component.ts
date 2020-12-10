@@ -15,6 +15,7 @@ export class PopUpdateUnitsComponent implements OnInit {
 
   units: ResponseProduct;
   checkOutForm: FormGroup;
+  prueba: FormGroup;
 
   constructor(protected ref: NbDialogRef<PopUpdateUnitsComponent>, 
     private generalService: GeneralService,
@@ -25,21 +26,22 @@ export class PopUpdateUnitsComponent implements OnInit {
       priceSell: [''],
       unit: [''],
     })
+    this.prueba = this.formBuilder.group({
+      unidades: [''],
+    })
    }
 
   ngOnInit(): void {
     this.units;
-    console.log("Estas son las unidades",this.units)
   }
 
   cancel(){
     this.ref.close();
   }
   updateUnit(unit:RequestUpdateUnit){
-    console.log("Este es unit: ", unit);
     this.serviceInventory.update(unit).subscribe(
       () => {
-        this.ref.close(unit);
+        this.ref.close();
         const type = 'success';
         const quote = {title: null, body: 'Unidades actualizadas correctamente'};
         this.generalService.showToast(type, quote.title, quote.body);

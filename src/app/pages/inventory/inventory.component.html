@@ -38,8 +38,9 @@
                     <td class="center" *ngFor="let cat of product.category">{{cat?.description}}</td>
                     <td class="center changeMouse" nbTooltip="Actualizar unidades" nbTooltipStatus="warning" (click)="unitModal(product)">{{product?.unit}}</td>
                     <td>
-                        <nb-icon class="changeMouse" nbTooltip="Editar" nbTooltipStatus="warning" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
-                        <nb-checkbox class="checkBox" nbTooltip="Desactivar" nbTooltipStatus="danger" [status]="product.status === 'ACTIVE' ? 'primary' : 'primary'" [checked]="product.status === 'ACTIVE'" (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
+                        <nb-icon class="changeMouse" nbTooltip="Editar producto" nbTooltipStatus="warning" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
+                        <nb-checkbox class="checkBox" [nbTooltip]="product.status === 'ACTIVE' ? 'Desactivar' : 'Activar'" [nbTooltipStatus]="product.status === 'ACTIVE' ? 'danger' : 'primary'" [status]="product.status === 'ACTIVE' ? 'primary' : 'danger'" [checked]="product.status === 'ACTIVE'"
+                            (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
                     </td>
                 </tr>
             </tbody>
