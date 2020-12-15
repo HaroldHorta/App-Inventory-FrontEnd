@@ -27,7 +27,6 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopDetailsComponent } from './inventory/pop-details/pop-details.component';
-import { PopUpdateImageComponent } from './inventory/pop-update-image/pop-update-image.component';
 import { PopUpdateUnitsComponent } from './inventory/pop-update-units/pop-update-units.component';
 import { CreateCustomerPopupComponent } from './customer/create-customer-popup/create-customer-popup.component';
 import { TicketComponent } from './ticket/ticket.component';
@@ -94,7 +93,6 @@ import { TicketCreditCapitalsComponent } from './ticket/ticket-historic/ticket-c
     InventoryComponent,
     PopupComponent,
     PopDetailsComponent,
-    PopUpdateImageComponent,
     PopUpdateUnitsComponent,
     CreateCustomerPopupComponent,
     TicketComponent,

@@ -4,6 +4,7 @@ import { NbDialogRef } from '@nebular/theme';
 import { ResponseCategory } from '../../../core/models/Response/category/ResponseCategory.module';
 import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { CategoryService } from '../../../core/services/category.service';
+import { GeneralService } from '../../../core/services/general.service';
 import { ProductService } from '../../../core/services/product.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class PopDetailsComponent implements OnInit {
   @Input() products: ResponseProduct;
 
   constructor(private serviceProduct: ProductService, private serviceCategory: CategoryService,
+    private generalService: GeneralService,
     protected ref: NbDialogRef<PopDetailsComponent>,
   ) {
 
@@ -38,6 +40,12 @@ export class PopDetailsComponent implements OnInit {
     this.serviceProduct.getProductByid(id).subscribe(
       product => {
         this.productDetails = product;
+      },
+      (err) => {
+        const type = 'danger';
+        const quote = {title: null, body: err.error.detailMessage};
+        this.generalService.showToast(type, quote.title, quote.body);
+        this.cancel();
       });
   }
   cancel() {

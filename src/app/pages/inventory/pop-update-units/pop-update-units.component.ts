@@ -46,6 +46,12 @@ export class PopUpdateUnitsComponent implements OnInit {
         const quote = {title: null, body: 'Unidades actualizadas correctamente'};
         this.generalService.showToast(type, quote.title, quote.body);
       },
+      (err) => {
+        const type = 'danger';
+        const quote = {title: null, body: err.error.detailMessage};
+        this.generalService.showToast(type, quote.title, quote.body);
+        this.ref.close();
+      }
     );
   }
 }

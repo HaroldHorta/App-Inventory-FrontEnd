@@ -7,7 +7,6 @@ import { FileUploadService } from '../../core/services/file-upload.service';
 import { GeneralService } from '../../core/services/general.service';
 import { ProductService } from '../../core/services/product.service';
 import { PopDetailsComponent } from './pop-details/pop-details.component';
-import { PopUpdateImageComponent } from './pop-update-image/pop-update-image.component';
 import { PopupComponent } from './popup/popup.component';
 import { PopUpdateUnitsComponent } from './pop-update-units/pop-update-units.component';
 
@@ -71,9 +70,7 @@ export class InventoryComponent implements OnInit {
   openModalDetails(item) {
     this.dialog.open(PopDetailsComponent, { context: { idProduct: item } });
   }
-  openModalImage(item) {
-    this.dialog.open(PopUpdateImageComponent, { context: { photo: item } });
-  }
+
   unitModal(item) {
     this.dialog.open(PopUpdateUnitsComponent, { context: { units: item } }).onClose.subscribe(() => {
       this.productList = [];
@@ -112,7 +109,15 @@ export class InventoryComponent implements OnInit {
           this.fileUpload.create(obj).subscribe(() => {
             this.urls = [];
             this.productList = [];
+            const type = 'success';
+            const quote = { title: null, body: 'Imagen actualizado correctamente' };
+            this.generalService.showToast(type, quote.title, quote.body);
             this.getProductList();
+          },
+          (err) => {
+            const type = 'danger';
+            const quote = {title: null, body: err.error.detailMessage};
+            this.generalService.showToast(type, quote.title, quote.body);
           });
         };
         reader.readAsDataURL(event.target.files[0]);

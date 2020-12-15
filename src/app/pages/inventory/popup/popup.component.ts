@@ -98,7 +98,6 @@ export class PopupComponent implements OnInit {
 
   addProduct(product) {
     product.photo = this.urls[0];
-
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
@@ -113,7 +112,12 @@ export class PopupComponent implements OnInit {
         const quote = { title: null, body: 'Producto agregado correctamente' };
         this.generalService.showToast(type, quote.title, quote.body);
       },
-    );
+      (err) =>{
+        const type = 'danger';
+        const quote = {title: null, body: err.error.detailMessage};
+        this.generalService.showToast(type, quote.body, quote.title);
+        this.ref.close(product);
+      });
   }
 
 
