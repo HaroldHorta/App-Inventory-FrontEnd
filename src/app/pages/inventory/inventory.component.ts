@@ -95,6 +95,8 @@ export class InventoryComponent implements OnInit {
         const type = 'success';
         const quote = { title: null, body: message };
         this.generalService.showToast(type, quote.title, quote.body);
+        this.productList = [];
+        this.getProductList();
       },
     );
   }
