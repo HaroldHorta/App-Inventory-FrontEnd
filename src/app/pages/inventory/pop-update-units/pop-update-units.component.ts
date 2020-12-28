@@ -17,7 +17,7 @@ export class PopUpdateUnitsComponent implements OnInit {
   checkOutForm: FormGroup;
   prueba: FormGroup;
 
-  constructor(protected ref: NbDialogRef<PopUpdateUnitsComponent>, 
+  constructor(protected ref: NbDialogRef<PopUpdateUnitsComponent>,
     private generalService: GeneralService,
     private serviceInventory: InventoryService,private formBuilder: FormBuilder) {
     this.checkOutForm = this.formBuilder.group({
@@ -29,15 +29,27 @@ export class PopUpdateUnitsComponent implements OnInit {
     this.prueba = this.formBuilder.group({
       unidades: [''],
     })
-   }
+  }
 
   ngOnInit(): void {
     this.units;
   }
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020
+*Este metodo permite llamar el metodo close del componente NbDialogRef, el cual se usas para cerrar los pop us*/
   cancel(){
     this.ref.close();
   }
+  /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020*/
+
+/*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020
+*Este metodo permite editar las unidades recibiendo un objeto con los datos del producto y usando el service update de unidades*/
   updateUnit(unit:RequestUpdateUnit){
     this.serviceInventory.update(unit).subscribe(
       () => {
@@ -55,3 +67,7 @@ export class PopUpdateUnitsComponent implements OnInit {
     );
   }
 }
+
+ /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020*/

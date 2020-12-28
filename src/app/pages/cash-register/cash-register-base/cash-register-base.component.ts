@@ -30,12 +30,24 @@ export class CashRegisterBaseComponent implements OnInit {
 
   }
 
+  /*<i>[ini][]</i>
+ *@author [CadenaCristian]
+ *@since 26/12/2020
+ *Este metodo sirve para mostrar el dinero base que hay en caja diario, si se inserta mas de un dato va a mostrar solo el mar reciente*/
   getCashBase() {
     this.cashBaseService.getCashBase().subscribe(data => {
       this.cashBase = data;
     });
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 26/12/2020*/
 
+   /*<i>[ini][]</i>
+ *@author [CadenaCristian]
+ *@since 26/12/2020
+ *Este metodo sirve para agregar el dinero base que se va a tener, funciona agregando el valor que llega en el input y limpiando el input
+ *por si se va a ingresar un nuevo valor, el solo toma el ultimo valor ingresado*/
   addCashBase(cashBase) {
 
     this.cashBaseService.createCashBase(cashBase.cashBase).subscribe(data => {
@@ -53,3 +65,7 @@ export class CashRegisterBaseComponent implements OnInit {
 
   }
 }
+
+/*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 26/12/2020*/

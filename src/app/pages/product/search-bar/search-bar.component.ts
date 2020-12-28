@@ -28,6 +28,11 @@ export class SearchBarComponent implements OnInit {
       1 if the search term length has increased
       0 if the search term remained equal
   */
+
+ /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Este metodo se encarga de buscar el nombre del producto escrito en el input*/
   public onSearchKeyup(search: string) {
     let change = 0;
     if (search.length > this.previousSearch.length) {
@@ -40,6 +45,9 @@ export class SearchBarComponent implements OnInit {
       this.searchChange.emit({search, change});
     }
   }
+/*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
   // Perform a plop animation on the search icon. This animation is executed on keydown just for visual reasons
   plop() {

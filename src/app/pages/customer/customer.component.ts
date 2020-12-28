@@ -72,17 +72,30 @@ export class CustomerComponent {
     this.getCustomerList();
   }
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo se encarga de listar los datos, llamando el metodo getCustomers del servicio serviceCustomer*/
   getCustomerList() {
     this.serviceCustomer.getCustomers().subscribe(
       customers => {
         this.customers = customers;
-        const data = this.customers;
-        this.source.load(data);
+        this.source.load(this.customers);
       },
     );
   }
+  /*<i>[fin][]</i>
+    *@author [CadenaCristian]
+    *@since 26/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo se encarga de crear nuevos usuarios y funciona evaluando que los campos no vengan vacios para poder ingresar el dato, 
+*en tal caso se envia una alerta informando que el campo es obligatorio, tambien pregunta si esta seguro de crear el nuevo usuario
+*que se quiere ingresar*/
   onCreateConfirm(event): void {
+    console.log("Estes event: ", event);
     if (event.newData.description === '') {
       const type = 'danger';
       const quote = { title: null, body: 'El customer no puede ir vacio' };
@@ -116,7 +129,15 @@ export class CustomerComponent {
       }
     }
   }
+  /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo se encarga de eliminar el registro que se elija, funciona llamando el metodo delete del serviceCustomer el cual recibe un ID
+*que es un string y prosigue mostrando una ventana de pregunta si esta seguro de eliminar el dato y luego una alerta de confirmacion*/
   onDeleteConfirm(event): void {
     if (window.confirm('¿Seguro de eliminar este registro?')) {
       this.serviceCustomer.delete(event.data.id).subscribe(data => {
@@ -151,3 +172,7 @@ export class CustomerComponent {
     }
   }
 }
+
+/*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/

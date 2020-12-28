@@ -44,16 +44,27 @@ export class ProductComponent implements OnInit {
     this.getProductsList();
     this.getProductFilter();
   }
-  // metodo para llamar la lista de productos
-  getProductsList() {
-    this.serviceProduct.getProductsFilters(this.page).subscribe( async product => {
-        this.pagination = new Array(Math.ceil(product.count / 10));
-        this.products = product.products;
 
-      },
+  /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020
+  *Metodo para llamar la lista de productos, con un listado de maximo 10 por pagina*/
+  getProductsList() {
+    this.serviceProduct.getProductsFilters(this.page).subscribe(async product => {
+      this.pagination = new Array(Math.ceil(product.count / 10));
+      this.products = product.products;
+
+    },
     );
   }
+  /*<i>[fin][]</i>
+    *@author [CadenaCristian]
+    *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+ *@author [CadenaCristian]
+ *@since 27/12/2020
+ *Metodo para poder filtrar segun el numbre en orden alfabetico o el precio*/
   getProductFilter() {
     this.serviceProduct.getProductsFilter().subscribe(async data => {
       this.originalDataProduct = data;
@@ -67,13 +78,27 @@ export class ProductComponent implements OnInit {
 
     });
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo para saber la pagina actual en la cual se encuentra el usuario, o sea la pagina actual del paginador*/
   setPage(i) {
     this.hiddenFilters = false;
     this.page = i;
     this.getProductsList();
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 28/12/2020
+  *Metodo para filtrar encargado de detectar algu caracter en el input de search*/
   onSearchChange(search) {
     if (search.search === '') {
       this.hiddenFilters = false;
@@ -85,7 +110,15 @@ export class ProductComponent implements OnInit {
       change: search.change,
     });
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 28/12/2020*/
 
+  /*<i>[ini][]</i>
+   *@author [CadenaCristian]
+   *@since 28/12/2020
+   *Metodo que actualiza la feed segun el producto que se va buscando, es decir va mostrando los productos que tengan coincidencia
+   *con lo que se esta buscando*/
   updateProducts(filter) {
 
     let productsSource = this.originalDataProduct.products;
@@ -96,6 +129,9 @@ export class ProductComponent implements OnInit {
       productsSource = this.productsFilters;
       filterAllData = false;
     }
+    /*<i>[fin][]</i>
+     *@author [CadenaCristian]
+     *@since 28/12/2020*/
 
     this.productsFilters = productsSource.filter(product => {
       // Filter by search
@@ -116,6 +152,10 @@ export class ProductComponent implements OnInit {
 
   }
 
+  /*<i>[ini][]</i>
+   *@author [CadenaCristian]
+   *@since 28/12/2020
+   *Metodo que se encarga de convertir todo a minisculas y comparar si es lo que se esta buscando o no*/
   sortProducts(criteria) {
     this.productsFilters.sort((a, b) => {
       const priceComparison = a.priceSell - b.priceSell;
@@ -136,3 +176,6 @@ export class ProductComponent implements OnInit {
     this.currentSorting = criteria;
   }
 }
+    /*<i>[fin][]</i>
+ *@author [CadenaCristian]
+ *@since 28/12/2020*/

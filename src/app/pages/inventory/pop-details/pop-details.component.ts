@@ -36,6 +36,11 @@ export class PopDetailsComponent implements OnInit {
 
   }
 
+  /*<i>[ini][]</i>
+ *@author [CadenaCristian]
+ *@since 24/12/2020
+ *Este metodo recibe un ID que se envia desde el inventory.component.ts el cual permite usar el sevicio getProductByid, el cual permite
+ listar por el ID deseado */
   getProductById(id) {
     this.serviceProduct.getProductByid(id).subscribe(
       product => {
@@ -48,10 +53,25 @@ export class PopDetailsComponent implements OnInit {
         this.cancel();
       });
   }
+  /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020*/
+
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020
+*Este metodo permite llamar el metodo close del componente NbDialogRef, el cual se usas para cerrar los pop us*/
   cancel() {
     this.ref.close();
   }
+  /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020*/
 
+/*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020
+*Este metodo se usa para listar la categoria actual que tiene el producto*/
   getCategoryList() {
     this.serviceCategory.getCategories().subscribe(
       category => {
@@ -59,3 +79,7 @@ export class PopDetailsComponent implements OnInit {
       });
   }
 }
+
+  /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 24/12/2020*/

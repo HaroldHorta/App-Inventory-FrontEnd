@@ -16,8 +16,8 @@ import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSou
 export class OrderComponent implements OnInit {
 
   customColumn = 'name';
-  defaultColumns = [ 'size', 'kind', 'items' ];
-  allColumns = [ this.customColumn, ...this.defaultColumns ];
+  defaultColumns = ['size', 'kind', 'items'];
+  allColumns = [this.customColumn, ...this.defaultColumns];
 
   orders: ResponseOrder[];
   items: RequestOrderProductItems[];
@@ -30,6 +30,10 @@ export class OrderComponent implements OnInit {
     this.getOrdersList();
   }
 
+  /*<i>[ini][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020
+   *Este metodo se encarga de listar las ordenes de productos existentes*/
   getOrdersList() {
     this.serviceOrder.getOrders().subscribe(
       orders => {
@@ -37,6 +41,9 @@ export class OrderComponent implements OnInit {
       },
     );
   }
+  /*<i>[fin][]</i>
+     *@author [CadenaCristian]
+     *@since 27/12/2020*/
 
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;

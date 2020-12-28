@@ -52,6 +52,10 @@ export class CartComponent implements OnInit {
 
   }
 
+  /*<i>[ini][]</i>
+ *@author [CadenaCristian]
+ *@since 27/12/2020
+ *Metodo se encarga de recibir el total de los producto seleccionados y redirecciona al checkout para seleccionar el metodo de pago*/
   checkOut(productsF: ResponseProduct, cartTotal) {
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
@@ -80,8 +84,19 @@ export class CartComponent implements OnInit {
 
     }
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020
+   *Metodo se encarga de desplegar el carrito de compra*/
   toggle() {
     this.accordion.toggle();
   }
 }
+
+/*<i>[fin][]</i>
+ *@author [CadenaCristian]
+ *@since 27/12/2020*/

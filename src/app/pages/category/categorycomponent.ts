@@ -53,6 +53,10 @@ export class CategoryComponent {
         this.getCategoryList();
     }
 
+    /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo permite obtener y listar todas las categorias que tenemos creadas*/
     getCategoryList() {
         this.serviceCategory.getCategories().subscribe(
             categories => {
@@ -62,8 +66,16 @@ export class CategoryComponent {
             },
         );
     }
+    /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
 
 
+    /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados y este
+metodo se usa para agregar una categoria*/
     onCreateConfirm(event): void {
         if (event.newData.description === '') {
             const type = 'danger';
@@ -90,7 +102,15 @@ export class CategoryComponent {
             }
         }
     }
+    /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
 
+    /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados, este metodo 
+se usa para eliminar una categoria existente*/
     onDeleteConfirm(event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             this.serviceCategory.delete(event.data.id).subscribe(data => {
@@ -109,7 +129,15 @@ export class CategoryComponent {
             event.confirm.reject();
         }
     }
+    /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
 
+    /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados, este metodo 
+se usa para editar una categoria existente*/
     onSaveConfirm(event): void {
 
         if (event.newData.description === '') {
@@ -133,3 +161,6 @@ export class CategoryComponent {
 
 }
 
+    /*<i>[fin][]</i>
+  *@author [CadenaCristian]
+  *@since 26/12/2020*/

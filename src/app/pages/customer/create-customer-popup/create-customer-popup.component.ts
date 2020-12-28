@@ -36,6 +36,10 @@ export class CreateCustomerPopupComponent implements OnInit {
     this.ref.close();
   }
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo se encarga de agregar un nuevo usuario que haya sido consultado en ticket y no exista*/
   addCustomer(customer, nroDocument) {
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
@@ -59,3 +63,7 @@ export class CreateCustomerPopupComponent implements OnInit {
 
   }
 }
+
+/*<i>[fin][]</i>
+     *@author [CadenaCristian]
+     *@since 27/12/2020*/

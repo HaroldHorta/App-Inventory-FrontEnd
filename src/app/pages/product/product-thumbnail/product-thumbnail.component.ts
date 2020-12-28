@@ -31,38 +31,65 @@ export class ProductThumbnailComponent implements OnInit {
     }
   }
 
+
   onProductClick() {
     this.detailViewActive = !this.detailViewActive;
   }
 
-  onAddToCart() {
-    this.cantidad = 1;
-    this.mostrarAgregarCarrito = false;
-    this.cartService.addProductToCart(this.product);
-    this.diableAdd();
-  }
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo que sirve para agregar producto al carrito de comprar*/
+onAddToCart() {
+  this.cantidad = 1;
+  this.mostrarAgregarCarrito = false;
+  this.cartService.addProductToCart(this.product);
+  this.diableAdd();
+}
+/*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020*/
 
-  aumentar(): number {
-    this.cantidad = this.cantidad + 1;
+/*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo que sirve para aumentar la cantidad de productos ya agregados en el carrito de comprar*/
+aumentar(): number {
+  this.cantidad = this.cantidad + 1;
     this.cartService.addProductToCart(this.product);
     this.diableAdd();
     return this.cantidad;
-
+    
   }
-
-  disminuir(): number {
-    this.cantidad = this.cantidad - 1;
-    this.cartService.deleteProductToCart(this.product);
-    this.diableAdd();
-    if (this.cantidad === 0) {
-      this.mostrarAgregarCarrito = true;
-      this.cartService.deleteProductFromCart(this.product);
-      return this.cantidad = 1;
+  /*<i>[fin][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020*/
+  
+  /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020
+  *Metodo que sirve para disminuir la cantidad de productos ya agregados en el carrito de comprar*/
+ disminuir(): number {
+   this.cantidad = this.cantidad - 1;
+   this.cartService.deleteProductToCart(this.product);
+   this.diableAdd();
+   if (this.cantidad === 0) {
+     this.mostrarAgregarCarrito = true;
+     this.cartService.deleteProductFromCart(this.product);
+     return this.cantidad = 1;
     } else {
       return this.cantidad;
     }
   }
-
+  /*<i>[fin][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020*/
+  
+  /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020
+  *Metodo que sirve para deshabilitar el boton de agregar productos, cuando ya no se tengan existencias
+  *disponibles*/
   diableAdd() {
     if (this.cantidad >= this.product.unit) {
       this.disableAdd = true;
@@ -71,3 +98,6 @@ export class ProductThumbnailComponent implements OnInit {
     }
   }
 }
+/*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020*/
