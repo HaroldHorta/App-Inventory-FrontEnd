@@ -39,7 +39,7 @@
                     <td class="center changeMouse" nbTooltip="Actualizar unidades" nbTooltipStatus="warning" (click)="unitModal(product)">{{product?.unit}}</td>
                     <td>
                         <nb-icon class="changeMouse" nbTooltip="Editar producto" nbTooltipStatus="warning" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
-                        <nb-checkbox class="checkBox" [nbTooltip]="product.status === 'ACTIVE' ? 'Desactivar' : 'Activar'" [nbTooltipStatus]="product.status === 'ACTIVE' ? 'danger' : 'primary'" [status]="product.status === 'ACTIVE' ? 'primary' : 'danger'" [checked]="product.status === 'ACTIVE'"
+                        <nb-checkbox class="checkBox" [nbTooltip]="product.status === 'ACTIVO' ? 'Desactivar' : 'Activar'" [nbTooltipStatus]="product.status === 'ACTIVO' ? 'danger' : 'primary'" [status]="product.status === 'ACTIVO' ? 'primary' : 'danger'" [checked]="product.status === 'ACTIVO'"
                             (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
                     </td>
                 </tr>
