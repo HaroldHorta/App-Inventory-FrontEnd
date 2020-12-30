@@ -4,6 +4,7 @@ import { NbDialogService, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrSe
 import { ResponseCustomer } from '../../core/models/Response/customer/ResponseCustomer.module';
 import { CustomerService } from '../../core/services/customer.service';
 import { GeneralService } from '../../core/services/general.service';
+import { CreateCustomerPopupComponent } from './create-customer-popup/create-customer-popup.component';
 
 @Component({
   selector: 'ngx-customer',
@@ -20,55 +21,9 @@ export class CustomerComponent {
   preventDuplicates = false;
   customers: ResponseCustomer[];
   hideError = false;
+  searchProduct;
 
-  settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      name: {
-        title: 'NOMBRE',
-        type: 'string',
-      },
-      typeDocument: {
-        title: 'TIPO DE DOCUMENTO',
-        type: 'TypeDocument',
-      },
-      nroDocument: {
-        title: 'NUMERO DE DOCUMENTO',
-        type: 'string',
-      },
-      email: {
-        title: 'EMAIL',
-        type: 'string',
-      },
-      address: {
-        title: 'DIRECCIÓN',
-        type: 'string',
-      },
-      phone: {
-        title: 'TELEFONO',
-        type: 'string',
-      },
-    },
-  };
-
-  source: LocalDataSource = new LocalDataSource();
-
-  constructor( private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService) {
+  constructor(    private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService) {
     this.getCustomerList();
   }
 
@@ -80,7 +35,6 @@ export class CustomerComponent {
     this.serviceCustomer.getCustomers().subscribe(
       customers => {
         this.customers = customers;
-        this.source.load(this.customers);
       },
     );
   }
@@ -171,8 +125,30 @@ export class CustomerComponent {
       }
     }
   }
-}
+  /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
 
 /*<i>[fin][]</i>
       *@author [CadenaCristian]
       *@since 26/12/2020*/
+
+  /*<i>[ini][EQUIDOG-6]</i>
+*@author [HaroldHorta]
+*@since 30/12/2020
+*Metodo encargado de desplegar el popup para crear el cliente */
+      openAddProduct() {
+        this.dialog.open(CreateCustomerPopupComponent).onClose.subscribe(() => {
+          this.customers = [];
+          this.getCustomerList();
+        });
+      }
+  /*<i>[fin][]</i>
+      *@author [HaroldHorta]
+      *@since 30/12/2020*/
+}
+
+
+
+
+     
