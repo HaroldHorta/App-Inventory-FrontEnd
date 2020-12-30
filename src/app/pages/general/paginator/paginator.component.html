@@ -1,0 +1,8 @@
+<div class="col-md-6 offset-md-3">
+    <ul class="pagination">
+      <li><a (click)="setPage(page-1)" disabled = "true">« Previous</a></li>
+      <li *ngFor="let p of pagination; let i = index"> <a style="cursor: pointer; text-align: center;" (click)="setPage(i)"
+          [ngClass]="{active: i === page }">{{ i+1 }}&nbsp;&nbsp;</a></li>
+      <li><a (click)="setPage(page+1)">Next »</a></li>
+    </ul>
+  </div>
