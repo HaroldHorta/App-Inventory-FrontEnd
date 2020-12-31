@@ -6,6 +6,7 @@ import { endpoint } from '../infraestructure/endpoint/endpoint';
 import { ResponseCustomer } from '../models/Response/customer/ResponseCustomer.module';
 import { RequestCustomer } from '../models/Request/customer/RequestCustomer';
 import { RequestUpdateCustomer } from '../models/Request/customer/RequestUpdateCustomer';
+import { ResponseCustomerPagination } from '../models/Response/customer/ResponseCustomerPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,18 @@ export class CustomerService {
   getCustomers(): Observable<ResponseCustomer[]> {
     return this.http.get(endpoint.Customer).pipe(
       map(response => response as ResponseCustomer[]),
+    );
+  }
+
+  getCustomerPageAll(): Observable<ResponseCustomerPagination> {
+    return this.http.get(`${endpoint.Customer}/customerFilter`).pipe(
+      map(response => response as ResponseCustomerPagination),
+    );
+  }
+
+  getCustomerPage(page): Observable<ResponseCustomerPagination> {
+    return this.http.get(`${endpoint.Customer}/page/?page=${page}`).pipe(
+      map(response => response as ResponseCustomerPagination),
     );
   }
 

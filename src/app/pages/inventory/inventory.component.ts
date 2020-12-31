@@ -41,7 +41,7 @@ export class InventoryComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020
-  *Metodo que permite obtener y listar todos los datos correspondientes a los productos, por medio de un service getProducts que es 
+  *Metodo que permite obtener y listar todos los datos correspondientes a los productos, por medio de un service getProducts que es
   *invocado desde el serviceProduct */
   getProductList() {
     this.serviceProduct.getProducts().subscribe(
@@ -65,7 +65,8 @@ export class InventoryComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020
-  *Metodo que permite abrir un pop-up que se encuentra en pop-up.componet.ts, el cual nos permite agregar un producto nuevo y tambien permite
+  *Metodo que permite abrir un pop-up que se encuentra en pop-up.componet.ts, el cual nos permite agregar
+  *un producto nuevo y tambien permite
   *recargar el listado de productos despues de haber terminado de registrar los datos del nuevo producto*/
   open() {
     this.dialog.open(PopupComponent).onClose.subscribe(() => {
@@ -80,7 +81,7 @@ export class InventoryComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020
-  *Metodo que permite abrir un pop-up que se encuentra en pop-up.componet.ts, el cual nos permite editar un producto existente en el cual 
+  *Metodo que permite abrir un pop-up que se encuentra en pop-up.componet.ts, el cual nos permite editar un producto existente en el cual
   *se le pasa un arreglo que contiene un objeto y tambien permite recargar el listado de productos despues de haber terminado de editar*/
   openModal(item) {
     this.dialog.open(PopupComponent, { context: { productEdit: item } }).onClose.subscribe(() => {
@@ -107,7 +108,7 @@ export class InventoryComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020
-  *Metodo que abre el Pop Up que permite agregar unidades en las existencias de los productos ya creados, el cual recibe el ID del producto 
+  *Metodo que abre el Pop Up que permite agregar unidades en las existencias de los productos ya creados, el cual recibe el ID del producto
   *con el cual tenemos acceso a la informacion de ese producto, pero solo se altera y se muestra la cantidad de unidades disponibles*/
   unitModal(item) {
     this.dialog.open(PopUpdateUnitsComponent, { context: { units: item } }).onClose.subscribe(() => {
@@ -123,7 +124,8 @@ export class InventoryComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020
-  *Metodo que permite cambiar el estado del producto de ACTIVO a DESACTIVADO y viceversa, el cual recibe el cual recibe un evento y el ID del
+  *Metodo que permite cambiar el estado del producto de ACTIVO a DESACTIVADO y viceversa, el cual recibe
+  *el cual recibe un evento y el ID del
   *producto del cual se quiere cambiar el status y evalua si product.status === 'ACTIVE' o 'INACTIVE'*/
   updateStatus(event, id) {
     let message;
@@ -153,7 +155,7 @@ export class InventoryComponent implements OnInit {
   /*<i>[ini][]</i>
  *@author [CadenaCristian]
  *@since 23/12/2020
- *Metodo que recibe un evento y un ID del producto especifico, el cual abre el explorador de archivos del pc en el cual se este usando y 
+ *Metodo que recibe un evento y un ID del producto especifico, el cual abre el explorador de archivos del pc en el cual se este usando y
  *permite subir la imagen que se desea cargar a ese producto, este o no este vacia la imagen del producto*/
   onSelectFile(idProduct, event) {
     if (event.target.files && event.target.files[0]) {
@@ -172,7 +174,7 @@ export class InventoryComponent implements OnInit {
           },
             (err) => {
               const type = 'danger';
-              const quote = {title: null, body: err.error.detailMessage};
+              const quote = { title: null, body: err.error.detailMessage };
               this.generalService.showToast(type, quote.title, quote.body);
             });
         };
@@ -180,8 +182,8 @@ export class InventoryComponent implements OnInit {
       }
     }
   }
-}
 
   /*<i>[fin][]</i>
- *@author [CadenaCristian]
- *@since 23/12/2020*/
+  *@author [CadenaCristian]
+  *@since 23/12/2020*/
+}

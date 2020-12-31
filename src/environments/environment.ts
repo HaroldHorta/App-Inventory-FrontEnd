@@ -10,6 +10,7 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://localhost:8282/api'
+  serverUrl: 'http://localhost:8282/api',
+   // serverUrl: 'https://equidog-qa.herokuapp.com/api',
   // production: false,
 };

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NbDialogService, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
 import { ResponseCustomer } from '../../core/models/Response/customer/ResponseCustomer.module';
 import { CustomerService } from '../../core/services/customer.service';
 import { GeneralService } from '../../core/services/general.service';
+import { CreateCustomerPopupComponent } from './create-customer-popup/create-customer-popup.component';
+import { PaginationService } from '../../core/services/pagination.service';
 
 @Component({
   selector: 'ngx-customer',
@@ -19,57 +21,24 @@ export class CustomerComponent {
   position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
   preventDuplicates = false;
   customers: ResponseCustomer[];
+  customerFilter: ResponseCustomer[];
+  originalDataProduct: any;
   hideError = false;
+  searchProduct;
+  mainFilter: any;
+  page: number = 0;
+  changeDetectorRef: ChangeDetectorRef;
 
-  settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      name: {
-        title: 'NOMBRE',
-        type: 'string',
-      },
-      typeDocument: {
-        title: 'TIPO DE DOCUMENTO',
-        type: 'TypeDocument',
-      },
-      nroDocument: {
-        title: 'NUMERO DE DOCUMENTO',
-        type: 'string',
-      },
-      email: {
-        title: 'EMAIL',
-        type: 'string',
-      },
-      address: {
-        title: 'DIRECCIÓN',
-        type: 'string',
-      },
-      phone: {
-        title: 'TELEFONO',
-        type: 'string',
-      },
-    },
-  };
-
-  source: LocalDataSource = new LocalDataSource();
-
-  constructor( private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService) {
+  constructor(private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService,
+    private paginationService: PaginationService,  changeDetectorRef: ChangeDetectorRef) {
+      this.changeDetectorRef = changeDetectorRef;
+    this.paginationService.paginatornumber$.subscribe(data => {
+      this.page = data;
+      this.changeDetectorRef.detectChanges();
+      this.getCustomerList();
+    });
     this.getCustomerList();
+    this.getCustomerFilter();
   }
 
   /*<i>[ini][]</i>
@@ -77,10 +46,9 @@ export class CustomerComponent {
 *@since 26/12/2020
 *Este metodo se encarga de listar los datos, llamando el metodo getCustomers del servicio serviceCustomer*/
   getCustomerList() {
-    this.serviceCustomer.getCustomers().subscribe(
+    this.serviceCustomer.getCustomerPage(this.page).subscribe(
       customers => {
-        this.customers = customers;
-        this.source.load(this.customers);
+        this.customers = customers.customers;
       },
     );
   }
@@ -88,14 +56,23 @@ export class CustomerComponent {
     *@author [CadenaCristian]
     *@since 26/12/2020*/
 
+
+  getCustomerFilter() {
+    this.serviceCustomer.getCustomerPageAll().subscribe(
+      customers => {
+        this.originalDataProduct = customers;
+        this.paginationService.paginationCount(customers);
+
+        this.customerFilter = this.originalDataProduct.customers.slice(0);
+      });
+  }
   /*<i>[ini][]</i>
 *@author [CadenaCristian]
 *@since 26/12/2020
-*Este metodo se encarga de crear nuevos usuarios y funciona evaluando que los campos no vengan vacios para poder ingresar el dato, 
+*Este metodo se encarga de crear nuevos usuarios y funciona evaluando que los campos no vengan vacios para poder ingresar el dato,
 *en tal caso se envia una alerta informando que el campo es obligatorio, tambien pregunta si esta seguro de crear el nuevo usuario
 *que se quiere ingresar*/
   onCreateConfirm(event): void {
-    console.log("Estes event: ", event);
     if (event.newData.description === '') {
       const type = 'danger';
       const quote = { title: null, body: 'El customer no puede ir vacio' };
@@ -171,8 +148,29 @@ export class CustomerComponent {
       }
     }
   }
-}
-
-/*<i>[fin][]</i>
+  /*<i>[fin][]</i>
       *@author [CadenaCristian]
       *@since 26/12/2020*/
+
+  /*<i>[fin][]</i>
+        *@author [CadenaCristian]
+        *@since 26/12/2020*/
+
+  /*<i>[ini][EQUIDOG-6]</i>
+*@author [HaroldHorta]
+*@since 30/12/2020
+*Metodo encargado de desplegar el popup para crear el cliente */
+  openAddProduct() {
+    this.dialog.open(CreateCustomerPopupComponent).onClose.subscribe(() => {
+      this.customers = [];
+      this.getCustomerList();
+    });
+  }
+  /*<i>[fin][]</i>
+      *@author [HaroldHorta]
+      *@since 30/12/2020*/
+}
+
+
+
+
