@@ -17,6 +17,7 @@ export class PaginationService {
 
   paginationCount(cantidad) {
     const numeroPaginas = Math.ceil(cantidad.count / 10);
+    this.pagination = [];
     for (let i = 1; i <= numeroPaginas; i++) {
       this.pagination.push(i);
     }

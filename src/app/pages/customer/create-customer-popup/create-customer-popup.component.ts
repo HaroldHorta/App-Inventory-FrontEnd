@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
+import { ResponseCustomer } from '../../../core/models/Response/customer/ResponseCustomer.module';
 import { CustomerService } from '../../../core/services/customer.service';
 import { GeneralService } from '../../../core/services/general.service';
 
@@ -12,14 +13,28 @@ import { GeneralService } from '../../../core/services/general.service';
 export class CreateCustomerPopupComponent implements OnInit {
 
   checkOutForm: FormGroup;
+  checkOutFormEdit: FormGroup;
   typeDocument = ['CC', 'TI', 'CE', 'PASSPORT'];
   loadingLargeGroup = false;
   disabledUpdate = false;
   nroDocument: string;
+  customerEdit: ResponseCustomer;
+  selectedItemEdit;
 
   constructor(private formBuilder: FormBuilder, protected ref: NbDialogRef<CreateCustomerPopupComponent>
     , private customerService: CustomerService, private generalService: GeneralService) {
+    /* Validacion para el crear del cliente */
     this.checkOutForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      typeDocument: ['', [Validators.required]],
+      nroDocument: ['', [Validators.required]],
+      email: '',
+      address: '',
+      phone: '',
+    });
+
+    /* Validacion para el editar del cliente */
+    this.checkOutFormEdit = this.formBuilder.group({
       name: ['', [Validators.required]],
       typeDocument: ['', [Validators.required]],
       nroDocument: ['', [Validators.required]],
@@ -30,6 +45,12 @@ export class CreateCustomerPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.customerEdit);
+    this.getTypeDocuementList();
+  }
+
+  getTypeDocuementList() {
+    this.selectedItemEdit = this.customerEdit.typeDocument;
   }
 
   cancel() {
