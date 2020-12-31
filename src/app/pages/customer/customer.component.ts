@@ -4,6 +4,7 @@ import { NbDialogService, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrSe
 import { ResponseCustomer } from '../../core/models/Response/customer/ResponseCustomer.module';
 import { CustomerService } from '../../core/services/customer.service';
 import { GeneralService } from '../../core/services/general.service';
+import { CreateCustomerPopupComponent } from './create-customer-popup/create-customer-popup.component';
 
 @Component({
   selector: 'ngx-customer',
@@ -20,69 +21,35 @@ export class CustomerComponent {
   preventDuplicates = false;
   customers: ResponseCustomer[];
   hideError = false;
+  searchProduct;
 
-  settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      name: {
-        title: 'NOMBRE',
-        type: 'string',
-      },
-      typeDocument: {
-        title: 'TIPO DE DOCUMENTO',
-        type: 'TypeDocument',
-      },
-      nroDocument: {
-        title: 'NUMERO DE DOCUMENTO',
-        type: 'string',
-      },
-      email: {
-        title: 'EMAIL',
-        type: 'string',
-      },
-      address: {
-        title: 'DIRECCIÓN',
-        type: 'string',
-      },
-      phone: {
-        title: 'TELEFONO',
-        type: 'string',
-      },
-    },
-  };
-
-  source: LocalDataSource = new LocalDataSource();
-
-  constructor( private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService) {
+  constructor(    private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService) {
     this.getCustomerList();
   }
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo se encarga de listar los datos, llamando el metodo getCustomers del servicio serviceCustomer*/
   getCustomerList() {
     this.serviceCustomer.getCustomers().subscribe(
       customers => {
         this.customers = customers;
-        const data = this.customers;
-        this.source.load(data);
       },
     );
   }
+  /*<i>[fin][]</i>
+    *@author [CadenaCristian]
+    *@since 26/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo se encarga de crear nuevos usuarios y funciona evaluando que los campos no vengan vacios para poder ingresar el dato, 
+*en tal caso se envia una alerta informando que el campo es obligatorio, tambien pregunta si esta seguro de crear el nuevo usuario
+*que se quiere ingresar*/
   onCreateConfirm(event): void {
+    console.log("Estes event: ", event);
     if (event.newData.description === '') {
       const type = 'danger';
       const quote = { title: null, body: 'El customer no puede ir vacio' };
@@ -116,7 +83,15 @@ export class CustomerComponent {
       }
     }
   }
+  /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo se encarga de eliminar el registro que se elija, funciona llamando el metodo delete del serviceCustomer el cual recibe un ID
+*que es un string y prosigue mostrando una ventana de pregunta si esta seguro de eliminar el dato y luego una alerta de confirmacion*/
   onDeleteConfirm(event): void {
     if (window.confirm('¿Seguro de eliminar este registro?')) {
       this.serviceCustomer.delete(event.data.id).subscribe(data => {
@@ -150,4 +125,30 @@ export class CustomerComponent {
       }
     }
   }
+  /*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
+
+/*<i>[fin][]</i>
+      *@author [CadenaCristian]
+      *@since 26/12/2020*/
+
+  /*<i>[ini][EQUIDOG-6]</i>
+*@author [HaroldHorta]
+*@since 30/12/2020
+*Metodo encargado de desplegar el popup para crear el cliente */
+      openAddProduct() {
+        this.dialog.open(CreateCustomerPopupComponent).onClose.subscribe(() => {
+          this.customers = [];
+          this.getCustomerList();
+        });
+      }
+  /*<i>[fin][]</i>
+      *@author [HaroldHorta]
+      *@since 30/12/2020*/
 }
+
+
+
+
+     

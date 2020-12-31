@@ -24,18 +24,36 @@ export class CashRegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /*<i>[ini][]</i>
+ *@author [CadenaCristian]
+ *@since 26/12/2020
+ *Este metodo sirve para mostrar la vista de hideBase y ocultar las vistas de hideArqueo y hideHistory*/
   hiddenBase() {
     this.hideBase = !this.hideBase;
     this.hideArqueo = false;
     this.hideHistory = false;
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 26/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo sirve para mostrar la vista de hideArqueo y ocultar las vistas de hideBase y hideHistory*/
   hiddenArqueo() {
     this.hideBase = false;
     this.hideHistory = false;
     this.hideArqueo = !this.hideArqueo;
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 26/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo sirve para mostrar la vista de hideHistory y ocultar las vistas de hideArqueo y hideBase*/
   hiddenHistory() {
     this.hideBase = false;
     this.hideArqueo = false;
@@ -43,3 +61,7 @@ export class CashRegisterComponent implements OnInit {
   }
 
 }
+
+/*<i>[fin][]</i>
+ *@author [CadenaCristian]
+ *@since 26/12/2020*/

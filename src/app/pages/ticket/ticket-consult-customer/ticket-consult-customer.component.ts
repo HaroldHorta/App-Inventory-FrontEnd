@@ -28,20 +28,24 @@ export class TicketConsultCustomerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  findByNroDocument(nroDocument) {
-    this.ticketService.getTicketByNroDocument(nroDocument.nroDocument).subscribe(data => {
-      this.hideNotTicket = false;
-      this.hideTicket = true;
+  /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020
+  *Este metodo se encarga de consultar los ticket relacionados al numero de identidad que se escriba y en el caso de que no exista, muestra un 
+  *anuncio de que no se encontro ningun registro*/
+findByNroDocument(nroDocument) {
+  this.ticketService.getTicketByNroDocument(nroDocument.nroDocument).subscribe(data => {
+  this.hideNotTicket = false;
+  this.hideTicket = true;
 
-      this.ticket = data;
-    },
-      (err) => {
-
-        this.hideNotTicket = true;
-        this.hideTicket = false;
-
-
-      });
+  this.ticket = data;
+  },
+  (err) => {
+      this.hideNotTicket = true;
+      this.hideTicket = false;
+    });
   }
-
 }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/

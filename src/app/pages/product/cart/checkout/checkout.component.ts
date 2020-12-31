@@ -66,6 +66,11 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo se encarga de comparar el numero de documento escrito en el input con alguno de la base de datos, para asi poder mostrar
+*los datos correspondientes a ese numero*/
   findByNroDocument(nroDocument) {
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
@@ -82,13 +87,27 @@ export class CheckoutComponent implements OnInit {
     );
 
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo que se encarga de abrir un pop up para agregar un nuevo cliente*/
   openAddCustomer() {
     this.dialog.open(CreateCustomerPopupComponent);
   }
+  /*<i>[fin][]</i>
+     *@author [CadenaCristian]
+     *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo se encarga de generar el ticket con los datos y tipo de pago de los productos seleccionados en el carrito de compra*/
   generarTicket(ticket) {
-
+    
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
@@ -96,7 +115,7 @@ export class CheckoutComponent implements OnInit {
     data.push({
       id: this.idTicket, customerId: ticket.customerId, order: ticket.order,
       paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? 0 : ticket.creditCapital,
-      creditPaymentType : ticket.creditPaymentType === '' ? 'CASH' : ticket.creditPaymentType,
+      creditPaymentType: ticket.creditPaymentType === '' ? 'CASH' : ticket.creditPaymentType,
     });
 
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
@@ -113,14 +132,28 @@ export class CheckoutComponent implements OnInit {
         this.generalService.showToast(type, quote.title, quote.body);
       });
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
+  /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020
+  *Metodo se encarga de generar el ticket con los datos y tipo de pago de los productos seleccionados en el carrito de compra*/
   public changedValueCredit(): void {
     const credit = {
       fieldName: this.credit,
     };
     // this.formGroup.patchValue(newVal);
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
+     /*<i>[ini][]</i>
+  *@author [CadenaCristian]
+  *@since 27/12/2020
+  *Metodo se encarga de decidir si el producto esta pago o aun queda algo por pagar como un credito*/
   public changedValuePayment(): void {
 
     const newVal = {
@@ -135,6 +168,9 @@ export class CheckoutComponent implements OnInit {
     }
     // this.formGroup.patchValue(newVal);
   }
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 27/12/2020*/
 
   public changedValuePaymentCredit(): void {
 
