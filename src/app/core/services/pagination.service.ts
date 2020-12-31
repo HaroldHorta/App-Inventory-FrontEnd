@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaginationService {
 
@@ -17,7 +17,7 @@ export class PaginationService {
 
   paginationCount(cantidad) {
     const numeroPaginas = Math.ceil(cantidad.count / 10);
-    for (var i = 1; i <= numeroPaginas; i++) {
+    for (let i = 1; i <= numeroPaginas; i++) {
       this.pagination.push(i);
     }
     this.paginatorAddedSource.next(this.pagination);

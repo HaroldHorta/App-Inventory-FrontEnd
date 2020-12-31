@@ -23,9 +23,9 @@ export class CreateCustomerPopupComponent implements OnInit {
       name: ['', [Validators.required]],
       typeDocument: ['', [Validators.required]],
       nroDocument: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: '',
       address: '',
-      phone: ['', [Validators.required]],
+      phone: '',
     });
   }
 
@@ -62,8 +62,8 @@ export class CreateCustomerPopupComponent implements OnInit {
     );
 
   }
-}
-
-/*<i>[fin][]</i>
+  /*<i>[fin][]</i>
      *@author [CadenaCristian]
      *@since 27/12/2020*/
+}
+

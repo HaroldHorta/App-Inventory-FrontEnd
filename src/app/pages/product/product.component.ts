@@ -35,14 +35,14 @@ export class ProductComponent implements OnInit {
     { name: 'Precio (high to low)', value: 'priceDes' },
   ];
 
-  constructor(private serviceProduct: ProductService, private paginationService: PaginationService, changeDetectorRef: ChangeDetectorRef ) {
+  constructor(private serviceProduct: ProductService, private paginationService: PaginationService, changeDetectorRef: ChangeDetectorRef) {
     this.changeDetectorRef = changeDetectorRef;
-   }
+  }
 
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.paginationService.paginatornumber$.subscribe(data => {
-      this.page = data;     
+      this.page = data;
       this.changeDetectorRef.detectChanges();
       this.getProductsList();
     });
@@ -55,10 +55,9 @@ export class ProductComponent implements OnInit {
   *@since 27/12/2020
   *Metodo para llamar la lista de productos, con un listado de maximo 10 por pagina*/
   getProductsList() {
-    console.log("component product", this.page)
-    this.serviceProduct.getProductsFilters(this.page).subscribe(async product => {      
+    this.serviceProduct.getProductsFilters(this.page).subscribe(async product => {
       this.products = product.products;
-    //  this.paginationService.paginationCount(product);
+      //  this.paginationService.paginationCount(product);
 
     },
     );
@@ -74,8 +73,8 @@ export class ProductComponent implements OnInit {
   getProductFilter() {
     this.serviceProduct.getProductsFilter().subscribe(async data => {
       this.originalDataProduct = data;
-    //  this.pagination = new Array(Math.ceil(data.count / 10));
-    this.paginationService.paginationCount(data);
+      //  this.pagination = new Array(Math.ceil(data.count / 10));
+      this.paginationService.paginationCount(data);
       this.mainFilter = {
         search: '',
       };
@@ -170,7 +169,7 @@ export class ProductComponent implements OnInit {
     });
     this.currentSorting = criteria;
   }
+      /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 28/12/2020*/
 }
-    /*<i>[fin][]</i>
- *@author [CadenaCristian]
- *@since 28/12/2020*/
