@@ -20,7 +20,7 @@ export class CategoryComponent {
     position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
     preventDuplicates = false;
     categories: ResponseCategory[];
-    errorMessage = '';
+    searchProduct;
 
     settings = {
         add: {
@@ -39,9 +39,12 @@ export class CategoryComponent {
             deleteButtonContent: '<i class="nb-trash"></i>',
             confirmDelete: true,
         },
+        filter: {
+            type: 'Buscar',
+        },
         columns: {
             description: {
-                title: 'description',
+                title: 'Descripción',
                 type: 'string',
             },
         },
@@ -71,6 +74,18 @@ export class CategoryComponent {
       *@since 26/12/2020*/
 
 
+    //   open3() {
+    //     this.dialogService.open(DialogNamePromptComponent)
+    //       .onClose.subscribe(name => name && this.names.push(name));
+    //   }
+    // cancel() {
+    //     this.ref.close();
+    //   }
+    
+    //   submit(name) {
+    //     this.ref.close(name);
+    //   }
+
     /*<i>[ini][]</i>
 *@author [CadenaCristian]
 *@since 26/12/2020
@@ -90,6 +105,7 @@ metodo se usa para agregar una categoria*/
                     const type = 'success';
                     const quote = { title: null, body: 'Categoria agregada correctamente' };
                     this.toastrService.showToast(type, quote.title, quote.body);
+                    this.getCategoryList();
                 },
                     (err) => {
                         const type = 'danger';
@@ -111,13 +127,14 @@ metodo se usa para agregar una categoria*/
 *@since 26/12/2020
 *Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados, este metodo 
 se usa para eliminar una categoria existente*/
-    onDeleteConfirm(event): void {
+    onDeleteConfirm(event, id): void {
+        console.log("si entro: ", id)
         if (window.confirm('Are you sure you want to delete?')) {
-            this.serviceCategory.delete(event.data.id).subscribe(data => {
+            this.serviceCategory.delete(id).subscribe(data => {
                 const type = 'success';
                 const quote = { title: null, body: 'Categoria eliminada correctamente' };
                 this.toastrService.showToast(type, quote.title, quote.body);
-                event.confirm.resolve();
+                this.getCategoryList();
             },
                 (err) => {
                     const type = 'danger';
