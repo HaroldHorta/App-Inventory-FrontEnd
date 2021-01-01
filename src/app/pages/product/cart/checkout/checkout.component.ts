@@ -107,7 +107,7 @@ export class CheckoutComponent implements OnInit {
 *@since 27/12/2020
 *Metodo se encarga de generar el ticket con los datos y tipo de pago de los productos seleccionados en el carrito de compra*/
   generarTicket(ticket) {
-    
+
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
     const data = [];
@@ -150,10 +150,10 @@ export class CheckoutComponent implements OnInit {
    *@author [CadenaCristian]
    *@since 27/12/2020*/
 
-     /*<i>[ini][]</i>
-  *@author [CadenaCristian]
-  *@since 27/12/2020
-  *Metodo se encarga de decidir si el producto esta pago o aun queda algo por pagar como un credito*/
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 27/12/2020
+*Metodo se encarga de decidir si el producto esta pago o aun queda algo por pagar como un credito*/
   public changedValuePayment(): void {
 
     const newVal = {

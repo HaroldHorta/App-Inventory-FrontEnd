@@ -82,7 +82,6 @@ export class CustomerComponent {
 *Este metodo se encarga de eliminar el registro que se elija, funciona llamando el metodo delete del serviceCustomer el cual recibe un ID
 *que es un string y prosigue mostrando una ventana de pregunta si esta seguro de eliminar el dato y luego una alerta de confirmacion*/
   onDeleteConfirm(id): void {
-    console.log(id)
     if (window.confirm('¿Seguro de eliminar este registro?')) {
       this.serviceCustomer.delete(id).subscribe(data => {
         const type = 'success';
@@ -121,7 +120,10 @@ export class CustomerComponent {
  *@since 31/12/2020
  *Medoto que abre el popup para editar el cliente */
   openModalEdit(item) {
-    this.dialog.open(CreateCustomerPopupComponent, { context: { customerEdit: item } });
+    this.dialog.open(CreateCustomerPopupComponent, { context: { customerEdit: item } }).onClose.subscribe(() => {
+      this.customers = [];
+      this.getCustomerList();
+    });
   }
   /*<i>[fin][EQUIDOG-6]</i>
        *@author [HaroldHorta]

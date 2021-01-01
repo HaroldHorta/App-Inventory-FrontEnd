@@ -45,8 +45,8 @@ export class CustomerService {
     return this.http.post<RequestCustomer>(endpoint.Customer, customer, { headers: this.httpHeaders });
   }
 
-  update(customer: RequestUpdateCustomer): Observable<RequestUpdateCustomer> {
-    return this.http.put<RequestUpdateCustomer>(endpoint.Customer, customer, { headers: this.httpHeaders });
+  update(id, customer): Observable<RequestUpdateCustomer> {
+    return this.http.put<RequestUpdateCustomer>(`${endpoint.Customer}/update/${id}`, customer, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateCustomer> {
