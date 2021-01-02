@@ -3,14 +3,28 @@
 
 }
 
+.puntos-suspensivos {
+  width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+span {
+  width: 60px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .item {
-  display        : flex;
-  text-align     : center;
+  display: flex;
+  text-align: center;
   justify-content: center;
-  align-items    : center;
+  align-items: center;
 
   >* {
-    flex: 1;
+    flex: auto;
   }
 
   &:first-child {
@@ -28,14 +42,14 @@
 
 .active {
   background-color: #38d693;
-  color           : white;
-  border-radius   : 5px;
+  color: white;
+  border-radius: 5px;
 }
 
 .inactive {
   background-color: #fa7477;
-  color           : white;
-  border-radius   : 5px;
+  color: white;
+  border-radius: 5px;
 }
 
 .space-top {

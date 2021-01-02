@@ -14,16 +14,10 @@ import { PaginationService } from '../../core/services/pagination.service';
 })
 export class CustomerComponent {
 
-  index = 1;
-  destroyByClick = true;
-  duration = 2000;
-  hasIcon = true;
-  position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
-  preventDuplicates = false;
   customers: ResponseCustomer[];
   customerFilter: ResponseCustomer[];
   originalDataProduct: any;
-  hideError = false;
+  hideFilters = false;
   searchCustomer;
   mainFilter: any;
   page: number = 0;
@@ -128,6 +122,18 @@ export class CustomerComponent {
   /*<i>[fin][EQUIDOG-6]</i>
        *@author [HaroldHorta]
        *@since 31/12/2020*/
+
+
+  onSelectChange(event) {
+
+    if (event === '') {
+      this.hideFilters = false;
+    }
+    if (event !== '') {
+      this.hideFilters = true;
+    }
+
+  }
 }
 
 
