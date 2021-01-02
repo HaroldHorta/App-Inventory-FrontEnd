@@ -13,7 +13,7 @@ import { PopDetailsExpensesComponent } from './pop-details-expenses/pop-details-
 export class ExpensesComponent implements OnInit {
 
   expenses: ResponseExpenses[];
-  searchProduct;
+  searchExpenses;
 
   constructor(private dialog: NbDialogService, private expensesService: ExpensesService) { }
 

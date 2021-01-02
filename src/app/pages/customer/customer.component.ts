@@ -24,7 +24,7 @@ export class CustomerComponent {
   customerFilter: ResponseCustomer[];
   originalDataProduct: any;
   hideError = false;
-  searchProduct;
+  searchCustomer;
   mainFilter: any;
   page: number = 0;
   changeDetectorRef: ChangeDetectorRef;

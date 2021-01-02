@@ -3,7 +3,7 @@
 
         <div class="row col-md-12">
             <div class="col-md-6">
-                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct"
+                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer"
                     autocomplete="on" placeholder="Buscar">
             </div>
             <div class="col-md-6">
@@ -30,7 +30,7 @@
                 <span>Acciones</span>
             </nb-card-header>
             <nb-list>
-                <nb-list-item class="item" *ngFor="let customer of customers">
+                <nb-list-item class="item" *ngFor="let customer of customers | filter:searchCustomer">
                     <span>{{ customer?.name }}</span>
                     <span>{{customer?.typeDocument}}</span>
                     <span>{{ customer?.nroDocument }}</span>
