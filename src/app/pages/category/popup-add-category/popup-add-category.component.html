@@ -1,0 +1,11 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Enter your name</nb-card-header>
+    <nb-card-body>
+        <!-- <p *ngIf="!checkOutForm.get('categoria').errors && !checkOutForm.get('categoria')" style="color: red;">* Campo obligatorio *</p> -->
+        <input nbInput type="text" formControlName="description" placeholder="Nombre categoria" onkeypress="return event.charCode >= 65 && event.charCode <= 122">
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="cancel col-md-6" nbButton status="danger" (click)="cancel()">Cancel</button>
+        <button class="col-md-6" nbButton status="success" (click)="onCreateConfirm(checkOutForm.value)">Submit</button>
+    </nb-card-footer>
+</nb-card>

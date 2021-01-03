@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
+import { NbDialogService, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ResponseCategory } from '../../core/models/Response/category/ResponseCategory.module';
 import { CategoryService } from '../../core/services/category.service';
 import { GeneralService } from '../../core/services/general.service';
+import { PopupAddCategoryComponent } from './popup-add-category/popup-add-category.component';
 
 
 @Component({
@@ -52,7 +53,8 @@ export class CategoryComponent {
 
     source: LocalDataSource = new LocalDataSource();
 
-    constructor(private router: Router, private serviceCategory: CategoryService, private toastrService: GeneralService) {
+    constructor(private router: Router, private serviceCategory: CategoryService,
+        private toastrService: GeneralService,private dialogService: NbDialogService) {
         this.getCategoryList();
     }
 
@@ -73,18 +75,11 @@ export class CategoryComponent {
       *@author [CadenaCristian]
       *@since 26/12/2020*/
 
+      open3() {
+        this.dialogService.open(PopupAddCategoryComponent)
+          .onClose.subscribe();
+      }
 
-    //   open3() {
-    //     this.dialogService.open(DialogNamePromptComponent)
-    //       .onClose.subscribe(name => name && this.names.push(name));
-    //   }
-    // cancel() {
-    //     this.ref.close();
-    //   }
-    
-    //   submit(name) {
-    //     this.ref.close(name);
-    //   }
 
     /*<i>[ini][]</i>
 *@author [CadenaCristian]

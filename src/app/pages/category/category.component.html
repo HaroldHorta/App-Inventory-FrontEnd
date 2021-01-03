@@ -13,7 +13,9 @@
         <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="off" placeholder="Buscar">
     </div>
     <div class="col-md-6">
-        <button class="col-md-12 btn btn-outline-primary form-group" type="button">Agregar producto</button>
+        <button class="col-md-12 btn btn-outline-primary form-group" type="button" nbTooltip="Agregar categoria" nbTooltipStatus="primary" (click)="open3()">
+            Agregar producto <nb-icon class="changeMouse" status="'primary'" icon="plus-circle-outline"></nb-icon>
+        </button>
     </div>
 </div>
 <div class="row">
@@ -30,15 +32,11 @@
                     <span class="col-md-6 center">{{cate.description.toUpperCase()}}</span>
                     <span class="col-md-6 center">
                         <div class="row">
-                            <div class="col-md-4">
-                                <nb-icon class="changeMouse" status="primary" nbTooltip="Agregar categoria"
-                                    nbTooltipStatus="primary" icon="plus-circle-outline"></nb-icon>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <nb-icon class="changeMouse" status="warning" nbTooltip="Editar"
                                     nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
                                     nbTooltipStatus="danger" icon="trash-2-outline"
                                     (click)="onDeleteConfirm($event, cate.id)"></nb-icon>
