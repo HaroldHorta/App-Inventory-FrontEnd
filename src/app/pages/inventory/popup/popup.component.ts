@@ -60,8 +60,9 @@ export class PopupComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 24/12/2020
-  *Este metodo permite obtener el campo que ya fue seleccionado previamente en el producto existen, este metodo se usa al momento de actualizar
-  un producto y funciona comparando el dato que recibe la variable selectedItemEdit y listando las categorias que sean diferentes a la 
+  *Este metodo permite obtener el campo que ya fue seleccionado previamente en el producto
+  existen, este metodo se usa al momento de actualizar
+  un producto y funciona comparando el dato que recibe la variable selectedItemEdit y listando las categorias que sean diferentes a la
   que viene en selectedItemEdit, tambien es inicializado en el ngOnInit ya que al momento de agregar necesitamos que las categorias esten
   disponibles al cargar ese pop up, por eso es lo primero al cargarse*/
   getCategoryList() {
@@ -81,17 +82,17 @@ export class PopupComponent implements OnInit {
     *@author [CadenaCristian]
     *@since 24/12/2020*/
 
-/*<i>[ini][]</i>
- *@author [CadenaCristian]
- *@since 25/12/2020
- *Metodo encargado de listar los productos existentes*/
-    getProductList() {
-      this.serviceProduct.getProducts().subscribe(
-        product => {
-          this.products = product;
-        },
-      );
-    }
+  /*<i>[ini][]</i>
+   *@author [CadenaCristian]
+   *@since 25/12/2020
+   *Metodo encargado de listar los productos existentes*/
+  getProductList() {
+    this.serviceProduct.getProducts().subscribe(
+      product => {
+        this.products = product;
+      },
+    );
+  }
   /*<i>[fin][]</i>
     *@author [CadenaCristian]
     *@since 24/12/2020*/
@@ -99,7 +100,7 @@ export class PopupComponent implements OnInit {
   /*<i>[ini][]</i>
  *@author [CadenaCristian]
  *@since 25/12/2020
- *Este metodo sirve para cerrar el POp up de agregar o cualquier otro pop up donde sea llamado, funciona llamando en el constructos a 
+ *Este metodo sirve para cerrar el POp up de agregar o cualquier otro pop up donde sea llamado, funciona llamando en el constructos a
  NbDialogRef el cual tiene un metodo especial llamado close, el cual cumple con la funcion ya descrita*/
   cancel() {
     this.ref.close();
@@ -111,7 +112,8 @@ export class PopupComponent implements OnInit {
   /*<i>[ini][]</i>
  *@author [CadenaCristian]
  *@since 25/12/2020
- *Este metodo se usa para poder seleccionar una foto desde el explorador de archivos, este metodo recibe un evento, el cual obtiene el nombre
+ *Este metodo se usa para poder seleccionar una foto desde el explorador de archivos,
+  *este metodo recibe un evento, el cual obtiene el nombre
  de la imagen que se quiere agregar, en la ruta event.target.files*/
   urls = [];
   onSelectFile(event) {
@@ -132,7 +134,7 @@ export class PopupComponent implements OnInit {
   /*<i>[ini][]</i>
 *@author [CadenaCristian]
 *@since 25/12/2020
-*Este metodo recibe un checkOutForm que contiene todos los values de cada uno de los input que se usaron en el formulario y se 
+*Este metodo recibe un checkOutForm que contiene todos los values de cada uno de los input que se usaron en el formulario y se
 debe realizar un push a una constante para poder darle la forma que recibe el backend en forma de JSON*/
   addProduct(product) {
     product.photo = this.urls[0];
@@ -150,9 +152,9 @@ debe realizar un push a una constante para poder darle la forma que recibe el ba
         const quote = { title: null, body: 'Producto agregado correctamente' };
         this.generalService.showToast(type, quote.title, quote.body);
       },
-      (err) =>{
+      (err) => {
         const type = 'danger';
-        const quote = {title: null, body: err.error.detailMessage};
+        const quote = { title: null, body: err.error.detailMessage };
         this.generalService.showToast(type, quote.body, quote.title);
         this.ref.close(product);
       });
@@ -193,8 +195,8 @@ el cual trae los valores de los input y permite mostrarlos*/
       },
     );
   }
+  /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 25/12/2020*/
 }
 
-  /*<i>[fin][]</i>
-  *@author [CadenaCristian]
-  *@since 25/12/2020*/

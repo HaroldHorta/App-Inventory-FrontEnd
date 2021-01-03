@@ -1,47 +1,64 @@
 <div class="row">
-    <div class="col-md-12">
+  <div class="col-md-12">
 
-        <div class="row col-md-12">
-            <div class="col-md-6">
-                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="on" placeholder="Buscar">
-            </div>
-            <div class="col-md-6">
-                <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="openAddProduct()">Agregar
-                    Cliente</button>
-            </div>
-        </div>
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer" autocomplete="on"
+          placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
+      </div>
 
-        <nb-alert outline="danger" *ngIf="hideError" class="typeDocument">Valores Tipo de Documento<br>
-            CC = Cedula de Ciudadania <br>
-            TI = Tarjeta de Identidad <br>
-            CE = Cedula de Extranjeria <br>
-            PASSPORT = Pasaporte
-        </nb-alert>
-        <nb-card size="medium">
-            <nb-card-header class="item">
-                <span>Nombre</span>
-                <span>Tipo de documento</span>
-                <span>Numero de documento</span>
-                <span>Email</span>
-                <span>Dirección</span>
-                <span>Telefono</span>
-                <span>Estado</span>
-                <span>Acciones</span>
-            </nb-card-header>
-            <nb-list>
-                <nb-list-item class="item" *ngFor="let customer of customers">
-                    <span>{{ customer?.name }}</span>
-                    <span>{{customer?.typeDocument}}</span>
-                    <span>{{ customer?.nroDocument }}</span>
-                    <span>{{customer.email}}</span>
-                    <span>{{customer?.address}}</span>
-                    <span>{{customer?.phone}}</span>
-                    <span
-                        [ngClass]="{active: customer.status === 'ACTIVO', inactive: customer.status !== 'ACTIVO'}">{{customer?.status}}</span>
-                </nb-list-item>
-            </nb-list>
-        </nb-card>
+      <div class="col-md-6">
+        <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="openAddProduct()">Agregar
+          Cliente</button>
+      </div>
     </div>
+    <nb-card size="medium">
+      <nb-card-header class="item">
+        <span>Nombre</span>
+        <span>Tipo de documento</span>
+        <span>Numero de documento</span>
+        <span>Email</span>
+        <span>Dirección</span>
+        <span>Telefono</span>
+        <span>Acciones</span>
+      </nb-card-header>
+      <nb-list *ngIf="!hideFilters">
+        <nb-list-item class="item" *ngFor="let customer of customers | filter:searchCustomer">
+          <span>{{ customer?.name }}</span>
+          <span>{{customer?.typeDocument}}</span>
+          <span>{{ customer?.nroDocument }}</span>
+          <span>{{customer.email}}</span>
+          <span>{{customer?.address}}</span>
+          <span>{{customer?.phone}}</span>
+          <span>
+            <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
+              nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
+            <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
+              nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
+          </span>
+        </nb-list-item>
+      </nb-list>
+      <nb-list *ngIf="hideFilters">
+
+        <nb-list-item class="item" *ngFor="let customer of customerFilter | filter:searchCustomer">
+          <span>{{ customer?.name }}</span>
+          <span>{{customer?.typeDocument}}</span>
+          <span>{{ customer?.nroDocument }}</span>
+          <span>{{customer.email}}</span>
+          <span>{{customer?.address}}</span>
+          <span>{{customer?.phone}}</span>
+          <span>
+            <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
+              nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
+            <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
+              nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
+          </span>
+        </nb-list-item>
+
+      </nb-list>
+
+    </nb-card>
+  </div>
 </div>
 
 <ngx-paginator></ngx-paginator>
