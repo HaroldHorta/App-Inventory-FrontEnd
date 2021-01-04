@@ -62,7 +62,6 @@ export class CustomerComponent {
       customers => {
         this.originalDataProduct = customers;
         this.paginationService.paginationCount(customers);
-
         this.customerFilter = this.originalDataProduct.customers.slice(0);
       });
   }

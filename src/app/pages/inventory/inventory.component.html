@@ -1,51 +1,90 @@
-<div class="container">
-    <div class="row col-md-12">
+<div class="row">
+    <div class="col-md-12">
         <div class="row col-md-12">
             <div class="col-md-6">
-                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="off" placeholder="Buscar">
+                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct"
+                    autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
             </div>
             <div class="col-md-6">
                 <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="open()">Agregar
                     producto</button>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="center">Ver más</th>
-                    <th class="center">Foto</th>
-                    <th class="center">Nombre</th>
-                    <th class="center">Descripción</th>
-                    <th class="center">Categoria</th>
-                    <th class="center">Unidades</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of productList | filter:searchProduct | paginate: { itemsPerPage: 7, currentPage: cp }">
-                    <td class="center">
-                        <nb-icon class="changeMouse" nbTooltip="Ver más" nbTooltipStatus="primary" status="primary" icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
-                    </td>
-                    <td class="center">
+        <nb-card size="medium">
+            <nb-card-header class="item">
+                <span>Ver más</span>
+                <span>Foto</span>
+                <span>Nombre</span>
+                <span>Descripción</span>
+                <span>Categoria</span>
+                <span>Unidades</span>
+                <span>Acciones</span>
+            </nb-card-header>
+
+            <nb-list *ngIf="!hideFilters"> 
+                <nb-list-item class="item" *ngFor="let product of productList">
+                    <span>
+                        <nb-icon class="changeMouse" nbTooltip="Ver más" nbTooltipStatus="primary" status="primary"
+                            icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
+                    </span>
+                    <span>
                         <label>
-                            <img for="boton-archivo" class="pru changeMouse" nbTooltip="Actualizar imagen" nbTooltipStatus="warning" src="{{product?.photo}}" />
+                            <img for="boton-archivo" class="pru changeMouse" nbTooltip="Actualizar imagen"
+                                nbTooltipStatus="warning" src="{{product?.photo}}" />
                             <input type='file' id="boton-archivo" class="imagen-para-archivo"
                                 (change)="onSelectFile(product.id , $event)">
                         </label>
-                    </td>
-                    <td class="center">{{product?.name}}</td>
-                    <td class="center">{{product?.description}}</td>
-                    <td class="center" *ngFor="let cat of product.category">{{cat?.description}}</td>
-                    <td class="center changeMouse" nbTooltip="Actualizar unidades" nbTooltipStatus="warning" (click)="unitModal(product)">{{product?.unit}}</td>
-                    <td>
-                        <nb-icon class="changeMouse" nbTooltip="Editar producto" nbTooltipStatus="warning" status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
-                        <nb-checkbox class="checkBox" [nbTooltip]="product.status === 'ACTIVO' ? 'Desactivar' : 'Activar'" [nbTooltipStatus]="product.status === 'ACTIVO' ? 'danger' : 'primary'" [status]="product.status === 'ACTIVO' ? 'primary' : 'danger'" [checked]="product.status === 'ACTIVO'"
-                            (checkedChange)="updateStatus($event,product.id)"></nb-checkbox>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </span>
+                    <span>{{product?.name}}</span>
+                    <span>{{product?.description}}</span>
+                    <span *ngFor="let cat of product.category">{{cat?.description}}</span>
+                    <span class="center changeMouse" nbTooltip="Actualizar unidades" nbTooltipStatus="warning"
+                        (click)="unitModal(product)">{{product?.unit}}</span>
+                    <span>
+                        <nb-icon class="changeMouse" nbTooltip="Editar producto" nbTooltipStatus="warning"
+                            status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
+                        <nb-checkbox class="checkBox"
+                            [nbTooltip]="product.status === 'ACTIVO' ? 'Desactivar' : 'Activar'"
+                            [nbTooltipStatus]="product.status === 'ACTIVO' ? 'danger' : 'primary'"
+                            [status]="product.status === 'ACTIVO' ? 'primary' : 'danger'"
+                            [checked]="product.status === 'ACTIVO'" (checkedChange)="updateStatus($event,product.id)">
+                        </nb-checkbox>
+                    </span>
+                </nb-list-item>
+            </nb-list>
+            <nb-list *ngIf="hideFilters">
+                <nb-list-item class="item" *ngFor="let product of productListFilter | filter:searchProduct">
+                    <span>
+                        <nb-icon class="changeMouse" nbTooltip="Ver más" nbTooltipStatus="primary" status="primary"
+                            icon="eye-outline" (click)="openModalDetails(product.id)"></nb-icon>
+                    </span>
+                    <span>
+                        <label>
+                            <img for="boton-archivo" class="pru changeMouse" nbTooltip="Actualizar imagen"
+                                nbTooltipStatus="warning" src="{{product?.photo}}" />
+                            <input type='file' id="boton-archivo" class="imagen-para-archivo"
+                                (change)="onSelectFile(product.id , $event)">
+                        </label>
+                    </span>
+                    <span>{{product?.name}}</span>
+                    <span>{{product?.description}}</span>
+                    <span *ngFor="let cat of product.category">{{cat?.description}}</span>
+                    <span class="center changeMouse" nbTooltip="Actualizar unidades" nbTooltipStatus="warning"
+                        (click)="unitModal(product)">{{product?.unit}}</span>
+                    <span>
+                        <nb-icon class="changeMouse" nbTooltip="Editar producto" nbTooltipStatus="warning"
+                            status="warning" (click)="openModal(product)" icon="edit-2-outline"></nb-icon>
+                        <nb-checkbox class="checkBox"
+                            [nbTooltip]="product.status === 'ACTIVO' ? 'Desactivar' : 'Activar'"
+                            [nbTooltipStatus]="product.status === 'ACTIVO' ? 'danger' : 'primary'"
+                            [status]="product.status === 'ACTIVO' ? 'primary' : 'danger'"
+                            [checked]="product.status === 'ACTIVO'" (checkedChange)="updateStatus($event,product.id)">
+                        </nb-checkbox>
+                    </span>
+                </nb-list-item>
+            </nb-list>
+        </nb-card>
     </div>
 </div>
 
-<pagination-controls (pageChange)="cp = $event"></pagination-controls>
+<ngx-paginator></ngx-paginator>
