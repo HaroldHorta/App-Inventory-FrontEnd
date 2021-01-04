@@ -19,10 +19,15 @@ export class InventoryService {
     return this.http.patch<RequestUpdateUnit>(`${endpoint.Units}/unit`, requestUpdateUnit, { headers: this.httpHeaders });
   }
 
-  getProductsInventory(): Observable<ResponseProductPagination> {
+  getProductsInventoryFilters(): Observable<ResponseProductPagination> {
     return this.http.get(`${endpoint.Units}/allProducts`).pipe(
       map(response => response as ResponseProductPagination),
     );
   }
 
+  getProductsInventoryPage(page): Observable<ResponseProductPagination> {
+    return this.http.get(`${endpoint.Units}/page/?page=${page}`).pipe(
+      map(response => response as ResponseProductPagination),
+    );
+  }
 }

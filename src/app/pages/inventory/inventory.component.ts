@@ -10,6 +10,7 @@ import { PopDetailsComponent } from './pop-details/pop-details.component';
 import { PopupComponent } from './popup/popup.component';
 import { PopUpdateUnitsComponent } from './pop-update-units/pop-update-units.component';
 import { InventoryService } from '../../core/services/inventory.service';
+import { PaginationService } from '../../core/services/pagination.service';
 
 @Component({
   selector: 'ngx-inventory',
@@ -21,22 +22,33 @@ export class InventoryComponent implements OnInit {
 
   product: ResponseProduct[];
   changeDetectorRef: ChangeDetectorRef;
-  hideListProduct = false;
   urls = [];
   productList = [];
+  productListFilter = [];
   searchProduct;
-  cp: number = 1;
   total: number = 0;
+  hideFilters = false;
+  page: number = 0;
+
+
 
   constructor(private serviceProduct: ProductService, private inventoryService: InventoryService, changeDetectorRef: ChangeDetectorRef,
     private generalService: GeneralService,
     private dialog: NbDialogService,
-    private fileUpload: FileUploadService) {
+    private fileUpload: FileUploadService,
+    private paginationService: PaginationService,) {
     this.changeDetectorRef = changeDetectorRef;
+
+    this.paginationService.paginatornumber$.subscribe(data => {
+      this.page = data;
+      this.changeDetectorRef.detectChanges();
+      this.getProductList();
+    });
+    this.getProductList();
+    this.getProductListFilter();
   }
 
   ngOnInit(): void {
-    this.getProductList();
   }
 
   /*<i>[ini][]</i>
@@ -45,23 +57,35 @@ export class InventoryComponent implements OnInit {
   *Metodo que permite obtener y listar todos los datos correspondientes a los productos, por medio de un service getProducts que es
   *invocado desde el serviceProduct */
   getProductList() {
-    this.inventoryService.getProductsInventory().subscribe(
+    this.inventoryService.getProductsInventoryPage(this.page).subscribe(
       product => {
+        this.productList = [];
         this.product = product.products;
         this.total = product.products.length;
         this.product.forEach(p => {
           this.productList.push(p);
         });
-        if (this.product.length === 0) {
-          this.hideListProduct = true;
-        }
-        this.changeDetectorRef.reattach();
       },
     );
   }
   /*<i>[fin][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020*/
+
+
+  getProductListFilter() {
+    this.inventoryService.getProductsInventoryFilters().subscribe(
+      product => {
+        this.paginationService.paginationCount(product);
+        this.productListFilter = [];
+        this.product = product.products;
+        this.total = product.products.length;
+        this.product.forEach(p => {
+          this.productListFilter.push(p);
+        });
+      },
+    );
+  }
 
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
@@ -187,4 +211,16 @@ export class InventoryComponent implements OnInit {
   /*<i>[fin][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020*/
+
+
+  onSelectChange(event) {
+
+    if (event === '') {
+      this.hideFilters = false;
+    }
+    if (event !== '') {
+      this.hideFilters = true;
+    }
+
+  }
 }
