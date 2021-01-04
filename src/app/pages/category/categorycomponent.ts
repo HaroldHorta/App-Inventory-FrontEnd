@@ -70,6 +70,7 @@ export class CategoryComponent {
     modalAdd() {
         this.dialogService.open(PopupAddCategoryComponent).onClose.subscribe(() => {
             this.getCategoryList();
+            this.getCategoryFilter();
         })
     }
 
