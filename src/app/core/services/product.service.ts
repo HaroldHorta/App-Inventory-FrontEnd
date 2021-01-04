@@ -17,13 +17,6 @@ export class ProductService {
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<ResponseProduct[]> {
-    return this.http.get(endpoint.Product).pipe(
-      map(response => response as ResponseProduct[]),
-    );
-  }
-
-
   getProductsFilter(): Observable<ResponseProductPagination> {
     return this.http.get(`${endpoint.Product}/productsFilter`).pipe(
       map(response => response as ResponseProductPagination),
@@ -32,7 +25,7 @@ export class ProductService {
 
 
   getProductsFilters(page): Observable<ResponseProductPagination> {
-    return this.http.get(`${endpoint.Product}/products/?page=${page}`).pipe(
+    return this.http.get(`${endpoint.Product}/page/?page=${page}`).pipe(
       map(response => response as ResponseProductPagination),
     );
   }

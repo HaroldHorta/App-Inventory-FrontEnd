@@ -9,6 +9,7 @@ import { ProductService } from '../../core/services/product.service';
 import { PopDetailsComponent } from './pop-details/pop-details.component';
 import { PopupComponent } from './popup/popup.component';
 import { PopUpdateUnitsComponent } from './pop-update-units/pop-update-units.component';
+import { InventoryService } from '../../core/services/inventory.service';
 
 @Component({
   selector: 'ngx-inventory',
@@ -27,7 +28,7 @@ export class InventoryComponent implements OnInit {
   cp: number = 1;
   total: number = 0;
 
-  constructor(private serviceProduct: ProductService, changeDetectorRef: ChangeDetectorRef,
+  constructor(private serviceProduct: ProductService, private inventoryService: InventoryService, changeDetectorRef: ChangeDetectorRef,
     private generalService: GeneralService,
     private dialog: NbDialogService,
     private fileUpload: FileUploadService) {
@@ -44,10 +45,10 @@ export class InventoryComponent implements OnInit {
   *Metodo que permite obtener y listar todos los datos correspondientes a los productos, por medio de un service getProducts que es
   *invocado desde el serviceProduct */
   getProductList() {
-    this.serviceProduct.getProducts().subscribe(
+    this.inventoryService.getProductsInventory().subscribe(
       product => {
-        this.product = product;
-        this.total = product.length;
+        this.product = product.products;
+        this.total = product.products.length;
         this.product.forEach(p => {
           this.productList.push(p);
         });
