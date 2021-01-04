@@ -8,8 +8,8 @@
         <input nbInput type="text" formControlName="description" [ngModel]="categoryEdit.description">
     </nb-card-body>
     <nb-card-footer>
-        <button *ngIf="!categoryEdit" class="btn btn-outline-success col-md-6" (click)="onCreateConfirm(checkOutForm.value)">Enviar</button>
-        <button *ngIf="categoryEdit" class="btn btn-outline-warning col-md-6" (click)="onSaveConfirm(categoryEdit.id,checkOutEdit.value)">Actualizar</button>
-        <button class="btn btn-outline-danger col-md-6" (click)="cancel()">Cancel</button>
+        <button *ngIf="!categoryEdit" class="btn btn-outline-success " style="width: 45%;" (click)="onCreateConfirm(checkOutForm.value)">Enviar</button>
+        <button *ngIf="categoryEdit" class="btn btn-outline-warning " style="width: 45%;" (click)="onSaveConfirm(categoryEdit.id,checkOutEdit.value)">Actualizar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cancel</button>
     </nb-card-footer>
 </nb-card>

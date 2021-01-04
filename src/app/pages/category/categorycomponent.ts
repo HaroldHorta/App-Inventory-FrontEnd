@@ -58,6 +58,10 @@ export class CategoryComponent {
       *@author [CadenaCristian]
       *@since 26/12/2020*/
 
+    /*<i>[ini][]</i>
+     *@author [CadenaCristian]
+     *@since 04/01/2021
+     *Metodo que permite listar todos los clientes para el filtro*/
     getCategoryFilter() {
         this.serviceCategory.getCategoryPageAll().subscribe(
             category => {
@@ -66,25 +70,41 @@ export class CategoryComponent {
             }
         )
     }
+    /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 04/01/2021*/
 
+    /*<i>[ini][]</i>
+         *@author [CadenaCristian]
+         *@since 04/01/2021
+         *Metodo que permite abrir el pop up de agregar e ingresar los datos a agregar*/
     modalAdd() {
         this.dialogService.open(PopupAddCategoryComponent).onClose.subscribe(() => {
             this.getCategoryList();
             this.getCategoryFilter();
         })
     }
+    /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 04/01/2021*/
 
+    /*<i>[ini][]</i>
+         *@author [CadenaCristian]
+         *@since 04/01/2021
+         *Metodo que permite abrir el pop up de editar y actualizar los datos*/
     modalEdit(item) {
         this.dialogService.open(PopupAddCategoryComponent, { context: { categoryEdit: item } }).onClose.subscribe(() => {
             this.getCategoryList();
         })
     }
+    /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 04/01/2021*/
 
     /*<i>[ini][]</i>
 *@author [CadenaCristian]
 *@since 26/12/2020
-*Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados, este metodo 
-se usa para eliminar una categoria existente*/
+*Metodo que permite eliminar los registros creados*/
     onDeleteConfirm(event, id): void {
         if (window.confirm('Are you sure you want to delete?')) {
             this.serviceCategory.delete(id).subscribe(data => {
@@ -92,6 +112,7 @@ se usa para eliminar una categoria existente*/
                 const quote = { title: null, body: 'Categoria eliminada correctamente' };
                 this.toastrService.showToast(type, quote.title, quote.body);
                 this.getCategoryList();
+                this.getCategoryFilter();
             },
                 (err) => {
                     const type = 'danger';
