@@ -82,20 +82,6 @@ export class PopupComponent implements OnInit {
     *@author [CadenaCristian]
     *@since 24/12/2020*/
 
-  /*<i>[ini][]</i>
-   *@author [CadenaCristian]
-   *@since 25/12/2020
-   *Metodo encargado de listar los productos existentes*/
-  getProductList() {
-    this.serviceProduct.getProducts().subscribe(
-      product => {
-        this.products = product;
-      },
-    );
-  }
-  /*<i>[fin][]</i>
-    *@author [CadenaCristian]
-    *@since 24/12/2020*/
 
   /*<i>[ini][]</i>
  *@author [CadenaCristian]
