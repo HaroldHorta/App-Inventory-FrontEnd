@@ -11,60 +11,70 @@
     </div>
 </div>
 
-<div *ngIf="!categories">
+<div *ngIf="!connectionInternet">
     <nb-card class="inline-form-card">
-        <nb-card-header>Categorías</nb-card-header>
         <nb-card-body>
-            <h6>No se han encontrado categorias registradas</h6>
+            <h6>Se necesita conexión a internet o el servicio no esta funcionando correctamente </h6>
         </nb-card-body>
     </nb-card>
 </div>
-<div class="row" *ngIf="categories">
-    <div class="col-md-12">
-        <nb-card>
-            <nb-card-header>
-                <div class="row">
-                    <div class="col-md-8 center">Nombre de la categoría</div>
-                    <div class="col-md-4 center">Acciones</div>
-                </div>
-            </nb-card-header>
-            <nb-list *ngIf="!hideFilters">
-                <nb-list-item *ngFor="let cate of categories">
-                    <span class="col-md-8 center">{{cate?.description}}</span>
-                    <span class="col-md-4 center">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"
-                                    nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
-                            </div>
-                            <div class="col-md-6">
-                                <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
-                                    nbTooltipStatus="danger" icon="trash-2-outline"
-                                    (click)="onDeleteConfirm($event, cate.id)"></nb-icon>
-                            </div>
-                        </div>
-                    </span>
-                </nb-list-item>
-            </nb-list>
-            <nb-list *ngIf="hideFilters">
-                <nb-list-item *ngFor="let cate of categoryFilter | filter:searchCategoria">
-                    <span class="col-md-6 center">{{cate?.description}}</span>
-                    <span class="col-md-6 center">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"
-                                    nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
-                            </div>
-                            <div class="col-md-6">
-                                <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
-                                    nbTooltipStatus="danger" icon="trash-2-outline"
-                                    (click)="onDeleteConfirm($event, cate.id)"></nb-icon>
-                            </div>
-                        </div>
-                    </span>
-                </nb-list-item>
-            </nb-list>
+
+<div *ngIf="connectionInternet">
+    <div *ngIf="!categories">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Categorías</nb-card-header>
+            <nb-card-body>
+                <h6>No se han encontrado categorias registradas</h6>
+            </nb-card-body>
         </nb-card>
+    </div>
+    <div class="row" *ngIf="categories">
+        <div class="col-md-12">
+            <nb-card>
+                <nb-card-header>
+                    <div class="row">
+                        <div class="col-md-8 center">Nombre de la categoría</div>
+                        <div class="col-md-4 center">Acciones</div>
+                    </div>
+                </nb-card-header>
+                <nb-list *ngIf="!hideFilters">
+                    <nb-list-item *ngFor="let cate of categories">
+                        <span class="col-md-8 center">{{cate?.description}}</span>
+                        <span class="col-md-4 center">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"
+                                        nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
+                                </div>
+                                <div class="col-md-6">
+                                    <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
+                                        nbTooltipStatus="danger" icon="trash-2-outline"
+                                        (click)="onDeleteConfirm($event, cate.id)"></nb-icon>
+                                </div>
+                            </div>
+                        </span>
+                    </nb-list-item>
+                </nb-list>
+                <nb-list *ngIf="hideFilters">
+                    <nb-list-item *ngFor="let cate of categoryFilter | filter:searchCategoria">
+                        <span class="col-md-6 center">{{cate?.description}}</span>
+                        <span class="col-md-6 center">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"
+                                        nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
+                                </div>
+                                <div class="col-md-6">
+                                    <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
+                                        nbTooltipStatus="danger" icon="trash-2-outline"
+                                        (click)="onDeleteConfirm($event, cate.id)"></nb-icon>
+                                </div>
+                            </div>
+                        </span>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card>
+        </div>
     </div>
 </div>
 <ngx-paginator *ngIf="categories"></ngx-paginator>

@@ -27,6 +27,7 @@ export class CategoryComponent {
     page: number = 0;
     changeDetectorRef: ChangeDetectorRef;
     categoryFilter: ResponseCategory[];
+    connectionInternet = false;
 
     source: LocalDataSource = new LocalDataSource();
 
@@ -68,7 +69,7 @@ export class CategoryComponent {
             category => {
                 this.paginationService.paginationCount(category);
                 this.categoryFilter = category.categories;
-              
+
             }
         )
     }
@@ -117,6 +118,9 @@ export class CategoryComponent {
                 this.getCategoryFilter();
             },
                 (err) => {
+                    if (status == '404') {
+                        this.connectionInternet = true;
+                    }
                     const type = 'danger';
                     const quote = { title: null, body: err.error.detailMessage };
                     this.toastrService.showToast(type, quote.title, quote.body);
