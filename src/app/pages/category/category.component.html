@@ -1,14 +1,25 @@
 <div class="row">
     <div class="col-md-6">
-        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCategoria" autocomplete="on" placeholder="Buscar nombre de la categoría" (ngModelChange)='onSelectChange($event)'>
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCategoria" autocomplete="on"
+            placeholder="Buscar nombre de la categoría" (ngModelChange)='onSelectChange($event)'>
     </div>
     <div class="col-md-6">
-        <button class="col-md-12 btn btn-outline-primary form-group" type="button" nbTooltip="Agregar categoria" nbTooltipStatus="primary" (click)="modalAdd()">
+        <button class="col-md-12 btn btn-outline-primary form-group" type="button" nbTooltip="Agregar categoria"
+            nbTooltipStatus="primary" (click)="modalAdd()">
             Agregar Categoria <nb-icon status="'primary'" icon="plus-circle-outline"></nb-icon>
         </button>
     </div>
 </div>
-<div class="row">
+
+<div *ngIf="!categories">
+    <nb-card class="inline-form-card">
+        <nb-card-header>Categorías</nb-card-header>
+        <nb-card-body>
+            <h6>No se han encontrado categorias registradas</h6>
+        </nb-card-body>
+    </nb-card>
+</div>
+<div class="row" *ngIf="categories">
     <div class="col-md-12">
         <nb-card>
             <nb-card-header>
@@ -56,4 +67,4 @@
         </nb-card>
     </div>
 </div>
-<ngx-paginator></ngx-paginator>
+<ngx-paginator *ngIf="categories"></ngx-paginator>

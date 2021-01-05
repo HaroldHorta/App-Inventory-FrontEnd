@@ -9,7 +9,17 @@
                     producto <nb-icon status="'primary'" icon="plus-circle-outline"></nb-icon></button>
             </div>
         </div>
-        <nb-card>
+
+        <div *ngIf="!product">
+            <nb-card class="inline-form-card">
+                <nb-card-header>Productos</nb-card-header>
+                <nb-card-body>
+                    <h6>No se han encontrado productos registrados</h6>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <nb-card *ngIf="product">
             <nb-card-header class="item">
                 <span>Ver más</span>
                 <span>Foto</span>
@@ -84,4 +94,4 @@
     </div>
 </div>
 
-<ngx-paginator></ngx-paginator>
+<ngx-paginator *ngIf="product"></ngx-paginator>

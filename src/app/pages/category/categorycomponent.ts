@@ -30,7 +30,7 @@ export class CategoryComponent {
 
     source: LocalDataSource = new LocalDataSource();
 
-    constructor(private router: Router, private serviceCategory: CategoryService,
+    constructor(private serviceCategory: CategoryService,
         private toastrService: GeneralService, private dialogService: NbDialogService, private paginationService: PaginationService,
         changeDetectorRef: ChangeDetectorRef) {
         this.changeDetectorRef = changeDetectorRef;
@@ -51,6 +51,7 @@ export class CategoryComponent {
         this.serviceCategory.getCategoryPage(this.page).subscribe(
             categories => {
                 this.categories = categories.categories;
+                this.getCategoryFilter();
             },
         );
     }
@@ -65,8 +66,9 @@ export class CategoryComponent {
     getCategoryFilter() {
         this.serviceCategory.getCategoryPageAll().subscribe(
             category => {
-                this.categoryFilter = category.categories;
                 this.paginationService.paginationCount(category);
+                this.categoryFilter = category.categories;
+              
             }
         )
     }

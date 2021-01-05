@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { endpoint } from '../infraestructure/endpoint/endpoint';
 import { ResponseCashBase } from '../models/Response/finances/cashBase/ResponseCashBase';
 import { ResponseCashRegister } from '../models/Response/finances/cashRegister/ResponseCashRegister';
+import { ResponseCashRegisterPagination } from '../models/Response/finances/cashRegister/ResponseCashRegisterPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +22,15 @@ export class CashRegisterBaseService {
     );
   }
 
-  getCashRegister(): Observable<ResponseCashRegister[]> {
-    return this.http.get(endpoint.CashRegister).pipe(
-      map(response => response as ResponseCashRegister[]),
+  getProductsExpensesFilters(): Observable<ResponseCashRegisterPagination> {
+    return this.http.get(`${endpoint.CashBase}/cashRegisterDailyFilter`).pipe(
+      map(response => response as ResponseCashRegisterPagination),
+    );
+  }
+
+  getProductsExpensesPage(page): Observable<ResponseCashRegisterPagination> {
+    return this.http.get(`${endpoint.CashBase}/page/?page=${page}`).pipe(
+      map(response => response as ResponseCashRegisterPagination),
     );
   }
 

@@ -32,6 +32,10 @@
       <input nbInput class=" form-group" type="text" formControlName="name" fullWidth placeholder="Nombre"
         [ngModel]="customerEdit.name">
     </div>
+    <div class="full-name-input form-group">
+      <input style="width: 45%;" nbInput class=" form-group" type="text" disabled [value]="customerEdit.typeDocument">
+      <input style="width: 50%; margin-left: 5%;" nbInput class=" form-group" type="text" disabled [value]="customerEdit.nroDocument">
+    </div>
     <input class="form-group" nbInput type="text" formControlName="email" fullWidth placeholder="Email"
       [ngModel]="customerEdit.email">
     <input class="form-group" nbInput type="text" formControlName="address" fullWidth placeholder="Dirección"
@@ -50,8 +54,8 @@
       nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Guardar</button>
 
     <button *ngIf="customerEdit" style="width: 45%;" class="btn btn-outline-success form-group"
-      (click)="updateCustomer(customerEdit.id, checkOutFormEdit.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning"
-      nbSpinnerSize="large" nbSpinnerMessage=""
+      (click)="updateCustomer(customerEdit.id, checkOutFormEdit.value)" [nbSpinner]="loadingLargeGroup"
+      nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
       [disabled]="!checkOutFormEdit.valid || disabledUpdate">Actualizar</button>
     <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton
       (click)="cancel()">Cancel</button>

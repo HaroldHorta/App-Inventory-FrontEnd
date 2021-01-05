@@ -55,6 +55,7 @@ export class CreateCustomerPopupComponent implements OnInit {
       this.customerEdit;
       this.selectedOption = this.customerEdit.typeDocument;
     }
+    console.log(this.customerEdit)
   }
   cancel() {
     this.ref.close();

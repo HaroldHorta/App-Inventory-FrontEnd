@@ -14,12 +14,12 @@ export class CashRegisterBaseComponent implements OnInit {
   cashBase: ResponseCashBase;
   checkOutForm: FormGroup;
 
-  
+
   loadingLargeGroup = false;
   disabledUpdate = false;
 
 
-  constructor(private formBuilder: FormBuilder, private cashBaseService: CashRegisterBaseService, private generalService: GeneralService) { 
+  constructor(private formBuilder: FormBuilder, private cashBaseService: CashRegisterBaseService, private generalService: GeneralService) {
     this.checkOutForm = this.formBuilder.group({
       cashBase: ['', [Validators.required]],
     });
@@ -43,11 +43,11 @@ export class CashRegisterBaseComponent implements OnInit {
    *@author [CadenaCristian]
    *@since 26/12/2020*/
 
-   /*<i>[ini][]</i>
- *@author [CadenaCristian]
- *@since 26/12/2020
- *Este metodo sirve para agregar el dinero base que se va a tener, funciona agregando el valor que llega en el input y limpiando el input
- *por si se va a ingresar un nuevo valor, el solo toma el ultimo valor ingresado*/
+  /*<i>[ini][]</i>
+*@author [CadenaCristian]
+*@since 26/12/2020
+*Este metodo sirve para agregar el dinero base que se va a tener, funciona agregando el valor que llega en el input y limpiando el input
+*por si se va a ingresar un nuevo valor, el solo toma el ultimo valor ingresado*/
   addCashBase(cashBase) {
 
     this.cashBaseService.createCashBase(cashBase.cashBase).subscribe(data => {
@@ -64,8 +64,22 @@ export class CashRegisterBaseComponent implements OnInit {
       });
 
   }
-}
-
-/*<i>[fin][]</i>
+  /*<i>[fin][]</i>
    *@author [CadenaCristian]
    *@since 26/12/2020*/
+
+   
+  /*<i>[ini][]</i>
+*@author [HaroldHorta]
+*@since 05/01/2021
+*Metodo para ocultar cuando se quiera insertar base y no existan registros*/
+
+  mostrarRegistros() {
+    this.cashBase = { dailyCashBase: '0', createAt: '0' };
+  }
+
+    /*<i>[fin][]</i>
+   *@author [HaroldHorta]
+   *@since 05/01/2021*/
+}
+

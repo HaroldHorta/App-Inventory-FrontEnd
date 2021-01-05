@@ -10,7 +10,17 @@
           Cliente <nb-icon status="'primary'" icon="person-add-outline"></nb-icon></button>
             </div>
         </div>
-        <nb-card size="medium">
+
+        <div *ngIf="!customers">
+            <nb-card class="inline-form-card">
+                <nb-card-header>Clientes</nb-card-header>
+                <nb-card-body>
+                    <h6>No se han encontrado clientes registrados</h6>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <nb-card *ngIf="customers">
             <nb-card-header class="item">
                 <span>Nombre</span>
                 <span>Tipo de documento</span>
@@ -21,7 +31,7 @@
                 <span>Acciones</span>
             </nb-card-header>
             <nb-list *ngIf="!hideFilters">
-                <nb-list-item class="item" *ngFor="let customer of customers | filter:searchCustomer">
+                <nb-list-item class="item" *ngFor="let customer of customers">
                     <span>{{ customer?.name }}</span>
                     <span>{{customer?.typeDocument}}</span>
                     <span>{{ customer?.nroDocument }}</span>
@@ -59,4 +69,4 @@
     </div>
 </div>
 
-<ngx-paginator></ngx-paginator>
+<ngx-paginator *ngIf="customers"></ngx-paginator>

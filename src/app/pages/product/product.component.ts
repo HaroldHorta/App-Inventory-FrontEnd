@@ -57,7 +57,7 @@ export class ProductComponent implements OnInit {
   getProductsList() {
     this.serviceProduct.getProductsFilters(this.page).subscribe(async product => {
       this.products = product.products;
-      //  this.paginationService.paginationCount(product);
+      this.getProductFilter();
 
     },
     );

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { endpoint } from '../infraestructure/endpoint/endpoint';
 import { RequestExpenses } from '../models/Request/expenses/RequestExpenses';
 import { ResponseExpenses } from '../models/Response/expenses/ResponseExpenses';
+import { ResponseExpensesPagination } from '../models/Response/expenses/ResponseExpensesPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +15,16 @@ export class ExpensesService {
   constructor(private http: HttpClient) { }
 
 
-  getCustomers(): Observable<ResponseExpenses[]> {
-    return this.http.get(endpoint.Expenses).pipe(
-      map(response => response as ResponseExpenses[]),
+
+  getProductsExpensesFilters(): Observable<ResponseExpensesPagination> {
+    return this.http.get(`${endpoint.Expenses}/expensesFilter`).pipe(
+      map(response => response as ResponseExpensesPagination),
+    );
+  }
+
+  getProductsExpensesPage(page): Observable<ResponseExpensesPagination> {
+    return this.http.get(`${endpoint.Expenses}/page/?page=${page}`).pipe(
+      map(response => response as ResponseExpensesPagination),
     );
   }
 

@@ -32,7 +32,8 @@ export class InventoryComponent implements OnInit {
 
 
 
-  constructor(private serviceProduct: ProductService, private inventoryService: InventoryService, changeDetectorRef: ChangeDetectorRef,
+  constructor(private serviceProduct: ProductService, private inventoryService: InventoryService,
+    changeDetectorRef: ChangeDetectorRef,
     private generalService: GeneralService,
     private dialog: NbDialogService,
     private fileUpload: FileUploadService,
@@ -72,10 +73,10 @@ export class InventoryComponent implements OnInit {
   *@author [CadenaCristian]
   *@since 23/12/2020*/
 
- /*<i>[ini][]</i>
-  *@author [CadenaCristian]
-  *@since 04/01/2021
-  *Metodo que permite listar todos los clientes para el filtro*/
+  /*<i>[ini][]</i>
+   *@author [CadenaCristian]
+   *@since 04/01/2021
+   *Metodo que permite listar todos los clientes para el filtro*/
   getProductListFilter() {
     this.inventoryService.getProductsInventoryFilters().subscribe(
       product => {

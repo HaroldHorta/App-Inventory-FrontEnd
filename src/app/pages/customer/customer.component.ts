@@ -43,6 +43,7 @@ export class CustomerComponent {
     this.serviceCustomer.getCustomerPage(this.page).subscribe(
       customers => {
         this.customers = customers.customers;
+        this. getCustomerFilter();
       },
     );
   }
