@@ -1,11 +1,10 @@
 <div class="row col-md-12">
     <div class="col-md-6">
-        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchExpenses" autocomplete="off"
-            placeholder="Buscar">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchExpenses" autocomplete="off" placeholder="Buscar">
     </div>
     <div class="col-md-6">
-        <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="open()">Agregar
-            Gasto</button>
+        <button class="col-md-12 btn btn-outline-primary form-group" nbTooltip="Agregar gasto" nbTooltipStatus="primary" type="button" (click)="open()">Agregar
+            Gasto <nb-icon status="'primary'" icon="plus-circle-outline"></nb-icon></button>
     </div>
 </div>
 <div *ngIf="!expenses">

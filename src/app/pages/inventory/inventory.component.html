@@ -5,8 +5,8 @@
                 <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchProduct" autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
             </div>
             <div class="col-md-6">
-                <button class="col-md-12 btn btn-outline-primary form-group" type="button" (click)="open()">Agregar
-                    producto</button>
+                <button class="col-md-12 btn btn-outline-primary form-group changeMouse" nbTooltip="Agregar producto" nbTooltipStatus="primary" type="button" (click)="open()">Agregar
+                    producto <nb-icon status="'primary'" icon="plus-circle-outline"></nb-icon></button>
             </div>
         </div>
         <nb-card>
