@@ -27,7 +27,7 @@ export class CategoryComponent {
     page: number = 0;
     changeDetectorRef: ChangeDetectorRef;
     categoryFilter: ResponseCategory[];
-    connectionInternet = false;
+    connectionInternet = true;
 
     source: LocalDataSource = new LocalDataSource();
 
@@ -54,6 +54,16 @@ export class CategoryComponent {
                 this.categories = categories.categories;
                 this.getCategoryFilter();
             },
+                (err) => {
+                    console.log('pasa por el error')
+                    if (err.status === 0) {
+                        console.log('pasa por el error')
+                        this.connectionInternet = false;
+                    }
+                    const type = 'danger';
+                    const quote = { title: null, body: err.error.detailMessage };
+                    this.toastrService.showToast(type, quote.title, quote.body);
+                },
         );
     }
     /*<i>[fin][]</i>
@@ -118,9 +128,6 @@ export class CategoryComponent {
                 this.getCategoryFilter();
             },
                 (err) => {
-                    if (status == '404') {
-                        this.connectionInternet = true;
-                    }
                     const type = 'danger';
                     const quote = { title: null, body: err.error.detailMessage };
                     this.toastrService.showToast(type, quote.title, quote.body);
