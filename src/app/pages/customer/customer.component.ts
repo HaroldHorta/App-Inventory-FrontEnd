@@ -22,6 +22,8 @@ export class CustomerComponent {
   mainFilter: any;
   page: number = 0;
   changeDetectorRef: ChangeDetectorRef;
+  connectionInternet = true;
+
 
   constructor(private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService,
     private paginationService: PaginationService, changeDetectorRef: ChangeDetectorRef) {
@@ -45,7 +47,14 @@ export class CustomerComponent {
         this.customers = customers.customers;
         this. getCustomerFilter();
       },
-    );
+      (err) => {
+          if (err.status === 0) {
+              this.connectionInternet = false;
+          }
+          const type = 'danger';
+          const quote = { title: null, body: err.error.detailMessage };
+          this.toastrService.showToast(type, quote.title, quote.body);
+      });
   }
   /*<i>[fin][]</i>
     *@author [CadenaCristian]

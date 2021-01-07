@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { ResponseExpenses } from '../../core/models/Response/expenses/ResponseExpenses';
 import { ExpensesService } from '../../core/services/expenses.service';
+import { GeneralService } from '../../core/services/general.service';
 import { PaginationService } from '../../core/services/pagination.service';
 import { PopCreateExpensesComponent } from './pop-create-expenses/pop-create-expenses.component';
 import { PopDetailsExpensesComponent } from './pop-details-expenses/pop-details-expenses.component';
@@ -9,7 +10,7 @@ import { PopDetailsExpensesComponent } from './pop-details-expenses/pop-details-
 @Component({
   selector: 'ngx-expenses',
   templateUrl: './expenses.component.html',
-  styleUrls: ['./expenses.component.scss']
+  styleUrls: ['./expenses.component.scss'],
 })
 export class ExpensesComponent implements OnInit {
 
@@ -19,10 +20,12 @@ export class ExpensesComponent implements OnInit {
   searchExpenses;
   page: number = 0;
   hideFilters = false;
+  connectionInternet = true;
 
-  constructor(private dialog: NbDialogService, changeDetectorRef: ChangeDetectorRef, 
-    private expensesService: ExpensesService,
-    private paginationService: PaginationService,) {
+
+  constructor(private dialog: NbDialogService, changeDetectorRef: ChangeDetectorRef,
+    private expensesService: ExpensesService,  private toastrService: GeneralService,
+    private paginationService: PaginationService) {
 
     this.changeDetectorRef = changeDetectorRef;
     this.paginationService.paginatornumber$.subscribe(data => {
@@ -36,7 +39,7 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+
 
   }
 
@@ -46,7 +49,14 @@ export class ExpensesComponent implements OnInit {
         this.expenses = expenses.expenses;
         this.getExpensesListFilter();
       },
-    );
+      (err) => {
+          if (err.status === 0) {
+              this.connectionInternet = false;
+          }
+          const type = 'danger';
+          const quote = { title: null, body: err.error.detailMessage };
+          this.toastrService.showToast(type, quote.title, quote.body);
+      });
   }
 
   getExpensesListFilter() {

@@ -48,6 +48,7 @@ import { TicketHistoryDetailsComponent } from './ticket/ticket-historic/ticket-h
 import { TicketCreditCapitalsComponent } from './ticket/ticket-historic/ticket-credit-capitals/ticket-credit-capitals.component';
 import { PaginatorComponent } from './general/paginator/paginator.component';
 import { PopupAddCategoryComponent } from './category/popup-add-category/popup-add-category.component';
+import { MenssageConnetionComponent } from './general/menssage-connetion/menssage-connetion.component';
 
 @NgModule({
   imports: [
@@ -114,6 +115,7 @@ import { PopupAddCategoryComponent } from './category/popup-add-category/popup-a
     TicketCreditCapitalsComponent,
     PaginatorComponent,
     PopupAddCategoryComponent,
+    MenssageConnetionComponent,
 
   ],
 })

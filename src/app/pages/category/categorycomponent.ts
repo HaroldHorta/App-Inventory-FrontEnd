@@ -54,17 +54,14 @@ export class CategoryComponent {
                 this.categories = categories.categories;
                 this.getCategoryFilter();
             },
-                (err) => {
-                    console.log('pasa por el error')
-                    if (err.status === 0) {
-                        console.log('pasa por el error')
-                        this.connectionInternet = false;
-                    }
-                    const type = 'danger';
-                    const quote = { title: null, body: err.error.detailMessage };
-                    this.toastrService.showToast(type, quote.title, quote.body);
-                },
-        );
+            (err) => {
+                if (err.status === 0) {
+                    this.connectionInternet = false;
+                }
+                const type = 'danger';
+                const quote = { title: null, body: err.error.detailMessage };
+                this.toastrService.showToast(type, quote.title, quote.body);
+            });
     }
     /*<i>[fin][]</i>
       *@author [CadenaCristian]
@@ -80,8 +77,8 @@ export class CategoryComponent {
                 this.paginationService.paginationCount(category);
                 this.categoryFilter = category.categories;
 
-            }
-        )
+            },
+        );
     }
     /*<i>[fin][]</i>
 *@author [CadenaCristian]
@@ -95,7 +92,7 @@ export class CategoryComponent {
         this.dialogService.open(PopupAddCategoryComponent).onClose.subscribe(() => {
             this.getCategoryList();
             this.getCategoryFilter();
-        })
+        });
     }
     /*<i>[fin][]</i>
 *@author [CadenaCristian]
@@ -108,7 +105,7 @@ export class CategoryComponent {
     modalEdit(item) {
         this.dialogService.open(PopupAddCategoryComponent, { context: { categoryEdit: item } }).onClose.subscribe(() => {
             this.getCategoryList();
-        })
+        });
     }
     /*<i>[fin][]</i>
 *@author [CadenaCristian]

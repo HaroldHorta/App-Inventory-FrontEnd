@@ -1,4 +1,4 @@
-import { ResponseCategory } from "./ResponseCategory.module";
+import { ResponseCategory } from './ResponseCategory.module';
 
 export class ResponseCategoryPagination {
     count: number;

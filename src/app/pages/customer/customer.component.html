@@ -1,72 +1,79 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="row col-md-12">
-            <div class="col-md-6">
-                <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer" autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
-            </div>
+  <div class="col-md-12">
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer" autocomplete="on"
+          placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
+      </div>
 
-            <div class="col-md-6">
-                <button class="col-md-12 btn btn-outline-primary form-group" nbTooltip="Agregar cliente" nbTooltipStatus="primary" type="button" (click)="openAddProduct()">Agregar
+      <div class="col-md-6">
+        <button class="col-md-12 btn btn-outline-primary form-group" nbTooltip="Agregar cliente"
+          nbTooltipStatus="primary" type="button" (click)="openAddProduct()">Agregar
           Cliente <nb-icon status="'primary'" icon="person-add-outline"></nb-icon></button>
-            </div>
-        </div>
-
-        <div *ngIf="!customers">
-            <nb-card class="inline-form-card">
-                <nb-card-header>Clientes</nb-card-header>
-                <nb-card-body>
-                    <h6>No se han encontrado clientes registrados</h6>
-                </nb-card-body>
-            </nb-card>
-        </div>
-
-        <nb-card *ngIf="customers">
-            <nb-card-header class="item">
-                <span>Nombre</span>
-                <span>Tipo de documento</span>
-                <span>Numero de documento</span>
-                <span>Email</span>
-                <span>Dirección</span>
-                <span>Telefono</span>
-                <span>Acciones</span>
-            </nb-card-header>
-            <nb-list *ngIf="!hideFilters">
-                <nb-list-item class="item" *ngFor="let customer of customers">
-                    <span>{{ customer?.name }}</span>
-                    <span>{{customer?.typeDocument}}</span>
-                    <span>{{ customer?.nroDocument }}</span>
-                    <span>{{customer.email}}</span>
-                    <span>{{customer?.address}}</span>
-                    <span>{{customer?.phone}}</span>
-                    <span>
-            <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
-              nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
-            <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
-              nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
-          </span>
-                </nb-list-item>
-            </nb-list>
-            <nb-list *ngIf="hideFilters">
-
-                <nb-list-item class="item" *ngFor="let customer of customerFilter | filter:searchCustomer">
-                    <span>{{ customer?.name }}</span>
-                    <span>{{customer?.typeDocument}}</span>
-                    <span>{{ customer?.nroDocument }}</span>
-                    <span>{{customer.email}}</span>
-                    <span>{{customer?.address}}</span>
-                    <span>{{customer?.phone}}</span>
-                    <span>
-            <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
-              nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
-            <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
-              nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
-          </span>
-                </nb-list-item>
-
-            </nb-list>
-
-        </nb-card>
+      </div>
     </div>
+    <div *ngIf="!connectionInternet">
+      <ngx-menssage-connetion></ngx-menssage-connetion>
+    </div>
+
+    <div *ngIf="connectionInternet">
+      <div *ngIf="!customers">
+        <nb-card class="inline-form-card">
+          <nb-card-header>Clientes</nb-card-header>
+          <nb-card-body>
+            <h6>No se han encontrado clientes registrados</h6>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+
+      <nb-card *ngIf="customers">
+        <nb-card-header class="item">
+          <span>Nombre</span>
+          <span>Tipo de documento</span>
+          <span>Numero de documento</span>
+          <span>Email</span>
+          <span>Dirección</span>
+          <span>Telefono</span>
+          <span>Acciones</span>
+        </nb-card-header>
+        <nb-list *ngIf="!hideFilters">
+          <nb-list-item class="item" *ngFor="let customer of customers">
+            <span>{{ customer?.name }}</span>
+            <span>{{customer?.typeDocument}}</span>
+            <span>{{ customer?.nroDocument }}</span>
+            <span>{{customer.email}}</span>
+            <span>{{customer?.address}}</span>
+            <span>{{customer?.phone}}</span>
+            <span>
+              <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
+                nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
+              <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
+                nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
+            </span>
+          </nb-list-item>
+        </nb-list>
+        <nb-list *ngIf="hideFilters">
+
+          <nb-list-item class="item" *ngFor="let customer of customerFilter | filter:searchCustomer">
+            <span>{{ customer?.name }}</span>
+            <span>{{customer?.typeDocument}}</span>
+            <span>{{ customer?.nroDocument }}</span>
+            <span>{{customer.email}}</span>
+            <span>{{customer?.address}}</span>
+            <span>{{customer?.phone}}</span>
+            <span>
+              <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
+                nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
+              <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
+                nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
+            </span>
+          </nb-list-item>
+
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
 </div>
 
 <ngx-paginator *ngIf="customers"></ngx-paginator>
