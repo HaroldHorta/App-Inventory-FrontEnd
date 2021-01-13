@@ -1,79 +1,82 @@
 <div class="row">
-  <div class="col-md-12">
-    <div class="row col-md-12">
-      <div class="col-md-6">
-        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer" autocomplete="on"
-          placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
-      </div>
-
-      <div class="col-md-6">
-        <button class="col-md-12 btn btn-outline-primary form-group" nbTooltip="Agregar cliente"
-          nbTooltipStatus="primary" type="button" (click)="openAddProduct()">Agregar
-          Cliente <nb-icon status="'primary'" icon="person-add-outline"></nb-icon></button>
-      </div>
+    <div class="col-md-4">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer" autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
+    </div>
+    <div class="col-md-4">
+        <nb-select selected="1" class="col-md-12">
+            <nb-option value="1" (click)="getCustomerList(prueba=1)">Orden de la A - Z</nb-option>
+            <nb-option value="2" (click)="getCustomerList(prueba=2)">Orden de la Z - A</nb-option>
+            <nb-option value="3" (click)="getCustomerList(prueba=3)">Orden del mas reciente al mas antiguo</nb-option>
+        </nb-select>
+    </div>
+    <div class="col-md-4">
+        <button class="col-md-12 btn btn-outline-primary form-group" nbTooltip="Agregar cliente" nbTooltipStatus="primary" type="button" (click)="openAddProduct()">Agregar
+        Cliente <nb-icon status="'primary'" icon="person-add-outline"></nb-icon></button>
     </div>
     <div *ngIf="!connectionInternet">
-      <ngx-menssage-connetion></ngx-menssage-connetion>
+        <ngx-menssage-connetion></ngx-menssage-connetion>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div *ngIf="connectionInternet">
+            <div *ngIf="!customers">
+                <nb-card class="inline-form-card">
+                    <nb-card-header>Clientes</nb-card-header>
+                    <nb-card-body>
+                        <h6>No se han encontrado clientes registrados</h6>
+                    </nb-card-body>
+                </nb-card>
+            </div>
 
-    <div *ngIf="connectionInternet">
-      <div *ngIf="!customers">
-        <nb-card class="inline-form-card">
-          <nb-card-header>Clientes</nb-card-header>
-          <nb-card-body>
-            <h6>No se han encontrado clientes registrados</h6>
-          </nb-card-body>
-        </nb-card>
-      </div>
 
-
-      <nb-card *ngIf="customers">
-        <nb-card-header class="item">
-          <span>Nombre</span>
-          <span>Tipo de documento</span>
-          <span>Numero de documento</span>
-          <span>Email</span>
-          <span>Dirección</span>
-          <span>Telefono</span>
-          <span>Acciones</span>
-        </nb-card-header>
-        <nb-list *ngIf="!hideFilters">
-          <nb-list-item class="item" *ngFor="let customer of customers">
-            <span>{{ customer?.name }}</span>
-            <span>{{customer?.typeDocument}}</span>
-            <span>{{ customer?.nroDocument }}</span>
-            <span>{{customer.email}}</span>
-            <span>{{customer?.address}}</span>
-            <span>{{customer?.phone}}</span>
-            <span>
+            <nb-card *ngIf="customers">
+                <nb-card-header class="item">
+                    <span>Nombre</span>
+                    <span>Tipo de documento</span>
+                    <span>Numero de documento</span>
+                    <span>Email</span>
+                    <span>Dirección</span>
+                    <span>Telefono</span>
+                    <span>Acciones</span>
+                </nb-card-header>
+                <nb-list *ngIf="!hideFilters">
+                    <nb-list-item class="item" *ngFor="let customer of customers">
+                        <span>{{ customer?.name }}</span>
+                        <span>{{customer?.typeDocument}}</span>
+                        <span>{{ customer?.nroDocument }}</span>
+                        <span>{{customer.email}}</span>
+                        <span>{{customer?.address}}</span>
+                        <span>{{customer?.phone}}</span>
+                        <span>
               <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
                 nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
               <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
                 nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
             </span>
-          </nb-list-item>
-        </nb-list>
-        <nb-list *ngIf="hideFilters">
+                    </nb-list-item>
+                </nb-list>
+                <nb-list *ngIf="hideFilters">
 
-          <nb-list-item class="item" *ngFor="let customer of customerFilter | filter:searchCustomer">
-            <span>{{ customer?.name }}</span>
-            <span>{{customer?.typeDocument}}</span>
-            <span>{{ customer?.nroDocument }}</span>
-            <span>{{customer.email}}</span>
-            <span>{{customer?.address}}</span>
-            <span>{{customer?.phone}}</span>
-            <span>
+                    <nb-list-item class="item" *ngFor="let customer of customerFilter | filter:searchCustomer">
+                        <span>{{ customer?.name }}</span>
+                        <span>{{customer?.typeDocument}}</span>
+                        <span>{{ customer?.nroDocument }}</span>
+                        <span>{{customer.email}}</span>
+                        <span>{{customer?.address}}</span>
+                        <span>{{customer?.phone}}</span>
+                        <span>
               <nb-icon class="changeMouse" (click)="openModalEdit(customer)" nbTooltip="Editar cliente"
                 nbTooltipStatus="warning" status="warning" icon="edit-2-outline"></nb-icon>
               <nb-icon class="changeMouse space" nbTooltip="Eliminar cliente" (click)="onDeleteConfirm(customer.id)"
                 nbTooltipStatus="danger" status="danger" icon="trash-2-outline"></nb-icon>
             </span>
-          </nb-list-item>
+                    </nb-list-item>
 
-        </nb-list>
-      </nb-card>
+                </nb-list>
+            </nb-card>
+        </div>
     </div>
-  </div>
 </div>
 
 <ngx-paginator *ngIf="customers"></ngx-paginator>

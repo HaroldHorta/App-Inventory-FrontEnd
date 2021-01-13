@@ -28,6 +28,9 @@ export class CategoryComponent {
     changeDetectorRef: ChangeDetectorRef;
     categoryFilter: ResponseCategory[];
     connectionInternet = true;
+    tipoDeordenList = true;
+    prueba = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
 
     source: LocalDataSource = new LocalDataSource();
 
@@ -48,10 +51,34 @@ export class CategoryComponent {
 *@author [CadenaCristian]
 *@since 26/12/2020
 *Este metodo permite obtener y listar todas las categorias que tenemos creadas*/
-    getCategoryList() {
+    getCategoryList(tipoDeordenList?) {
+        for(var i = 0; i < this.prueba.length; i++){
+
+        }
         this.serviceCategory.getCategoryPage(this.page).subscribe(
             categories => {
                 this.categories = categories.categories;
+                if (this.tipoDeordenList === true) {
+                    this.categories.sort((a, b) => {
+                        if (a.description > b.description) {
+                            return 1;
+                        }
+                        if (a.description < b.description) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                } else {
+                    this.categories.sort((a, b) => {
+                        if (a.createAt < b.createAt) {
+                            return 1;
+                        }
+                        if (a.createAt > b.createAt) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
                 this.getCategoryFilter();
             },
             (err) => {
