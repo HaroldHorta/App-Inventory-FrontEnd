@@ -23,6 +23,7 @@ export class PaginatorComponent implements OnInit {
 *@since 27/12/2020
 *Metodo para saber la pagina actual en la cual se encuentra el usuario, o sea la pagina actual del paginador*/
   setPage(i) {
+    console.log("este es i: ",i)
     this.page = i;
     this.paginationService.paginationNumber(this.page);
 

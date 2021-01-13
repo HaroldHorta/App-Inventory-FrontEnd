@@ -62,6 +62,15 @@ export class InventoryComponent implements OnInit {
       product => {
         this.productList = [];
         this.product = product.products;
+        this.product.sort((a,b) => {
+          if (a.createAt < b.createAt){
+            return 1;
+          }
+          if (a.createAt > b.createAt){
+            return -1;
+          }
+          return 0;
+        })
         this.total = product.products.length;
         this.product.forEach(p => {
           this.productList.push(p);
