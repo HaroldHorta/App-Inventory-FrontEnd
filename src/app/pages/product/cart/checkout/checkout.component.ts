@@ -27,10 +27,10 @@ export class CheckoutComponent implements OnInit {
   customer: ResponseCustomer;
   hideAddCustomer = false;
   idTicket: string;
-  typePayment = ['CASH', 'TRANSACTION', 'CREDIT'];
-  typePaymentCredit = ['CASH', 'TRANSACTION'];
-  payment: string = 'CASH';
-  paymentCredit: string = 'CASH';
+  typePayment = ['EFECTIVO', 'TRANSACCION', 'CREDITO'];
+  typePaymentCredit = ['EFECTIVO', 'TRANSACCION'];
+  payment: string = 'EFECTIVO';
+  paymentCredit: string = 'EFECTIVO';
   credit: number;
   hideCredit = false;
 
@@ -115,7 +115,7 @@ export class CheckoutComponent implements OnInit {
     data.push({
       id: this.idTicket, customerId: ticket.customerId, order: ticket.order,
       paymentType: ticket.paymentType, creditCapital: ticket.creditCapital === undefined ? 0 : ticket.creditCapital,
-      creditPaymentType: ticket.creditPaymentType === '' ? 'CASH' : ticket.creditPaymentType,
+      creditPaymentType: ticket.creditPaymentType === '' ? 'EFECTIVO' : ticket.creditPaymentType,
     });
 
     this.serviceTicket.create(JSON.stringify(data[0])).subscribe(() => {
@@ -159,10 +159,10 @@ export class CheckoutComponent implements OnInit {
     const newVal = {
       fieldName: this.payment,
     };
-    if (this.payment === 'CREDIT') {
+    if (this.payment === 'CREDITO') {
       this.hideCredit = true;
     }
-    if (!(this.payment === 'CREDIT')) {
+    if (!(this.payment === 'CREDITO')) {
       this.hideCredit = false;
       this.credit = undefined;
     }
