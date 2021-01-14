@@ -15,6 +15,7 @@ import { PopupAddCategoryComponent } from './popup-add-category/popup-add-catego
     styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent {
+
     index = 1;
     destroyByClick = true;
     duration = 2000;
@@ -30,6 +31,7 @@ export class CategoryComponent {
     connectionInternet = true;
     tipoDeordenList = true;
     prueba = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    cantidadTotalData;
 
 
     source: LocalDataSource = new LocalDataSource();
@@ -52,7 +54,7 @@ export class CategoryComponent {
 *@since 26/12/2020
 *Este metodo permite obtener y listar todas las categorias que tenemos creadas*/
     getCategoryList(tipoDeordenList?) {
-        for(var i = 0; i < this.prueba.length; i++){
+        for (let i = 0; i < this.prueba.length; i++) {
 
         }
         this.serviceCategory.getCategoryPage(this.page).subscribe(
@@ -101,9 +103,9 @@ export class CategoryComponent {
     getCategoryFilter() {
         this.serviceCategory.getCategoryPageAll().subscribe(
             category => {
-                this.paginationService.paginationCount(category);
+                this.cantidadTotalData = category.categories.length;
+                this.paginationService.paginationCount(category, this.cantidadTotalData);
                 this.categoryFilter = category.categories;
-
             },
         );
     }

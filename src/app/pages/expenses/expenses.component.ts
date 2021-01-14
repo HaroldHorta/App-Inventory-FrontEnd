@@ -21,6 +21,7 @@ export class ExpensesComponent implements OnInit {
   page: number = 0;
   hideFilters = false;
   connectionInternet = true;
+  cantidadTotalData;
 
 
   constructor(private dialog: NbDialogService, changeDetectorRef: ChangeDetectorRef,
@@ -46,6 +47,7 @@ export class ExpensesComponent implements OnInit {
   getExpensesList() {
     this.expensesService.getProductsExpensesPage(this.page).subscribe(
       expenses => {
+        this.cantidadTotalData = expenses.expenses.length;
         this.expenses = expenses.expenses;
         this.getExpensesListFilter();
       },
@@ -62,7 +64,7 @@ export class ExpensesComponent implements OnInit {
   getExpensesListFilter() {
     this.expensesService.getProductsExpensesFilters().subscribe(
       expenses => {
-        this.paginationService.paginationCount(expenses);
+        this.paginationService.paginationCount(expenses, this.cantidadTotalData);
         this.expensesFilter = expenses.expenses;
       },
     );

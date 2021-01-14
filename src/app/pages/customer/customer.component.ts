@@ -24,6 +24,7 @@ export class CustomerComponent {
   changeDetectorRef: ChangeDetectorRef;
   connectionInternet = true;
   prueba = 1;
+  cantidadTotalData;
 
 
   constructor(private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService,
@@ -43,45 +44,43 @@ export class CustomerComponent {
 *@since 26/12/2020
 *metodo que lista os clientes por paginacion*/
   getCustomerList(prueba?) {
-    console.log(prueba);
     this.serviceCustomer.getCustomerPage(this.page).subscribe(
       customers => {
         this.customers = customers.customers;
-      if (this.prueba === 1){
-        this.customers.sort((a, b) => {
-          if (a.name > b.name) {
-            return 1;
-          }
-          if (a.name < b.name) {
-            return -1;
-          }
-          return 0;
-        });
-        this.getCustomerFilter();
-      }
-      else if (this.prueba === 2){
-        this.customers.sort((a, b) => {
-          if (a.name < b.name) {
-            return 1;
-          }
-          if (a.name > b.name) {
-            return -1;
-          }
-          return 0;
-        });
-        this.getCustomerFilter();
-      }else{
-        this.customers.sort((a, b) => {
-          if (a.phone < b.phone) {
-            return 1;
-          }
-          if (a.phone > b.phone) {
-            return -1;
-          }
-          return 0;
-        });
-        this.getCustomerFilter();
-      }
+        if (this.prueba === 1) {
+          this.customers.sort((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (a.name < b.name) {
+              return -1;
+            }
+            return 0;
+          });
+          this.getCustomerFilter();
+        } else if (this.prueba === 2) {
+          this.customers.sort((a, b) => {
+            if (a.name < b.name) {
+              return 1;
+            }
+            if (a.name > b.name) {
+              return -1;
+            }
+            return 0;
+          });
+          this.getCustomerFilter();
+        } else {
+          this.customers.sort((a, b) => {
+            if (a.phone < b.phone) {
+              return 1;
+            }
+            if (a.phone > b.phone) {
+              return -1;
+            }
+            return 0;
+          });
+          this.getCustomerFilter();
+        }
       },
       (err) => {
         if (err.status === 0) {
@@ -107,7 +106,8 @@ export class CustomerComponent {
     this.serviceCustomer.getCustomerPageAll().subscribe(
       customers => {
         this.originalDataProduct = customers;
-        this.paginationService.paginationCount(customers);
+        this.cantidadTotalData = customers.customers.length;
+        this.paginationService.paginationCount(customers, this.cantidadTotalData);
         this.customerFilter = this.originalDataProduct.customers.slice(0);
       });
   }

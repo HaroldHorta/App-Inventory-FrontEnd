@@ -1,33 +1,46 @@
 .img {
-    width: 150px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
+}
+
+.position {
+  float: left;
+  padding-top: 7px;
+  margin-right: 5px;
 }
 
 .pag {
-    padding-left: auto;
-	padding-right: auto;
-}
-ul.pagination {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
+  padding-left: auto;
+  padding-right: auto;
 }
 
-ul.pagination li {display: inline;}
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.pagination li {
+  display: inline;
+}
 
 ul.pagination li a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    text-align: center;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align: center;
 }
 
 ul.pagination li a.active {
-    background-color: #4c93af;
-    color: white;
-    border-radius: 5px;
+  background-color: #4c93af;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+  padding: 8px 16px;
 }
 
 
-ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+ul.pagination li a:hover:not(.active) {
+  background-color: #ddd;
+}
