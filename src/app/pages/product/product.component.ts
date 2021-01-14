@@ -16,9 +16,8 @@ export class ProductComponent implements OnInit {
   page: number = 0;
   preview = [1];
   hiddenFilters = false;
-  cantidadTotalData;
-
   originalDataProduct: any;
+  dataPaginator;
 
   mainFilter: any;
   cp: number = 1;
@@ -47,7 +46,6 @@ export class ProductComponent implements OnInit {
       this.getProductsList();
     });
     this.getProductsList();
-    this.getProductFilter();
   }
 
   /*<i>[ini][]</i>
@@ -56,7 +54,7 @@ export class ProductComponent implements OnInit {
   *Metodo para llamar la lista de productos, con un listado de maximo 10 por pagina*/
   getProductsList() {
     this.serviceProduct.getProductsFilters(this.page).subscribe(async product => {
-      this.cantidadTotalData = product.products.length;
+      this.dataPaginator = product;
       this.products = product.products;
       this.getProductFilter();
 
@@ -75,7 +73,7 @@ export class ProductComponent implements OnInit {
     this.serviceProduct.getProductsFilter().subscribe(async data => {
       this.originalDataProduct = data;
       //  this.pagination = new Array(Math.ceil(data.count / 10));
-      this.paginationService.paginationCount(data, this.cantidadTotalData);
+      this.paginationService.paginationCount(this.dataPaginator);
       this.mainFilter = {
         search: '',
       };

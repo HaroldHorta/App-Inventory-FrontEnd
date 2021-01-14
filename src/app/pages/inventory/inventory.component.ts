@@ -29,8 +29,7 @@ export class InventoryComponent implements OnInit {
   total: number = 0;
   hideFilters = false;
   page: number = 0;
-  cantidadTotalData;
-
+  dataPaginator;
 
   constructor(private serviceProduct: ProductService, private inventoryService: InventoryService,
     changeDetectorRef: ChangeDetectorRef,
@@ -46,7 +45,6 @@ export class InventoryComponent implements OnInit {
       this.getProductList();
     });
     this.getProductList();
-    this.getProductListFilter();
   }
 
   ngOnInit(): void {
@@ -60,7 +58,7 @@ export class InventoryComponent implements OnInit {
   getProductList() {
     this.inventoryService.getProductsInventoryPage(this.page).subscribe(
       product => {
-        this.cantidadTotalData = product.products.length;
+      this.dataPaginator = product;
         this.productList = [];
         this.product = product.products;
         this.product.sort((a, b) => {
@@ -76,6 +74,7 @@ export class InventoryComponent implements OnInit {
         this.product.forEach(p => {
           this.productList.push(p);
         });
+        this.getProductListFilter();
       },
     );
   }
@@ -90,7 +89,7 @@ export class InventoryComponent implements OnInit {
   getProductListFilter() {
     this.inventoryService.getProductsInventoryFilters().subscribe(
       product => {
-        this.paginationService.paginationCount(product, this.cantidadTotalData);
+        this.paginationService.paginationCount(this.dataPaginator);
         this.productListFilter = [];
         this.product = product.products;
         this.total = product.products.length;

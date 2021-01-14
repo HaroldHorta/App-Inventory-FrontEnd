@@ -24,8 +24,7 @@ export class CustomerComponent {
   changeDetectorRef: ChangeDetectorRef;
   connectionInternet = true;
   prueba = 1;
-  cantidadTotalData;
-
+  dataPaginator;
 
   constructor(private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService,
     private paginationService: PaginationService, changeDetectorRef: ChangeDetectorRef) {
@@ -36,7 +35,6 @@ export class CustomerComponent {
       this.getCustomerList();
     });
     this.getCustomerList();
-    this.getCustomerFilter();
   }
 
   /*<i>[ini][]</i>
@@ -46,6 +44,7 @@ export class CustomerComponent {
   getCustomerList(prueba?) {
     this.serviceCustomer.getCustomerPage(this.page).subscribe(
       customers => {
+        this.dataPaginator = customers;
         this.customers = customers.customers;
         if (this.prueba === 1) {
           this.customers.sort((a, b) => {
@@ -106,8 +105,7 @@ export class CustomerComponent {
     this.serviceCustomer.getCustomerPageAll().subscribe(
       customers => {
         this.originalDataProduct = customers;
-        this.cantidadTotalData = customers.customers.length;
-        this.paginationService.paginationCount(customers, this.cantidadTotalData);
+        this.paginationService.paginationCount(this.dataPaginator);
         this.customerFilter = this.originalDataProduct.customers.slice(0);
       });
   }

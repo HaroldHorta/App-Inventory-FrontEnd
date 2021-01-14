@@ -13,17 +13,15 @@ export class PaginationService {
   paginatornumber$ = this.paginatorNumberSource.asObservable();
   pagination: any[] = [];
   numberPag: any[] = [];
-  cantidadTotalData;
   constructor() { }
 
-  paginationCount(cantidad, cantidadTotalData) {
-    this.cantidadTotalData = cantidadTotalData;
-    const numeroPaginas = Math.ceil(cantidad.count / 10);
+  paginationCount(cantidad) {
+    const numeroPaginas = Math.ceil(cantidad.totalData / cantidad.size);
     this.pagination = [];
     for (let i = 1; i <= numeroPaginas; i++) {
       this.pagination.push(i);
     }
-    this.paginatorAddedSource.next({ pag: this.pagination, cant: this.cantidadTotalData });
+    this.paginatorAddedSource.next({ pag: this.pagination, cant: cantidad});
   }
 
   paginationNumber(pag) {

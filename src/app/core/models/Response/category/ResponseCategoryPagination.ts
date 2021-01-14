@@ -1,6 +1,9 @@
 import { ResponseCategory } from './ResponseCategory.module';
 
 export class ResponseCategoryPagination {
-    count: number;
+    limitMin: number;
+    limitMax: number;
+    totalData: number;
+    size: number;
     categories: ResponseCategory[];
 }
