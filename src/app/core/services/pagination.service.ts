@@ -13,19 +13,21 @@ export class PaginationService {
   paginatornumber$ = this.paginatorNumberSource.asObservable();
   pagination: any[] = [];
   numberPag: any[] = [];
+  cantidadTotalData;
   constructor() { }
 
-  paginationCount(cantidad) {
+  paginationCount(cantidad, cantidadTotalData) {
+    this.cantidadTotalData = cantidadTotalData;
     const numeroPaginas = Math.ceil(cantidad.count / 10);
     this.pagination = [];
     for (let i = 1; i <= numeroPaginas; i++) {
       this.pagination.push(i);
     }
-    this.paginatorAddedSource.next(this.pagination);
+    this.paginatorAddedSource.next({ pag: this.pagination, cant: this.cantidadTotalData });
   }
 
   paginationNumber(pag) {
     this.numberPag = pag;
-    this.paginatorNumberSource.next( this.numberPag );
+    this.paginatorNumberSource.next(this.numberPag);
   }
 }

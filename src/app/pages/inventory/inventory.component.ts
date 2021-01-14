@@ -29,7 +29,7 @@ export class InventoryComponent implements OnInit {
   total: number = 0;
   hideFilters = false;
   page: number = 0;
-
+  cantidadTotalData;
 
 
   constructor(private serviceProduct: ProductService, private inventoryService: InventoryService,
@@ -37,7 +37,7 @@ export class InventoryComponent implements OnInit {
     private generalService: GeneralService,
     private dialog: NbDialogService,
     private fileUpload: FileUploadService,
-    private paginationService: PaginationService,) {
+    private paginationService: PaginationService) {
     this.changeDetectorRef = changeDetectorRef;
 
     this.paginationService.paginatornumber$.subscribe(data => {
@@ -60,17 +60,18 @@ export class InventoryComponent implements OnInit {
   getProductList() {
     this.inventoryService.getProductsInventoryPage(this.page).subscribe(
       product => {
+        this.cantidadTotalData = product.products.length;
         this.productList = [];
         this.product = product.products;
-        this.product.sort((a,b) => {
-          if (a.createAt < b.createAt){
+        this.product.sort((a, b) => {
+          if (a.createAt < b.createAt) {
             return 1;
           }
-          if (a.createAt > b.createAt){
+          if (a.createAt > b.createAt) {
             return -1;
           }
           return 0;
-        })
+        });
         this.total = product.products.length;
         this.product.forEach(p => {
           this.productList.push(p);
@@ -89,7 +90,7 @@ export class InventoryComponent implements OnInit {
   getProductListFilter() {
     this.inventoryService.getProductsInventoryFilters().subscribe(
       product => {
-        this.paginationService.paginationCount(product);
+        this.paginationService.paginationCount(product, this.cantidadTotalData);
         this.productListFilter = [];
         this.product = product.products;
         this.total = product.products.length;
