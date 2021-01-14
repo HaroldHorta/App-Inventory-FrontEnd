@@ -1,6 +1,9 @@
 import { ResponseProduct } from './ResponseProduct.module';
 
 export class ResponseProductPagination {
-    count: number;
+    limitMin: number;
+    limitMax: number;
+    totalData: number;
+    size: number;
     products: ResponseProduct[];
 }

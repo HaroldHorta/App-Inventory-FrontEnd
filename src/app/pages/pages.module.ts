@@ -22,7 +22,6 @@ import { SearchBarComponent } from './product/search-bar/search-bar.component';
 import { CategoryComponent } from './category/categorycomponent';
 import { CustomerComponent } from './customer/customer.component';
 import { CheckoutComponent } from './product/cart/checkout/checkout.component';
-import { OrderComponent } from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopupComponent } from './inventory/popup/popup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -92,7 +91,6 @@ import { MenssageConnetionComponent } from './general/menssage-connetion/menssag
     CategoryComponent,
     CustomerComponent,
     CheckoutComponent,
-    OrderComponent,
     InventoryComponent,
     PopupComponent,
     PopDetailsComponent,

@@ -21,8 +21,7 @@ export class ExpensesComponent implements OnInit {
   page: number = 0;
   hideFilters = false;
   connectionInternet = true;
-  cantidadTotalData;
-
+  dataPaginator;
 
   constructor(private dialog: NbDialogService, changeDetectorRef: ChangeDetectorRef,
     private expensesService: ExpensesService,  private toastrService: GeneralService,
@@ -40,14 +39,12 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
   }
 
   getExpensesList() {
     this.expensesService.getProductsExpensesPage(this.page).subscribe(
       expenses => {
-        this.cantidadTotalData = expenses.expenses.length;
+        this.dataPaginator = expenses;
         this.expenses = expenses.expenses;
         this.getExpensesListFilter();
       },
@@ -64,7 +61,7 @@ export class ExpensesComponent implements OnInit {
   getExpensesListFilter() {
     this.expensesService.getProductsExpensesFilters().subscribe(
       expenses => {
-        this.paginationService.paginationCount(expenses, this.cantidadTotalData);
+        this.paginationService.paginationCount(this.dataPaginator);
         this.expensesFilter = expenses.expenses;
       },
     );

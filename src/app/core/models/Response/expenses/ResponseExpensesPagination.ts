@@ -1,6 +1,9 @@
 import { ResponseExpenses } from "./ResponseExpenses";
 
 export class ResponseExpensesPagination {
-    count: number;
+    limitMin: number;
+    limitMax: number;
+    totalData: number;
+    size: number;
     expenses: ResponseExpenses[];
 }

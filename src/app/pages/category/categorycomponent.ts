@@ -31,8 +31,7 @@ export class CategoryComponent {
     connectionInternet = true;
     tipoDeordenList = true;
     prueba = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-    cantidadTotalData;
-
+    paginatorCategories;
 
     source: LocalDataSource = new LocalDataSource();
 
@@ -46,7 +45,6 @@ export class CategoryComponent {
             this.getCategoryList();
         });
         this.getCategoryList();
-        this.getCategoryFilter();
     }
 
     /*<i>[ini][]</i>
@@ -59,6 +57,7 @@ export class CategoryComponent {
         }
         this.serviceCategory.getCategoryPage(this.page).subscribe(
             categories => {
+                this.paginatorCategories = categories;
                 this.categories = categories.categories;
                 if (this.tipoDeordenList === true) {
                     this.categories.sort((a, b) => {
@@ -103,8 +102,8 @@ export class CategoryComponent {
     getCategoryFilter() {
         this.serviceCategory.getCategoryPageAll().subscribe(
             category => {
-                this.cantidadTotalData = category.categories.length;
-                this.paginationService.paginationCount(category, this.cantidadTotalData);
+                this.paginationService.paginationCount(this.paginatorCategories);
+
                 this.categoryFilter = category.categories;
             },
         );

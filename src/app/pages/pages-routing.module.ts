@@ -6,7 +6,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product/product.component';
 import { CategoryComponent } from './category/categorycomponent';
 import { CustomerComponent } from './customer/customer.component';
-import { OrderComponent } from './order/order.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
@@ -32,10 +31,6 @@ const routes: Routes = [{
     {
       path: 'customer',
       component: CustomerComponent,
-    },
-    {
-      path: 'order',
-      component: OrderComponent,
     },
     {
       path: 'product',

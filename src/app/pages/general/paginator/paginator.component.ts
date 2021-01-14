@@ -18,12 +18,10 @@ export class PaginatorComponent implements OnInit {
   ngOnInit(): void {
     this.paginationService.paginatorAdded$.subscribe(data => {
       this.pagination = data.pag;
-      this.cantidadTotalData = data.cant;
-      this.limitemax = data.cant;
-      if (this.limitemax > 10) {
-        this.limitemax = 10;
-      }
-      this.limitemin = 1;
+      this.cantidadTotalData = data.cant.totalData;
+      this.limitemax =data.cant.limitMax;
+      this.limitemin =data.cant.limitMin;
+
     });
   }
 

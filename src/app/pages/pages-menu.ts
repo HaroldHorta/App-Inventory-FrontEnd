@@ -18,11 +18,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'customer',
   },
   {
-    title: 'Orden',
-    icon: 'attach-2-outline',
-    link: 'order',
-  },
-  {
     title: 'Productos',
     icon: 'gift-outline',
     link: 'product',

@@ -15,8 +15,7 @@ export class CashRegisterHistoricComponent implements OnInit {
   cashRegistersFilters: ResponseCashRegister[];
   changeDetectorRef: ChangeDetectorRef;
   page: number = 0;
-  cantidadTotalData;
-
+  dataPaginator;
 
 
   constructor(private cashBaseService: CashRegisterBaseService,
@@ -28,7 +27,6 @@ export class CashRegisterHistoricComponent implements OnInit {
       this.page = data;
       this.changeDetectorRef.detectChanges();
       this.getCashRegisterList();
-      this.getCashRegisterListFilter();
     });
     this.getCashRegisterList();
 
@@ -45,7 +43,7 @@ export class CashRegisterHistoricComponent implements OnInit {
   getCashRegisterList() {
     this.cashBaseService.getProductsExpensesPage(this.page).subscribe(
       cashRegisters => {
-        this.cantidadTotalData = cashRegisters.cashRegisters.length;
+        this.dataPaginator = cashRegisters;
         this.cashRegisters = cashRegisters.cashRegisters;
         this.getCashRegisterListFilter();
       },
@@ -62,7 +60,7 @@ export class CashRegisterHistoricComponent implements OnInit {
   getCashRegisterListFilter() {
     this.cashBaseService.getProductsExpensesFilters().subscribe(
       cashRegisters => {
-        this.paginationService.paginationCount(cashRegisters, this.cantidadTotalData);
+        this.paginationService.paginationCount( this.dataPaginator);
         this.cashRegistersFilters = cashRegisters.cashRegisters;
       },
     );
