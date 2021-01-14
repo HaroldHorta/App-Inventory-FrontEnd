@@ -2,29 +2,21 @@
     <nb-card-header>Producto</nb-card-header>
     <nb-card-body>
         <p *ngIf="checkOutForm.get('description').errors && checkOutForm.get('description').dirty" class="messageError">
-            *
-            Campo Obligatorio</p>
-        <textarea nbInput rows="3" formControlName="description" fullWidth shape="round"
-            placeholder="Descripción"></textarea>
+            * Campo Obligatorio</p>
+        <textarea nbInput rows="3" formControlName="description" fullWidth shape="round" placeholder="Descripción"></textarea>
         <p *ngIf="checkOutForm.get('images').errors && checkOutForm.get('images').dirty" class="messageError">
-            *
-            Campo Obligatorio</p>
+            * Campo Obligatorio</p>
 
         <img *ngFor='let url of urls' [src]="url" height="200" width="200"> <br />
-        <input nbInput type="file" formControlName="images" class="form-group" fullWidth
-            (change)="onSelectFile($event)">
+        <input nbInput type="file" formControlName="images" class="form-group" fullWidth (change)="onSelectFile($event)">
         <p *ngIf="checkOutForm.get('price').errors && checkOutForm.get('price').dirty" class="messageError">
-            *
-            Campo Obligatorio</p>
+            * Campo Obligatorio</p>
         <img *ngFor="" alt="">
         <input nbInput type="text" formControlName="price" placeholder="Precio factura" class="form-group" fullWidth onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 
     </nb-card-body>
     <nb-card-footer>
-        <button style="width: 45%;" class="btn btn-outline-success form-group" type="submit"
-            (click)="addExpenses(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success"
-            nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Enviar</button>
-        <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton
-            (click)="cancel()">Cancel</button>
+        <button class="btn btn-outline-success col-md-6" style="width: 45%;" type="submit" (click)="addExpenses(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Enviar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cerrar</button>
     </nb-card-footer>
 </nb-card>

@@ -33,22 +33,18 @@
             <nb-card>
                 <nb-card-header>
                     <div class="row">
-                        <div class="col-md-2 center">#</div>
-                        <div class="col-md-6 center">Nombre de la categoría</div>
-                        <div class="col-md-4 center">Acciones</div>
+                        <div class="col-md-8 center ">Nombre de la categoría</div>
+                        <div class="col-md-4 center ">Acciones</div>
                     </div>
                 </nb-card-header>
                 <nb-list *ngIf="!hideFilters">
-                    <nb-list-item *ngFor="let cate of categories, let indice=index">
-                        <span class="col-md-2 center">{{indice+1}}</span>
-                        <span class="col-md-6 center">{{cate?.description}}</span>
-                        <span class="col-md-4 center">
+                    <nb-list-item *ngFor="let cate of categories">
+                        <span class="col-md-8 center">{{cate?.description}}</span>
+                        <span class="col-md-4 center ">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"
                                         nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
-                                </div>
-                                <div class="col-md-6">
                                     <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
                                         nbTooltipStatus="danger" icon="trash-2-outline"
                                         (click)="onDeleteConfirm($event, cate.id)"></nb-icon>

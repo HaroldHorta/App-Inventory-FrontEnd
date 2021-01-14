@@ -38,9 +38,9 @@
         <textarea nbInput rows="5" formControlName="description" fullWidth shape="round" [ngModel]="productEdit.description"></textarea>
     </nb-card-body>
     <nb-card-footer>
-        <button *ngIf="!productEdit" style="width: 45%;" class="btn btn-outline-success form-group" type="submit" (click)="addProduct(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Enviar</button>
+        <button *ngIf="!productEdit" class="btn btn-outline-success" style="width: 45%;" type="submit" (click)="addProduct(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Enviar</button>
         <button *ngIf="productEdit" style="width: 45%;" class="btn btn-outline-warning form-group" type="submit" (click)="updateProduct(productEdit.id,checkOutFormEdit.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
             [disabled]="disabledUpdate">Actualizar</button>
-        <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cancel</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cancelar</button>
     </nb-card-footer>
 </nb-card>
