@@ -23,7 +23,6 @@ export class CustomerComponent {
   page: number = 0;
   changeDetectorRef: ChangeDetectorRef;
   connectionInternet = true;
-  prueba = 1;
   dataPaginator;
 
   constructor(private dialog: NbDialogService, private serviceCustomer: CustomerService, private toastrService: GeneralService,
@@ -41,45 +40,20 @@ export class CustomerComponent {
 *@author [CadenaCristian]
 *@since 26/12/2020
 *metodo que lista os clientes por paginacion*/
-  getCustomerList(prueba?) {
+  getCustomerList(ordenList?) {
+    console.log(ordenList)
     this.serviceCustomer.getCustomerPage(this.page).subscribe(
       customers => {
         this.dataPaginator = customers;
         this.customers = customers.customers;
-        if (this.prueba === 1) {
-          this.customers.sort((a, b) => {
-            if (a.name > b.name) {
-              return 1;
-            }
-            if (a.name < b.name) {
-              return -1;
-            }
-            return 0;
-          });
-          this.getCustomerFilter();
-        } else if (this.prueba === 2) {
-          this.customers.sort((a, b) => {
-            if (a.name < b.name) {
-              return 1;
-            }
-            if (a.name > b.name) {
-              return -1;
-            }
-            return 0;
-          });
-          this.getCustomerFilter();
+        if (ordenList == true) {
+          console.log("true")
+          this.ordenAlfabetico();
         } else {
-          this.customers.sort((a, b) => {
-            if (a.phone < b.phone) {
-              return 1;
-            }
-            if (a.phone > b.phone) {
-              return -1;
-            }
-            return 0;
-          });
-          this.getCustomerFilter();
+          console.log("false")
+          this.ordenMasNuevaMasReciente();
         }
+        this.getCustomerFilter();
       },
       (err) => {
         if (err.status === 0) {
@@ -168,7 +142,6 @@ export class CustomerComponent {
 
 
   onSelectChange(event) {
-
     if (event === '') {
       this.hideFilters = false;
     }
@@ -176,7 +149,35 @@ export class CustomerComponent {
       this.hideFilters = true;
     }
 
+    /*<i>[ini][EQUIDOG-6]</i>
+ *@author [HaroldHorta]
+ *@since 19/01/2021
+ *Medoto que ordena por orden alfabetico */
   }
+  ordenAlfabetico() {
+    this.customers.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    })
+  }
+  /*<i>[fin][EQUIDOG-6]</i>
+      *@author [HaroldHorta]
+      *@since 19/01/2021*/
+
+  /*<i>[ini][EQUIDOG-6]</i>
+   *@author [HaroldHorta]
+   *@since 19/01/2021
+   *Medoto que le da la vuelta al arreglo */
+  ordenMasNuevaMasReciente() {
+    this.customers.reverse();
+  }
+  /*<i>[fin][EQUIDOG-6]</i>
+      *@author [HaroldHorta]
+      *@since 19/01/2021*/
 }
 
 

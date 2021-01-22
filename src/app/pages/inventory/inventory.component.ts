@@ -55,21 +55,17 @@ export class InventoryComponent implements OnInit {
   *@since 23/12/2020
   *Metodo que permite obtener y listar todos los datos correspondientes a los productos, por medio de un service getProducts que es
   *invocado desde el serviceProduct */
-  getProductList() {
+  getProductList(ordenList?) {
     this.inventoryService.getProductsInventoryPage(this.page).subscribe(
       product => {
-      this.dataPaginator = product;
+        this.dataPaginator = product;
         this.productList = [];
         this.product = product.products;
-        this.product.sort((a, b) => {
-          if (a.createAt < b.createAt) {
-            return 1;
-          }
-          if (a.createAt > b.createAt) {
-            return -1;
-          }
-          return 0;
-        });
+        if(ordenList == true){
+          this.ordenAlfabetico();
+        }else {
+          this.ordenMasNuevoMasAntiguo();
+        }
         this.total = product.products.length;
         this.product.forEach(p => {
           this.productList.push(p);
@@ -237,6 +233,21 @@ export class InventoryComponent implements OnInit {
     if (event !== '') {
       this.hideFilters = true;
     }
-
   }
+
+  ordenAlfabetico() {
+    this.product.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 0;
+    })
+  }
+  ordenMasNuevoMasAntiguo() {
+    this.product.reverse();
+  }
+
 }

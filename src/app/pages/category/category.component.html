@@ -3,9 +3,9 @@
         <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCategoria" autocomplete="on" placeholder="Buscar nombre de la categoría" (ngModelChange)='onSelectChange($event)'>
     </div>
     <div class="col-md-4">
-        <nb-select selected="1" class="col-md-12">
-            <nb-option value="1" (click)="getCategoryList(tipoDeordenList=true)">Orden alfabetico</nb-option>
-            <nb-option value="2" (click)="getCategoryList(tipoDeordenList=false)">De mas nuevo a mas antiguo</nb-option>
+        <nb-select selected="2" class="col-md-12">
+            <nb-option value="1" (click)="getCategoryList(true)">Orden alfabetico</nb-option>
+            <nb-option value="2" (click)="getCategoryList(false)">De mas nuevo a mas antiguo</nb-option>
         </nb-select>
     </div>
     <div class="col-md-4">
@@ -40,7 +40,7 @@
                 <nb-list *ngIf="!hideFilters">
                     <nb-list-item *ngFor="let cate of categories">
                         <span class="col-md-8 center">{{cate?.description}}</span>
-                        <span class="col-md-4 center ">
+                        <span class="col-md-4 center">
                             <div class="row">
                                 <div class="col-md-12">
                                     <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"

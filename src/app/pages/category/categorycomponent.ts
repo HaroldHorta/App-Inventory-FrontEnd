@@ -29,8 +29,6 @@ export class CategoryComponent {
     changeDetectorRef: ChangeDetectorRef;
     categoryFilter: ResponseCategory[];
     connectionInternet = true;
-    tipoDeordenList = true;
-    prueba = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     paginatorCategories;
 
     source: LocalDataSource = new LocalDataSource();
@@ -52,33 +50,15 @@ export class CategoryComponent {
 *@since 26/12/2020
 *Este metodo permite obtener y listar todas las categorias que tenemos creadas*/
     getCategoryList(tipoDeordenList?) {
-        for (let i = 0; i < this.prueba.length; i++) {
-
-        }
+        console.log("este es:",tipoDeordenList)
         this.serviceCategory.getCategoryPage(this.page).subscribe(
             categories => {
                 this.paginatorCategories = categories;
                 this.categories = categories.categories;
-                if (this.tipoDeordenList === true) {
-                    this.categories.sort((a, b) => {
-                        if (a.description > b.description) {
-                            return 1;
-                        }
-                        if (a.description < b.description) {
-                            return -1;
-                        }
-                        return 0;
-                    });
-                } else {
-                    this.categories.sort((a, b) => {
-                        if (a.createAt < b.createAt) {
-                            return 1;
-                        }
-                        if (a.createAt > b.createAt) {
-                            return -1;
-                        }
-                        return 0;
-                    });
+                if(tipoDeordenList === true){
+                    this.OrdenListAlfabetico();
+                }else{
+                    this.OrdenListNuevaAntiguo();
                 }
                 this.getCategoryFilter();
             },
@@ -174,4 +154,40 @@ export class CategoryComponent {
             this.hideFilters = true;
         }
     }
+
+    /*<i>[ini][EQUIDOG-6]</i>
+   *@author [HaroldHorta]
+   *@since 19/01/2021
+   *Medoto que ordena del registro mas nuevo al mas antiguo*/
+    OrdenListNuevaAntiguo() {
+        this.categories.sort((a, b) => {
+            if (a.createAt < b.createAt) {
+                return 1;
+            } if (a.createAt > b.createAt) {
+                return -1;
+            }
+            return 0;
+        })
+    }
+    /*<i>[fin][EQUIDOG-6]</i>
+      *@author [HaroldHorta]
+      *@since 19/01/2021*/
+
+    /*<i>[ini][EQUIDOG-6]</i>
+   *@author [HaroldHorta]
+   *@since 19/01/2021
+   *Medoto que ordena por orden alfabetico */
+    OrdenListAlfabetico(){
+        this.categories.sort((a,b) => {
+            if(a.description > b.description){
+                return 1;
+            } if(a.description < b.description){
+                return -1;
+            }
+            return 0;
+        })
+    }
+    /*<i>[fin][EQUIDOG-6]</i>
+      *@author [HaroldHorta]
+      *@since 19/01/2021*/
 }

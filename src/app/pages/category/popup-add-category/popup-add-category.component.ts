@@ -16,6 +16,8 @@ export class PopupAddCategoryComponent implements OnInit {
   checkOutEdit: FormGroup;
   category: ResponseCategory[];
   categoryEdit: ResponseCategory;
+  disableButton = false;
+  loadingLargeGroup = false;
 
   constructor(protected ref: NbDialogRef<PopupAddCategoryComponent>, private formBuilder: FormBuilder,
     private toastrService: GeneralService, private serviceCategory: CategoryService) {
@@ -47,6 +49,8 @@ export class PopupAddCategoryComponent implements OnInit {
 *Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados y este
 metodo se usa para agregar una categoria*/
   onCreateConfirm(event) {
+    this.disableButton = true;
+    this.loadingLargeGroup = true;
     if (event.description === '') {
       const type = 'danger';
       const quote = { title: null, body: 'La Categoría no puede ir vacia' };
@@ -79,6 +83,7 @@ metodo se usa para agregar una categoria*/
 *Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados, este metodo
 se usa para editar una categoria existente*/
   onSaveConfirm(id, category): void {
+    this.loadingLargeGroup = true;
     if (category.description === '') {
       const type = 'danger';
       const quote = { title: null, body: 'La Categoría no puede ir vacia' };

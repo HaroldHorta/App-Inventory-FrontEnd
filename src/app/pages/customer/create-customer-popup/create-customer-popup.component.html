@@ -42,10 +42,9 @@
 
 
     <nb-card-footer>
-        <button *ngIf="!customerEdit" class="btn btn-outline-success col-md-6" style="width: 45%;" (click)="addCustomer(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Guardar</button>
+        <button *ngIf="!customerEdit" class="btn btn-outline-success col-md-6" style="width: 45%;" (click)="addCustomer(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Guardar</button>
 
-        <button *ngIf="customerEdit" style="width: 45%;" class="btn btn-outline-success form-group" (click)="updateCustomer(customerEdit.id, checkOutFormEdit.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage=""
-            [disabled]="!checkOutFormEdit.valid || disabledUpdate">Actualizar</button>
-        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cancelar</button>
+        <button *ngIf="customerEdit" style="width: 45%;" class="btn btn-outline-success" (click)="updateCustomer(customerEdit.id, checkOutFormEdit.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutFormEdit.valid || disabledUpdate">Actualizar</button>
+        <button class="btn btn-outline-danger" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cancelar</button>
     </nb-card-footer>
 </nb-card>

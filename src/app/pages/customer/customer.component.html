@@ -3,10 +3,9 @@
         <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchCustomer" autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChange($event)'>
     </div>
     <div class="col-md-4">
-        <nb-select selected="1" class="col-md-12">
-            <nb-option value="1" (click)="getCustomerList(prueba=1)">Orden de la A - Z</nb-option>
-            <nb-option value="2" (click)="getCustomerList(prueba=2)">Orden de la Z - A</nb-option>
-            <nb-option value="3" (click)="getCustomerList(prueba=3)">Orden del mas reciente al mas antiguo</nb-option>
+        <nb-select selected="2" class="col-md-12">
+            <nb-option value="1" (click)="getCustomerList(true)">Orden de la A - Z</nb-option>
+            <nb-option value="2" (click)="getCustomerList(false)">Orden del mas reciente al mas antiguo</nb-option>
         </nb-select>
     </div>
     <div class="col-md-4">
