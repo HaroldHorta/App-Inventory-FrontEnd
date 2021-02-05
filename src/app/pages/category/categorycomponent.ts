@@ -50,14 +50,13 @@ export class CategoryComponent {
 *@since 26/12/2020
 *Este metodo permite obtener y listar todas las categorias que tenemos creadas*/
     getCategoryList(tipoDeordenList?) {
-        console.log("este es:",tipoDeordenList)
         this.serviceCategory.getCategoryPage(this.page).subscribe(
             categories => {
                 this.paginatorCategories = categories;
                 this.categories = categories.categories;
-                if(tipoDeordenList === true){
+                if (tipoDeordenList === true) {
                     this.OrdenListAlfabetico();
-                }else{
+                } else {
                     this.OrdenListNuevaAntiguo();
                 }
                 this.getCategoryFilter();
@@ -167,7 +166,7 @@ export class CategoryComponent {
                 return -1;
             }
             return 0;
-        })
+        });
     }
     /*<i>[fin][EQUIDOG-6]</i>
       *@author [HaroldHorta]
@@ -177,15 +176,15 @@ export class CategoryComponent {
    *@author [HaroldHorta]
    *@since 19/01/2021
    *Medoto que ordena por orden alfabetico */
-    OrdenListAlfabetico(){
-        this.categories.sort((a,b) => {
-            if(a.description > b.description){
+    OrdenListAlfabetico() {
+        this.categories.sort((a, b) => {
+            if (a.description > b.description) {
                 return 1;
-            } if(a.description < b.description){
+            } if (a.description < b.description) {
                 return -1;
             }
             return 0;
-        })
+        });
     }
     /*<i>[fin][EQUIDOG-6]</i>
       *@author [HaroldHorta]

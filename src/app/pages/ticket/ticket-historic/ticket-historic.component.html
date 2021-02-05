@@ -8,7 +8,8 @@
                 <span>Tipo de pago</span>
                 <span>Estado del ticket</span>
                 <span>Número de productos</span>
-                <span>Valor</span>
+                <span>Valor total</span>
+                <span>Saldo pendiente</span>
                 <span>Acciones</span>
             </nb-card-header>
             <nb-list>
@@ -17,11 +18,12 @@
                     <span>{{ item?.createAt }}</span>
                     <span>{{item?.customer.name}}</span>
                     <span>{{ item?.paymentType }}</span>
-                    <span [ngClass]="{active: item.ticketStatus === 'PAYED', inactive: item.ticketStatus !== 'PAYED'}">{{item?.ticketStatus}}</span>
+                    <span [ngClass]="{active: item.ticketStatus === 'PAGADA', inactive: item.ticketStatus !== 'PAGADA'}">{{item?.ticketStatus}}</span>
                     <span>{{item.items}}</span>
                     <span>$ {{item?.ticketCost}}</span>
-                    <nb-icon class="changeMouse" status="danger" nbTooltip="Click para abonar" nbTooltipStatus="danger" *ngIf="item.ticketStatus === 'CREDIT'" icon="trending-up-outline" (click)="openCreditCapital(item)"></nb-icon>
-                    <nb-icon class="changeMouse" status="primary" nbTooltip="Ticket pagado" nbTooltipStatus="primary" *ngIf="item.ticketStatus === 'PAYED'" icon="done-all-outline"></nb-icon>
+                    <span>$ {{item?.outstandingBalance}}</span>
+                    <nb-icon class="changeMouse" status="danger" nbTooltip="Click para abonar" nbTooltipStatus="danger" *ngIf="item.ticketStatus === 'CREDITO'" icon="trending-up-outline" (click)="openCreditCapital(item)"></nb-icon>
+                    <nb-icon class="changeMouse" status="primary" nbTooltip="Ticket pagado" nbTooltipStatus="primary" *ngIf="item.ticketStatus === 'PAGADA'" icon="done-all-outline"></nb-icon>
                 </nb-list-item>
             </nb-list>
         </nb-card>

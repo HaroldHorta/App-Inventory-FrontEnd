@@ -24,7 +24,7 @@ export class TicketHistoricComponent implements OnInit {
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 27/12/2020
-  *Este metodo se encarga de mostrar todos los detalles y campos que tiene cada ticket, es una vista mas 
+  *Este metodo se encarga de mostrar todos los detalles y campos que tiene cada ticket, es una vista mas
   *completa de la informacion correpondiente a cada ticket, funciona recibiendo un ID y listando los
   *datos de ese ID recibido*/
   openDetails(ticket) {
@@ -46,7 +46,7 @@ export class TicketHistoricComponent implements OnInit {
       this.ngOnInit();
     });
   }
-}
   /*<i>[fin][]</i>
- *@author [CadenaCristian]
- *@since 27/12/2020*/
+*@author [CadenaCristian]
+*@since 27/12/2020*/
+}

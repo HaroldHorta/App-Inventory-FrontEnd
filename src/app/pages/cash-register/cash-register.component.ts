@@ -60,8 +60,7 @@ export class CashRegisterComponent implements OnInit {
     this.hideHistory = !this.hideHistory;
   }
 
+  /*<i>[fin][]</i>
+   *@author [CadenaCristian]
+   *@since 26/12/2020*/
 }
-
-/*<i>[fin][]</i>
- *@author [CadenaCristian]
- *@since 26/12/2020*/

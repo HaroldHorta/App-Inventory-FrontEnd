@@ -16,7 +16,7 @@ export class TicketConsultCreditComponent implements OnInit {
 
   ngOnInit(): void {
     this.ticket;
-    this.ticket = this.ticket.filter(t => t.ticketStatus === 'CREDIT');
+    this.ticket = this.ticket.filter(t => t.ticketStatus === 'CREDITO');
   }
 
 

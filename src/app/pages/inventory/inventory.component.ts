@@ -61,9 +61,9 @@ export class InventoryComponent implements OnInit {
         this.dataPaginator = product;
         this.productList = [];
         this.product = product.products;
-        if(ordenList == true){
+        if (ordenList) {
           this.ordenAlfabetico();
-        }else {
+        } else {
           this.ordenMasNuevoMasAntiguo();
         }
         this.total = product.products.length;
@@ -244,7 +244,7 @@ export class InventoryComponent implements OnInit {
         return -1;
       }
       return 0;
-    })
+    });
   }
   ordenMasNuevoMasAntiguo() {
     this.product.reverse();

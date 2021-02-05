@@ -13,8 +13,8 @@ export class TicketCreditCapitalsComponent implements OnInit {
 
   ticket;
   checkOutForm: FormGroup;
-  typePayment = ['CASH', 'TRANSACTION'];
-  payment: string = 'CASH';
+  typePayment = ['EFECTIVO', 'TRANSACCION'];
+  payment: string = 'EFECTIVO';
   loadingLargeGroup = false;
 
   constructor(private formBuilder: FormBuilder, private ticketService: TicketService,
@@ -41,13 +41,13 @@ export class TicketCreditCapitalsComponent implements OnInit {
       this.ref.close();
       this.loadingLargeGroup = false;
       const type = 'success';
-      const quote = { title: null, body: 'Guardado exitoso' };
+      const quote = { title: 'Exitoso', body: 'Guardado exitoso' };
       this.generalService.showToast(type, quote.title, quote.body);
 
     },
       (err) => {
         const type = 'danger';
-        const quote = { title: null, body: err.error.detailMessage };
+        const quote = { title: 'Fallo', body: err.error.detailMessage };
         this.generalService.showToast(type, quote.title, quote.body);
       });
   }
