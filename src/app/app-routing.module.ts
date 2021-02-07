@@ -8,8 +8,8 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
-import { CheckoutComponent } from './pages/product/cart/checkout/checkout.component';
-import { TicketGeneratorComponent } from './pages/ticket/ticket-generator/ticket-generator.component';
+import { TicketGeneratorComponent } from './pages/invetoryProduct/ticket/ticket-generator/ticket-generator.component';
+import { CheckoutComponent } from './pages/invetoryProduct/product/cart/checkout/checkout.component';
 
 export const routes: Routes = [
   {

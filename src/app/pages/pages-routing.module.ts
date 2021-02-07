@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProductComponent } from './product/product.component';
-import { CategoryComponent } from './category/categorycomponent';
-import { CustomerComponent } from './customer/customer.component';
-import { InventoryComponent } from './inventory/inventory.component';
-import { TicketComponent } from './ticket/ticket.component';
-import { CashRegisterComponent } from './cash-register/cash-register.component';
-import { ExpensesComponent } from './expenses/expenses.component';
+import { ProductComponent } from './invetoryProduct/product/product.component';
+import { CustomerComponent } from './invetoryProduct/customer/customer.component';
+import { InventoryComponent } from './invetoryProduct/inventory/inventory.component';
+import { TicketComponent } from './invetoryProduct/ticket/ticket.component';
+import { CashRegisterComponent } from './invetoryProduct/cash-register/cash-register.component';
+import { ExpensesComponent } from './invetoryProduct/expenses/expenses.component';
+import { CategoryComponent } from './invetoryProduct/category/categorycomponent';
 
 const routes: Routes = [{
   path: '',
