@@ -10,6 +10,7 @@ import { TicketComponent } from './invetoryProduct/ticket/ticket.component';
 import { CashRegisterComponent } from './invetoryProduct/cash-register/cash-register.component';
 import { ExpensesComponent } from './invetoryProduct/expenses/expenses.component';
 import { CategoryComponent } from './invetoryProduct/category/categorycomponent';
+import { BreedComponent } from './clinicHistory/breed/breed.component';
 
 const routes: Routes = [{
   path: '',
@@ -51,6 +52,10 @@ const routes: Routes = [{
     {
       path: 'expenses',
       component: ExpensesComponent,
+    },
+    {
+      path: 'breed',
+      component: BreedComponent,
     },
   ],
 },

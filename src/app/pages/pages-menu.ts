@@ -66,21 +66,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-open-outline',
     children: [
       {
-        title: 'Ingresar',
-        link: '/auth/login',
+        title: 'Razas',
+        icon: 'radio-button-off-outline',
+        link: 'breed',
       },
-      {
-        title: 'Registrar',
-        link: '/auth/register',
-      },
-      {
-        title: 'Solicitud de contraseña',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Cambiar contraseña',
-        link: '/auth/reset-password',
-      },
+      
     ],
   },
 ];

@@ -12,5 +12,9 @@ export const endpoint = {
     CashBase: `${environment.serverUrl}/cash`,
     Expenses: `${environment.serverUrl}/expenses`,
 
+    // modulo de clinica
+
+    Breed: `${environment.serverUrl}/breed`,
+
 
 };

@@ -31,8 +31,6 @@ export class CategoryComponent {
     connectionInternet = true;
     paginatorCategories;
 
-    source: LocalDataSource = new LocalDataSource();
-
     constructor(private serviceCategory: CategoryService,
         private toastrService: GeneralService, private dialogService: NbDialogService, private paginationService: PaginationService,
         changeDetectorRef: ChangeDetectorRef) {

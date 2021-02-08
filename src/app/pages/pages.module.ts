@@ -48,6 +48,10 @@ import { PaginatorComponent } from './general/paginator/paginator.component';
 import { PopupAddCategoryComponent } from './invetoryProduct/category/popup-add-category/popup-add-category.component';
 import { MenssageConnetionComponent } from './general/menssage-connetion/menssage-connetion.component';
 import { ProductComponent } from './invetoryProduct/product/product.component';
+import { BreedComponent } from './clinicHistory/breed/breed.component';
+import { SpeciesComponent } from './clinicHistory/species/species.component';
+import { PetComponent } from './clinicHistory/pet/pet.component';
+import { PopupAddBreedComponent } from './clinicHistory/breed/popup-add-breed/popup-add-breed.component';
 
 @NgModule({
   imports: [
@@ -114,6 +118,10 @@ import { ProductComponent } from './invetoryProduct/product/product.component';
     PaginatorComponent,
     PopupAddCategoryComponent,
     MenssageConnetionComponent,
+    BreedComponent,
+    SpeciesComponent,
+    PetComponent,
+    PopupAddBreedComponent,
 
   ],
 })
