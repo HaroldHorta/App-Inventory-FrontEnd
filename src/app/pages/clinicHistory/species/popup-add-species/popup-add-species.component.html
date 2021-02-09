@@ -1,0 +1,14 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Especie</nb-card-header>
+    <nb-card-body *ngIf="!speciesEdit">
+        <input nbInput type="text" formControlName="description" placeholder="Nombre especie">
+    </nb-card-body>
+    <nb-card-body *ngIf="speciesEdit" [formGroup]="checkOutEdit">
+        <input nbInput type="text" formControlName="description" [ngModel]="speciesEdit.description">
+    </nb-card-body>
+    <nb-card-footer>
+        <button *ngIf="!speciesEdit" class="btn btn-outline-success " style="width: 45%;" (click)="onCreateConfirm(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disableButton">Enviar</button>
+        <button *ngIf="speciesEdit" class="btn btn-outline-warning " style="width: 45%;" (click)="onSaveConfirm(speciesEdit.id,checkOutEdit.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="">Actualizar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

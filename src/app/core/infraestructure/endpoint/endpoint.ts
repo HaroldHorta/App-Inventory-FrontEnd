@@ -15,6 +15,7 @@ export const endpoint = {
     // modulo de clinica
 
     Breed: `${environment.serverUrl}/breed`,
+    Species: `${environment.serverUrl}/species`,
 
 
 };

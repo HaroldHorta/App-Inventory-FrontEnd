@@ -52,6 +52,7 @@ import { BreedComponent } from './clinicHistory/breed/breed.component';
 import { SpeciesComponent } from './clinicHistory/species/species.component';
 import { PetComponent } from './clinicHistory/pet/pet.component';
 import { PopupAddBreedComponent } from './clinicHistory/breed/popup-add-breed/popup-add-breed.component';
+import { PopupAddSpeciesComponent } from './clinicHistory/species/popup-add-species/popup-add-species.component';
 
 @NgModule({
   imports: [
@@ -122,6 +123,7 @@ import { PopupAddBreedComponent } from './clinicHistory/breed/popup-add-breed/po
     SpeciesComponent,
     PetComponent,
     PopupAddBreedComponent,
+    PopupAddSpeciesComponent,
 
   ],
 })

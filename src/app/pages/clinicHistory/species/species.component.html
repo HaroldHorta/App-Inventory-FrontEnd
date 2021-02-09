@@ -1,1 +1,59 @@
-<p>species works!</p>
+<div class="row">
+    <div class="col-md-4">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchSpecies" autocomplete="on" placeholder="Buscar nombre de la especie" (ngModelChange)='onSelectChange($event)'>
+    </div>
+    <div class="col-md-4">
+        <nb-select selected="2" class="col-md-12">
+            <nb-option value="1" (click)="getSpeciesList(true)">Orden alfabetico</nb-option>
+            <nb-option value="2" (click)="getSpeciesList(false)">De mas nuevo a mas antiguo</nb-option>
+        </nb-select>
+    </div>
+    <div class="col-md-4">
+        <button class="col-md-12 btn btn-outline-primary form-group" type="button" nbTooltip="Agregar Especie" nbTooltipStatus="primary" (click)="modalAdd()">
+            Agregar Especie <nb-icon status="'primary'" icon="plus-circle-outline"></nb-icon>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="!connectionInternet">
+    <ngx-menssage-connetion></ngx-menssage-connetion>
+</div>
+
+<div *ngIf="connectionInternet">
+    <div *ngIf="!species">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Especies</nb-card-header>
+            <nb-card-body>
+                <h6>No se han encontrado especie registradas</h6>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="row" *ngIf="species">
+        <div class="col-md-12">
+            <nb-card>
+                <nb-card-header>
+                    <div class="row">
+                        <div class="col-md-8 center ">Nombre de la especie</div>
+                        <div class="col-md-4 center ">Acciones</div>
+                    </div>
+                </nb-card-header>
+                <nb-list *ngIf="!hideFilters">
+                    <nb-list-item *ngFor="let cate of species | filter:searchSpecies">
+                        <span class="col-md-8 center">{{cate?.description}}</span>
+                        <span class="col-md-4 center">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <nb-icon class="changeMouse" status="warning" (click)="modalEdit(cate)"
+                                        nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
+                                    <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
+                                        nbTooltipStatus="danger" icon="trash-2-outline"
+                                        (click)="onDeleteConfirm($event, cate.id)"></nb-icon>
+                                </div>
+                            </div>
+                        </span>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card>
+        </div>
+    </div>
+</div>

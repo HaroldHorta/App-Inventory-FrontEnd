@@ -70,7 +70,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'radio-button-off-outline',
         link: 'breed',
       },
-      
+      {
+        title: 'Especies',
+        icon: 'radio-button-off-outline',
+        link: 'species',
+      },
+
     ],
   },
 ];

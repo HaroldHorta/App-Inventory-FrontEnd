@@ -11,6 +11,7 @@ import { CashRegisterComponent } from './invetoryProduct/cash-register/cash-regi
 import { ExpensesComponent } from './invetoryProduct/expenses/expenses.component';
 import { CategoryComponent } from './invetoryProduct/category/categorycomponent';
 import { BreedComponent } from './clinicHistory/breed/breed.component';
+import { SpeciesComponent } from './clinicHistory/species/species.component';
 
 const routes: Routes = [{
   path: '',
@@ -56,6 +57,10 @@ const routes: Routes = [{
     {
       path: 'breed',
       component: BreedComponent,
+    },
+    {
+      path: 'species',
+      component: SpeciesComponent,
     },
   ],
 },

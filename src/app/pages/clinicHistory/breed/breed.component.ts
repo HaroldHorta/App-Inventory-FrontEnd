@@ -9,13 +9,13 @@ import { PopupAddBreedComponent } from './popup-add-breed/popup-add-breed.compon
 @Component({
   selector: 'ngx-breed',
   templateUrl: './breed.component.html',
-  styleUrls: ['./breed.component.scss']
+  styleUrls: ['./breed.component.scss'],
 })
 export class BreedComponent implements OnInit {
 
   hideFilters = false;
   breed: ResponseBreed[];
-  searchBreed;
+  searchbreed;
   page: number = 0;
   changeDetectorRef: ChangeDetectorRef;
   breedFilter: ResponseBreed[];
@@ -45,7 +45,6 @@ export class BreedComponent implements OnInit {
           breed => {
               this.paginatorBreed = breed;
               this.breed = breed.breeds;
-              console.log(this.breed)
               if (tipoDeordenList === true) {
                   this.OrdenListAlfabetico();
               } else {

@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
-import { ResponseBreed } from '../../../../core/models/Response/breed/ResponseBreed';
-import { BreedService } from '../../../../core/services/breed.service';
+import { ResponseSpecies } from '../../../../core/models/Response/species/ResponseSpecies';
 import { GeneralService } from '../../../../core/services/general.service';
+import { SpeciesService } from '../../../../core/services/species.service';
 
 @Component({
-  selector: 'ngx-popup-add-breed',
-  templateUrl: './popup-add-breed.component.html',
-  styleUrls: ['./popup-add-breed.component.scss'],
+  selector: 'ngx-popup-add-species',
+  templateUrl: './popup-add-species.component.html',
+  styleUrls: ['./popup-add-species.component.scss'],
 })
-export class PopupAddBreedComponent implements OnInit {
+export class PopupAddSpeciesComponent implements OnInit {
 
+
+  speciesEdit: ResponseSpecies;
   checkOutForm: FormGroup;
   checkOutEdit: FormGroup;
-  breed: ResponseBreed[];
-  breedEdit: ResponseBreed;
+  species: ResponseSpecies[];
   disableButton = false;
   loadingLargeGroup = false;
 
-  constructor(protected ref: NbDialogRef<PopupAddBreedComponent>, private formBuilder: FormBuilder,
-    private toastrService: GeneralService, private serviceBreed: BreedService) {
+  constructor(protected ref: NbDialogRef<PopupAddSpeciesComponent>, private formBuilder: FormBuilder,
+    private toastrService: GeneralService, private serviceSpecies: SpeciesService) {
     this.checkOutForm = this.formBuilder.group({
       description: ['', [Validators.required]],
     });
@@ -47,20 +48,20 @@ export class PopupAddBreedComponent implements OnInit {
 *@author [CadenaCristian]
 *@since 03/01/2021
 *Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones que el trae predeterminados y este
-metodo se usa para agregar una raza*/
+metodo se usa para agregar una especie*/
   onCreateConfirm(event) {
     this.disableButton = true;
     this.loadingLargeGroup = true;
     if (event.description === '') {
       const type = 'danger';
-      const quote = { title: null, body: 'La raza no puede ir vacia' };
+      const quote = { title: null, body: 'La especie no puede ir vacia' };
 
       this.toastrService.showToast(type, quote.title, quote.body);
     } else {
-      if (window.confirm('¿Esta seguro de agregar la raza?')) {
-        this.serviceBreed.create(event).subscribe(() => {
+      if (window.confirm('¿Esta seguro de agregar la especie?')) {
+        this.serviceSpecies.create(event).subscribe(() => {
           const type = 'success';
-          const quote = { title: null, body: 'Raza agregada correctamente' };
+          const quote = { title: null, body: 'Especie agregada correctamente' };
           this.toastrService.showToast(type, quote.title, quote.body);
           this.ref.close(event);
         },
@@ -83,19 +84,19 @@ metodo se usa para agregar una raza*/
 *@since 03/01/2021
 *Este metodo usa una tabla llamada smart Table, la cual deja alterar la fucnionalidad de los botones
 que el trae predeterminados, este metodo
-se usa para editar una categoria existente*/
-  onSaveConfirm(id, breed): void {
+se usa para editar una especie existente*/
+  onSaveConfirm(id, especie): void {
     this.loadingLargeGroup = true;
-    if (breed.description === '') {
+    if (especie.description === '') {
       const type = 'danger';
-      const quote = { title: null, body: 'La Categoría no puede ir vacia' };
+      const quote = { title: null, body: 'La especie no puede ir vacia' };
       this.toastrService.showToast(type, quote.title, quote.body);
     } else {
-      if (window.confirm('¿Esta seguro de actualizar la categoria?')) {
-        const categoria = { id: id, description: breed.description };
-        this.serviceBreed.update(categoria).subscribe(() => {
+      if (window.confirm('¿Esta seguro de actualizar la especie?')) {
+        const especies = { id: id, description: especie.description };
+        this.serviceSpecies.update(especies).subscribe(() => {
           const type = 'success';
-          const quote = { title: null, body: 'Categoria actualizada correctamente' };
+          const quote = { title: null, body: 'Especie actualizada correctamente' };
           this.toastrService.showToast(type, quote.title, quote.body);
           this.ref.close();
         }, (err) => {
