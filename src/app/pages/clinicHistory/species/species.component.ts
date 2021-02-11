@@ -13,7 +13,7 @@ import { PopupAddSpeciesComponent } from './popup-add-species/popup-add-species.
 export class SpeciesComponent implements OnInit {
 
   hideFilters = false;
-  species: ResponseSpecies[];
+  species: ResponseSpecies[] = [];
   searchSpecies;
   changeDetectorRef: ChangeDetectorRef;
   connectionInternet = true;

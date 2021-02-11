@@ -1,5 +1,4 @@
 import { ResponseCategory } from '../category/ResponseCategory.module';
-import { FileInfo } from '../../Request/base/FileInfo.module';
 import { Status } from '../../enum/Status.enum';
 
 export class ResponseProduct {
