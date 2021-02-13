@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {
   NbCardModule, NbMenuModule, NbIconModule, NbInputModule, NbTreeGridModule,
   NbTableModule, NbAccordionModule, NbListModule, NbSelectModule, NbCheckboxModule,
-  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule, NbButtonModule, NbStepperModule, NbTooltipModule,
+  NbSpinnerModule, NbAlertModule, NbLayoutModule, NbRadioModule, NbButtonModule, NbStepperModule, NbTooltipModule, NbDatepickerModule,
 } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -53,6 +53,7 @@ import { SpeciesComponent } from './clinicHistory/species/species.component';
 import { PetComponent } from './clinicHistory/pet/pet.component';
 import { PopupAddBreedComponent } from './clinicHistory/breed/popup-add-breed/popup-add-breed.component';
 import { PopupAddSpeciesComponent } from './clinicHistory/species/popup-add-species/popup-add-species.component';
+import { PopupAddPetComponent } from './clinicHistory/pet/popup-add-pet/popup-add-pet.component';
 
 @NgModule({
   imports: [
@@ -81,6 +82,7 @@ import { PopupAddSpeciesComponent } from './clinicHistory/species/popup-add-spec
     Ng2SearchPipeModule,
     NgxPaginationModule,
     NbStepperModule,
+    NbDatepickerModule.forRoot(),
   ],
   exports: [CartComponent],
   declarations: [
@@ -124,6 +126,7 @@ import { PopupAddSpeciesComponent } from './clinicHistory/species/popup-add-spec
     PetComponent,
     PopupAddBreedComponent,
     PopupAddSpeciesComponent,
+    PopupAddPetComponent,
 
   ],
 })

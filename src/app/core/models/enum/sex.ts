@@ -1,3 +1,3 @@
-export enum sex {
-    FEMENINO, MASCULINO 
+export enum Sex {
+    FEMENINO = 'FEMENINO', MASCULINO = 'MASCULINO'
 }

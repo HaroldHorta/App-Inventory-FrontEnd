@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NbDialogService } from '@nebular/theme';
 import { ResponsePet } from '../../../core/models/Response/pet/ResponsePet';
+import { GeneralService } from '../../../core/services/general.service';
 import { PetService } from '../../../core/services/pet.service';
+import { PopupAddPetComponent } from './popup-add-pet/popup-add-pet.component';
 
 @Component({
   selector: 'ngx-pet',
@@ -16,7 +19,7 @@ export class PetComponent implements OnInit {
   disabledUpdate = false;
   petHidden = false;
   searchPet = false;
-  constructor(private formBuilder: FormBuilder, private petService: PetService) {
+  constructor(private toastrService: GeneralService, private dialogService: NbDialogService, private formBuilder: FormBuilder, private petService: PetService) {
 
     this.checkOutForm = this.formBuilder.group({
       nroDocument: ['', [Validators.required]],
@@ -37,12 +40,17 @@ export class PetComponent implements OnInit {
       this.searchPet = true;
       this.pet = pet;
       if (this.pet.length != 0) {
-        console.log('pasa')
         this.petHidden = true;
       } else {
         this.petHidden = false;
       }
-      console.log(this.pet)
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
+    }, (err) => {
+      const type = 'danger';
+      const quote = { title: null, body: err.error.detailMessage };
+      this.toastrService.showToast(type, quote.title, quote.body);
+      this.loadingLargeGroup = false;
       this.loadingLargeGroup = false;
       this.disabledUpdate = false;
     })
@@ -51,6 +59,18 @@ export class PetComponent implements OnInit {
    *@author [CadenaCristian]
    *@since 27/12/2020*/
 
-
+  /*<i>[ini][]</i>
+         *@author [CadenaCristian]
+         *@since 04/01/2021
+         *Metodo que permite abrir el pop up de editar y actualizar los datos*/
+  openModdalAdd(nroDocument) {
+    this.dialogService.open(PopupAddPetComponent, { context: { nroDocument: nroDocument.nroDocument } }).onClose.subscribe(res => {
+      const nro= {nroDocument: res.customer}
+      this.findByNroDocument(nro);
+    });
+  }
+  /*<i>[fin][]</i>
+*@author [CadenaCristian]
+*@since 04/01/2021*/
 
 }
