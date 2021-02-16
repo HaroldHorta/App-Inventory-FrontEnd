@@ -33,10 +33,10 @@
             <div class="box">
                 <h6>Vacunas</h6>
                 <hr style="border-color:blue;">
-                <div *ngFor = " let vacuna of pet.vaccinations">
+                <div *ngFor=" let vacuna of pet.vaccinations">
                     <span><b>Nombre vacuna: </b> {{vacuna?.vaccination.description}}</span>
-                    <span class="espacio"><b>Lote: </b> {{pet?.vaccination.lote}}</span>
-                    <span class="espacio"><b>Fecha de vacunación: </b> {{pet?.vaccinationDate}}</span>
+                    <span class="espacio"><b>Lote: </b> {{vacuna?.vaccination.lot}}</span>
+                    <span class="espacio"><b>Fecha de vacunación: </b> {{vacuna?.vaccinationDate}}</span>
                 </div>
             </div>
 
