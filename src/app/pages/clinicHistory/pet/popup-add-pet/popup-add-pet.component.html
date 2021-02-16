@@ -5,7 +5,7 @@
             <!-- <p *ngIf="!checkOutForm.get('categoria').errors && !checkOutForm.get('categoria')" style="color: red;">* Campo obligatorio *</p> -->
             <input fullWidth nbInput type="text" formControlName="name" placeholder="Nombre mascota">
         </div>
-        <div  class="full-name-inputs form-group">
+        <div class="full-name-inputs form-group">
             <nb-select placeholder="Especie" formControlName="species">
                 <nb-option *ngFor="let spe of species" [value]="spe.id">{{spe.description}}</nb-option>
             </nb-select>
@@ -25,19 +25,25 @@
 
         <div class="full-name-inputs form-group">
             <input nbInput type="text" formControlName="color" placeholder="Color mascota">
-            
-            <input style="margin-left: 10px;" nbInput placeholder="Fecha Nacimiento" formControlName="dateBirth" [nbDatepicker]="dateTimePicker">
+
+            <input style="margin-left: 10px;" nbInput placeholder="Fecha Nacimiento" formControlName="dateBirth"
+                [nbDatepicker]="dateTimePicker">
             <nb-datepicker #dateTimePicker></nb-datepicker>
         </div>
 
         <div class="full-name-inputs form-group">
             <input nbInput type="text" fullWidth formControlName="particularSigns" placeholder="Señas particulares">
         </div>
+        <div>
+            <input nbInput type="file" formControlName="photo" class="form-group" fullWidth
+                (change)="onSelectFile($event)">
+        </div>
 
         <div *ngIf="!infoCustomer" class="full-name-inputs form-group">
             <input #nro nbInput type="text" placeholder="Cedula cliente">
-            <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-info form-group" type="submit" (click)="findByNroDocument(nro.value)"
-                [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">Validar
+            <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-info form-group" type="submit"
+                (click)="findByNroDocument(nro.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
+                nbSpinnerSize="large" nbSpinnerMessage="">Validar
                 cliente</button>
         </div>
 

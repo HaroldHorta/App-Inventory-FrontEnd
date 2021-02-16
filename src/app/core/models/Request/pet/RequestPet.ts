@@ -12,4 +12,5 @@ export class RequestPet {
     particularSigns: string;
     origin: Origin;
     customer: string;
+    photo: string;
 }

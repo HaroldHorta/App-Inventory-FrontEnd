@@ -44,6 +44,8 @@ export class PopupAddPetComponent implements OnInit {
       particularSigns: ['', [Validators.required]],
       origin: ['', [Validators.required]],
       customer: ['', [Validators.required]],
+      photo: ['', [Validators.required]],
+
     });
   }
 
@@ -114,8 +116,7 @@ export class PopupAddPetComponent implements OnInit {
   }
 
   onCreateConfirm(pet) {
-    console.log(pet);
-
+    pet.photo = this.urls[0];
     this.servicePet.create(pet).subscribe(() => {
       const type = 'success';
       const quote = { title: null, body: 'Categoria agregada correctamente' };
@@ -139,5 +140,18 @@ export class PopupAddPetComponent implements OnInit {
   /*<i>[fin][]</i>
   *@author [CadenaCristian]
   *@since 03/01/2021*/
+
+  urls = [];
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      for (let i = 0; i < 1; i++) {
+        const reader = new FileReader();
+        reader.onload = (events: any) => {
+          this.urls.push(events.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+  }
 }
 

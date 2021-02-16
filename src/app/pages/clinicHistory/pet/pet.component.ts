@@ -5,6 +5,8 @@ import { ResponsePet } from '../../../core/models/Response/pet/ResponsePet';
 import { GeneralService } from '../../../core/services/general.service';
 import { PetService } from '../../../core/services/pet.service';
 import { PopupAddPetComponent } from './popup-add-pet/popup-add-pet.component';
+import { PopupAddVaccinationPetComponent } from './popup-add-vaccination-pet/popup-add-vaccination-pet.component';
+import { PopupDetailsPetComponent } from './popup-details-pet/popup-details-pet.component';
 
 @Component({
   selector: 'ngx-pet',
@@ -19,7 +21,8 @@ export class PetComponent implements OnInit {
   disabledUpdate = false;
   petHidden = false;
   searchPet = false;
-  constructor(private toastrService: GeneralService, private dialogService: NbDialogService, private formBuilder: FormBuilder, private petService: PetService) {
+  constructor(private toastrService: GeneralService, private dialogService: NbDialogService,
+    private formBuilder: FormBuilder, private petService: PetService) {
 
     this.checkOutForm = this.formBuilder.group({
       nroDocument: ['', [Validators.required]],
@@ -65,12 +68,23 @@ export class PetComponent implements OnInit {
          *Metodo que permite abrir el pop up de editar y actualizar los datos*/
   openModdalAdd(nroDocument) {
     this.dialogService.open(PopupAddPetComponent, { context: { nroDocument: nroDocument.nroDocument } }).onClose.subscribe(res => {
-      const nro= {nroDocument: res.customer}
+      const nro = { nroDocument: res.customer }
       this.findByNroDocument(nro);
     });
   }
   /*<i>[fin][]</i>
 *@author [CadenaCristian]
 *@since 04/01/2021*/
+  openModalDetails(pet, hasScroll) {
+    hasScroll = true;
+    this.dialogService.open(PopupDetailsPetComponent, { context: { pet: pet }, hasScroll });
+  }
+
+  openModalVaccination(pet) {
+    this.dialogService.open(PopupAddVaccinationPetComponent, { context: { pet: pet } }).onClose.subscribe(res => {
+      const nro = { nroDocument: res.customer.nroDocument }
+      this.findByNroDocument(nro);
+    });
+  }
 
 }

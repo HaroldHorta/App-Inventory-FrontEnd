@@ -76,6 +76,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: 'species',
       },
       {
+        title: 'Vacunas',
+        icon: 'radio-button-off-outline',
+        link: 'vaccination',
+      },
+      {
         title: 'Mascotas',
         icon: 'radio-button-off-outline',
         link: 'pet',

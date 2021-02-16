@@ -1,0 +1,42 @@
+@media (min-width: 601px) {
+    .contenedorImg {
+        width: 25%;
+        float: left;
+    }
+    .img-card {
+        width: 50%;
+        margin: auto;
+        display: block;
+    }
+}
+
+.contenedorDetalles {
+    overflow-y: scroll !important;
+    margin-right: -5px;
+    min-width: 250px;
+    width: 70%;
+    float: left;
+    height: 500px;
+}
+
+.espacio {
+    padding-left: 20px;
+}
+
+h6 {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+span {
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+}
+
+.box {
+    margin-top: 25px;
+}
+ .box-inter{
+     margin-top: 5px;
+ }

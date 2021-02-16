@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-4">
+        <input class="col-md-12 form-control" type="text" name="search" [(ngModel)]="searchVaccination"
+            autocomplete="on" placeholder="Buscar nombre de la vacuna" (ngModelChange)='onSelectChange($event)'>
+    </div>
+    <div class="col-md-4">
+        <nb-select selected="2" class="col-md-12">
+            <nb-option value="1" (click)="getVaccinaList(true)">Orden alfabetico</nb-option>
+            <nb-option value="2" (click)="getVaccinaList(false)">De mas nuevo a mas antiguo</nb-option>
+        </nb-select>
+    </div>
+    <div class="col-md-4">
+        <button class="col-md-12 btn btn-outline-primary form-group" type="button" nbTooltip="Agregar vacuna"
+            nbTooltipStatus="primary" (click)="modalAdd()">
+            Agregar vacuna <nb-icon status="'primary'" icon="plus-circle-outline"></nb-icon>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="!connectionInternet">
+    <ngx-menssage-connetion></ngx-menssage-connetion>
+</div>
+
+<div *ngIf="connectionInternet">
+    <div *ngIf="hiddenvaccination">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Vacunas</nb-card-header>
+            <nb-card-body>
+                <h6>No se han encontrado vacuna registradas</h6>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="row" *ngIf="!hiddenvaccination">
+        <div class="col-md-12">
+            <nb-card>
+                <nb-card-header class="item">
+                    <span>Nombre</span>
+                    <span>lote</span>
+                    <span>Detalle</span>
+                    <span>Acciones</span>
+                </nb-card-header>
+                <nb-list *ngIf="!hideFilters">
+                    <nb-list-item class="item" *ngFor="let vaccination of vaccination | filter:searchVaccination">
+                        <span>{{vaccination?.description}}</span>
+                        <span>{{vaccination?.lot}}</span>
+                        <span>{{vaccination?.observation}}</span>
+                        <span>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <nb-icon class="changeMouse" status="warning" (click)="modalEdit(vaccination)"
+                                        nbTooltip="Editar" nbTooltipStatus="warning" icon="edit-2-outline"></nb-icon>
+                                    <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
+                                        nbTooltipStatus="danger" icon="trash-2-outline"
+                                        (click)="onDeleteConfirm($event, vaccination.id)"></nb-icon>
+                                </div>
+                            </div>
+                        </span>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card>
+        </div>
+    </div>
+</div>
