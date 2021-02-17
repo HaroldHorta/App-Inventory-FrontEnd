@@ -116,16 +116,23 @@ export class PopupAddPetComponent implements OnInit {
   }
 
   onCreateConfirm(pet) {
+    this.disableButton = true;
+    this.loadingLargeGroup = true;
     pet.photo = this.urls[0];
     this.servicePet.create(pet).subscribe(() => {
+
       const type = 'success';
       const quote = { title: null, body: 'Categoria agregada correctamente' };
       this.toastrService.showToast(type, quote.title, quote.body);
       this.ref.close(pet);
+      this.disableButton = false;
+      this.loadingLargeGroup = false;
     }, (err) => {
       const type = 'danger';
       const quote = { title: null, body: err.error.detailMessage };
       this.toastrService.showToast(type, quote.title, quote.body);
+      this.disableButton = false;
+      this.loadingLargeGroup = false;
     });
 
   }

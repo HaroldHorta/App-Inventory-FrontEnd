@@ -3,6 +3,7 @@ import { Origin } from "../../enum/origin";
 import { reproductiveStatus } from "../../enum/reproductiveStatus";
 import { Sex } from "../../enum/sex";
 import { RequestFeeding } from "../../Request/feeding/RequestFeeding";
+import { RequestPatientHistoryVaccinations } from "../../Request/pet/vaccination/RequestPatientHistoryVaccinations";
 import { ResponseBreed } from "../breed/ResponseBreed";
 import { ResponseCustomer } from "../customer/ResponseCustomer.module";
 import { ResponseDewormingInternal } from "../dewormingInternal/ResponseDewormingInternal";
@@ -23,7 +24,7 @@ export class ResponsePet {
     origin: Origin;
     customer: ResponseCustomer;
     createAt: string;
-    vaccinations: ResponseVaccinations[];
+    vaccinations: RequestPatientHistoryVaccinations[];
     physiologicalConstants: ResponsePhysiologicalConstants[];
     dewormingInternal: ResponseDewormingInternal[];
     dewormingExternal: ResponseDewormingInternal[];

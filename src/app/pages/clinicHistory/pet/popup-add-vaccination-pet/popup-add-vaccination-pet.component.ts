@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NbDialogRef } from '@nebular/theme';
+import { NbDialogRef, NbDialogService } from '@nebular/theme';
+import { RequestPhysiologicalConstants } from '../../../../core/models/Request/pet/RequestPhysiologicalConstants/RequestPhysiologicalConstants';
 import { RequestPatientHistoryVaccinations } from '../../../../core/models/Request/pet/vaccination/RequestPatientHistoryVaccinations';
 import { RequestVaccination } from '../../../../core/models/Request/pet/vaccination/RequestVaccination';
 import { ResponsePet } from '../../../../core/models/Response/pet/ResponsePet';
-import { ResponseVaccinations } from '../../../../core/models/Response/vaccination/ResponseVaccinations';
 import { Vaccination } from '../../../../core/models/Response/vaccination/vaccination';
 import { GeneralService } from '../../../../core/services/general.service';
 import { PetService } from '../../../../core/services/pet.service';
 import { VaccinationService } from '../../../../core/services/vaccination.service';
+import { PhysiologicalConstantsComponent } from '../physiological-constants/physiological-constants.component';
 
 @Component({
   selector: 'ngx-popup-add-vaccination-pet',
@@ -22,11 +23,16 @@ export class PopupAddVaccinationPetComponent implements OnInit {
   hiddenVaccination = false;
   vaccination: Vaccination[];
   vaccinationsReques: RequestVaccination[] = [];
+  physiologicalConstants: RequestPhysiologicalConstants;
   requestVaccinations: RequestPatientHistoryVaccinations = new RequestPatientHistoryVaccinations;
-  vaccinationId;
   dateVaccination;
 
-  constructor(private toastrService: GeneralService, private formBuilder: FormBuilder, private servicePet: PetService, private serviceVaccination: VaccinationService, protected ref: NbDialogRef<PopupAddVaccinationPetComponent>) {
+  disableButton = false;
+  loadingLargeGroup = false;
+
+  constructor(private dialogService: NbDialogService, private toastrService: GeneralService,
+    private formBuilder: FormBuilder, private servicePet: PetService,
+    private serviceVaccination: VaccinationService, protected ref: NbDialogRef<PopupAddVaccinationPetComponent>) {
     this.checkOutForm = this.formBuilder.group({
       vaccinationDate: ['', [Validators.required]],
     });
@@ -41,8 +47,12 @@ export class PopupAddVaccinationPetComponent implements OnInit {
   }
 
   displayVaccination() {
-    this.hiddenVaccination = true;
-    this.getVaccination();
+    this.dialogService.open(PhysiologicalConstantsComponent).onClose.subscribe(res => {
+      this.physiologicalConstants = res;
+      this.hiddenVaccination = true;
+      this.getVaccination();
+    });
+
   }
 
 
@@ -52,33 +62,28 @@ export class PopupAddVaccinationPetComponent implements OnInit {
       let pet = this.pet.vaccinations
 
       let petVaccination = [];
-      let arrVaccination = [];
-      arrVaccination = vaccination
+      let arrVaccination = vaccination;
 
-      pet.forEach(element => {
-        console.log()
-        let newdata = {
-          id: element.vaccination.id, description: element.vaccination.description, status: element.vaccination.status,
-          createAt: element.vaccination.createAt, lot: element.vaccination.lot
-        }
-        petVaccination.push(newdata);
+      pet.forEach(el => {
+        el.vaccinations.forEach(element => {
+          let newdata = {
+            id: element.vaccination.id, description: element.vaccination.description, status: element.vaccination.status,
+            createAt: element.vaccination.createAt, lot: element.vaccination.lot
+          }
+          petVaccination.push(newdata);
+        })
       });
-      console.log('petVaccination', petVaccination)
-      console.log('arrVaccination', arrVaccination)
-
       petVaccination.forEach(petVaccination => {
 
         arrVaccination.forEach(arr => {
 
           if (petVaccination.id === arr.id) {
             let indice = arrVaccination.findIndex(arr => arr.id === petVaccination.id);
-            console.log('indice', indice)
             arrVaccination.splice(indice, 1);
           }
         })
 
       })
-      console.log('sinRepetidos', arrVaccination)
 
       this.vaccination = arrVaccination;
 
@@ -86,25 +91,31 @@ export class PopupAddVaccinationPetComponent implements OnInit {
   }
 
   onNgModelChange(vaccination, event) {
-    this.vaccinationId = vaccination.id;
     if (event) {
-      this.vaccinationsReques.push({ id: this.vaccinationId, vaccinationDate: null });
+      this.vaccinationsReques.push({ vaccination: vaccination, vaccinationDate: null });
     } else {
-      let indice = this.vaccinationsReques.findIndex(pet => pet.id === vaccination);
+      let indice = this.vaccinationsReques.findIndex(pet => pet.vaccination.id === vaccination);
       this.vaccinationsReques.splice(indice, 1);
     }
   }
 
   onNgDateChange(vaccination, date) {
     this.dateVaccination = date;
-    let indice = this.vaccinationsReques.findIndex(pet => pet.id === vaccination);
+    let indice = this.vaccinationsReques.findIndex(pet => pet.vaccination.id === vaccination);
     this.vaccinationsReques[indice].vaccinationDate = this.dateVaccination;
+
   }
 
+
   saveVaccination(id) {
+    this.disableButton = true;
+    this.loadingLargeGroup = true;
+
     this.requestVaccinations.vaccinations = this.vaccinationsReques;
-    
+    this.requestVaccinations.physiologicalConstants = this.physiologicalConstants;
+
     this.servicePet.updateVaccionation(id, this.requestVaccinations).subscribe(() => {
+
       const type = 'success';
       const quote = { title: null, body: 'Especie agregada correctamente' };
       this.toastrService.showToast(type, quote.title, quote.body);
@@ -113,11 +124,17 @@ export class PopupAddVaccinationPetComponent implements OnInit {
       this.servicePet.getById(id).subscribe(pet => {
         this.pet = pet;
       })
+
+      this.disableButton = false;
+      this.loadingLargeGroup = false;
     },
       (err) => {
         const type = 'danger';
         const quote = { title: null, body: err.error.detailMessage };
         this.toastrService.showToast(type, quote.title, quote.body);
+
+        this.disableButton = false;
+        this.loadingLargeGroup = false;
       });
 
   }

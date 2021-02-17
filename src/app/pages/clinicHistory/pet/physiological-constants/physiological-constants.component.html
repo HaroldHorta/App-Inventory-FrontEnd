@@ -1,0 +1,34 @@
+<nb-card [formGroup]="checkOutForm" class="col-md-12">
+    <nb-card-header>Categoria</nb-card-header>
+    <nb-card-body>
+        <div class="full-name-inputs form-group">
+            <input class="form-group" nbInput type="text" formControlName="capillaryFillTime"
+                placeholder="Tiempo de llenado capilar">
+            <input class="form-group space" nbInput type="text" formControlName="pulse" placeholder="Pulso">
+
+        </div>
+
+        <div class="full-name-inputs form-group">
+            <input nbInput type="text" formControlName="heartRate" placeholder="Ritmo cardiaco">
+
+            <input nbInput class="form-group space" type="text" formControlName="respiratoryFrequency"
+                placeholder="Frecuencia respiratoria">
+
+        </div>
+
+        <div class="full-name-inputs form-group">
+            <input nbInput type="text" formControlName="temperature" placeholder="Temperatura en °C">
+
+            <input class="form-group space" nbInput type="text" formControlName="weight" placeholder="Peso en Kg">
+
+        </div>
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="btn btn-outline-success " style="width: 45%;" (click)="onCreateConfirm(checkOutForm.value)"
+            [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage=""
+            [disabled]="!checkOutForm.valid || disableButton">Enviar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;"
+            (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

@@ -1,4 +1,6 @@
+import { Vaccination } from "../../../Response/vaccination/vaccination";
+
 export class RequestVaccination {
-    id: string;
+    vaccination: Vaccination;
     vaccinationDate: Date;
 }

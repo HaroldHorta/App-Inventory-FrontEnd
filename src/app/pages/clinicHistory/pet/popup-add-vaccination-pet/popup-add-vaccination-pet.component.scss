@@ -48,3 +48,17 @@ nb-card-body.example-items-rows {
 nb-checkbox:not(:only-child) {
   margin-right: 1.5rem;
 }
+
+
+.item {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    >* {
+        flex: 1;
+    }
+    &:first-child {
+        border-top: none;
+    }
+}
