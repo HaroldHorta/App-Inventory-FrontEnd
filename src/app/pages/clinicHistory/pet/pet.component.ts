@@ -87,4 +87,10 @@ export class PetComponent implements OnInit {
     });
   }
 
+  openModalDeworming(pet) {
+    this.dialogService.open(PopupAddVaccinationPetComponent, { context: { pet: pet } }).onClose.subscribe(res => {
+      const nro = { nroDocument: res.customer.nroDocument }
+      this.findByNroDocument(nro);
+    });
+  }
 }

@@ -45,6 +45,8 @@
                     <span>Color</span>
                     <span>Edad</span>
                     <span>Vacunas</span>
+                    <span>Des. Interna</span>
+                    <span>Des. Externa</span>
                     <span>Acciones</span>
                 </nb-card-header>
                 <nb-list>
@@ -60,10 +62,18 @@
                         <span class="col-md-8 center">{{pet?.color}}</span>
                         <span class="col-md-8 center">{{pet?.age}}</span>
                         <span>
-                            <nb-icon class="changeMouse" nbTooltip="Detalles" nbTooltipStatus="primary" status="primary"
-                                icon="eye-outline" (click)="openModalVaccination(pet)"></nb-icon>
+                            <nb-icon class="changeMouse" nbTooltip="Vacunas" nbTooltipStatus="success" status="success"
+                                icon="book-outline" (click)="openModalVaccination(pet)"></nb-icon>
                         </span>
                      
+                        <span>
+                            <nb-icon class="changeMouse" nbTooltip="Vacunas" nbTooltipStatus="success" status="success"
+                                icon="book-outline" (click)="openModalDeworming(pet)"></nb-icon>
+                        </span>
+                        <span>
+                            <nb-icon class="changeMouse" nbTooltip="Vacunas" nbTooltipStatus="success" status="success"
+                                icon="book-outline"></nb-icon>
+                        </span>
                         <span class="col-md-4 center">
                             <div class="row">
                                 <div class="col-md-12">

@@ -20,6 +20,16 @@
     height: 500px;
 }
 
+.bloque{ 
+	width: 100%;
+}
+.bloque .A, .bloque .B{  /*hijos*/
+    display: inline-block;
+}
+.B{
+    float: right;
+}
+
 .espacio {
     padding-left: 20px;
 }

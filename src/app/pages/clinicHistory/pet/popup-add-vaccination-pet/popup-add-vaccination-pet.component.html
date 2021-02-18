@@ -31,47 +31,48 @@
             </div>
 
             <div class="box">
-                <h6>Vacunas</h6>
-                <hr style="border-color:blue;">
-                <nb-card>
-                    <nb-card-header class="item">
-                        <span>Vacuna</span>
-                        <span>Lote</span>
-                        <span>Fecha Vacunación</span>
-                    </nb-card-header>
-                    <div *ngFor=" let vacuna of pet.vaccinations">
-                        <nb-list>
-                            <nb-list-item *ngFor="let vac of vacuna.vaccinations" class="item">
-                                <span>{{vac?.vaccination?.description}}</span>
-                                <span>{{vac?.vaccination?.lot}}</span>
-                                <span> {{vac?.vaccinationDate |
-                                    date:'yyyy/MM/dd'}}</span>
-                            </nb-list-item>
-                        </nb-list>
+                <div class="bloque">
+                    <div class="A">
+                        <h6>Vacunas</h6>
                     </div>
+                    <div class="B">
+                        <button *ngIf="!hiddenVaccination" class="btn btn-outline-primary" type="submit"
+                            (click)="displayVaccination()">Agregar Vacuna</button>
+
+                    </div>
+                </div>
+                <hr style="border-color:blue;">
+                <div *ngFor=" let vacuna of pet.vaccinations">
+                    <div *ngFor=" let vac of vacuna.vaccinations" class="item">
+                        <span class="col-md-4 center"><b>Nombre vacuna: </b> {{vac?.vaccination?.description}}</span>
+                        <span class="col-md-4 center"><b>Lote: </b> {{vac?.vaccination?.lot}}</span>
+                        <span class="col-md-4 center"><b>Fecha de vacunación: </b> {{vac?.vaccinationDate |
+                            date:'yyyy/MM/dd'}}</span>
+
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="hiddenVaccination">
+                <nb-card>
+                    <nb-card-body class="example-items-rows" [formGroup]="checkOutForm">
+                        <div *ngFor="let vaccination of vaccination;">
+                            <nb-checkbox multiple (checkedChange)="onNgModelChange(vaccination, $event)"
+                                status="primary">
+                                {{vaccination?.description}}</nb-checkbox>
+                            <input style="margin-left: 10px;" nbInput placeholder="Fecha Vacuna"
+                                [nbDatepicker]="dateTimePicker">
+                            <nb-datepicker #dateTimePicker (dateChange)="onNgDateChange(vaccination.id,$event)">
+                            </nb-datepicker>
+                        </div>
+                        <button style="float:right; margin-top: 15px;" class="btn btn-outline-primary" type="submit"
+                            (click)="saveVaccination(pet.id)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
+                            nbSpinnerSize="large">Agregar Vacuna</button>
+                    </nb-card-body>
                 </nb-card>
             </div>
-        </div>
-        <button *ngIf="!hiddenVaccination" style="float:right; margin-top: 15px;" class="btn btn-outline-primary"
-            type="submit" (click)="displayVaccination()">Vacuna</button>
-        <div *ngIf="hiddenVaccination">
-            <nb-card>
-                <nb-card-body class="example-items-rows" [formGroup]="checkOutForm">
-                    <div *ngFor="let vaccination of vaccination;">
-                        <nb-checkbox multiple (checkedChange)="onNgModelChange(vaccination, $event)" status="primary">
-                            {{vaccination?.description}}</nb-checkbox>
-                        <input style="margin-left: 10px;" nbInput placeholder="Fecha Vacuna"
-                            [nbDatepicker]="dateTimePicker">
-                        <nb-datepicker #dateTimePicker (dateChange)="onNgDateChange(vaccination.id,$event)">
-                        </nb-datepicker>
-                    </div>
-                    <button style="float:right; margin-top: 15px;" class="btn btn-outline-primary" type="submit"
-                        (click)="saveVaccination(pet.id)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
-                        nbSpinnerSize="large">Agregar Vacuna</button>
-                </nb-card-body>
-            </nb-card>
-        </div>
 
+        </div>
         <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton
             (click)="cancel()">Cerrar</button>
     </nb-card-body>
