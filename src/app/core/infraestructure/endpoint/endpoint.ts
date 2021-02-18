@@ -18,6 +18,8 @@ export const endpoint = {
     Species: `${environment.serverUrl}/species`,
     Pet: `${environment.serverUrl}/pet`,
     Vaccinations: `${environment.serverUrl}/vaccination`,
+    Veterinary: `${environment.serverUrl}/veterinary`,
+
 
 
 

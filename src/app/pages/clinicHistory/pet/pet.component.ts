@@ -4,6 +4,7 @@ import { NbDialogService } from '@nebular/theme';
 import { ResponsePet } from '../../../core/models/Response/pet/ResponsePet';
 import { GeneralService } from '../../../core/services/general.service';
 import { PetService } from '../../../core/services/pet.service';
+import { PopupAddClinicHistoryComponent } from './popup-add-clinic-history/popup-add-clinic-history.component';
 import { PopupAddDewormingPetComponent } from './popup-add-deworming-pet/popup-add-deworming-pet.component';
 import { PopupAddPetComponent } from './popup-add-pet/popup-add-pet.component';
 import { PopupAddVaccinationPetComponent } from './popup-add-vaccination-pet/popup-add-vaccination-pet.component';
@@ -83,6 +84,13 @@ export class PetComponent implements OnInit {
 
   openModalVaccination(pet) {
     this.dialogService.open(PopupAddVaccinationPetComponent, { context: { pet: pet } }).onClose.subscribe(res => {
+      const nro = { nroDocument: res.customer.nroDocument }
+      this.findByNroDocument(nro);
+    });
+  }
+
+  openModalClinicHistory(pet) {
+    this.dialogService.open(PopupAddClinicHistoryComponent, { context: { pet: pet } }).onClose.subscribe(res => {
       const nro = { nroDocument: res.customer.nroDocument }
       this.findByNroDocument(nro);
     });

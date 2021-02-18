@@ -1,3 +1,4 @@
+
 @media (min-width: 601px) {
     .contenedorImg {
         width: 25%;
@@ -19,6 +20,16 @@
     height: 500px;
 }
 
+.bloque{ 
+	width: 100%;
+}
+.bloque .A, .bloque .B{  /*hijos*/
+    display: inline-block;
+}
+.B{
+    float: right;
+}
+
 .espacio {
     padding-left: 20px;
 }
@@ -31,12 +42,33 @@ h6 {
 span {
     margin-bottom: 5px;
     margin-top: 5px;
-
 }
 
 .box {
     margin-top: 25px;
 }
- .box-inter{
-     margin-top: 5px;
- }
+.box-inter {
+    margin-top: 5px;
+}
+
+nb-card-body.example-items-rows {
+  align-items: center;
+}
+
+nb-checkbox:not(:only-child) {
+  margin-right: 1.5rem;
+}
+
+
+.item {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    >* {
+        flex: 1;
+    }
+    &:first-child {
+        border-top: none;
+    }
+}

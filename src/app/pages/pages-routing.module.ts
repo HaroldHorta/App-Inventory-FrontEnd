@@ -14,6 +14,7 @@ import { BreedComponent } from './clinicHistory/breed/breed.component';
 import { SpeciesComponent } from './clinicHistory/species/species.component';
 import { PetComponent } from './clinicHistory/pet/pet.component';
 import { VaccinationComponent } from './clinicHistory/vaccination/vaccination.component';
+import { VeterinaryComponent } from './clinicHistory/veterinary/veterinary.component';
 
 const routes: Routes = [{
   path: '',
@@ -71,6 +72,10 @@ const routes: Routes = [{
     {
       path: 'vaccination',
       component: VaccinationComponent,
+    },
+    {
+      path: 'veterinary',
+      component: VeterinaryComponent,
     },
   ],
 },

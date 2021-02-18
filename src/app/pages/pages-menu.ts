@@ -85,7 +85,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'radio-button-off-outline',
         link: 'pet',
       },
-
+      {
+        title: 'Veterinario',
+        icon: 'radio-button-off-outline',
+        link: 'veterinary',
+      },
     ],
   },
 ];
