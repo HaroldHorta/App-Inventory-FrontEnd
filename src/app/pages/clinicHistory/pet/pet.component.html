@@ -44,9 +44,7 @@
                     <span>Raza</span>
                     <span>Color</span>
                     <span>Edad</span>
-                    <span>Vacunas</span>
-                    <span>Des. Interna</span>
-                    <span>Des. Externa</span>
+                    <span>Veterinaria</span>
                     <span>Acciones</span>
                 </nb-card-header>
                 <nb-list>
@@ -55,7 +53,7 @@
                             <nb-icon class="changeMouse" nbTooltip="Detalles" nbTooltipStatus="primary" status="primary"
                                 icon="eye-outline" (click)="openModalDetails(pet)"></nb-icon>
                         </span>
-                     
+
                         <span class="col-md-8 center">{{pet?.name}}</span>
                         <span class="col-md-8 center">{{pet?.species.description}}</span>
                         <span class="col-md-8 center">{{pet?.breed.description}}</span>
@@ -64,15 +62,15 @@
                         <span>
                             <nb-icon class="changeMouse" nbTooltip="Vacunas" nbTooltipStatus="success" status="success"
                                 icon="book-outline" (click)="openModalVaccination(pet)"></nb-icon>
-                        </span>
-                     
-                        <span>
-                            <nb-icon class="changeMouse" nbTooltip="Vacunas" nbTooltipStatus="success" status="success"
-                                icon="book-outline" (click)="openModalDeworming(pet)"></nb-icon>
-                        </span>
-                        <span>
-                            <nb-icon class="changeMouse" nbTooltip="Vacunas" nbTooltipStatus="success" status="success"
-                                icon="book-outline"></nb-icon>
+                            <nb-icon class="changeMouse" nbTooltip="Desparasitación Interna" nbTooltipStatus="success"
+                                status="success" icon="calendar-outline" (click)="openModalDeworming(pet,true)">
+                            </nb-icon>
+                            <nb-icon class="changeMouse" nbTooltip="Desparasitación Externa" nbTooltipStatus="success"
+                                status="success" icon="browser-outline" (click)="openModalDeworming(pet,false)">
+                            </nb-icon>
+
+                            <nb-icon class="changeMouse" nbTooltip="Nueva Historia Clínica" nbTooltipStatus="success"
+                                status="success" icon="book-open-outline"></nb-icon>
                         </span>
                         <span class="col-md-4 center">
                             <div class="row">

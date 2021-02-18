@@ -59,6 +59,7 @@ import { PopupAddVaccinationPetComponent } from './clinicHistory/pet/popup-add-v
 import { VaccinationComponent } from './clinicHistory/vaccination/vaccination.component';
 import { PopupAddVaccinationComponent } from './clinicHistory/vaccination/popup-add-vaccination/popup-add-vaccination.component';
 import { PhysiologicalConstantsComponent } from './clinicHistory/pet/physiological-constants/physiological-constants.component';
+import { PopupAddDewormingPetComponent } from './clinicHistory/pet/popup-add-deworming-pet/popup-add-deworming-pet.component';
 
 @NgModule({
   imports: [
@@ -137,6 +138,7 @@ import { PhysiologicalConstantsComponent } from './clinicHistory/pet/physiologic
     VaccinationComponent,
     PopupAddVaccinationComponent,
     PhysiologicalConstantsComponent,
+    PopupAddDewormingPetComponent,
 
   ],
 })

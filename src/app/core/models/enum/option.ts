@@ -1,3 +1,3 @@
 export enum option {
-    SI, NO
+    SI="SI", NO="NO"
 }
