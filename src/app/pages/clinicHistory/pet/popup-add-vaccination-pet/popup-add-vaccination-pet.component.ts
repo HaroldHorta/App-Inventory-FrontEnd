@@ -103,17 +103,16 @@ export class PopupAddVaccinationPetComponent implements OnInit {
     this.dateVaccination = date;
     let indice = this.vaccinationsReques.findIndex(pet => pet.vaccination.id === vaccination);
     this.vaccinationsReques[indice].vaccinationDate = this.dateVaccination;
-
   }
-
 
   saveVaccination(id) {
     this.disableButton = true;
     this.loadingLargeGroup = true;
-
+    this.requestVaccinations.vaccinations = [];
     this.requestVaccinations.vaccinations = this.vaccinationsReques;
     this.requestVaccinations.physiologicalConstants = this.physiologicalConstants;
 
+    console.log(this.requestVaccinations)
     this.servicePet.updateVaccionation(id, this.requestVaccinations).subscribe(() => {
 
       const type = 'success';
