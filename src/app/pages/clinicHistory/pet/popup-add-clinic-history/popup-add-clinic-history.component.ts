@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
+import { Attitude } from '../../../../core/models/enum/Attitude';
+import { BodyCondition } from '../../../../core/models/enum/BodyCondition';
 import { FeedingOption } from '../../../../core/models/enum/feedingOption';
 import { Habitat } from '../../../../core/models/enum/habitat';
 import { ReproductiveStatus } from '../../../../core/models/enum/reproductiveStatus';
+import { StateDehydration } from '../../../../core/models/enum/StateDehydration';
 import { RequestFeeding } from '../../../../core/models/Request/feeding/RequestFeeding';
 import { RequestHabitat } from '../../../../core/models/Request/habitat/RequestHabitat';
 import { RequestReproductiveStatus } from '../../../../core/models/Request/pet/reproductiveStatus/RequestReproductiveStatus';
@@ -40,9 +43,15 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   feedingOption: Array<string> = [];
   reproductiveStatus: Array<string> = [];
   habitatOption: Array<string> = [];
+  attitudeOption:Array<string>=[];
+  bodyConditionOption:Array<string>=[];
+  stateDehydrationOption:string[]=[];
   reproductive;
   habitat;
   feeding;
+  attitude;
+  bodyCondition;
+  statusDehydration;
   search;
   descriptionFeedind: string = '';
   descriptionHabitat: string = '';
@@ -76,12 +85,13 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.pet.reproductiveStatus)
-
     this.preCarga();
     this.getFeeding();
     this.getReproductiveStatus();
     this.getHabitat();
+    this.getAttitude();
+    this.getBodyCondition();
+    this.getStateDehydration();
   }
 
   preCarga() {
@@ -119,16 +129,43 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     }
   }
 
+  getAttitude() {
+    for (let value in Attitude) {
+      if (typeof Attitude[value] === 'number') {
+        this.attitudeOption.push(value);
+      }
+    }
+  }
+
+  getBodyCondition(){
+    for(let value in BodyCondition){
+      if(typeof BodyCondition[value]==='number'){
+        this.bodyConditionOption.push(value)
+      }
+    }
+  }
+
+  getStateDehydration(){
+        this.stateDehydrationOption.push(StateDehydration.NORMAL);
+        this.stateDehydrationOption.push(StateDehydration.CEROACINCO);
+        this.stateDehydrationOption.push(StateDehydration.SEISASIETE);
+        this.stateDehydrationOption.push(StateDehydration.OCHOANUEVE);
+        this.stateDehydrationOption.push(StateDehydration.MAS10);
+    console.log(this.stateDehydrationOption)
+  }
+
   cancel() {
     this.ref.close();
   }
 
   getVetrinaryByProfessionalCard(profesionalCard) {
+    this.disableButton = true;
+    this.loadingLargeGroup = true;
     this.serviceVeterinary.getVeterinaryByprofessionalCard(profesionalCard).subscribe(veterinary => {
-      this.disableButton = true;
-      this.loadingLargeGroup = true;
       this.veterinary = veterinary;
       this.infoVeterinary = true;
+      this.disableButton = false;
+      this.loadingLargeGroup = false;
     },
       (err) => {
         const type = 'danger';
@@ -143,7 +180,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
 
   openModalDeworming(pet, intorext: boolean) {
     this.dialogService.open(PopupAddDewormingPetComponent, { context: { pet: pet, intorext: intorext } }).onClose.subscribe(res => {
-      console.log('res', res)
       this.pet = res;
     });
   }
@@ -227,8 +263,26 @@ export class PopupAddClinicHistoryComponent implements OnInit {
 
   public onSelectChangeHabitat(event): void {
     this.descriptionFeedind = event;
-    this.updateFeeding();
+    this.updateHabitat();
 
+  }
+
+  changedValueAttitude() {
+    const newVal = {
+      fieldName: this.attitude,
+    };
+  }
+
+  changedValueBodyCondition(){
+    const newVal = {
+      fieldName: this.bodyCondition,
+    };
+  }
+
+  changedValueStateDehydration(){
+    const newVal = {
+      fieldName: this.statusDehydration,
+    };
   }
 
 
@@ -242,7 +296,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   updateReproductiveStatus() {
 
     this.requestReproductiveStatus = { reproductiveStatus: this.reproductive };
-    console.log(this.requestReproductiveStatus)
     this.servicePet.updateReproductiveStatus(this.pet.id, this.requestReproductiveStatus).subscribe(
       pet => {
         this.pet = pet;
@@ -379,6 +432,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   saveConstantsPhy(physiologicalConstants) {
     this.physiologicalConstants = physiologicalConstants;
     this.ConstantsPhy = true;
-    console.log(this.physiologicalConstants)
   }
+
 }

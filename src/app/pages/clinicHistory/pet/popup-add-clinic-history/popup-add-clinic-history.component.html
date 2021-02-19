@@ -1,273 +1,342 @@
 <nb-card>
-    <nb-card-header>Historia Clinica EquidoDog</nb-card-header>
+    <nb-card-header>Historia Clínica EquidoDog</nb-card-header>
     <nb-card-body>
         <div class="contenedorImg">
             <img class="img-card" src="{{pet?.photo}}" />
         </div>
         <div class="contenedorDetalles">
-            <div class="box">
-                <h6>Datos mascota</h6>
-                <hr style="border-color:blue;">
-                <div class="box-inter">
-                    <span><b>Nombre: </b> {{pet?.name}}</span>
-                    <span class="espacio"><b>Raza: </b> {{pet?.breed.description}}</span>
-                    <span class="espacio"><b>Especie: </b> {{pet?.species.description}}</span>
-                    <span class="espacio"><b>Color: </b> {{pet?.color}}</span>
-                    <span class="espacio"><b>Sexo: </b> {{pet?.sex}}</span>
-                </div>
-                <div class="box-inter">
-                    <span><b>Fecha de nacimiento: </b> {{pet?.dateBirth}}</span>
-                    <span class="espacio"><b>Age: </b> {{pet?.age}}</span>
-                    <span class="espacio"><b>Señas particulares: </b> {{pet?.particularSigns}}</span>
-                    <span class="espacio"><b>Origen: </b> {{pet?.origin}}</span>
-                </div>
-            </div>
-            <div class="box">
-                <h6>Datos propietario</h6>
-                <hr style="border-color:blue;">
-                <span><b>Propietario: </b> {{pet?.customer.name}}</span>
-                <span class="espacio"><b>Dirección: </b> {{pet?.customer.address}}</span>
-                <span class="espacio"><b>Telefono: </b> {{pet?.customer.phone}}</span>
-            </div>
-
-
-            <div class="box">
-                <h6>Datos Veterinario</h6>
-                <hr style="border-color:blue;">
-                <div *ngIf="!infoVeterinary" class="full-name-inputs form-group">
-                    <input #nro nbInput type="text" placeholder="Tarjeta profesional veterinario">
-                    <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-info form-group"
-                        type="submit" (click)="getVetrinaryByProfessionalCard(nro.value)"
-                        [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info" nbSpinnerSize="large"
-                        nbSpinnerMessage="">Validar</button>
-                </div>
-                <div *ngIf="infoVeterinary">
-                    <span><b>Veterinario: </b> {{veterinary?.name}} {{veterinary?.surname}}</span>
-                    <span style="margin-left: 10%;"><b>Tarjeta Profesional: </b> {{veterinary?.professionalCard}}</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <h6>Motivo de la consulta</h6>
-                <hr style="border-color:blue;">
-                <div class="full-name-inputs form-group">
-                    <textarea nbInput fullWidth placeholder="Motivo de la consulta"></textarea>
-                </div>
-            </div>
-
-            <div class="box">
-                <h6>Anamnésicos</h6>
-                <hr style="border-color:blue;">
-                <div class="full-name-inputs form-group">
-                    <textarea nbInput fullWidth placeholder="Anamnésicos"></textarea>
-                </div>
-            </div>
-            <div class="box">
-                <h6>Vacunas</h6>
-                <hr style="border-color:blue;">
-                <div *ngFor=" let vacuna of pet.vaccinations">
-                    <div *ngFor=" let vac of vacuna.vaccinations" class="item">
-                        <span class="col-md-4 center"><b>Vacuna: </b> {{vac?.vaccination?.description}}</span>
-                        <span class="col-md-4 center"><b>Lote: </b> {{vac?.vaccination?.lot}}</span>
-                        <span class="col-md-4 center"><b>Fecha de vacunación: </b> {{vac?.vaccinationDate |
-                            date:'yyyy/MM/dd'}}</span>
+            <nb-stepper orientation="horizontal">
+                <nb-step [label]="labelOne">
+                    <ng-template #labelOne>Datos Generales Mascotas</ng-template>
+                    <div class="box">
+                        <h6>Datos mascota</h6>
+                        <hr style="border-color:blue;">
+                        <div class="box-inter">
+                            <span><b>Nombre: </b> {{pet?.name}}</span>
+                            <span class="espacio"><b>Raza: </b> {{pet?.breed.description}}</span>
+                            <span class="espacio"><b>Especie: </b> {{pet?.species.description}}</span>
+                            <span class="espacio"><b>Color: </b> {{pet?.color}}</span>
+                            <span class="espacio"><b>Sexo: </b> {{pet?.sex}}</span>
+                        </div>
+                        <div class="box-inter">
+                            <span><b>Fecha de nacimiento: </b> {{pet?.dateBirth}}</span>
+                            <span class="espacio"><b>Age: </b> {{pet?.age}}</span>
+                            <span class="espacio"><b>Señas particulares: </b> {{pet?.particularSigns}}</span>
+                            <span class="espacio"><b>Origen: </b> {{pet?.origin}}</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <h6>Desparasitación Interna</h6>
-                <nb-icon class="changeMouse" nbTooltip="Desparasitación Interna" nbTooltipStatus="success"
-                    status="success" icon="calendar-outline" (click)="openModalDeworming(pet,true)">
-                </nb-icon>
-                <hr style="border-color:blue;">
-                <div *ngFor=" let dewormingInternal of pet.dewormingInternal" class="item">
-                    <span class="col-md-4 center"><b>Observación: </b>
-                        {{dewormingInternal?.deworming?.description}}</span>
-                    <span class="col-md-4 center"><b>Producto: </b>
-                        {{dewormingInternal?.deworming?.product}}</span>
-                    <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
-                        {{dewormingInternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
-                </div>
-            </div>
-
-
-            <div class="box">
-                <h6>Desparasitación Externa</h6>
-                <nb-icon class="changeMouse" nbTooltip="Desparasitación Externa" nbTooltipStatus="success"
-                    status="success" icon="browser-outline" (click)="openModalDeworming(pet,false)">
-                </nb-icon>
-                <hr style="border-color:blue;">
-                <div *ngFor=" let dewormingExternal of pet.dewormingExternal" class="item">
-                    <span class="col-md-4 center"><b>Observación: </b>
-                        {{dewormingExternal?.deworming?.description}}</span>
-                    <span class="col-md-4 center"><b>Producto: </b>
-                        {{dewormingExternal?.deworming?.product}}</span>
-                    <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
-                        {{dewormingExternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
-                </div>
-            </div>
-
-            <div class="box">
-                <h6>Alimentación</h6>
-                <nb-radio-group name="group1" [(value)]="feeding" class="Groupradiobox" [(ngModel)]="feeding"
-                    (ngModelChange)="changedValueFeeding()">
-                    <nb-radio class="radiobox" *ngFor="let type of feedingOption" [value]="type">
-                        {{type}}
-                    </nb-radio>
-                </nb-radio-group>
-
-                <input nbInput *ngIf="hideDescription" type="text" name="search" [(ngModel)]="search" autocomplete="on"
-                    placeholder="Buscar" (ngModelChange)='onSelectChangeFeeding($event)'>
-            </div>
-
-            <div class="box">
-                <h6>Habitat</h6>
-                <nb-radio-group name="group3" [(value)]="habitat" class="Groupradiobox" [(ngModel)]="habitat"
-                    (ngModelChange)="changedValueHabitat()">
-                    <nb-radio class="radiobox" *ngFor="let type of habitatOption" [value]="type">
-                        {{type}}
-                    </nb-radio>
-                </nb-radio-group>
-
-                <input nbInput *ngIf="hideDescriptionHabitat" type="text" name="search" [(ngModel)]="search"
-                    autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChangeHabitat($event)'>
-            </div>
-
-
-            <div class="box">
-                <h6>Estado Reproductivo</h6>
-                <nb-radio-group name="group2" [(value)]="reproductive" class="Groupradiobox" [(ngModel)]="reproductive"
-                    (ngModelChange)="changedValueReproductiveStatus()">
-                    <nb-radio class="radiobox" *ngFor="let type of reproductiveStatus" [value]="type">
-                        {{type}}
-                    </nb-radio>
-                </nb-radio-group>
-            </div>
-
-
-            <div class="box">
-                <h6>Alergias</h6>
-                <nb-icon class="changeMouse" nbTooltip="Agregar nueva alergia" nbTooltipStatus="success"
-                    status="success" icon="file-add-outline" (click)="openAllergy()">
-                </nb-icon>
-                <hr style="border-color:blue;">
-                <div class="full-name-inputs form-group">
-                    <textarea disabled nbInput fullWidth placeholder="Alergias">{{pet?.allergy}}</textarea>
-                </div>
-                <div *ngIf="hiddenAllergy" class="full-name-inputs form-group">
-                    <textarea #des nbInput fullWidth placeholder="Nueva Alergias, separada por ','"></textarea>
-                    <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-success form-group"
-                        type="submit" [nbSpinner]="loadingLargeGroup" (click)="updateAllergy(des.value)"
-                        nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">Guardar Alergias</button>
-                </div>
-            </div>
-
-            <div class="box">
-                <h6>Enfermedades Anteriores</h6>
-                <nb-icon class="changeMouse" nbTooltip="Agregar nueva enfermedad previa" nbTooltipStatus="success"
-                    status="success" icon="file-add-outline" (click)="openPreviousIllnesses()">
-                </nb-icon>
-                <hr style="border-color:blue;">
-                <div class="full-name-inputs form-group">
-                    <textarea nbInput disabled fullWidth
-                        placeholder="Enfermedad previa">{{pet?.previousIllnesses}}</textarea>
-                </div>
-                <div *ngIf="hiddenPreviousIllnesses" class="full-name-inputs form-group">
-                    <textarea #des nbInput fullWidth placeholder="Enfermedad previa, separada por ','"></textarea>
-                    <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-success form-group"
-                        type="submit" [nbSpinner]="loadingLargeGroup" (click)="updatePreviousIllnesses(des.value)"
-                        nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">Guardar Enfermedades
-                        Previas</button>
-                </div>
-            </div>
-
-            <div class="box">
-                <h6>Cirugía</h6>
-                <nb-icon class="changeMouse" nbTooltip="Agregar nueva cirugía" nbTooltipStatus="success"
-                    status="success" icon="file-add-outline" (click)="openSurgeries()">
-                </nb-icon>
-                <hr style="border-color:blue;">
-                <div class="full-name-inputs form-group">
-                    <textarea nbInput disabled fullWidth placeholder="Cirugía previa">{{pet?.surgeries}}</textarea>
-                </div>
-                <div *ngIf="hiddenSurgeries" class="full-name-inputs form-group">
-                    <textarea #des nbInput fullWidth placeholder="Cirugía previa, separada por ','"></textarea>
-                    <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-success form-group"
-                        type="submit" [nbSpinner]="loadingLargeGroup" (click)="updateSurgeries(des.value)"
-                        nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">Guardar Cirugias</button>
-                </div>
-            </div>
-
-
-            <div class="box">
-                <h6>Antecedentes familiriares</h6>
-                <nb-icon class="changeMouse" nbTooltip="Agregar antecedente familiriar" nbTooltipStatus="success"
-                    status="success" icon="file-add-outline" (click)="openFamilyBackground()">
-                </nb-icon>
-                <hr style="border-color:blue;">
-                <div class="full-name-inputs form-group">
-                    <textarea disabled nbInput fullWidth
-                        placeholder="Antecedente familiriar">{{pet?.familyBackground}}</textarea>
-                </div>
-                <div *ngIf="hiddenFamilyBackground" class="full-name-inputs form-group">
-                    <textarea #des nbInput fullWidth placeholder="Antecedente familiriar, separada por ','"></textarea>
-                    <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-success form-group"
-                        type="submit" [nbSpinner]="loadingLargeGroup" (click)="updateFamilyBackground(des.value)"
-                        nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">Guardar antecedentes
-                        familiriares</button>
-                </div>
-            </div>
-
-            <div class="box" [formGroup]="checkOutFormConstantsPhy">
-                <h6>Constantes fisiológicas</h6>
-                <hr style="border-color:blue;">
-
-                <div *ngIf="!ConstantsPhy">
-                    <div class="full-name-inputs form-group">
-                        <input class="form-group" nbInput type="text" formControlName="capillaryFillTime"
-                            placeholder="Tiempo de llenado capilar">
-                        <input class="form-group space" nbInput type="text" formControlName="pulse" placeholder="Pulso">
-
+                    <div class="box">
+                        <h6>Datos propietario</h6>
+                        <hr style="border-color:blue;">
+                        <span><b>Propietario: </b> {{pet?.customer.name}}</span>
+                        <span class="espacio"><b>Dirección: </b> {{pet?.customer.address}}</span>
+                        <span class="espacio"><b>Telefono: </b> {{pet?.customer.phone}}</span>
                     </div>
 
-                    <div class="full-name-inputs form-group">
-                        <input nbInput type="text" formControlName="heartRate" placeholder="Ritmo cardiaco">
-
-                        <input nbInput class="form-group space" type="text" formControlName="respiratoryFrequency"
-                            placeholder="Frecuencia respiratoria">
-
+                    <div class="box">
+                        <h6>Vacunas</h6>
+                        <hr style="border-color:blue;">
+                        <div *ngFor=" let vacuna of pet.vaccinations">
+                            <div *ngFor=" let vac of vacuna.vaccinations" class="item">
+                                <span class="col-md-4 center"><b>Vacuna: </b> {{vac?.vaccination?.description}}</span>
+                                <span class="col-md-4 center"><b>Lote: </b> {{vac?.vaccination?.lot}}</span>
+                                <span class="col-md-4 center"><b>Fecha de vacunación: </b> {{vac?.vaccinationDate |
+                                    date:'yyyy/MM/dd'}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <h6>Desparasitación Interna</h6>
+                        <nb-icon class="changeMouse" nbTooltip="Desparasitación Interna" nbTooltipStatus="success"
+                            status="success" icon="calendar-outline" (click)="openModalDeworming(pet,true)">
+                        </nb-icon>
+                        <hr style="border-color:blue;">
+                        <div *ngFor=" let dewormingInternal of pet.dewormingInternal" class="item">
+                            <span class="col-md-4 center"><b>Observación: </b>
+                                {{dewormingInternal?.deworming?.description}}</span>
+                            <span class="col-md-4 center"><b>Producto: </b>
+                                {{dewormingInternal?.deworming?.product}}</span>
+                            <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
+                                {{dewormingInternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
+                        </div>
                     </div>
 
-                    <div class="full-name-inputs form-group">
-                        <input nbInput type="text" formControlName="temperature" placeholder="Temperatura en °C">
 
-                        <input class="form-group space" nbInput type="text" formControlName="weight"
-                            placeholder="Peso en Kg">
-
+                    <div class="box">
+                        <h6>Desparasitación Externa</h6>
+                        <nb-icon class="changeMouse" nbTooltip="Desparasitación Externa" nbTooltipStatus="success"
+                            status="success" icon="browser-outline" (click)="openModalDeworming(pet,false)">
+                        </nb-icon>
+                        <hr style="border-color:blue;">
+                        <div *ngFor=" let dewormingExternal of pet.dewormingExternal" class="item">
+                            <span class="col-md-4 center"><b>Observación: </b>
+                                {{dewormingExternal?.deworming?.description}}</span>
+                            <span class="col-md-4 center"><b>Producto: </b>
+                                {{dewormingExternal?.deworming?.product}}</span>
+                            <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
+                                {{dewormingExternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
+                        </div>
                     </div>
 
-                    <button class="btn btn-outline-success " style="width: 45%;"
-                        (click)="saveConstantsPhy(checkOutFormConstantsPhy.value)" [nbSpinner]="loadingLargeGroup"
-                        nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage=""
-                        [disabled]="!checkOutFormConstantsPhy.valid || disableButton">Guardar constantes
-                        fisiológicas</button>
-                </div>
+                    <div class="box">
+                        <h6>Alimentación</h6>
+                        <nb-radio-group name="group1" [(value)]="feeding" class="Groupradiobox" [(ngModel)]="feeding"
+                            (ngModelChange)="changedValueFeeding()">
+                            <nb-radio class="radiobox" *ngFor="let type of feedingOption" [value]="type">
+                                {{type}}
+                            </nb-radio>
+                        </nb-radio-group>
 
-                <div *ngIf="ConstantsPhy" class="box-inter">
-                    <span><b>T.L. Capilar: </b> {{physiologicalConstants?.capillaryFillTime}}</span>
-                    <span class="espacio"><b>Pulso: </b> {{physiologicalConstants?.pulse}}</span>
-                    <span class="espacio"><b>Ritmo cardiaco: </b> {{physiologicalConstants?.heartRate}}</span>
-                    <span class="espacio"><b>Frecuencia respiratoria: </b> {{physiologicalConstants?.respiratoryFrequency}}</span>
-                    <span class="espacio"><b>Temperatura: </b> {{physiologicalConstants?.temperature}}</span>
-                    <span class="espacio"><b>Peso: </b> {{physiologicalConstants?.weight}}</span>
-                </div>
-            </div>
+                        <input nbInput *ngIf="hideDescription" type="text" name="search" [(ngModel)]="search"
+                            autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChangeFeeding($event)'>
+                    </div>
 
-            <div class="box">
-                <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-success form-group"
-                    type="submit" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info" nbSpinnerSize="large"
-                    nbSpinnerMessage="">Guardar</button>
-            </div>
+                    <div class="box">
+                        <h6>Habitat</h6>
+                        <nb-radio-group name="group3" [(value)]="habitat" class="Groupradiobox" [(ngModel)]="habitat"
+                            (ngModelChange)="changedValueHabitat()">
+                            <nb-radio class="radiobox" *ngFor="let type of habitatOption" [value]="type">
+                                {{type}}
+                            </nb-radio>
+                        </nb-radio-group>
+
+                        <input nbInput *ngIf="hideDescriptionHabitat" type="text" name="search" [(ngModel)]="search"
+                            autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChangeHabitat($event)'>
+                    </div>
+
+
+                    <div class="box">
+                        <h6>Estado Reproductivo</h6>
+                        <nb-radio-group name="group2" [(value)]="reproductive" class="Groupradiobox"
+                            [(ngModel)]="reproductive" (ngModelChange)="changedValueReproductiveStatus()">
+                            <nb-radio class="radiobox" *ngFor="let type of reproductiveStatus" [value]="type">
+                                {{type}}
+                            </nb-radio>
+                        </nb-radio-group>
+                    </div>
+
+
+                    <div class="box">
+                        <h6>Alergias</h6>
+                        <nb-icon class="changeMouse" nbTooltip="Agregar nueva alergia" nbTooltipStatus="success"
+                            status="success" icon="file-add-outline" (click)="openAllergy()">
+                        </nb-icon>
+                        <hr style="border-color:blue;">
+                        <div class="full-name-inputs form-group">
+                            <textarea disabled nbInput fullWidth placeholder="Alergias">{{pet?.allergy}}</textarea>
+                        </div>
+                        <div *ngIf="hiddenAllergy" class="full-name-inputs form-group">
+                            <textarea #des nbInput fullWidth placeholder="Nueva Alergias, separada por ','"></textarea>
+                            <button style="margin-top: 10px; margin-left: 10px;"
+                                class="btn btn-outline-success form-group" type="submit" [nbSpinner]="loadingLargeGroup"
+                                (click)="updateAllergy(des.value)" nbSpinnerStatus="info" nbSpinnerSize="large"
+                                nbSpinnerMessage="">Guardar Alergias</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <h6>Enfermedades Anteriores</h6>
+                        <nb-icon class="changeMouse" nbTooltip="Agregar nueva enfermedad previa"
+                            nbTooltipStatus="success" status="success" icon="file-add-outline"
+                            (click)="openPreviousIllnesses()">
+                        </nb-icon>
+                        <hr style="border-color:blue;">
+                        <div class="full-name-inputs form-group">
+                            <textarea nbInput disabled fullWidth
+                                placeholder="Enfermedad previa">{{pet?.previousIllnesses}}</textarea>
+                        </div>
+                        <div *ngIf="hiddenPreviousIllnesses" class="full-name-inputs form-group">
+                            <textarea #des nbInput fullWidth
+                                placeholder="Enfermedad previa, separada por ','"></textarea>
+                            <button style="margin-top: 10px; margin-left: 10px;"
+                                class="btn btn-outline-success form-group" type="submit" [nbSpinner]="loadingLargeGroup"
+                                (click)="updatePreviousIllnesses(des.value)" nbSpinnerStatus="info"
+                                nbSpinnerSize="large" nbSpinnerMessage="">Guardar Enfermedades
+                                Previas</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <h6>Cirugía</h6>
+                        <nb-icon class="changeMouse" nbTooltip="Agregar nueva cirugía" nbTooltipStatus="success"
+                            status="success" icon="file-add-outline" (click)="openSurgeries()">
+                        </nb-icon>
+                        <hr style="border-color:blue;">
+                        <div class="full-name-inputs form-group">
+                            <textarea nbInput disabled fullWidth
+                                placeholder="Cirugía previa">{{pet?.surgeries}}</textarea>
+                        </div>
+                        <div *ngIf="hiddenSurgeries" class="full-name-inputs form-group">
+                            <textarea #des nbInput fullWidth placeholder="Cirugía previa, separada por ','"></textarea>
+                            <button style="margin-top: 10px; margin-left: 10px;"
+                                class="btn btn-outline-success form-group" type="submit" [nbSpinner]="loadingLargeGroup"
+                                (click)="updateSurgeries(des.value)" nbSpinnerStatus="info" nbSpinnerSize="large"
+                                nbSpinnerMessage="">Guardar Cirugias</button>
+                        </div>
+                    </div>
+
+
+                    <div class="box">
+                        <h6>Antecedentes familiriares</h6>
+                        <nb-icon class="changeMouse" nbTooltip="Agregar antecedente familiriar"
+                            nbTooltipStatus="success" status="success" icon="file-add-outline"
+                            (click)="openFamilyBackground()">
+                        </nb-icon>
+                        <hr style="border-color:blue;">
+                        <div class="full-name-inputs form-group">
+                            <textarea disabled nbInput fullWidth
+                                placeholder="Antecedente familiriar">{{pet?.familyBackground}}</textarea>
+                        </div>
+                        <div *ngIf="hiddenFamilyBackground" class="full-name-inputs form-group">
+                            <textarea #des nbInput fullWidth
+                                placeholder="Antecedente familiriar, separada por ','"></textarea>
+                            <button style="margin-top: 10px; margin-left: 10px;"
+                                class="btn btn-outline-success form-group" type="submit" [nbSpinner]="loadingLargeGroup"
+                                (click)="updateFamilyBackground(des.value)" nbSpinnerStatus="info" nbSpinnerSize="large"
+                                nbSpinnerMessage="">Guardar antecedentes
+                                familiriares</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+                <nb-step [label]="labelTwo">
+                    <ng-template #labelTwo>Motivo de la consulta</ng-template>
+                    <h4>Consulta</h4>
+                    <div class="box">
+                        <h6>Datos Veterinario</h6>
+                        <hr style="border-color:blue;">
+                        <div *ngIf="!infoVeterinary" class="full-name-inputs form-group">
+                            <input #nro nbInput type="text" placeholder="Tarjeta profesional veterinario">
+                            <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-info form-group"
+                                type="submit" (click)="getVetrinaryByProfessionalCard(nro.value)"
+                                [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info" nbSpinnerSize="large"
+                                nbSpinnerMessage="">Validar</button>
+                        </div>
+                        <div *ngIf="infoVeterinary">
+                            <span><b>Veterinario: </b> {{veterinary?.name}} {{veterinary?.surname}}</span>
+                            <span style="margin-left: 10%;"><b>Tarjeta Profesional: </b>
+                                {{veterinary?.professionalCard}}</span>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <h6>Motivo de la consulta</h6>
+                        <hr style="border-color:blue;">
+                        <div class="full-name-inputs form-group">
+                            <textarea nbInput fullWidth placeholder="Motivo de la consulta"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <h6>Anamnésicos</h6>
+                        <hr style="border-color:blue;">
+                        <div class="full-name-inputs form-group">
+                            <textarea nbInput fullWidth placeholder="Anamnésicos"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+                <nb-step [label]="labelThree">
+                    <ng-template #labelThree>Constantes fisiológicas</ng-template>
+                    <div class="box" [formGroup]="checkOutFormConstantsPhy">
+                        <h6>Constantes fisiológicas</h6>
+                        <hr style="border-color:blue;">
+
+                        <div *ngIf="!ConstantsPhy">
+                            <div class="full-name-inputs form-group">
+                                <input class="form-group" nbInput type="text" formControlName="capillaryFillTime"
+                                    placeholder="Tiempo de llenado capilar">
+                                <input class="form-group space" nbInput type="text" formControlName="pulse"
+                                    placeholder="Pulso">
+
+                            </div>
+
+                            <div class="full-name-inputs form-group">
+                                <input nbInput type="text" formControlName="heartRate" placeholder="Ritmo cardiaco">
+
+                                <input nbInput class="form-group space" type="text"
+                                    formControlName="respiratoryFrequency" placeholder="Frecuencia respiratoria">
+
+                            </div>
+
+                            <div class="full-name-inputs form-group">
+                                <input nbInput type="text" formControlName="temperature"
+                                    placeholder="Temperatura en °C">
+
+                                <input class="form-group space" nbInput type="text" formControlName="weight"
+                                    placeholder="Peso en Kg">
+
+                            </div>
+
+                            <button class="btn btn-outline-success " style="width: 45%;"
+                                (click)="saveConstantsPhy(checkOutFormConstantsPhy.value)"
+                                [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large"
+                                nbSpinnerMessage=""
+                                [disabled]="!checkOutFormConstantsPhy.valid || disableButton">Guardar constantes
+                                fisiológicas</button>
+                        </div>
+
+                        <div *ngIf="ConstantsPhy" class="box-inter">
+                            <span><b>T.L. Capilar: </b> {{physiologicalConstants?.capillaryFillTime}}</span>
+                            <span class="espacio"><b>Pulso: </b> {{physiologicalConstants?.pulse}}</span>
+                            <span class="espacio"><b>Ritmo cardiaco: </b> {{physiologicalConstants?.heartRate}}</span>
+                            <span class="espacio"><b>Frecuencia respiratoria: </b>
+                                {{physiologicalConstants?.respiratoryFrequency}}</span>
+                            <span class="espacio"><b>Temperatura: </b> {{physiologicalConstants?.temperature}}</span>
+                            <span class="espacio"><b>Peso: </b> {{physiologicalConstants?.weight}}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+                <nb-step [label]="labelFour">
+                    <ng-template #labelFour>Examen Clínico</ng-template>
+                    <h4>Examen Clínico</h4>
+
+                    <div class="box">
+                        <h6>Actitud</h6>
+                        <nb-radio-group name="group4" class="Groupradiobox" (ngModelChange)="changedValueAttitude()">
+                            <nb-radio class="radiobox" *ngFor="let type of attitudeOption" [value]="type">
+                                {{type}}
+                            </nb-radio>
+                        </nb-radio-group>
+                    </div>
+
+                    <div class="box">
+                        <h6>Condición corporal</h6>
+                        <nb-radio-group name="group5" class="Groupradiobox"
+                            (ngModelChange)="changedValueBodyCondition()">
+                            <nb-radio class="radiobox" *ngFor="let type of bodyConditionOption" [value]="type">
+                                {{type}}
+                            </nb-radio>
+                        </nb-radio-group>
+                    </div>
+
+                    <div class="box">
+                        <h6>Estado de deshidratación</h6>
+                        <nb-radio-group name="group6" class="Groupradiobox"
+                            (ngModelChange)="changedValueStateDehydration()">
+                            <nb-radio class="radiobox" *ngFor="let type of stateDehydrationOption" [value]="type">
+                                {{type}}
+                            </nb-radio>
+                        </nb-radio-group>
+                    </div>
+
+                    <div>
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+            </nb-stepper>
         </div>
     </nb-card-body>
     <nb-card-footer>
