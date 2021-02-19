@@ -1,6 +1,6 @@
-import { habitat } from "../../enum/habitat";
+import { Habitat } from "../../enum/habitat";
 import { Origin } from "../../enum/origin";
-import { reproductiveStatus } from "../../enum/reproductiveStatus";
+import { ReproductiveStatus } from "../../enum/reproductiveStatus";
 import { Sex } from "../../enum/sex";
 import { RequestFeeding } from "../../Request/feeding/RequestFeeding";
 import { RequestPatientHistoryVaccinations } from "../../Request/pet/vaccination/RequestPatientHistoryVaccinations";
@@ -32,8 +32,8 @@ export class ResponsePet {
     previousIllnesses: string;
     surgeries: string;
     familyBackground: string;
-    habitat: habitat;
-    reproductiveStatus: reproductiveStatus;
+    habitat: Habitat;
+    reproductiveStatus: ReproductiveStatus;
     allergy: string;
     photo: string;
 }

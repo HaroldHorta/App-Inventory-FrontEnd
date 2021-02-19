@@ -35,7 +35,7 @@
                 <hr style="border-color:blue;">
                 <div *ngFor=" let vacuna of pet.vaccinations">
                     <div *ngFor=" let vac of vacuna.vaccinations" class="item">
-                        <span class="col-md-4 center"><b>Nombre vacuna: </b> {{vac?.vaccination?.description}}</span>
+                        <span class="col-md-4 center"><b>Vacuna: </b> {{vac?.vaccination?.description}}</span>
                         <span class="col-md-4 center"><b>Lote: </b> {{vac?.vaccination?.lot}}</span>
                         <span class="col-md-4 center"><b>Fecha de vacunación: </b> {{vac?.vaccinationDate |
                             date:'yyyy/MM/dd'}}</span>
@@ -48,7 +48,7 @@
                 <div *ngFor=" let dewormingInternal of pet.dewormingInternal" class="item">
                     <span class="col-md-4 center"><b>Observación: </b>
                         {{dewormingInternal?.deworming?.description}}</span>
-                    <span class="col-md-4 center"><b>Producto Desparasitación: </b>
+                    <span class="col-md-4 center"><b>Producto: </b>
                         {{dewormingInternal?.deworming?.product}}</span>
                     <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
                         {{dewormingInternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
@@ -62,7 +62,7 @@
                 <div *ngFor=" let dewormingExternal of pet.dewormingExternal" class="item">
                     <span class="col-md-4 center"><b>Observación: </b>
                         {{dewormingExternal?.deworming?.description}}</span>
-                    <span class="col-md-4 center"><b>Producto Desparasitación: </b>
+                    <span class="col-md-4 center"><b>Producto: </b>
                         {{dewormingExternal?.deworming?.product}}</span>
                     <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
                         {{dewormingExternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>

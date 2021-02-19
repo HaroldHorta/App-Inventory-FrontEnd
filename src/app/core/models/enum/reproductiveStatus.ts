@@ -1,3 +1,3 @@
-export enum reproductiveStatus{
+export enum ReproductiveStatus{
     CASTRADO, GESTACION, ENTERO, LACTANCIA
 }

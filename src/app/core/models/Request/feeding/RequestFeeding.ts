@@ -1,6 +1,6 @@
-import { feedingOption } from "../../enum/feedingOption";
+import { FeedingOption } from "../../enum/feedingOption";
 
 export class RequestFeeding {
-    feedingOption: feedingOption;
+    feedingOption: FeedingOption;
     description: string;
 }

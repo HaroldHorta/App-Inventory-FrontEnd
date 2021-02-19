@@ -1,3 +1,3 @@
-export enum feedingOption {
+export enum FeedingOption {
     BALANCEADA, CASERA, MIXTA, OTRA
 }
