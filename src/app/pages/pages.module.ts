@@ -63,6 +63,8 @@ import { PopupAddDewormingPetComponent } from './clinicHistory/pet/popup-add-dew
 import { PopupAddClinicHistoryComponent } from './clinicHistory/pet/popup-add-clinic-history/popup-add-clinic-history.component';
 import { VeterinaryComponent } from './clinicHistory/veterinary/veterinary.component';
 import { PopupAddVeterinaryComponent } from './clinicHistory/veterinary/popup-add-veterinary/popup-add-veterinary.component';
+import { ExamClinicComponent } from './clinicHistory/exam-clinic/exam-clinic.component';
+import { PopupAddExamclinicComponent } from './clinicHistory/exam-clinic/popup-add-examclinic/popup-add-examclinic.component';
 
 @NgModule({
   imports: [
@@ -145,6 +147,8 @@ import { PopupAddVeterinaryComponent } from './clinicHistory/veterinary/popup-ad
     PopupAddClinicHistoryComponent,
     VeterinaryComponent,
     PopupAddVeterinaryComponent,
+    ExamClinicComponent,
+    PopupAddExamclinicComponent,
 
   ],
 })

@@ -19,9 +19,6 @@ export const endpoint = {
     Pet: `${environment.serverUrl}/pet`,
     Vaccinations: `${environment.serverUrl}/vaccination`,
     Veterinary: `${environment.serverUrl}/veterinary`,
-
-
-
-
+    ClinicExam: `${environment.serverUrl}/clinicExam`,
 
 };

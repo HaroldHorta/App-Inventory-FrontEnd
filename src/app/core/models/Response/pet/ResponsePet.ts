@@ -3,6 +3,7 @@ import { Origin } from "../../enum/origin";
 import { ReproductiveStatus } from "../../enum/reproductiveStatus";
 import { Sex } from "../../enum/sex";
 import { RequestFeeding } from "../../Request/feeding/RequestFeeding";
+import { RequestHabitat } from "../../Request/habitat/RequestHabitat";
 import { RequestPatientHistoryVaccinations } from "../../Request/pet/vaccination/RequestPatientHistoryVaccinations";
 import { ResponseBreed } from "../breed/ResponseBreed";
 import { ResponseCustomer } from "../customer/ResponseCustomer.module";
@@ -32,7 +33,7 @@ export class ResponsePet {
     previousIllnesses: string;
     surgeries: string;
     familyBackground: string;
-    habitat: Habitat;
+    habitat: RequestHabitat;
     reproductiveStatus: ReproductiveStatus;
     allergy: string;
     photo: string;

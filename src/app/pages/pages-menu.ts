@@ -86,9 +86,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: 'pet',
       },
       {
-        title: 'Veterinario',
+        title: 'Examen clínico',
         icon: 'radio-button-off-outline',
-        link: 'veterinary',
+        link: 'examclinic',
       },
     ],
   },

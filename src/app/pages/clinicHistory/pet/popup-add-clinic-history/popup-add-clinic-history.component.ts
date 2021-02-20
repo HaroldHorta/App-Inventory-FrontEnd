@@ -43,9 +43,9 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   feedingOption: Array<string> = [];
   reproductiveStatus: Array<string> = [];
   habitatOption: Array<string> = [];
-  attitudeOption:Array<string>=[];
-  bodyConditionOption:Array<string>=[];
-  stateDehydrationOption:string[]=[];
+  attitudeOption: Array<string> = [];
+  bodyConditionOption: Array<string> = [];
+  stateDehydrationOption: string[] = [];
   reproductive;
   habitat;
   feeding;
@@ -102,7 +102,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
       this.reproductive = this.pet.reproductiveStatus;
     }
     if (this.pet.habitat != null) {
-      this.habitat = this.pet.habitat;
+      this.habitat = this.pet.habitat.habitat;
     }
   }
   getFeeding() {
@@ -137,21 +137,20 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     }
   }
 
-  getBodyCondition(){
-    for(let value in BodyCondition){
-      if(typeof BodyCondition[value]==='number'){
+  getBodyCondition() {
+    for (let value in BodyCondition) {
+      if (typeof BodyCondition[value] === 'number') {
         this.bodyConditionOption.push(value)
       }
     }
   }
 
-  getStateDehydration(){
-        this.stateDehydrationOption.push(StateDehydration.NORMAL);
-        this.stateDehydrationOption.push(StateDehydration.CEROACINCO);
-        this.stateDehydrationOption.push(StateDehydration.SEISASIETE);
-        this.stateDehydrationOption.push(StateDehydration.OCHOANUEVE);
-        this.stateDehydrationOption.push(StateDehydration.MAS10);
-    console.log(this.stateDehydrationOption)
+  getStateDehydration() {
+    this.stateDehydrationOption.push(StateDehydration.NORMAL);
+    this.stateDehydrationOption.push(StateDehydration.CEROACINCO);
+    this.stateDehydrationOption.push(StateDehydration.SEISASIETE);
+    this.stateDehydrationOption.push(StateDehydration.OCHOANUEVE);
+    this.stateDehydrationOption.push(StateDehydration.MAS10);
   }
 
   cancel() {
@@ -273,13 +272,13 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     };
   }
 
-  changedValueBodyCondition(){
+  changedValueBodyCondition() {
     const newVal = {
       fieldName: this.bodyCondition,
     };
   }
 
-  changedValueStateDehydration(){
+  changedValueStateDehydration() {
     const newVal = {
       fieldName: this.statusDehydration,
     };
