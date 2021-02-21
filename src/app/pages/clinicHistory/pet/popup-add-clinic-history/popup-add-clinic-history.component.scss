@@ -15,7 +15,7 @@
     margin-left: 0%;
 }
 
-.space{
+.space {
     margin-left: 20%;
 }
 
@@ -82,5 +82,9 @@ nb-checkbox:not(:only-child) {
     }
     &:first-child {
         border-top: none;
+    }
+
+    .normal {
+        background-color: blue;
     }
 }

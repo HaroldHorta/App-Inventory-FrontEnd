@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
@@ -5,14 +6,18 @@ import { Attitude } from '../../../../core/models/enum/Attitude';
 import { BodyCondition } from '../../../../core/models/enum/BodyCondition';
 import { FeedingOption } from '../../../../core/models/enum/feedingOption';
 import { Habitat } from '../../../../core/models/enum/habitat';
+import { OptionClinicExam } from '../../../../core/models/enum/OptionClinicExam';
 import { ReproductiveStatus } from '../../../../core/models/enum/reproductiveStatus';
 import { StateDehydration } from '../../../../core/models/enum/StateDehydration';
+import { RequestAddClinicExamClinicHistory } from '../../../../core/models/Request/clinichistory/RequestAddClinicExamClinicHistory';
 import { RequestFeeding } from '../../../../core/models/Request/feeding/RequestFeeding';
 import { RequestHabitat } from '../../../../core/models/Request/habitat/RequestHabitat';
 import { RequestReproductiveStatus } from '../../../../core/models/Request/pet/reproductiveStatus/RequestReproductiveStatus';
 import { RequestPhysiologicalConstants } from '../../../../core/models/Request/pet/RequestPhysiologicalConstants/RequestPhysiologicalConstants';
+import { ResponseClinicExam } from '../../../../core/models/Response/examclinic/ResponseClinicExam';
 import { ResponsePet } from '../../../../core/models/Response/pet/ResponsePet';
 import { ResponseVeterinary } from '../../../../core/models/Response/veterinary/ResponseVeterinary';
+import { ExamClinicService } from '../../../../core/services/exam-clinic.service';
 import { GeneralService } from '../../../../core/services/general.service';
 import { PetService } from '../../../../core/services/pet.service';
 import { VeterinaryService } from '../../../../core/services/veterinary.service';
@@ -28,6 +33,8 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   pet: ResponsePet = new ResponsePet;
   veterinary: ResponseVeterinary;
   physiologicalConstants: RequestPhysiologicalConstants;
+  requestReproductiveStatus: RequestReproductiveStatus;
+  examClinic: ResponseClinicExam[];
   infoVeterinary = false;
   infoFeeding = false;
   disableButton = false;
@@ -46,7 +53,9 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   attitudeOption: Array<string> = [];
   bodyConditionOption: Array<string> = [];
   stateDehydrationOption: string[] = [];
+  optionClinicExam: string[] = [];
   reproductive;
+  clinicExam;
   habitat;
   feeding;
   attitude;
@@ -55,15 +64,19 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   search;
   descriptionFeedind: string = '';
   descriptionHabitat: string = '';
+  observationExam: string = '';
+
   requestFeeding: RequestFeeding;
   requestHabitat: RequestHabitat;
-  requestReproductiveStatus: RequestReproductiveStatus;
 
+
+  requestAddClinicExamClinicHistory: Array<RequestAddClinicExamClinicHistory> = new Array<RequestAddClinicExamClinicHistory>();
+  normalCheck = true;
 
 
   constructor(protected ref: NbDialogRef<PopupAddClinicHistoryComponent>, private serviceVeterinary: VeterinaryService,
     private toastrService: GeneralService, private formBuilder: FormBuilder, private dialogService: NbDialogService,
-    private servicePet: PetService) {
+    private servicePet: PetService, private serviceCLinicExam: ExamClinicService) {
 
     this.checkOutForm = this.formBuilder.group({
       veterinary: ['', [Validators.required]],
@@ -92,6 +105,8 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.getAttitude();
     this.getBodyCondition();
     this.getStateDehydration();
+    this.getOptionClinicExam();
+    this.getExamClinic();
   }
 
   preCarga() {
@@ -153,6 +168,23 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.stateDehydrationOption.push(StateDehydration.MAS10);
   }
 
+
+
+  getOptionClinicExam() {
+    this.optionClinicExam.push(OptionClinicExam.NORMAL);
+    this.optionClinicExam.push(OptionClinicExam.ANORMAL);
+  }
+
+  getExamClinic() {
+    this.serviceCLinicExam.getClinicExam().subscribe(examClinic => {
+      this.examClinic = examClinic;
+
+      const normal = OptionClinicExam.NORMAL;
+      this.examClinic.forEach(exam => {
+        this.requestAddClinicExamClinicHistory.push({ clinicExam: exam, optionClinicExam: normal, observation: this.observationExam });
+      })
+    })
+  }
   cancel() {
     this.ref.close();
   }
@@ -197,7 +229,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.updateFeeding();
 
   }
-
 
   changedValueHabitat() {
     const newVal = {
@@ -432,5 +463,37 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.physiologicalConstants = physiologicalConstants;
     this.ConstantsPhy = true;
   }
+
+  searchObservation;
+  public onSelectChangeObservation(indexExam, event): void {
+    console.log(indexExam, event)
+    if (this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam === OptionClinicExam.ANORMAL) {
+      console.log('pasa por el evento de observacion')
+      this.observationExam = event;
+      this.requestAddClinicExamClinicHistory[indexExam].observation = this.observationExam;
+    } else {
+      this.requestAddClinicExamClinicHistory[indexExam].observation = "";
+
+    }
+    console.log(this.requestAddClinicExamClinicHistory)
+
+  }
+exam=true;
+  changedValueExamClinic(type, indexExam, indexCheck, event) {
+    console.log(type, indexExam, indexCheck, event)
+    if (type === OptionClinicExam.ANORMAL && event) {
+      console.log('pasa por el evento de check en caso de anormal y el check true')
+      this.observationExam = "";
+      this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam = type;
+      this.requestAddClinicExamClinicHistory[indexExam].observation = this.observationExam;
+    }  else {
+      console.log('pasa por el evento de check en caso de normal y el check true')
+      this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam = OptionClinicExam.NORMAL;
+      this.requestAddClinicExamClinicHistory[indexExam].observation = "";
+    } 
+
+    console.log(this.requestAddClinicExamClinicHistory)
+  }
+
 
 }

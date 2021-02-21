@@ -101,7 +101,7 @@
                         </nb-radio-group>
 
                         <input nbInput *ngIf="hideDescriptionHabitat" type="text" name="search" [(ngModel)]="search"
-                            autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChangeHabitat($event)'>
+                            autocomplete="on" placeholder="Cuál?" (ngModelChange)='onSelectChangeHabitat($event)'>
                     </div>
 
 
@@ -330,6 +330,36 @@
                             </nb-radio>
                         </nb-radio-group>
                     </div>
+
+                    <div>
+                        <nb-card>
+                            <nb-card-body class="example-items-rows">
+
+                                <div class="row show-grid" *ngFor="let examClinic of examClinic; let indexExam = index">
+
+                                    <div class="col-6 col-md-4">
+                                        <span>{{examClinic.exam}}</span>
+                                    </div>
+
+                                    <div class="col-6 col-md-4">
+
+                                        <nb-checkbox *ngFor="let type of optionClinicExam; let indexCheck = index"
+                                            (checkedChange)="changedValueExamClinic(type, indexExam, indexCheck, $event)"
+                                            status="primary">{{type}}</nb-checkbox>
+                                    </div>
+
+                                    <div class="col-6 col-md-4">
+                                        <textarea fullWidth nbInput type="text" name="searchObservation"
+                                            *ngIf="requestAddClinicExamClinicHistory[indexExam].optionClinicExam === 'ANORMAL'"
+                                            [(ngModel)]="requestAddClinicExamClinicHistory[indexExam].observation"
+                                            autocomplete="on" placeholder="Observación"
+                                            (ngModelChange)='onSelectChangeObservation(indexExam, $event)'></textarea>
+                                    </div>
+                                </div>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+
 
                     <div>
                         <button nbButton disabled nbStepperNext>prev</button>
