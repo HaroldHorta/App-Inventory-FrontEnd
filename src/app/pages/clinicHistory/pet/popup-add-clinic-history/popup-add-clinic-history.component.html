@@ -424,6 +424,28 @@
                     </div>
                 </nb-step>
 
+
+                <nb-step [label]="labelSix">
+                    <ng-template #labelSix>Plan Diagnóstico</ng-template>
+                    <h4>Plan Diagnóstico</h4>
+                    <div class="example-items-rows">
+                        <div class="row show-grid">
+                            <div class="col-12 col-md-6">
+                                <nb-checkbox *ngFor="let type of diagnosticPlan; let indexCheck = index"
+                                    (checkedChange)="changedValueDiagnosticPlan(type, indexCheck, $event)"
+                                    status="primary">
+                                    {{type.description}}</nb-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+
             </nb-stepper>
         </div>
     </nb-card-body>

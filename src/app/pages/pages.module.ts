@@ -65,6 +65,8 @@ import { VeterinaryComponent } from './clinicHistory/veterinary/veterinary.compo
 import { PopupAddVeterinaryComponent } from './clinicHistory/veterinary/popup-add-veterinary/popup-add-veterinary.component';
 import { ExamClinicComponent } from './clinicHistory/exam-clinic/exam-clinic.component';
 import { PopupAddExamclinicComponent } from './clinicHistory/exam-clinic/popup-add-examclinic/popup-add-examclinic.component';
+import { DiagnosticPlanComponent } from './clinicHistory/diagnostic-plan/diagnostic-plan.component';
+import { PopupAddDianosticPlanComponent } from './clinicHistory/diagnostic-plan/popup-add-dianostic-plan/popup-add-dianostic-plan.component';
 
 @NgModule({
   imports: [
@@ -149,6 +151,8 @@ import { PopupAddExamclinicComponent } from './clinicHistory/exam-clinic/popup-a
     PopupAddVeterinaryComponent,
     ExamClinicComponent,
     PopupAddExamclinicComponent,
+    DiagnosticPlanComponent,
+    PopupAddDianosticPlanComponent,
 
   ],
 })

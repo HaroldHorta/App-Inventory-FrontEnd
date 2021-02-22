@@ -11,13 +11,16 @@ import { ReproductiveStatus } from '../../../../core/models/enum/reproductiveSta
 import { StateDehydration } from '../../../../core/models/enum/StateDehydration';
 import { RequestAddClinicExamClinicHistory } from '../../../../core/models/Request/clinichistory/RequestAddClinicExamClinicHistory';
 import { RequestListProblems } from '../../../../core/models/Request/clinichistory/RequestListProblems';
+import { RequestDiagnosticPlan } from '../../../../core/models/Request/diagnosticplan/RequestDiagnosticPlan';
 import { RequestFeeding } from '../../../../core/models/Request/feeding/RequestFeeding';
 import { RequestHabitat } from '../../../../core/models/Request/habitat/RequestHabitat';
 import { RequestReproductiveStatus } from '../../../../core/models/Request/pet/reproductiveStatus/RequestReproductiveStatus';
 import { RequestPhysiologicalConstants } from '../../../../core/models/Request/pet/RequestPhysiologicalConstants/RequestPhysiologicalConstants';
+import { ResponseDiagnosticPlan } from '../../../../core/models/Response/diagnosticplan/ResponseDiagnosticPlan';
 import { ResponseClinicExam } from '../../../../core/models/Response/examclinic/ResponseClinicExam';
 import { ResponsePet } from '../../../../core/models/Response/pet/ResponsePet';
 import { ResponseVeterinary } from '../../../../core/models/Response/veterinary/ResponseVeterinary';
+import { DiagnosticPlanService } from '../../../../core/services/diagnostic-plan.service';
 import { ExamClinicService } from '../../../../core/services/exam-clinic.service';
 import { GeneralService } from '../../../../core/services/general.service';
 import { PetService } from '../../../../core/services/pet.service';
@@ -37,6 +40,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   requestReproductiveStatus: RequestReproductiveStatus;
   examClinic: ResponseClinicExam[];
   requestListProblems: RequestListProblems[] = [];
+  diagnosticPlan: RequestDiagnosticPlan[] = [];
   infoVeterinary = false;
   infoFeeding = false;
   disableButton = false;
@@ -66,6 +70,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   bodyCondition;
   statusDehydration;
   search;
+  searchObservation;
   descriptionFeedind: string = '';
   descriptionHabitat: string = '';
   observationExam: string = '';
@@ -80,7 +85,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
 
   constructor(protected ref: NbDialogRef<PopupAddClinicHistoryComponent>, private serviceVeterinary: VeterinaryService,
     private toastrService: GeneralService, private formBuilder: FormBuilder, private dialogService: NbDialogService,
-    private servicePet: PetService, private serviceCLinicExam: ExamClinicService) {
+    private servicePet: PetService, private serviceCLinicExam: ExamClinicService, private serviceDiagnosticPlan: DiagnosticPlanService) {
 
     this.checkOutForm = this.formBuilder.group({
       veterinary: ['', [Validators.required]],
@@ -90,7 +95,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
       recipeBook: ['', [Validators.required]],
 
     });
-
 
     this.checkOutFormListProblems = this.formBuilder.group({
       problem: ['', [Validators.required]],
@@ -118,6 +122,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.getStateDehydration();
     this.getOptionClinicExam();
     this.getExamClinic();
+    this.getDiagnosticPlan();
   }
 
   preCarga() {
@@ -179,8 +184,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.stateDehydrationOption.push(StateDehydration.MAS10);
   }
 
-
-
   getOptionClinicExam() {
     this.optionClinicExam.push(OptionClinicExam.NORMAL);
     this.optionClinicExam.push(OptionClinicExam.ANORMAL);
@@ -194,6 +197,12 @@ export class PopupAddClinicHistoryComponent implements OnInit {
       this.examClinic.forEach(exam => {
         this.requestAddClinicExamClinicHistory.push({ clinicExam: exam, optionClinicExam: normal, observation: this.observationExam });
       })
+    })
+  }
+
+  getDiagnosticPlan() {
+    this.serviceDiagnosticPlan.getDiagnosticPlan().subscribe(diagnosticPlan => {
+      this.diagnosticPlan = diagnosticPlan;
     })
   }
   cancel() {
@@ -475,9 +484,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.ConstantsPhy = true;
   }
 
-  searchObservation;
   public onSelectChangeObservation(indexExam, event): void {
-    console.log(indexExam, event)
     if (this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam === OptionClinicExam.ANORMAL) {
       console.log('pasa por el evento de observacion')
       this.observationExam = event;
@@ -489,7 +496,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     console.log(this.requestAddClinicExamClinicHistory)
 
   }
-  exam = true;
+
   changedValueExamClinic(type, indexExam, indexCheck, event) {
     console.log(type, indexExam, indexCheck, event)
     if (type === OptionClinicExam.ANORMAL && event) {
@@ -509,14 +516,27 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   addListProblems(listProblem) {
     this.hiddenListProblem = true;
     this.requestListProblems.push(listProblem);
-    console.log(this.requestListProblems)
+    this.checkOutFormListProblems.reset();
   }
 
   deleteListProblem(i) {
-
     this.requestListProblems.splice(i, 1)
+  }
+
+  diagnosticPlans: ResponseDiagnosticPlan[] = [];
+  changedValueDiagnosticPlan(type, indexCheck, event) {
+
+    console.log(type, indexCheck, event)
+    if (event) {
+      this.diagnosticPlans.push(type);
+    } else {
+      this.diagnosticPlans.splice(indexCheck, 1);
+    }
+
+    console.log(this.diagnosticPlans)
 
 
   }
+
 
 }

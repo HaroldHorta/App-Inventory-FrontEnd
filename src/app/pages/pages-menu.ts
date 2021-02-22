@@ -90,6 +90,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'radio-button-off-outline',
         link: 'examclinic',
       },
+      {
+        title: 'Plan diagnóstico',
+        icon: 'radio-button-off-outline',
+        link: 'diagnosticPlan',
+      },
+      
     ],
   },
 ];

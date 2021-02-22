@@ -16,6 +16,7 @@ import { PetComponent } from './clinicHistory/pet/pet.component';
 import { VaccinationComponent } from './clinicHistory/vaccination/vaccination.component';
 import { VeterinaryComponent } from './clinicHistory/veterinary/veterinary.component';
 import { ExamClinicComponent } from './clinicHistory/exam-clinic/exam-clinic.component';
+import { DiagnosticPlanComponent } from './clinicHistory/diagnostic-plan/diagnostic-plan.component';
 
 const routes: Routes = [{
   path: '',
@@ -81,6 +82,10 @@ const routes: Routes = [{
     {
       path: 'examclinic',
       component: ExamClinicComponent,
+    },
+    {
+      path: 'diagnosticPlan',
+      component: DiagnosticPlanComponent,
     },
   ],
 },
