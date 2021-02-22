@@ -10,6 +10,7 @@ import { OptionClinicExam } from '../../../../core/models/enum/OptionClinicExam'
 import { ReproductiveStatus } from '../../../../core/models/enum/reproductiveStatus';
 import { StateDehydration } from '../../../../core/models/enum/StateDehydration';
 import { RequestAddClinicExamClinicHistory } from '../../../../core/models/Request/clinichistory/RequestAddClinicExamClinicHistory';
+import { RequestListProblems } from '../../../../core/models/Request/clinichistory/RequestListProblems';
 import { RequestFeeding } from '../../../../core/models/Request/feeding/RequestFeeding';
 import { RequestHabitat } from '../../../../core/models/Request/habitat/RequestHabitat';
 import { RequestReproductiveStatus } from '../../../../core/models/Request/pet/reproductiveStatus/RequestReproductiveStatus';
@@ -35,6 +36,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   physiologicalConstants: RequestPhysiologicalConstants;
   requestReproductiveStatus: RequestReproductiveStatus;
   examClinic: ResponseClinicExam[];
+  requestListProblems: RequestListProblems[] = [];
   infoVeterinary = false;
   infoFeeding = false;
   disableButton = false;
@@ -45,8 +47,10 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   hiddenSurgeries = false;
   hiddenFamilyBackground = false;
   hideDescriptionHabitat = false;
+  hiddenListProblem = false;
   checkOutForm: FormGroup;
   checkOutFormConstantsPhy: FormGroup;
+  checkOutFormListProblems: FormGroup;
   feedingOption: Array<string> = [];
   reproductiveStatus: Array<string> = [];
   habitatOption: Array<string> = [];
@@ -85,6 +89,13 @@ export class PopupAddClinicHistoryComponent implements OnInit {
       anamnesis: ['', [Validators.required]],
       recipeBook: ['', [Validators.required]],
 
+    });
+
+
+    this.checkOutFormListProblems = this.formBuilder.group({
+      problem: ['', [Validators.required]],
+      listMaster: ['', [Validators.required]],
+      differentialDiagnosis: ['', [Validators.required]],
     });
 
     this.checkOutFormConstantsPhy = this.formBuilder.group({
@@ -478,7 +489,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     console.log(this.requestAddClinicExamClinicHistory)
 
   }
-exam=true;
+  exam = true;
   changedValueExamClinic(type, indexExam, indexCheck, event) {
     console.log(type, indexExam, indexCheck, event)
     if (type === OptionClinicExam.ANORMAL && event) {
@@ -486,14 +497,26 @@ exam=true;
       this.observationExam = "";
       this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam = type;
       this.requestAddClinicExamClinicHistory[indexExam].observation = this.observationExam;
-    }  else {
+    } else {
       console.log('pasa por el evento de check en caso de normal y el check true')
       this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam = OptionClinicExam.NORMAL;
       this.requestAddClinicExamClinicHistory[indexExam].observation = "";
-    } 
+    }
 
     console.log(this.requestAddClinicExamClinicHistory)
   }
 
+  addListProblems(listProblem) {
+    this.hiddenListProblem = true;
+    this.requestListProblems.push(listProblem);
+    console.log(this.requestListProblems)
+  }
+
+  deleteListProblem(i) {
+
+    this.requestListProblems.splice(i, 1)
+
+
+  }
 
 }

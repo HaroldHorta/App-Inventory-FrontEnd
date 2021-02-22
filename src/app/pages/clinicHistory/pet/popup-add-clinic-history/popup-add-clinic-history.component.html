@@ -366,6 +366,64 @@
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
+
+                <nb-step [label]="labelFive">
+                    <ng-template #labelFive>Lista de problemas</ng-template>
+                    <h4>Lsita de problemas</h4>
+                    <div [formGroup]="checkOutFormListProblems" class="example-items-rows">
+
+                        <div class="full-name-inputs form-group">
+                            <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                formControlName="problem" placeholder="Problema">
+                            <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                formControlName="listMaster" placeholder="Problema maestro">
+                            <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                formControlName="differentialDiagnosis" placeholder="Diagnóstico diferencial">
+                            <button class="btn btn-outline-success form-group " style="margin-top: 7px;"
+                                (click)="addListProblems(checkOutFormListProblems.value)"
+                                [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large"
+                                nbSpinnerMessage=""
+                                [disabled]="!checkOutFormListProblems.valid || disableButton">Agregar Problema</button>
+                        </div>
+
+                    </div>
+
+                    <div class="row" *ngIf="hiddenListProblem">
+                        <div class="col-md-12">
+                            <nb-card>
+                                <nb-card-header class="item">
+                                    <span>Problema</span>
+                                    <span>Problema maestro</span>
+                                    <span>Diagnóstico diferencial</span>
+                                    <span>Acciones</span>
+                                </nb-card-header>
+                                <nb-list *ngIf="!hideFilters">
+                                    <nb-list-item class="item" *ngFor="let list of requestListProblems; let i = index">
+                                        <span>{{list?.problem}}</span>
+                                        <span>{{list?.listMaster}}</span>
+                                        <span>{{list?.differentialDiagnosis}}</span>
+                                        <span>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
+                                                        nbTooltipStatus="danger" icon="trash-2-outline"
+                                                        (click)="deleteListProblem(i)"></nb-icon>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </nb-list-item>
+                                </nb-list>
+                            </nb-card>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+
             </nb-stepper>
         </div>
     </nb-card-body>
