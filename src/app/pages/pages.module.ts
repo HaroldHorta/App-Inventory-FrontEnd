@@ -67,6 +67,7 @@ import { ExamClinicComponent } from './clinicHistory/exam-clinic/exam-clinic.com
 import { PopupAddExamclinicComponent } from './clinicHistory/exam-clinic/popup-add-examclinic/popup-add-examclinic.component';
 import { DiagnosticPlanComponent } from './clinicHistory/diagnostic-plan/diagnostic-plan.component';
 import { PopupAddDianosticPlanComponent } from './clinicHistory/diagnostic-plan/popup-add-dianostic-plan/popup-add-dianostic-plan.component';
+import { ClinicHistoryComponent } from './clinicHistory/clinic-history/clinic-history.component';
 
 @NgModule({
   imports: [
@@ -153,6 +154,7 @@ import { PopupAddDianosticPlanComponent } from './clinicHistory/diagnostic-plan/
     PopupAddExamclinicComponent,
     DiagnosticPlanComponent,
     PopupAddDianosticPlanComponent,
+    ClinicHistoryComponent,
 
   ],
 })

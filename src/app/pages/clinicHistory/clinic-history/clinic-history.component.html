@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card class="inline-form-card" [formGroup]="checkOutForm">
+
+            <nb-card-header>Historia Clinica</nb-card-header>
+            <nb-card-body>
+                <div class="form-inline">
+                    <input type="text" class="col-md-4" nbInput fullWidth formControlName="nroDocument"
+                        placeholder="Numero de documento">
+
+                    <button style="margin-left: 20px;" class="btn btn-outline-info form-group" type="submit"
+                        (click)="findByNroDocument(checkOutForm.value)" [nbSpinner]="loadingLargeGroup"
+                        nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage=""
+                        [disabled]="!checkOutForm.valid || disabledUpdate">Consultar</button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<div *ngIf="searchClinicHistory">
+    <div *ngIf="!clinicHistoryHidden">
+        <nb-card class="inline-form-card">
+            <nb-card-header>Historias clinicas</nb-card-header>
+            <nb-card-body>
+                <h6>No se han encontrado historias clinicas registradas</h6>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+    <div *ngIf="clinicHistoryHidden">
+        <div>
+            <h5>Datos de la mascota</h5>
+            <nb-card>
+                <nb-card-header class="item">
+                    <span>Fecha</span>
+                    <span>Nombre</span>
+                    <span>Especie</span>
+                    <span>Raza</span>
+                    <span>Color</span>
+                    <span>Historia Clinica</span>
+                </nb-card-header>
+                <nb-list>
+                    <nb-list-item class="item" *ngFor="let clinicHistory of clinicHistory" >
+                        <span>{{clinicHistory?.createAt | date:'yyyy/MM/dd'}}</span>
+                        <span>{{clinicHistory?.pet?.name}}</span>
+                        <span>{{clinicHistory?.pet?.species?.description}}</span>
+                        <span>{{clinicHistory?.pet?.breed?.description}}</span>
+                        <span>{{clinicHistory?.pet?.color}}</span>
+                        <span>{{clinicHistory?.pet?.age}}</span>
+                        <span>
+                            <nb-icon class="changeMouse" nbTooltip="Nueva Historia Clínica" nbTooltipStatus="success"
+                                status="success" (click)="openClinicHistory(clinicHistory.id)" icon="book-open-outline">
+                            </nb-icon>
+                        </span>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card>
+        </div>
+    </div>
+</div>

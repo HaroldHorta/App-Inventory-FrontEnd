@@ -21,5 +21,7 @@ export const endpoint = {
     Veterinary: `${environment.serverUrl}/veterinary`,
     ClinicExam: `${environment.serverUrl}/clinicExam`,
     DiagnosticPlan: `${environment.serverUrl}/diagnosticPlan`,
+    ClinicHistory: `${environment.serverUrl}/clinic-history`,
+
 
 };

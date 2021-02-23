@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
@@ -10,16 +9,20 @@ import { OptionClinicExam } from '../../../../core/models/enum/OptionClinicExam'
 import { ReproductiveStatus } from '../../../../core/models/enum/reproductiveStatus';
 import { StateDehydration } from '../../../../core/models/enum/StateDehydration';
 import { RequestAddClinicExamClinicHistory } from '../../../../core/models/Request/clinichistory/RequestAddClinicExamClinicHistory';
+import { RequestAddClinicHistoryDTO } from '../../../../core/models/Request/clinichistory/RequestAddClinicHistoryDTO';
+import { RequestClinicExamClinicHistory } from '../../../../core/models/Request/clinichistory/RequestClinicExamClinicHistory';
 import { RequestListProblems } from '../../../../core/models/Request/clinichistory/RequestListProblems';
 import { RequestDiagnosticPlan } from '../../../../core/models/Request/diagnosticplan/RequestDiagnosticPlan';
 import { RequestFeeding } from '../../../../core/models/Request/feeding/RequestFeeding';
 import { RequestHabitat } from '../../../../core/models/Request/habitat/RequestHabitat';
 import { RequestReproductiveStatus } from '../../../../core/models/Request/pet/reproductiveStatus/RequestReproductiveStatus';
 import { RequestPhysiologicalConstants } from '../../../../core/models/Request/pet/RequestPhysiologicalConstants/RequestPhysiologicalConstants';
+import { ResponseClinicHistoryDTO } from '../../../../core/models/Response/clinichistory/ResponseClinicHistoryDTO';
 import { ResponseDiagnosticPlan } from '../../../../core/models/Response/diagnosticplan/ResponseDiagnosticPlan';
 import { ResponseClinicExam } from '../../../../core/models/Response/examclinic/ResponseClinicExam';
 import { ResponsePet } from '../../../../core/models/Response/pet/ResponsePet';
 import { ResponseVeterinary } from '../../../../core/models/Response/veterinary/ResponseVeterinary';
+import { ClinicHistoryService } from '../../../../core/services/clinic-history.service';
 import { DiagnosticPlanService } from '../../../../core/services/diagnostic-plan.service';
 import { ExamClinicService } from '../../../../core/services/exam-clinic.service';
 import { GeneralService } from '../../../../core/services/general.service';
@@ -41,6 +44,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   examClinic: ResponseClinicExam[];
   requestListProblems: RequestListProblems[] = [];
   diagnosticPlan: RequestDiagnosticPlan[] = [];
+  responseDiagnosticPlans: ResponseDiagnosticPlan[] = [];
   infoVeterinary = false;
   infoFeeding = false;
   disableButton = false;
@@ -63,7 +67,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   stateDehydrationOption: string[] = [];
   optionClinicExam: string[] = [];
   reproductive;
-  clinicExam;
+  clinicExam: RequestClinicExamClinicHistory;
   habitat;
   feeding;
   attitude;
@@ -74,7 +78,6 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   descriptionFeedind: string = '';
   descriptionHabitat: string = '';
   observationExam: string = '';
-
   requestFeeding: RequestFeeding;
   requestHabitat: RequestHabitat;
 
@@ -84,17 +87,9 @@ export class PopupAddClinicHistoryComponent implements OnInit {
 
 
   constructor(protected ref: NbDialogRef<PopupAddClinicHistoryComponent>, private serviceVeterinary: VeterinaryService,
-    private toastrService: GeneralService, private formBuilder: FormBuilder, private dialogService: NbDialogService,
+    private toastrService: GeneralService, private serviceClinicHistory: ClinicHistoryService,
+    private formBuilder: FormBuilder, private dialogService: NbDialogService,
     private servicePet: PetService, private serviceCLinicExam: ExamClinicService, private serviceDiagnosticPlan: DiagnosticPlanService) {
-
-    this.checkOutForm = this.formBuilder.group({
-      veterinary: ['', [Validators.required]],
-      pet: ['', [Validators.required]],
-      reasonOfConsultation: ['', [Validators.required]],
-      anamnesis: ['', [Validators.required]],
-      recipeBook: ['', [Validators.required]],
-
-    });
 
     this.checkOutFormListProblems = this.formBuilder.group({
       problem: ['', [Validators.required]],
@@ -486,31 +481,40 @@ export class PopupAddClinicHistoryComponent implements OnInit {
 
   public onSelectChangeObservation(indexExam, event): void {
     if (this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam === OptionClinicExam.ANORMAL) {
-      console.log('pasa por el evento de observacion')
       this.observationExam = event;
       this.requestAddClinicExamClinicHistory[indexExam].observation = this.observationExam;
     } else {
       this.requestAddClinicExamClinicHistory[indexExam].observation = "";
 
     }
-    console.log(this.requestAddClinicExamClinicHistory)
 
   }
 
+  reasonOfConsultation: string;
+  searchReasonOfConsultation: string;
+  public onSelectChangereasonOfConsultation(event): void {
+    this.reasonOfConsultation = event;
+  }
+
+  searchFeeding: string;
+  searchAnamnesis: string;
+  searchHabitat: string;
+  anamnesis: string;
+
+  public onSelectChangeAnamnesis(event): void {
+    this.anamnesis = event;
+  }
+
   changedValueExamClinic(type, indexExam, indexCheck, event) {
-    console.log(type, indexExam, indexCheck, event)
     if (type === OptionClinicExam.ANORMAL && event) {
-      console.log('pasa por el evento de check en caso de anormal y el check true')
       this.observationExam = "";
       this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam = type;
       this.requestAddClinicExamClinicHistory[indexExam].observation = this.observationExam;
     } else {
-      console.log('pasa por el evento de check en caso de normal y el check true')
       this.requestAddClinicExamClinicHistory[indexExam].optionClinicExam = OptionClinicExam.NORMAL;
       this.requestAddClinicExamClinicHistory[indexExam].observation = "";
     }
 
-    console.log(this.requestAddClinicExamClinicHistory)
   }
 
   addListProblems(listProblem) {
@@ -523,20 +527,63 @@ export class PopupAddClinicHistoryComponent implements OnInit {
     this.requestListProblems.splice(i, 1)
   }
 
-  diagnosticPlans: ResponseDiagnosticPlan[] = [];
   changedValueDiagnosticPlan(type, indexCheck, event) {
-
-    console.log(type, indexCheck, event)
     if (event) {
-      this.diagnosticPlans.push(type);
+      this.responseDiagnosticPlans.push(type);
     } else {
-      this.diagnosticPlans.splice(indexCheck, 1);
+      this.responseDiagnosticPlans.splice(indexCheck, 1);
     }
-
-    console.log(this.diagnosticPlans)
-
 
   }
 
+  clinicHistory: RequestAddClinicHistoryDTO;
+  responseClinichistory: ResponseClinicHistoryDTO;
+  addClinicHIstory() {
+    this.disableButton = true;
+    this.loadingLargeGroup = true;
+    if(this.veterinary === undefined){
+      const type = 'danger';
+      const quote = { title: null, body: 'El veterinario del paso 2 no existe' };
+      this.toastrService.showToast(type, quote.title, quote.body);
+      this.disableButton = false;
+      this.loadingLargeGroup = false;
+    }
+  
+    this.clinicExam = {
+      attitude: this.attitude,
+      bodyCondition: this.bodyCondition,
+      stateDehydration: this.statusDehydration,
+      clinicExamClinicHistories: this.requestAddClinicExamClinicHistory
+    }
+
+    this.clinicHistory = {
+      veterinary: this.veterinary.id,
+      pet: this.pet.id,
+      reasonOfConsultation: this.reasonOfConsultation,
+      anamnesis: this.anamnesis,
+      recipeBook: null,
+      physiologicalConstants: this.physiologicalConstants,
+      clinicExam: this.clinicExam,
+      listProblems: this.requestListProblems,
+      diagnosticPlans: this.responseDiagnosticPlans,
+    }
+
+    this.serviceClinicHistory.create(this.clinicHistory).subscribe(clinicHistory => {
+      this.responseClinichistory = clinicHistory;
+      const type = 'success';
+      const quote = { title: null, body: 'Agregado correctamente' };
+      this.toastrService.showToast(type, quote.title, quote.body);
+      this.ref.close();
+    },
+      (err) => {
+        const type = 'danger';
+        const quote = { title: null, body: err.error.detailMessage };
+        this.toastrService.showToast(type, quote.title, quote.body);
+        this.disableButton = false;
+        this.loadingLargeGroup = false;
+
+      },
+    )
+  }
 
 }

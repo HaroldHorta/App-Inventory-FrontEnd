@@ -87,8 +87,9 @@
                             </nb-radio>
                         </nb-radio-group>
 
-                        <input nbInput *ngIf="hideDescription" type="text" name="search" [(ngModel)]="search"
-                            autocomplete="on" placeholder="Buscar" (ngModelChange)='onSelectChangeFeeding($event)'>
+                        <input nbInput *ngIf="hideDescription" type="text" name="searchFeeding"
+                            [(ngModel)]="searchFeeding" autocomplete="on" placeholder="Buscar"
+                            (ngModelChange)='onSelectChangeFeeding($event)'>
                     </div>
 
                     <div class="box">
@@ -100,8 +101,9 @@
                             </nb-radio>
                         </nb-radio-group>
 
-                        <input nbInput *ngIf="hideDescriptionHabitat" type="text" name="search" [(ngModel)]="search"
-                            autocomplete="on" placeholder="Cuál?" (ngModelChange)='onSelectChangeHabitat($event)'>
+                        <input nbInput *ngIf="hideDescriptionHabitat" type="text" name="searchHabitat"
+                            [(ngModel)]="searchHabitat" autocomplete="on" placeholder="Cuál?"
+                            (ngModelChange)='onSelectChangeHabitat($event)'>
                     </div>
 
 
@@ -226,7 +228,10 @@
                         <h6>Motivo de la consulta</h6>
                         <hr style="border-color:blue;">
                         <div class="full-name-inputs form-group">
-                            <textarea nbInput fullWidth placeholder="Motivo de la consulta"></textarea>
+                            <textarea autocomplete="on" name="searchReasonOfConsultation"
+                                [(ngModel)]="searchReasonOfConsultation"
+                                (ngModelChange)='onSelectChangereasonOfConsultation($event)' nbInput fullWidth
+                                placeholder="Motivo de la consulta"></textarea>
                         </div>
                     </div>
 
@@ -234,12 +239,14 @@
                         <h6>Anamnésicos</h6>
                         <hr style="border-color:blue;">
                         <div class="full-name-inputs form-group">
-                            <textarea nbInput fullWidth placeholder="Anamnésicos"></textarea>
+                            <textarea autocomplete="on" name="searchAnamnesis" [(ngModel)]="searchAnamnesis"
+                                (ngModelChange)='onSelectChangeAnamnesis($event)' nbInput fullWidth
+                                placeholder="Anamnésicos"></textarea>
                         </div>
                     </div>
 
                     <div>
-                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button nbButton nbStepperNext>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -294,7 +301,7 @@
                         </div>
                     </div>
                     <div style="margin-top: 10px;">
-                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button nbButton nbStepperNext>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -362,7 +369,7 @@
 
 
                     <div>
-                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button nbButton nbStepperNext>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -419,7 +426,7 @@
 
 
                     <div>
-                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button nbButton nbStepperPrev>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -439,10 +446,11 @@
                         </div>
                     </div>
 
-
+                    <button class="btn btn-outline-success " style="width: 45%;" (click)="addClinicHIstory()"
+                        [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large"
+                        nbSpinnerMessage="" [disabled]="disableButton">Guardar Historia Clínica</button>
                     <div>
-                        <button nbButton disabled nbStepperNext>prev</button>
-                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                        <button nbButton nbStepperNext>prev</button>
                     </div>
                 </nb-step>
 

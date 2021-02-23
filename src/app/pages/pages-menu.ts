@@ -66,6 +66,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-open-outline',
     children: [
       {
+        title: 'Mascotas',
+        icon: 'radio-button-off-outline',
+        link: 'pet',
+      },
+      {
+        title: 'Historias Clinicas',
+        icon: 'radio-button-off-outline',
+        link: 'clinicHistory',
+      },
+      {
         title: 'Razas',
         icon: 'radio-button-off-outline',
         link: 'breed',
@@ -79,11 +89,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Vacunas',
         icon: 'radio-button-off-outline',
         link: 'vaccination',
-      },
-      {
-        title: 'Mascotas',
-        icon: 'radio-button-off-outline',
-        link: 'pet',
       },
       {
         title: 'Examen clínico',
