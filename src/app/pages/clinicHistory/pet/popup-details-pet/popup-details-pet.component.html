@@ -1,0 +1,80 @@
+<nb-card>
+    <nb-card-header>Mascota EquidoDog</nb-card-header>
+    <nb-card-body>
+        <div class="contenedorImg">
+            <img class="img-card" src="{{pet?.photo}}" />
+        </div>
+        <div class="contenedorDetalles">
+            <div class="box">
+                <h6>Datos mascota</h6>
+                <hr style="border-color:blue;">
+                <div class="box-inter">
+                    <span><b>Nombre: </b> {{pet?.name}}</span>
+                    <span class="espacio"><b>Raza: </b> {{pet?.breed.description}}</span>
+                    <span class="espacio"><b>Especie: </b> {{pet?.species.description}}</span>
+                    <span class="espacio"><b>Color: </b> {{pet?.color}}</span>
+                    <span class="espacio"><b>Sexo: </b> {{pet?.sex}}</span>
+                </div>
+                <div class="box-inter">
+                    <span><b>Fecha de nacimiento: </b> {{pet?.dateBirth}}</span>
+                    <span class="espacio"><b>Age: </b> {{pet?.age}}</span>
+                    <span class="espacio"><b>Señas particulares: </b> {{pet?.particularSigns}}</span>
+                    <span class="espacio"><b>Origen: </b> {{pet?.origin}}</span>
+                </div>
+            </div>
+            <div class="box">
+                <h6>Datos propietario</h6>
+                <hr style="border-color:blue;">
+                <span><b>Propietario: </b> {{pet?.customer.name}}</span>
+                <span class="espacio"><b>Dirección: </b> {{pet?.customer.address}}</span>
+                <span class="espacio"><b>Telefono: </b> {{pet?.customer.phone}}</span>
+            </div>
+
+            <div class="box">
+                <h6>Vacunas</h6>
+                <hr style="border-color:blue;">
+                <div *ngFor=" let vacuna of pet.vaccinations">
+                    <div *ngFor=" let vac of vacuna.vaccinations" class="item">
+                        <span class="col-md-4 center"><b>Vacuna: </b> {{vac?.vaccination?.description}}</span>
+                        <span class="col-md-4 center"><b>Lote: </b> {{vac?.vaccination?.lot}}</span>
+                        <span class="col-md-4 center"><b>Fecha de vacunación: </b> {{vac?.vaccinationDate |
+                            date:'yyyy/MM/dd'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <h6>Desparasitación Interna</h6>
+                <hr style="border-color:blue;">
+                <div *ngFor=" let dewormingInternal of pet.dewormingInternal" class="item">
+                    <span class="col-md-4 center"><b>Observación: </b>
+                        {{dewormingInternal?.deworming?.description}}</span>
+                    <span class="col-md-4 center"><b>Producto: </b>
+                        {{dewormingInternal?.deworming?.product}}</span>
+                    <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
+                        {{dewormingInternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
+                </div>
+            </div>
+
+
+            <div class="box">
+                <h6>Desparasitación Externa</h6>
+                <hr style="border-color:blue;">
+                <div *ngFor=" let dewormingExternal of pet.dewormingExternal" class="item">
+                    <span class="col-md-4 center"><b>Observación: </b>
+                        {{dewormingExternal?.deworming?.description}}</span>
+                    <span class="col-md-4 center"><b>Producto: </b>
+                        {{dewormingExternal?.deworming?.product}}</span>
+                    <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
+                        {{dewormingExternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
+                </div>
+            </div>
+
+
+
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton
+            (click)="cancel()">Cerrar</button>
+    </nb-card-footer>
+</nb-card>

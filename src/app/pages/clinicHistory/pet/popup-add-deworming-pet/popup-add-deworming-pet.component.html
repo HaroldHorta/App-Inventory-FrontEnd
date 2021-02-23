@@ -1,0 +1,99 @@
+<nb-card>
+    <nb-card-header>Carnet Desparasitación</nb-card-header>
+    <nb-card-body>
+        <div class="contenedorImg">
+            <img class="img-card" src="{{pet?.photo}}" />
+        </div>
+        <div class="contenedorDetalles">
+            <div class="box">
+                <h6>Datos mascota</h6>
+                <hr style="border-color:blue;">
+                <div class="box-inter">
+                    <span><b>Nombre: </b> {{pet?.name}}</span>
+                    <span class="espacio"><b>Raza: </b> {{pet?.breed.description}}</span>
+                    <span class="espacio"><b>Especie: </b> {{pet?.species.description}}</span>
+                    <span class="espacio"><b>Color: </b> {{pet?.color}}</span>
+                    <span class="espacio"><b>Sexo: </b> {{pet?.sex}}</span>
+                </div>
+                <div class="box-inter">
+                    <span><b>Fecha de nacimiento: </b> {{pet?.dateBirth}}</span>
+                    <span class="espacio"><b>Age: </b> {{pet?.age}}</span>
+                    <span class="espacio"><b>Señas particulares: </b> {{pet?.particularSigns}}</span>
+                    <span class="espacio"><b>Origen: </b> {{pet?.origin}}</span>
+                </div>
+            </div>
+            <div class="box">
+                <h6>Datos propietario</h6>
+                <hr style="border-color:blue;">
+                <span><b>Propietario: </b> {{pet?.customer.name}}</span>
+                <span class="espacio"><b>Dirección: </b> {{pet?.customer.address}}</span>
+                <span class="espacio"><b>Telefono: </b> {{pet?.customer.phone}}</span>
+            </div>
+
+            <div class="box">
+                <div class="bloque">
+                    <div class="A">
+                        <h6>Desparasitación</h6>
+                    </div>
+                    <div class="B">
+                        <button *ngIf="!hiddenDeworming" class="btn btn-outline-primary" type="submit"
+                            (click)="displayDeworming()">Agregar Desparasitación</button>
+
+                    </div>
+                </div>
+                <hr style="border-color:blue;">
+
+                <div *ngIf="hiddenDeworming">
+                    <nb-card [formGroup]="checkOutFormInternal">
+                        <nb-card-header>Desparasitación</nb-card-header>
+                        <nb-card-body>
+                            <input fullWidth class="form-group" nbInput type="text" formControlName="description"
+                                placeholder="Descripcion"> <br>
+                            <input class="form-group" nbInput placeholder="Fecha Desparasitación"
+                                [nbDatepicker]="dateTimePicker">
+                            <nb-datepicker #dateTimePicker (dateChange)="onNgDateChange($event)">
+                            </nb-datepicker> <br>
+                            <input fullWidth class="form-group" nbInput type="text" formControlName="product"
+                                placeholder="Producto Desparasitación">
+                        </nb-card-body>
+
+                        <nb-card-footer>
+                            <button class="btn btn-outline-success " style="width: 45%;"
+                                (click)="onCreateInternal(pet.id,checkOutFormInternal.value)"
+                                [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large"
+                                nbSpinnerMessage=""
+                                [disabled]="!checkOutFormInternal.valid || disableButton">Guardar</button>
+                        </nb-card-footer>
+                    </nb-card>
+                </div>
+                <div *ngIf="intorext">
+                    <div *ngFor=" let dewormingInternal of pet.dewormingInternal" class="item">
+                        <span class="col-md-4 center"><b>Observación: </b>
+                            {{dewormingInternal?.deworming?.description}}</span>
+                        <span class="col-md-4 center"><b>Producto: </b>
+                            {{dewormingInternal?.deworming?.product}}</span>
+                        <span class="col-md-4 center"><b>Fecha: </b>
+                            {{dewormingInternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
+                    </div>
+                </div>
+                <div *ngIf="!intorext">
+                    <div *ngFor=" let dewormingExternal of pet.dewormingExternal" class="item">
+                        <span class="col-md-4 center"><b>Observación: </b>
+                            {{dewormingExternal?.deworming?.description}}</span>
+                        <span class="col-md-4 center"><b>Producto Desparasitación: </b>
+                            {{dewormingExternal?.deworming?.product}}</span>
+                        <span class="col-md-4 center"><b>Fecha de Desparasitación: </b>
+                            {{dewormingExternal?.deworming?.dewormingDate | date:'yyyy/MM/dd'}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton
+            (click)="cancel()">Cerrar</button>
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+</nb-card>

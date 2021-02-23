@@ -1,0 +1,19 @@
+.item {
+    display: flex;
+  text-align: center;
+    justify-content: center;
+    align-items: center;
+  
+    > * {
+      flex: 1;
+    }
+  
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .img-card {
+    width: 10%;
+    height: 10%;
+}

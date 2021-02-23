@@ -1,0 +1,16 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Vetrinario</nb-card-header>
+    <nb-card-body>
+        <input class="form-group" nbInput type="text" formControlName="name" placeholder="Nombres"> <br>
+        <input class="form-group" nbInput type="text" formControlName="surname" placeholder="Apellidos"> <br>
+        <input class="form-group" nbInput type="text" formControlName="professionalCard" placeholder="Tarjeta profesional">
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="btn btn-outline-success " style="width: 45%;"
+            (click)="onCreateConfirm(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control"
+            nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disableButton">Enviar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;"
+            (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

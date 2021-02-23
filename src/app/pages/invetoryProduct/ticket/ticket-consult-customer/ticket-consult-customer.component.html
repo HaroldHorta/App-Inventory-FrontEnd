@@ -1,0 +1,35 @@
+<div class="row space-top ">
+    <div class="col-md-12">
+      <nb-card class="inline-form-card" [formGroup]="checkOutForm">
+  
+        <nb-card-header>Consultar ticket por cliente</nb-card-header>
+        <nb-card-body>
+          <div class="form-inline">
+            <input type="text" class="col-md-4" nbInput fullWidth formControlName="nroDocument"
+              placeholder="Numero de documento">
+  
+            <button class="btn btn-outline-info form-group posicion" type="submit"
+              (click)="findByNroDocument(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
+              nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid">Consultar</button>
+  
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  
+  <div *ngIf = "hideNotTicket">
+    <nb-card>
+      <nb-card-body>
+        <div>
+          <span class="posicion"><strong>No existen ticket con el numero de cedula solicitado.
+            </strong></span>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  
+  <ngx-ticket-historic *ngIf="hideTicket" [ticket] = "ticket"></ngx-ticket-historic>
+  
+  
+  

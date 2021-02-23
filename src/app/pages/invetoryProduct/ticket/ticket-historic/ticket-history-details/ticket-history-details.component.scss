@@ -1,0 +1,23 @@
+.item {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  
+    >* {
+      flex: 1;
+    }
+  
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .general {
+      margin-left: 0px;
+      width: 140%;
+  }
+
+  .posicion {
+    margin-left: 5%;
+  }

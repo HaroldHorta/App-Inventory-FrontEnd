@@ -1,0 +1,17 @@
+<div class="row col-md-12">
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="success" (click)="hiddenBase()">Insertar base</button>
+  </div>
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="info" (click)="hiddenArqueo()">Generar arqueo diario</button>
+  </div>
+  <div class="col-md-4">
+    <button fullWidth nbButton outline status="primary" (click)="hiddenHistory()">Consultar histórico</button>
+  </div>
+</div>
+
+<ngx-cash-register-daily *ngIf="hideArqueo"></ngx-cash-register-daily>
+
+<ngx-cash-register-base *ngIf="hideBase"></ngx-cash-register-base>
+
+<ngx-cash-register-historic *ngIf="hideHistory"></ngx-cash-register-historic>

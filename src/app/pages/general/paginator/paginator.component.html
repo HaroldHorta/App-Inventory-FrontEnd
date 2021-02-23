@@ -1,0 +1,13 @@
+<div>
+  <div class="position">
+    <div>{{limitemin}} - {{limitemax}} de {{cantidadTotalData}}</div>
+  </div>
+  <div>
+    <div>
+      <ul class="pagination">
+        <li *ngFor="let p of pagination; let i = index"> <a style="cursor: pointer; text-align: center;"
+            (click)="setPage(i)" [ngClass]="{active: i === page }">{{ i+1 }}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Cliente</nb-card-header>
+
+    <!-- inicio crear cliente -->
+    <nb-card-body *ngIf="!customerEdit">
+        <div class="full-name-input form-group">
+            <p *ngIf="checkOutForm.get('name').errors && checkOutForm.get('name').dirty" class="messageError">* Campo Obligatorio
+            </p>
+            <input nbInput class=" form-group" type="text" formControlName="name" fullWidth placeholder="Nombre">
+        </div>
+        <div class="full-name-input form-group">
+            <nb-select style="width: 45%;" placeholder="Tipo de documento" formControlName="typeDocument">
+                <nb-option *ngFor="let item of typeDocument" [value]="item">{{item}}</nb-option>
+            </nb-select>
+            <p *ngIf="checkOutForm.get('nroDocument').errors && checkOutForm.get('nroDocument').dirty" class="messageError">
+                * Campo Obligatorio</p>
+            <input #nroDocument style="width: 50%; margin-left: 5%;" nbInput type="text" formControlName="nroDocument" placeholder="Numero de documento">
+        </div>
+        <input class="form-group" nbInput type="text" formControlName="email" fullWidth placeholder="Email">
+        <input class="form-group" nbInput type="text" formControlName="address" fullWidth placeholder="Dirección">
+        <input class="form-group" nbInput type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" formControlName="phone" fullWidth placeholder="Telefono">
+    </nb-card-body>
+    <!-- fin crear cliente -->
+
+    <!-- inicio editar cliente -->
+
+    <nb-card-body [formGroup]="checkOutFormEdit" *ngIf="customerEdit">
+        <div class="full-name-input form-group">
+            <input nbInput class=" form-group" type="text" formControlName="name" fullWidth placeholder="Nombre" [ngModel]="customerEdit.name">
+        </div>
+        <div class="full-name-input form-group">
+            <input style="width: 45%;" nbInput class=" form-group" type="text" disabled [value]="customerEdit.typeDocument">
+            <input style="width: 50%; margin-left: 5%;" nbInput class=" form-group" type="text" disabled [value]="customerEdit.nroDocument">
+        </div>
+        <input class="form-group" nbInput type="text" formControlName="email" fullWidth placeholder="Email" [ngModel]="customerEdit.email">
+        <input class="form-group" nbInput type="text" formControlName="address" fullWidth placeholder="Dirección" [ngModel]="customerEdit.address">
+        <input class="form-group" nbInput type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" formControlName="phone" fullWidth placeholder="Telefono" [ngModel]="customerEdit.phone">
+    </nb-card-body>
+
+
+    <!-- Fin Editar -->
+
+
+    <nb-card-footer>
+        <button *ngIf="!customerEdit" class="btn btn-outline-success col-md-6" style="width: 45%;" (click)="addCustomer(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disabledUpdate">Guardar</button>
+
+        <button *ngIf="customerEdit" style="width: 45%;" class="btn btn-outline-success" (click)="updateCustomer(customerEdit.id, checkOutFormEdit.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutFormEdit.valid || disabledUpdate">Actualizar</button>
+        <button class="btn btn-outline-danger" style="width: 45%; margin-left: 10%;" (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

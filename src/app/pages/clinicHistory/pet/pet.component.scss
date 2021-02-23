@@ -1,0 +1,32 @@
+.item {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    >* {
+        flex: 1;
+    }
+    &:first-child {
+        border-top: none;
+    }
+}
+
+.active {
+    background-color: #38d693;
+    color: white;
+    border-radius: 5px;
+}
+
+.inactive {
+    background-color: #fa7477;
+    color: white;
+    border-radius: 5px;
+}
+
+.space-top {
+    margin-top: 5%;
+}
+
+.center {
+    text-align: center;
+}

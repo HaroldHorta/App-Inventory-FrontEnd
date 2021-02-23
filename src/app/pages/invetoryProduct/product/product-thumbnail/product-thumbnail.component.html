@@ -1,0 +1,64 @@
+<nb-card accent="info" status="info">
+  <nb-card-body>
+
+    <div class="cards">
+      <div class="clearfix">
+        <div>
+          <div>
+
+            <div class="text-center">
+              <img class="img-card" src="{{product?.photo}}" />
+            </div>
+          </div>
+          <p class="text-muted  mt-3 mb-0 espacio-lateral">
+            Unidades: {{ product?.unit }}
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="text-muted puntos-suspensivos espacio-lateral mt-3 mb-0"><strong>$ {{ product?.priceSell }}</strong>
+        </p>
+        <p class="text-muted puntos-suspensivos espacio-lateral mb-0">{{ product?.name }}</p>
+        <p class="text-muted puntos-suspensivos espacio-lateral mb-0">
+          {{ product?.description }}
+        </p>
+      </div>
+      <div class=" mx-auto row justify-content-center align-items-center contenedor-boton"
+        *ngIf="mostrarAgregarCarrito">
+        <input type="hidden" value="{{product.id}}" #id>
+        <button fullWidth nbButton outline status="primary" ng-disabled="buttonDisabled" (click)="onAddToCart()">Agregar
+          al
+          carrito</button>
+      </div>
+
+      <div class="row" *ngIf="!mostrarAgregarCarrito">
+        <div class="col-lg-12">
+          <nb-card-body>
+            <div class="buttons-row offset-md-2">
+              <div class="row show-grid">
+                <div class="spaces-add  col-6 col-md-2">
+                  <div> <button fullWidth nbButton outline status="danger" (click)="disminuir()"><nb-icon icon="trash-2-outline"></nb-icon></button>
+                  </div>
+                </div>
+                <div class="spaces-add col-6 col-md-6">
+                  <div > <button  fullWidth nbButton outline status="basic"
+                      (click)="aumentar()" disabled>{{cantidad}}</button>
+                  </div>
+
+                </div>
+                <div class="spaces-add  col-6 col-md-2">
+                  <div> <button fullWidth nbButton outline status="success" (click)="aumentar()"
+                      [disabled]="disableAdd"><nb-icon icon="plus-outline"></nb-icon></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nb-card-body>
+
+        </div>
+      </div>
+
+    </div>
+
+  </nb-card-body>
+</nb-card>

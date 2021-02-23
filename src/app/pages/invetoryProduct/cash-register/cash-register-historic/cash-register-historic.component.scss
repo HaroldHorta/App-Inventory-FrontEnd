@@ -1,0 +1,26 @@
+.space {
+    margin-left: 5%;
+  }
+  
+  .space-top {
+    margin-top: 5%;
+  }
+  
+  .posicion {
+    margin-left: 1%;
+  }
+  
+  .item {
+    display: flex;
+  text-align: center;
+    justify-content: center;
+    align-items: center;
+  
+    > * {
+      flex: 1;
+    }
+  
+    &:first-child {
+      border-top: none;
+    }
+  }

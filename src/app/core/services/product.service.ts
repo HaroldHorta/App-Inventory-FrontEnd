@@ -7,6 +7,7 @@ import { ResponseProduct } from '../models/Response/product/ResponseProduct.modu
 import { RequestAddProduct } from '../models/Request/product/RequestAddProduct';
 import { RequestUpdateProduct } from '../models/Request/product/RequestUpdateProduct';
 import { Status } from '../models/enum/Status.enum';
+import { ResponseProductPagination } from '../models/Response/product/ResponseProductPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +17,16 @@ export class ProductService {
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<ResponseProduct[]> {
-    return this.http.get(endpoint.Product).pipe(
-      map(response => response as ResponseProduct[]),
+  getProductsFilter(): Observable<ResponseProductPagination> {
+    return this.http.get(`${endpoint.Product}/productsFilter`).pipe(
+      map(response => response as ResponseProductPagination),
     );
   }
 
-  getProductsFilters(): Observable<ResponseProduct[]> {
-    return this.http.get(`${endpoint.Product}/products`).pipe(
-      map(response => response as ResponseProduct[]),
+
+  getProductsFilters(page): Observable<ResponseProductPagination> {
+    return this.http.get(`${endpoint.Product}/page/?page=${page}`).pipe(
+      map(response => response as ResponseProductPagination),
     );
   }
 

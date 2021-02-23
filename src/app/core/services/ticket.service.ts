@@ -24,7 +24,15 @@ export class TicketService {
     return this.http.get<ResponseTicket>(`${endpoint.Ticket}/${id}`);
   }
 
+  getTicketByNroDocument(nroDocument): Observable<ResponseTicket[]> {
+    return this.http.get<ResponseTicket[]>(`${endpoint.Ticket}/nroDocument/${nroDocument}`);
+  }
+
   create(ticket): Observable<RequestAddTicket> {
     return this.http.post<RequestAddTicket>(endpoint.Ticket, ticket, { headers: this.httpHeaders });
+  }
+
+  creditCapital(id, creditCapital, creditPayment): Observable<ResponseTicket> {
+    return this.http.patch<ResponseTicket>(`${endpoint.Ticket}/${id}/${creditCapital}/${creditPayment}`, { headers: this.httpHeaders })
   }
 }

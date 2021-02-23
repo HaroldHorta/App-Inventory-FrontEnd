@@ -6,6 +6,7 @@ import { endpoint } from '../infraestructure/endpoint/endpoint';
 import { ResponseCustomer } from '../models/Response/customer/ResponseCustomer.module';
 import { RequestCustomer } from '../models/Request/customer/RequestCustomer';
 import { RequestUpdateCustomer } from '../models/Request/customer/RequestUpdateCustomer';
+import { ResponseCustomerPagination } from '../models/Response/customer/ResponseCustomerPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,18 @@ export class CustomerService {
     );
   }
 
+  getCustomerPageAll(): Observable<ResponseCustomerPagination> {
+    return this.http.get(`${endpoint.Customer}/customerFilter`).pipe(
+      map(response => response as ResponseCustomerPagination),
+    );
+  }
+
+  getCustomerPage(page): Observable<ResponseCustomerPagination> {
+    return this.http.get(`${endpoint.Customer}/page/?page=${page}`).pipe(
+      map(response => response as ResponseCustomerPagination),
+    );
+  }
+
   findCustomerById(id: string): Observable<ResponseCustomer> {
     return this.http.get<ResponseCustomer>(`${endpoint.Customer}/${id}`);
   }
@@ -32,8 +45,8 @@ export class CustomerService {
     return this.http.post<RequestCustomer>(endpoint.Customer, customer, { headers: this.httpHeaders });
   }
 
-  update(customer: RequestUpdateCustomer): Observable<RequestUpdateCustomer> {
-    return this.http.put<RequestUpdateCustomer>(endpoint.Customer, customer, { headers: this.httpHeaders });
+  update(id, customer): Observable<RequestUpdateCustomer> {
+    return this.http.put<RequestUpdateCustomer>(`${endpoint.Customer}/update/${id}`, customer, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateCustomer> {

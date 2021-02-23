@@ -1,3 +1,5 @@
 export enum PaymentType {
-    CASH,CARD
+    CASH = 'Efectivo',
+    TRANSACTION = 'Transacción',
+    CREDIT = 'Credito',
 }

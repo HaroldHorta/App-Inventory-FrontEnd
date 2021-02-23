@@ -1,0 +1,27 @@
+<nb-card>
+    <nb-card-header>Detalles del gasto</nb-card-header>
+    <nb-card-body>
+
+        <div class="contenedorImg">
+            <nb-stepper orientation="horizontal">
+                <nb-step *ngFor="let url of expense?.images">
+
+                    <img class="img-card" [src]="url" />
+                    <div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button class="sep-botton" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+            </nb-stepper>
+        </div>
+
+        <div class="contenedorDetalles">
+            <p class="espacio"><b>Fecha de creado: </b>{{expense?.createAt}}</p>
+            <p class="espacio"><b>Description: </b> {{expense?.description}}</p>
+            <p class="espacio"><b>Valor factura: </b>{{expense?.price}}</p>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" (click)="cancel()">Cerrar</button>
+    </nb-card-footer>
+</nb-card>

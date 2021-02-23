@@ -1,0 +1,13 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header [formGroup]="prueba">Existencias actuales: <input nbInput class="" type="text" formControlName="unidades" [ngModel]="units.unit" disabled></nb-card-header>
+    <nb-card-body>
+        <input nbInput class="form-group" type="hidden" fullWidth formControlName="id" [ngModel]="units?.id">
+        <input nbInput class="form-group" type="hidden" fullWidth formControlName="priceBuy" [ngModel]="units?.priceBuy">
+        <input nbInput class="form-group" type="hidden" fullWidth formControlName="priceSell" [ngModel]="units?.priceSell"> Nueva cantidad:
+        <input nbInput class="form-group" type="text" fullWidth formControlName="unit">
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="width: 45%;" class="btn btn-outline-warning form-group" type="submit" (click)="updateUnit(checkOutForm.value)">Actualizar</button>
+        <button style="width: 45%; margin-left: 10%;" class="btn btn-outline-danger  form-group" nbButton (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

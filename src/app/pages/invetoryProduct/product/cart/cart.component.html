@@ -1,0 +1,33 @@
+<div (click)="toggle()">
+  
+    <nb-icon icon="bell-outline"></nb-icon>
+    <div *ngIf= "(numProducts > 0)" class="indicator"><span>{{numProducts}}</span></div>
+  
+  <nb-accordion>
+    <nb-accordion-item #item >
+      <nb-accordion-item-body>
+        <div *ngIf= "(numProducts != 0 || numProducts === 0 )">
+          El carrito esta vacio
+        </div>
+        <div *ngIf= "(numProducts > 0)">
+          <h5>Lista de productos:</h5>
+          <div *ngFor="let item of products">
+            <div class="row show-grid">
+              <div class="col-md-8 puntos-suspensivos">
+                <p>{{item.unit}} x {{item.product.name}}</p>
+              </div>
+              <div class="col-md-4">
+                <p>{{item.unit*item.product.priceSell | currency:'USD':'symbol':'1.0-0' }}</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-outline-primary btn-lg btn-block form-group" type="button"
+            (click)="checkOut(products,cartTotal)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="warning"
+            nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="disabledUpdate"> ir a pagar
+            {{cartTotal | currency:'USD':'symbol':'1.0-0'}}</button>
+        </div>
+      </nb-accordion-item-body>
+    </nb-accordion-item>
+  </nb-accordion>
+
+</div>

@@ -1,0 +1,25 @@
+<nb-card [formGroup]="checkOutForm">
+    <nb-card-header>Vacuna</nb-card-header>
+    <nb-card-body *ngIf="!vaccionationEdit">
+        <input class="form-group" nbInput type="text" formControlName="description" placeholder="Nombre Vacuna"> <br>
+        <input class="form-group" nbInput type="text" formControlName="lot" placeholder="Lote Vacuna"> <br>
+        <input class="form-group" nbInput type="text" formControlName="observation" placeholder="Observacion Vacuna">
+
+    </nb-card-body>
+    <nb-card-body *ngIf="vaccionationEdit" [formGroup]="checkOutEdit">
+        <input class="form-group" nbInput type="text" formControlName="description" [ngModel]="vaccionationEdit.description"> <br>
+        <input class="form-group" nbInput type="text" formControlName="lot" [ngModel]="vaccionationEdit.lot"><br>
+        <input class="form-group" nbInput type="text" formControlName="observation" [ngModel]="vaccionationEdit.observation">
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button *ngIf="!vaccionationEdit" class="btn btn-outline-success " style="width: 45%;"
+            (click)="onCreateConfirm(checkOutForm.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control"
+            nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="!checkOutForm.valid || disableButton">Enviar</button>
+        <button *ngIf="vaccionationEdit" class="btn btn-outline-warning " style="width: 45%;"
+            (click)="onSaveConfirm(vaccionationEdit.id,checkOutEdit.value)" [nbSpinner]="loadingLargeGroup"
+            nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage="">Actualizar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;"
+            (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

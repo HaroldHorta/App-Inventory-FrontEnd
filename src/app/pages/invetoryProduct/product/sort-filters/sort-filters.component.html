@@ -1,0 +1,6 @@
+<div class="sidebar-box">
+  <select class="select-css" (change)='onSelectChange($event)'>
+    <option *ngFor='let filter of filters' [value]="filter.value">{{filter.name}}</option>
+  </select>
+  <div class="triangle"></div>
+</div>

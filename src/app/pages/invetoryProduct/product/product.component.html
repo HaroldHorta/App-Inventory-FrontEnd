@@ -1,0 +1,38 @@
+<div class="row show-grid">
+  <div class="col-md-12">
+    <div class="row show-grid">
+      <div class="col-md-6">
+        <ngx-sort-filters [filters]='sortFilters' (sortChange)='sortProducts($event)'>
+        </ngx-sort-filters>
+      </div>
+      <div class="col-md-4">
+        <ngx-search-bar #searchComponent (searchChange)='onSearchChange($event)'></ngx-search-bar>
+      </div>
+      <div class="col-md-2">
+        <ngx-cart class="col-md-12"></ngx-cart>
+      </div>
+    </div>
+
+    
+    <div *ngIf="!products">
+      <nb-card class="inline-form-card">
+          <nb-card-header>Productos</nb-card-header>
+          <nb-card-body>
+              <h6>No se han encontrado productos registrados</h6>
+          </nb-card-body>
+      </nb-card>
+  </div>
+
+    <div class="row show-grid" *ngIf="products">
+      <div class="col-md-12" *ngIf="!hiddenFilters">
+        <ngx-showcase [products]='products'></ngx-showcase>
+      </div>
+      <div class="col-md-12"  *ngIf="hiddenFilters">
+        <ngx-showcase [products]='productsFilters'></ngx-showcase>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-paginator *ngIf="products"></ngx-paginator>
+

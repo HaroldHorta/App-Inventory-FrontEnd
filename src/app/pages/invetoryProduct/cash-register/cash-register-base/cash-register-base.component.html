@@ -1,0 +1,30 @@
+<div class="space-top">
+
+  <div *ngIf="!cashBase">
+    <nb-card class="inline-form-card">
+        <nb-card-header>Gastos</nb-card-header>
+        <nb-card-body>
+            <button class="btn btn-outline-success form-group" type="submit" (click)="mostrarRegistros()">Agregar base</button>
+            <h6>No se han encontrado gastos registrados </h6>
+        </nb-card-body>
+    </nb-card>
+</div>
+
+  <nb-card class="inline-form-card" *ngIf="cashBase">
+    <nb-card-header>Base</nb-card-header>
+    <nb-card-body>
+
+      <p><strong>La base actual es de: ${{cashBase?.dailyCashBase}} pesos, insertada el dia
+          {{cashBase?.createAt}}</strong></p>
+
+      <div class="form-inline" [formGroup]="checkOutForm">
+        <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="col-md-4"
+          formControlName="cashBase" nbInput fullWidth formControlName="cashBase"
+          placeholder="¿Cuanto es la base del día?">
+        <button nbButton outline status="primary" class="form-group space" [nbSpinner]="loadingLargeGroup"
+          nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="" (click)="addCashBase(checkOutForm.value)"
+          [disabled]="!checkOutForm.valid || disabledUpdate">Insertar</button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

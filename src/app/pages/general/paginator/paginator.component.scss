@@ -1,0 +1,49 @@
+.img {
+  width: 100px;
+  height: 100px;
+}
+
+.position {
+  float: left;
+  padding-top: 7px;
+  margin-right: 5px;
+}
+
+.pag {
+  padding-left: auto;
+  padding-right: auto;
+}
+
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.pagination li {
+  display: inline;
+}
+
+ul.pagination li a {
+  float: left;
+  text-decoration: none;
+margin-right: 5px;
+  background-color: #64a0f8;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+ul.pagination li a.active {
+  background-color: #0732f5;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+
+ul.pagination li a:hover:not(.active) {
+  background-color: #ddd;
+}

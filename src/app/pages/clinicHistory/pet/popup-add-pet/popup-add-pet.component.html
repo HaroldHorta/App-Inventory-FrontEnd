@@ -1,0 +1,91 @@
+<nb-card [formGroup]="checkOutForm" class="col-md-12">
+    <nb-card-header>Categoria</nb-card-header>
+    <nb-card-body>
+        <div class="full-name-inputs form-group">
+            <!-- <p *ngIf="!checkOutForm.get('categoria').errors && !checkOutForm.get('categoria')" style="color: red;">* Campo obligatorio *</p> -->
+            <input fullWidth nbInput type="text" formControlName="name" placeholder="Nombre mascota">
+        </div>
+        <div class="full-name-inputs form-group">
+            <nb-select placeholder="Especie" formControlName="species">
+                <nb-option *ngFor="let spe of species" [value]="spe.id">{{spe.description}}</nb-option>
+            </nb-select>
+
+            <nb-select style="margin-left: 10px;" placeholder="Raza" formControlName="breed">
+                <nb-option *ngFor="let breed of breed" [value]="breed.id">{{breed.description}}</nb-option>
+            </nb-select>
+
+            <nb-select style="margin-left: 10px;" placeholder="Sexo" formControlName="sex">
+                <nb-option *ngFor="let sex of sex" [value]="sex">{{sex}}</nb-option>
+            </nb-select>
+
+            <nb-select style="margin-left: 10px;" placeholder="Origen" formControlName="origin">
+                <nb-option *ngFor="let origin of origin" [value]="origin">{{origin}}</nb-option>
+            </nb-select>
+        </div>
+
+        <div class="full-name-inputs form-group">
+            <input nbInput type="text" formControlName="color" placeholder="Color mascota">
+
+            <input style="margin-left: 10px;" nbInput placeholder="Fecha Nacimiento" formControlName="dateBirth"
+                [nbDatepicker]="dateTimePicker">
+            <nb-datepicker #dateTimePicker></nb-datepicker>
+        </div>
+
+        <div class="full-name-inputs form-group">
+            <input nbInput type="text" fullWidth formControlName="particularSigns" placeholder="Señas particulares">
+        </div>
+        <div>
+            <input nbInput type="file" formControlName="photo" class="form-group" fullWidth
+                (change)="onSelectFile($event)">
+        </div>
+
+        <div *ngIf="!infoCustomer" class="full-name-inputs form-group">
+            <input #nro nbInput type="text" placeholder="Cedula cliente">
+            <button style="margin-top: 10px; margin-left: 10px;" class="btn btn-outline-info form-group" type="submit"
+                (click)="findByNroDocument(nro.value)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
+                nbSpinnerSize="large" nbSpinnerMessage="">Validar
+                cliente</button>
+        </div>
+
+        <div *ngIf="infoCustomer">
+            <nb-card>
+                <nb-card-header>Cliente</nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <input nbInput type="hidden" formControlName="customer" [(ngModel)]="customer.nroDocument">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Nombre: </label>
+                                <span class="posicion">{{customer?.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <div>
+            <nb-card *ngIf="infoNoData">
+                <nb-card-body>
+                    <div>
+                        <span class="posicion"><strong>El cliente consultado no existe, de click en el boton para
+                                agregar.
+                            </strong></span>
+                        <button class="btn btn-outline-success form-group posicion" type="button"
+                            (click)="openAddCustomer()">Agregar</button>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="btn btn-outline-success " style="width: 45%;" (click)="onCreateConfirm(checkOutForm.value)"
+            [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage=""
+            [disabled]="!checkOutForm.valid || disableButton">Enviar</button>
+        <button class="btn btn-outline-danger col-md-6" style="width: 45%; margin-left: 10%;"
+            (click)="cancel()">Cancelar</button>
+    </nb-card-footer>
+</nb-card>

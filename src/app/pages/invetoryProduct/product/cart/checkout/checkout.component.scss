@@ -1,0 +1,44 @@
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    >* {
+      flex: 1;
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .form-inline [fullWidth] {
+    flex: 1;
+  }
+
+  .form-inline>* {
+    margin: 0 1.5rem 1.5rem 0;
+  }
+
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+
+  .posicion {
+    margin-left: 1%;
+
+  }
+
+  .radiobox {
+    display: inline-block;
+    margin-left: 0%;
+  }
+
+  .Groupradiobox {
+    margin-left: 2%;
+  }
+
+  .classname {
+    height: 750px;
+    overflow: scroll;
+  }

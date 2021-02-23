@@ -1,0 +1,80 @@
+<nb-card>
+    <nb-card-header>Carnet vacunación EquidoDog</nb-card-header>
+    <nb-card-body>
+        <div class="contenedorImg">
+            <img class="img-card" src="{{pet?.photo}}" />
+        </div>
+        <div class="contenedorDetalles">
+            <div class="box">
+                <h6>Datos mascota</h6>
+                <hr style="border-color:blue;">
+                <div class="box-inter">
+                    <span><b>Nombre: </b> {{pet?.name}}</span>
+                    <span class="espacio"><b>Raza: </b> {{pet?.breed.description}}</span>
+                    <span class="espacio"><b>Especie: </b> {{pet?.species.description}}</span>
+                    <span class="espacio"><b>Color: </b> {{pet?.color}}</span>
+                    <span class="espacio"><b>Sexo: </b> {{pet?.sex}}</span>
+                </div>
+                <div class="box-inter">
+                    <span><b>Fecha de nacimiento: </b> {{pet?.dateBirth}}</span>
+                    <span class="espacio"><b>Age: </b> {{pet?.age}}</span>
+                    <span class="espacio"><b>Señas particulares: </b> {{pet?.particularSigns}}</span>
+                    <span class="espacio"><b>Origen: </b> {{pet?.origin}}</span>
+                </div>
+            </div>
+            <div class="box">
+                <h6>Datos propietario</h6>
+                <hr style="border-color:blue;">
+                <span><b>Propietario: </b> {{pet?.customer.name}}</span>
+                <span class="espacio"><b>Dirección: </b> {{pet?.customer.address}}</span>
+                <span class="espacio"><b>Telefono: </b> {{pet?.customer.phone}}</span>
+            </div>
+
+            <div class="box">
+                <div class="bloque">
+                    <div class="A">
+                        <h6>Vacunas</h6>
+                    </div>
+                    <div class="B">
+                        <button *ngIf="!hiddenVaccination" class="btn btn-outline-primary" type="submit"
+                            (click)="displayVaccination()">Agregar Vacuna</button>
+
+                    </div>
+                </div>
+                <hr style="border-color:blue;">
+                <div *ngFor=" let vacuna of pet.vaccinations">
+                    <div *ngFor=" let vac of vacuna.vaccinations" class="item">
+                        <span class="col-md-4 center"><b>Nombre vacuna: </b> {{vac?.vaccination?.description}}</span>
+                        <span class="col-md-4 center"><b>Lote: </b> {{vac?.vaccination?.lot}}</span>
+                        <span class="col-md-4 center"><b>Fecha de vacunación: </b> {{vac?.vaccinationDate |
+                            date:'yyyy/MM/dd'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="hiddenVaccination">
+                <nb-card>
+                    <nb-card-body class="example-items-rows" [formGroup]="checkOutForm">
+                        <div *ngFor="let vaccination of vaccination;">
+                            <nb-checkbox multiple (checkedChange)="onNgModelChange(vaccination, $event)"
+                                status="primary">
+                                {{vaccination?.description}}</nb-checkbox>
+                            <input style="margin-left: 10px;" nbInput placeholder="Fecha Vacuna"
+                                [nbDatepicker]="dateTimePicker">
+                            <nb-datepicker #dateTimePicker (dateChange)="onNgDateChange(vaccination.id,$event)">
+                            </nb-datepicker>
+                        </div>
+                        <button style="float:right; margin-top: 15px;" class="btn btn-outline-primary" type="submit"
+                            (click)="saveVaccination(pet.id)" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="info"
+                            nbSpinnerSize="large">Agregar Vacuna</button>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+
+        </div>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton
+            (click)="cancel()">Cerrar</button>
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+</nb-card>

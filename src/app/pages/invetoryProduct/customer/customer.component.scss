@@ -1,0 +1,57 @@
+.typeDocument {
+  font-size: 12px;
+
+}
+
+.puntos-suspensivos {
+  width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+span {
+  width: 60px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  >* {
+    flex: auto;
+  }
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.space {
+  margin-left: 10%;
+}
+
+.changeMouse {
+  cursor: pointer;
+}
+
+.active {
+  background-color: #38d693;
+  color: white;
+  border-radius: 5px;
+}
+
+.inactive {
+  background-color: #fa7477;
+  color: white;
+  border-radius: 5px;
+}
+
+.space-top {
+  margin-top: 5%;
+}
