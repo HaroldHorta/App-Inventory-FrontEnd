@@ -1,0 +1,29 @@
+<nb-card>
+  <nb-card-header>Formato Historia Clínica</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-2">
+        <label class="posicionLogo"><img class="pru" src="../../../../assets/images/logo.jpg" /></label>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group posicionInfo">
+          <span>{{nombre}}</span> <br>
+          <span>{{leyenda}}</span><br>
+          <span>{{nit}}</span><br>
+          <span>{{telefono}}</span><br>
+          <span>{{direccion}}</span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group posicionInfo">
+          <label for="inputLastName" class="label">Codigo: <br></label>
+          <span class="">EQUI-DOG-01</span> <br>
+          <label for="inputLastName" class="label">Versión: <br></label>
+          <span class="">01</span> <br>
+          <label for="inputLastName" class="label">Fecha Emisión: <br></label>
+          <span class="">{{dateDay | date:'yyyy/MM/dd'}}</span>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
