@@ -214,7 +214,7 @@
             </nb-card-body>
         </nb-card>
 
-        
+
         <!-- Historia paciente -->
 
         <nb-card>
@@ -240,8 +240,84 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="inputFirstName" class="label">Alergias: </label>
+                            <span class="posicion">{{ clinicHistory?.pet?.allergy}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Enfermedades anteriores: <br></label>
+                            <span class="posicion">{{clinicHistory?.pet?.previousIllnesses}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Cirugías: <br></label>
+                            <span class="posicion">{{clinicHistory?.pet?.surgeries}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Antecedentes familiares: <br></label>
+                            <span class="posicion">{{clinicHistory?.pet?.familyBackground}}</span>
+                        </div>
+                    </div>
+                </div>
             </nb-card-body>
         </nb-card>
+
+        <!--Constantes fisiologicas-->
+
+        <nb-card>
+            <nb-card-header>Constantes fisiológicas</nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputFirstName" class="label">T.Ll.C.: </label>
+                            <span class="posicion">{{ clinicHistory?.physiologicalConstants?.capillaryFillTime}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">F.C: <br></label>
+                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.heartRate}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">F.R: <br></label>
+                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.respiratoryFrequency}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Pulso: <br></label>
+                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.pulse}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Temperatura: <br></label>
+                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.temperature}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Peso: <br></label>
+                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.weight}}</span>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
 
     </nb-layout-column>
 </nb-layout>
