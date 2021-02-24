@@ -556,6 +556,8 @@ export class PopupAddClinicHistoryComponent implements OnInit {
       clinicExamClinicHistories: this.requestAddClinicExamClinicHistory
     }
 
+    console.log(this.clinicExam)
+
     this.clinicHistory = {
       veterinary: this.veterinary.id,
       pet: this.pet.id,
