@@ -49,6 +49,7 @@ export class PopupAddVaccinationPetComponent implements OnInit {
   displayVaccination() {
     this.dialogService.open(PhysiologicalConstantsComponent).onClose.subscribe(res => {
       this.physiologicalConstants = res;
+      console.log(res)
       this.hiddenVaccination = true;
       this.getVaccination();
     });

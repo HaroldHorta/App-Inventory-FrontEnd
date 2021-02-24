@@ -311,7 +311,8 @@
 
                     <div class="box">
                         <h6>Actitud</h6>
-                        <nb-radio-group name="group4" class="Groupradiobox" (ngModelChange)="changedValueAttitude()">
+                        <nb-radio-group name="group4" [(value)]="attitude" class="Groupradiobox" [(ngModel)]="attitude"
+                            (ngModelChange)="changedValueAttitude()">
                             <nb-radio class="radiobox" *ngFor="let type of attitudeOption" [value]="type">
                                 {{type}}
                             </nb-radio>
@@ -320,7 +321,7 @@
 
                     <div class="box">
                         <h6>Condición corporal</h6>
-                        <nb-radio-group name="group5" class="Groupradiobox"
+                        <nb-radio-group name="group5" class="Groupradiobox" [(value)]="bodyCondition" class="Groupradiobox" [(ngModel)]="bodyCondition"
                             (ngModelChange)="changedValueBodyCondition()">
                             <nb-radio class="radiobox" *ngFor="let type of bodyConditionOption" [value]="type">
                                 {{type}}
@@ -330,7 +331,7 @@
 
                     <div class="box">
                         <h6>Estado de deshidratación</h6>
-                        <nb-radio-group name="group6" class="Groupradiobox"
+                        <nb-radio-group name="group6" class="Groupradiobox" [(value)]="statusDehydration" class="Groupradiobox" [(ngModel)]="statusDehydration"
                             (ngModelChange)="changedValueStateDehydration()">
                             <nb-radio class="radiobox" *ngFor="let type of stateDehydrationOption" [value]="type">
                                 {{type}}

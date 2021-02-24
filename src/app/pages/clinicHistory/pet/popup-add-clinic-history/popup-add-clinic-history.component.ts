@@ -313,6 +313,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   }
 
   changedValueAttitude() {
+   console.log( 'pasa por aqui')
     const newVal = {
       fieldName: this.attitude,
     };

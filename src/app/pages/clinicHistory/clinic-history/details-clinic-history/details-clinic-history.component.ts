@@ -11,13 +11,11 @@ import { ClinicHistoryService } from '../../../../core/services/clinic-history.s
 export class DetailsClinicHistoryComponent implements OnInit {
 
   idClinicHistory: string;
-  clinicHistory: ResponseClinicHistoryDTO
+  clinicHistory: ResponseClinicHistoryDTO = new ResponseClinicHistoryDTO;
   constructor(private activeRouter: ActivatedRoute, private clinicHistoryService: ClinicHistoryService) { }
 
   ngOnInit(): void {
     this.idClinicHistory = this.activeRouter.snapshot.paramMap.get('idClinicHistory');
-    console.log(this.idClinicHistory)
-
     this.getById(this.idClinicHistory);
 
 
@@ -26,8 +24,6 @@ export class DetailsClinicHistoryComponent implements OnInit {
   getById(id) {
     this.clinicHistoryService.getById(id).subscribe(clinicHistory =>{
       this.clinicHistory = clinicHistory
-      console.log(JSON.stringify(this.clinicHistory))
-
     }
     )
 

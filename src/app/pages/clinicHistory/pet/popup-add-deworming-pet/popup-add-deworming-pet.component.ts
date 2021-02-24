@@ -76,6 +76,8 @@ export class PopupAddDewormingPetComponent implements OnInit {
 
         this.disableButton = false;
         this.loadingLargeGroup = false;
+        this.checkOutFormInternal.reset();
+
       },
         (err) => {
           const type = 'danger';
@@ -98,6 +100,8 @@ export class PopupAddDewormingPetComponent implements OnInit {
 
         this.disableButton = false;
         this.loadingLargeGroup = false;
+
+        this.checkOutFormInternal.reset();
       },
         (err) => {
           const type = 'danger';

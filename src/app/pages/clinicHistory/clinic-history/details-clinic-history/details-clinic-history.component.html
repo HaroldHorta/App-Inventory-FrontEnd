@@ -290,7 +290,8 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="inputLastName" class="label">F.R: <br></label>
-                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.respiratoryFrequency}}</span>
+                            <span
+                                class="posicion">{{clinicHistory?.physiologicalConstants?.respiratoryFrequency}}</span>
                         </div>
                     </div>
                 </div>
@@ -314,6 +315,61 @@
                             <span class="posicion">{{clinicHistory?.physiologicalConstants?.weight}}</span>
                         </div>
                     </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
+        <!--Examenes clinicos-->
+
+        <nb-card>
+            <nb-card-header>Exámenes clínicos</nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputFirstName" class="label">Actitud: </label>
+                            <span class="posicion">{{ clinicHistory?.clinicExam?.attitude}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Condición corporal: <br></label>
+                            <span class="posicion">{{clinicHistory?.clinicExam?.bodyCondition}}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="inputLastName" class="label">Deshidratación <br></label>
+                            <span class="posicion">{{clinicHistory?.clinicExam?.stateDehydration}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngFor=" let history of clinicHistory.clinicExam.clinicExamClinicHistories" class="item">
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Estado: </label>
+                        {{history?.optionClinicExam}}</span>
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre examen: </label>
+                        {{history?.clinicExam?.exam}}</span>
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Observación:
+                        </label> {{history?.observation}}</span>
+                </div>
+
+            </nb-card-body>
+        </nb-card>
+
+
+        <!-- Lista de proeblemas -->
+
+        <nb-card>
+            <nb-card-header>Lista de problemas</nb-card-header>
+            <nb-card-body>
+                <div *ngFor=" let problems of clinicHistory.listProblems" class="item">
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Problema: </label>
+                        {{problems?.problem}}</span>
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Raiz del problema: </label>
+                        {{problems?.listMaster}}</span>
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Diagnóstico diferencial :
+                        </label> {{problems?.differentialDiagnosis }}</span>
                 </div>
             </nb-card-body>
         </nb-card>
