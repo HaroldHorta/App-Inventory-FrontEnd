@@ -49,8 +49,11 @@
                         <span>{{clinicHistory?.pet?.color}}</span>
                         <span>{{clinicHistory?.pet?.age}}</span>
                         <span>
+                            <nb-icon class="changeMouse" nbTooltip="Completar Historia Clínica" nbTooltipStatus="success"
+                            status="success" (click)="openModalEvidences(clinicHistory)" icon="calendar-outline"></nb-icon>
+                 
                             <a class="navf" [routerLink]="['/pages/clinic-history/', clinicHistory.id]" target="_blank">
-                                <nb-icon class="changeMouse" nbTooltip="Ver historia clínica"
+                                <nb-icon class="changeMouse" nbTooltip="Certificado historia clínica"
                                     nbTooltipStatus="success" status="success" icon="book-open-outline">
                                 </nb-icon>
                             </a>

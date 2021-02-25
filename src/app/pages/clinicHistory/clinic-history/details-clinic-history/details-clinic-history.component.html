@@ -375,5 +375,27 @@
         </nb-card>
 
 
+
+        <!-- plan diagnostico -->
+
+        <nb-card>
+            <nb-card-header>Examen cl+inico y resultados</nb-card-header>
+            <nb-card-body>
+
+                <div *ngFor=" let history of clinicHistory.diagnosticPlans; let i = index" class="item">
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Examen: </label>
+                        {{history?.description}}</span>
+                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Laboratorio:
+                        </label>{{history?.labs}} </span>
+                    <span class="col-md-4 center">
+                        <nb-icon class="changeMouse space" nbTooltip="Descargar pdf" (click)="download(i)"
+                            nbTooltipStatus="success" status="success" icon="download-outline"></nb-icon>
+                    </span>
+                </div>
+
+            </nb-card-body>
+        </nb-card>
+
+
     </nb-layout-column>
 </nb-layout>

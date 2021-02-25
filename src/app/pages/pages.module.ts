@@ -70,6 +70,7 @@ import { PopupAddDianosticPlanComponent } from './clinicHistory/diagnostic-plan/
 import { ClinicHistoryComponent } from './clinicHistory/clinic-history/clinic-history.component';
 import { DetailsClinicHistoryComponent } from './clinicHistory/clinic-history/details-clinic-history/details-clinic-history.component';
 import { HeardFormatComponent } from './clinicHistory/clinic-history/details-clinic-history/heard-format/heard-format.component';
+import { PopupEvidencesClinicHistoryComponent } from './clinicHistory/clinic-history/popup-evidences-clinic-history/popup-evidences-clinic-history.component';
 
 @NgModule({
   imports: [
@@ -159,6 +160,7 @@ import { HeardFormatComponent } from './clinicHistory/clinic-history/details-cli
     ClinicHistoryComponent,
     DetailsClinicHistoryComponent,
     HeardFormatComponent,
+    PopupEvidencesClinicHistoryComponent,
 
   ],
 })

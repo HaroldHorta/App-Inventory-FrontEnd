@@ -5,6 +5,7 @@ import { NbDialogService } from '@nebular/theme';
 import { ResponseClinicHistoryDTO } from '../../../core/models/Response/clinichistory/ResponseClinicHistoryDTO';
 import { ClinicHistoryService } from '../../../core/services/clinic-history.service';
 import { GeneralService } from '../../../core/services/general.service';
+import { PopupEvidencesClinicHistoryComponent } from './popup-evidences-clinic-history/popup-evidences-clinic-history.component';
 
 @Component({
   selector: 'ngx-clinic-history',
@@ -41,7 +42,6 @@ export class ClinicHistoryComponent implements OnInit {
     this.clinicHistoryService.getByCustomer(nroDocument.nroDocument).subscribe(clinicHistory => {
       this.searchClinicHistory = true;
       this.clinicHistory = clinicHistory;
-      console.log(this.clinicHistory)
       if (this.clinicHistory.length != 0) {
         this.clinicHistoryHidden = true;
       } else {
@@ -67,4 +67,11 @@ export class ClinicHistoryComponent implements OnInit {
     this.router.navigate(['pages/clinic-history', this.idClinicHistory]);  
 
    }
+
+   openModalEvidences(clinicHistory) {
+    this.dialogService.open(PopupEvidencesClinicHistoryComponent, { context: { clinicHistory: clinicHistory } }).onClose.subscribe(res => {
+      const nro = { nroDocument: res.customer.nroDocument }
+      this.findByNroDocument(nro);
+    });
+  }
 }
