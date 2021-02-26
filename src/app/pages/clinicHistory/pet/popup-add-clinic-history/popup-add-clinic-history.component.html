@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div>
-                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button nbButton disabled nbStepperPrevious>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -246,7 +246,7 @@
                     </div>
 
                     <div>
-                        <button nbButton nbStepperNext>prev</button>
+                        <button nbButton nbStepperPrevious>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                     <div style="margin-top: 10px;">
-                        <button nbButton nbStepperNext>prev</button>
+                        <button nbButton nbStepperPrevious>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -321,7 +321,8 @@
 
                     <div class="box">
                         <h6>Condición corporal</h6>
-                        <nb-radio-group name="group5" class="Groupradiobox" [(value)]="bodyCondition" class="Groupradiobox" [(ngModel)]="bodyCondition"
+                        <nb-radio-group name="group5" class="Groupradiobox" [(value)]="bodyCondition"
+                            class="Groupradiobox" [(ngModel)]="bodyCondition"
                             (ngModelChange)="changedValueBodyCondition()">
                             <nb-radio class="radiobox" *ngFor="let type of bodyConditionOption" [value]="type">
                                 {{type}}
@@ -331,7 +332,8 @@
 
                     <div class="box">
                         <h6>Estado de deshidratación</h6>
-                        <nb-radio-group name="group6" class="Groupradiobox" [(value)]="statusDehydration" class="Groupradiobox" [(ngModel)]="statusDehydration"
+                        <nb-radio-group name="group6" class="Groupradiobox" [(value)]="statusDehydration"
+                            class="Groupradiobox" [(ngModel)]="statusDehydration"
                             (ngModelChange)="changedValueStateDehydration()">
                             <nb-radio class="radiobox" *ngFor="let type of stateDehydrationOption" [value]="type">
                                 {{type}}
@@ -370,7 +372,7 @@
 
 
                     <div>
-                        <button nbButton nbStepperNext>prev</button>
+                        <button nbButton nbStepperPrevious>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -427,7 +429,7 @@
 
 
                     <div>
-                        <button nbButton nbStepperPrev>prev</button>
+                        <button nbButton nbStepperPrevious>prev</button>
                         <button style="float: right;" nbButton nbStepperNext>next</button>
                     </div>
                 </nb-step>
@@ -451,7 +453,7 @@
                         [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large"
                         nbSpinnerMessage="" [disabled]="disableButton">Guardar Historia Clínica</button>
                     <div>
-                        <button nbButton nbStepperNext>prev</button>
+                        <button nbButton nbStepperPrevious>prev</button>
                     </div>
                 </nb-step>
 

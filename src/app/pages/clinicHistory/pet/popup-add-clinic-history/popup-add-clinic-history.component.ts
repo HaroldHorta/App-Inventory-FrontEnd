@@ -313,10 +313,11 @@ export class PopupAddClinicHistoryComponent implements OnInit {
   }
 
   changedValueAttitude() {
-   console.log( 'pasa por aqui')
     const newVal = {
       fieldName: this.attitude,
     };
+   console.log( 'pasa por aqui', this.attitude)
+
   }
 
   changedValueBodyCondition() {
@@ -557,7 +558,7 @@ export class PopupAddClinicHistoryComponent implements OnInit {
       clinicExamClinicHistories: this.requestAddClinicExamClinicHistory
     }
 
-    console.log(this.clinicExam)
+    console.log('clinic exam',this.clinicExam)
 
     this.clinicHistory = {
       veterinary: this.veterinary.id,

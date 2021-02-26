@@ -7,6 +7,10 @@ import { ClinicHistoryService } from '../../../../core/services/clinic-history.s
 import { GeneralService } from '../../../../core/services/general.service';
 import { saveAs as fileSaverSave } from 'file-saver';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResultClinic } from '../../../../core/models/Request/clinichistory/ResultClinic';
+import { TherapeuticPlan } from '../../../../core/models/Request/clinichistory/TherapeuticPlan';
+import { RequestTherapeuticPlan } from '../../../../core/models/Request/clinichistory/RequestTherapeuticPlan';
+import { TherapeuticPlanOption } from '../../../../core/models/enum/TherapeuticPlanOption';
 
 @Component({
   selector: 'ngx-popup-evidences-clinic-history',
@@ -15,17 +19,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PopupEvidencesClinicHistoryComponent implements OnInit {
 
-  clinicHistory: ResponseClinicHistoryDTO;
+  clinicHistory: ResponseClinicHistoryDTO = new ResponseClinicHistoryDTO;
+  result: ResultClinic;
   diagnostic: RequestDiagnosticPlanCLinicHistory;
   diagnosticPlans: ResponseDiagnosticPlan[] = [];
   responseDiagnosticPlan: ResponseDiagnosticPlan;
+  therapeuticPlanOption: string[] = [];
   search;
   lab: string;
   loadingLargeGroup = false;
   disabledUpdate = false;
   examHidden = false;
-  resultHidden=false;
+  resultHidden = false;
   checkOutForm: FormGroup;
+  checkOutFormTherapeutic: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder, private toastrService: GeneralService, protected ref: NbDialogRef<PopupEvidencesClinicHistoryComponent>, private service: ClinicHistoryService) {
@@ -36,14 +43,37 @@ export class PopupEvidencesClinicHistoryComponent implements OnInit {
       diagnosticImpression: ['', [Validators.required]],
 
     });
+
+    this.checkOutFormTherapeutic = this.formBuilder.group({
+
+      therapeuticPlanOption: ['', [Validators.required]],
+      activePrincipleManage: ['', [Validators.required]],
+      presentation: ['', [Validators.required]],
+      posology: ['', [Validators.required]],
+      totalDose: ['', [Validators.required]],
+      via: ['', [Validators.required]],
+      frequencyDuration: ['', [Validators.required]],
+
+    });
   }
 
   ngOnInit(): void {
     this.diagnosticPlans = this.clinicHistory.diagnosticPlans;
+    this.getTherapeuticPlanOption();
   }
   cancel() {
     this.ref.close();
   }
+
+  getTherapeuticPlanOption() {
+    this.therapeuticPlanOption.push(TherapeuticPlanOption.SUPPORT);
+    this.therapeuticPlanOption.push(TherapeuticPlanOption.PREVENTIVE);
+    this.therapeuticPlanOption.push(TherapeuticPlanOption.SYMPTOMATIC);
+    this.therapeuticPlanOption.push(TherapeuticPlanOption.ETIOLOGICAL);
+
+    console.log(this.therapeuticPlanOption)
+  }
+
 
   public onSelectChange(event, i): void {
     this.lab = event;
@@ -115,8 +145,66 @@ export class PopupEvidencesClinicHistoryComponent implements OnInit {
     fileSaverSave(new File([u8arr], filename, { type: format }));
   }
 
-  updateInterpretResult(result){
+  updateInterpretResult(result) {
+    this.result = result;
+    this.loadingLargeGroup = true;
+    this.disabledUpdate = true;
 
+    this.service.updateResult(this.clinicHistory.id, this.result).subscribe(clinicHistory => {
+      this.clinicHistory = clinicHistory;
+      const type = 'success';
+      const quote = { title: null, body: 'Agregado correctamente' };
+      this.toastrService.showToast(type, quote.title, quote.body);
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
+      this.resultHidden = true;
+    },
+      (err) => {
+        const type = 'danger';
+        const quote = { title: null, body: err.error.detailMessage };
+        this.toastrService.showToast(type, quote.title, quote.body);
+
+        this.disabledUpdate = false;
+        this.loadingLargeGroup = false;
+      });
   }
 
+  disableButton = false;
+  hiddenTherapeuticPlan = false;
+  therapeuticPlan: TherapeuticPlan[] = [];
+  requestTherapeuticPlan: RequestTherapeuticPlan = new RequestTherapeuticPlan;
+  addListTherapeuticPlan(therapeuticPlan) {
+    this.hiddenTherapeuticPlan = true;
+    this.therapeuticPlan.push(therapeuticPlan);
+    this.checkOutFormTherapeutic.reset();
+  }
+
+  deleteTherapeuticPlan(i) {
+    this.therapeuticPlan.splice(i, 1)
+  }
+
+  updateTherapeuticPlan() {
+    this.loadingLargeGroup = true;
+    this.disabledUpdate = true;
+    this.requestTherapeuticPlan.therapeuticPlans = this.therapeuticPlan;
+    this.service.updateTherapeuticPlan(this.clinicHistory.id, this.requestTherapeuticPlan).subscribe(clinicHistory => {
+      this.clinicHistory = clinicHistory;
+      const type = 'success';
+      const quote = { title: null, body: 'Agregado correctamente' };
+      this.toastrService.showToast(type, quote.title, quote.body);
+      this.loadingLargeGroup = false;
+      this.disabledUpdate = false;
+      this.resultHidden = true;
+      this.ref.close();
+
+    },
+      (err) => {
+        const type = 'danger';
+        const quote = { title: null, body: err.error.detailMessage };
+        this.toastrService.showToast(type, quote.title, quote.body);
+
+        this.disabledUpdate = false;
+        this.loadingLargeGroup = false;
+      });
+  }
 }

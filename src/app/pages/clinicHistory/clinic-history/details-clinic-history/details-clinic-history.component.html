@@ -1,400 +1,497 @@
 <nb-layout>
     <nb-layout-column>
-        <ngx-heard-format class="header"></ngx-heard-format>
+        <div class="htmlData" id="htmlData" #htmlData>
 
-        <!-- Datos del de la historia clinica -->
-        <nb-card>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Fecha historia clínica: </label>
-                            <span class="posicion">{{clinicHistory?.createAt | date:'yyyy/MM/dd'}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">N° historia clínica: <br></label>
-                            <span class="posicion">{{clinicHistory?.id}}</span>
-                        </div>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
+            <ngx-heard-format class="header"></ngx-heard-format>
 
-        <!-- Datos del veterinario -->
+            <!-- Datos del de la historia clinica -->
+            <nb-card>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Fecha historia clínica: </label>
+                                <span class="posicion">{{clinicHistory?.createAt | date:'yyyy/MM/dd'}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">N° historia clínica: <br></label>
+                                <span class="posicion">{{clinicHistory?.id}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
 
-        <nb-card>
-            <nb-card-header>Datos Veterinario</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Nombre: </label>
-                            <span class="posicion">{{ clinicHistory?.veterinary?.name}}
-                                {{clinicHistory?.veterinary?.surname}} </span>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">N° tarjeta profesional: <br></label>
-                            <span class="posicion">{{clinicHistory?.veterinary?.professionalCard}}</span>
-                        </div>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
+            <!-- Datos del veterinario -->
 
-        <!-- Datos del Mascota -->
+            <nb-card>
+                <nb-card-header>Datos Veterinario</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Nombre: </label>
+                                <span class="posicion">{{ clinicHistory?.veterinary?.name}}
+                                    {{clinicHistory?.veterinary?.surname}} </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">N° tarjeta profesional: <br></label>
+                                <span class="posicion">{{clinicHistory?.veterinary?.professionalCard}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
 
-        <nb-card>
-            <nb-card-header>Datos Mascota</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Nombre: </label>
-                            <span class="posicion">{{ clinicHistory?.pet?.name}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Raza: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.breed?.description}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Especie: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.species?.description}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Sexo: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.sex}}</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Datos del Mascota -->
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Nacimiento: </label>
-                            <span class="posicion">{{ clinicHistory?.pet?.dateBirth | date:'yyyy/MM/dd'}} </span>
+            <nb-card>
+                <nb-card-header>Datos Mascota</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Nombre: </label>
+                                <span class="posicion">{{ clinicHistory?.pet?.name}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Raza: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.breed?.description}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Especie: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.species?.description}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Sexo: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.sex}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Edad: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.age}}</span>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Nacimiento: </label>
+                                <span class="posicion">{{ clinicHistory?.pet?.dateBirth | date:'yyyy/MM/dd'}} </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Edad: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.age}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Color: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.color}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Señas particulares: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.particularSigns}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Color: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.color}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Señas particulares: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.particularSigns}}</span>
-                        </div>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
+                </nb-card-body>
+            </nb-card>
 
 
-        <!-- Datos del Propietrio -->
+            <!-- Datos del Propietrio -->
 
-        <nb-card>
-            <nb-card-header>Datos Propietrio</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Nombre: </label>
-                            <span class="posicion">{{ clinicHistory?.pet?.customer?.name}}</span>
+            <nb-card>
+                <nb-card-header>Datos Propietrio</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Nombre: </label>
+                                <span class="posicion">{{ clinicHistory?.pet?.customer?.name}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">tipo de documento: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.customer?.typeDocument}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">N° documento: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.customer?.nroDocument}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">tipo de documento: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.customer?.typeDocument}}</span>
+                </nb-card-body>
+            </nb-card>
+
+            <!-- Motivos de la consulta -->
+
+            <nb-card>
+                <nb-card-header>Motivos de la consulta</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Motivos de la consulta: </label>
+                                <span class="posicion">{{ clinicHistory?.reasonOfConsultation}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Anamnésicos: <br></label>
+                                <span class="posicion">{{clinicHistory?.anamnesis}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">N° documento: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.customer?.nroDocument}}</span>
+                </nb-card-body>
+            </nb-card>
+
+            <!-- Vacunacion mascota -->
+
+            <nb-card>
+                <nb-card-header>Historia del paciente</nb-card-header>
+            </nb-card>
+            <nb-card>
+                <nb-card-header>Vacunación Mascota</nb-card-header>
+                <nb-card-body>
+                    <div *ngFor=" let vacuna of clinicHistory.pet.vaccinations">
+                        <div *ngFor=" let vac of vacuna.vaccinations" class="item">
+                            <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre vacuna:
+                                </label>
+                                {{vac?.vaccination?.description}}</span>
+                            <span class="col-md-4 center"><label for="inputFirstName" class="label">Lote: </label>
+                                {{vac?.vaccination?.lot}}</span>
+                            <span class="col-md-4 center"><label for="inputFirstName" class="label">Fecha de vacunación:
+                                </label> {{vac?.vaccinationDate |
+                                date:'yyyy/MM/dd'}}</span>
                         </div>
                     </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
+                </nb-card-body>
+            </nb-card>
 
-        <!-- Motivos de la consulta -->
+            <!-- Desparasitacion Interna-->
 
-        <nb-card>
-            <nb-card-header>Motivos de la consulta</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Motivos de la consulta: </label>
-                            <span class="posicion">{{ clinicHistory?.reasonOfConsultation}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Anamnésicos: <br></label>
-                            <span class="posicion">{{clinicHistory?.anamnesis}}</span>
-                        </div>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
-
-        <!-- Vacunacion mascota -->
-
-        <nb-card>
-            <nb-card-header>Historia del paciente</nb-card-header>
-        </nb-card>
-        <nb-card>
-            <nb-card-header>Vacunación Mascota</nb-card-header>
-            <nb-card-body>
-                <div *ngFor=" let vacuna of clinicHistory.pet.vaccinations">
-                    <div *ngFor=" let vac of vacuna.vaccinations" class="item">
-                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre vacuna: </label>
-                            {{vac?.vaccination?.description}}</span>
-                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Lote: </label>
-                            {{vac?.vaccination?.lot}}</span>
-                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Fecha de vacunación:
-                            </label> {{vac?.vaccinationDate |
+            <nb-card>
+                <nb-card-header>Desparasitación Interna Mascota</nb-card-header>
+                <nb-card-body>
+                    <div *ngFor=" let deworming of clinicHistory.pet.dewormingInternal" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre poducto: </label>
+                            {{deworming?.deworming?.description}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Producto: </label>
+                            {{deworming?.deworming?.product}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Fecha de
+                                desparasitación:
+                            </label> {{deworming?.deworming?.dewormingDate |
                             date:'yyyy/MM/dd'}}</span>
                     </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
-
-        <!-- Desparasitacion Interna-->
-
-        <nb-card>
-            <nb-card-header>Desparasitación Interna Mascota</nb-card-header>
-            <nb-card-body>
-                <div *ngFor=" let deworming of clinicHistory.pet.dewormingInternal" class="item">
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre poducto: </label>
-                        {{deworming?.deworming?.description}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Producto: </label>
-                        {{deworming?.deworming?.product}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Fecha de desparasitación:
-                        </label> {{deworming?.deworming?.dewormingDate |
-                        date:'yyyy/MM/dd'}}</span>
-                </div>
-            </nb-card-body>
-        </nb-card>
+                </nb-card-body>
+            </nb-card>
 
 
-        <!-- Desparasitacion Interna-->
+            <!-- Desparasitacion Interna-->
 
-        <nb-card>
-            <nb-card-header>Desparasitación Externa Mascota</nb-card-header>
-            <nb-card-body>
-                <div *ngFor=" let deworming of clinicHistory.pet.dewormingExternal" class="item">
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre poducto: </label>
-                        {{deworming?.deworming?.description}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Producto: </label>
-                        {{deworming?.deworming?.product}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Fecha de desparasitación:
-                        </label> {{deworming?.deworming?.dewormingDate |
-                        date:'yyyy/MM/dd'}}</span>
-                </div>
-            </nb-card-body>
-        </nb-card>
+            <nb-card>
+                <nb-card-header>Desparasitación Externa Mascota</nb-card-header>
+                <nb-card-body>
+                    <div *ngFor=" let deworming of clinicHistory.pet.dewormingExternal" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre poducto: </label>
+                            {{deworming?.deworming?.description}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Producto: </label>
+                            {{deworming?.deworming?.product}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Fecha de
+                                desparasitación:
+                            </label> {{deworming?.deworming?.dewormingDate |
+                            date:'yyyy/MM/dd'}}</span>
+                    </div>
+                </nb-card-body>
+            </nb-card>
 
 
-        <!-- Historia paciente -->
+            <!-- Historia paciente -->
 
-        <nb-card>
-            <nb-card-header>Datos generales paciente</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Estado reproductivo: </label>
-                            <span class="posicion">{{ clinicHistory?.pet?.reproductiveStatus}}</span>
+            <nb-card>
+                <nb-card-header>Datos generales paciente</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Estado reproductivo: </label>
+                                <span class="posicion">{{ clinicHistory?.pet?.reproductiveStatus}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Habitat <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.habitat?.habitat}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Alimentación <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.feeding?.feedingOption}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Habitat <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.habitat?.habitat}}</span>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Alergias: </label>
+                                <span class="posicion">{{ clinicHistory?.pet?.allergy}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Enfermedades anteriores: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.previousIllnesses}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Cirugías: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.surgeries}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Antecedentes familiares: <br></label>
+                                <span class="posicion">{{clinicHistory?.pet?.familyBackground}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Alimentación <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.feeding?.feedingOption}}</span>
+                </nb-card-body>
+            </nb-card>
+
+            <!--Constantes fisiologicas-->
+
+            <nb-card>
+                <nb-card-header>Constantes fisiológicas</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">T.Ll.C.: </label>
+                                <span class="posicion">{{
+                                    clinicHistory?.physiologicalConstants?.capillaryFillTime}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">F.C: <br></label>
+                                <span class="posicion">{{clinicHistory?.physiologicalConstants?.heartRate}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">F.R: <br></label>
+                                <span
+                                    class="posicion">{{clinicHistory?.physiologicalConstants?.respiratoryFrequency}}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Alergias: </label>
-                            <span class="posicion">{{ clinicHistory?.pet?.allergy}}</span>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Pulso: <br></label>
+                                <span class="posicion">{{clinicHistory?.physiologicalConstants?.pulse}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Temperatura: <br></label>
+                                <span class="posicion">{{clinicHistory?.physiologicalConstants?.temperature}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Peso: <br></label>
+                                <span class="posicion">{{clinicHistory?.physiologicalConstants?.weight}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Enfermedades anteriores: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.previousIllnesses}}</span>
+                </nb-card-body>
+            </nb-card>
+
+            <!--Examenes clinicos-->
+
+            <nb-card>
+                <nb-card-header>Exámenes clínicos</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Actitud: </label>
+                                <span class="posicion">{{ clinicHistory?.clinicExam?.attitude}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Condición corporal: <br></label>
+                                <span class="posicion">{{clinicHistory?.clinicExam?.bodyCondition}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Deshidratación <br></label>
+                                <span class="posicion">{{clinicHistory?.clinicExam?.stateDehydration}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Cirugías: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.surgeries}}</span>
+
+                    <div *ngFor=" let history of clinicHistory.clinicExam.clinicExamClinicHistories" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Estado: </label>
+                            {{history?.optionClinicExam}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre examen: </label>
+                            {{history?.clinicExam?.exam}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Observación:
+                            </label> {{history?.observation}}</span>
+                    </div>
+
+                </nb-card-body>
+            </nb-card>
+
+
+            <!-- Lista de proeblemas -->
+
+            <nb-card>
+                <nb-card-header>Lista de problemas</nb-card-header>
+                <nb-card-body>
+                    <div *ngFor=" let problems of clinicHistory.listProblems" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Problema: </label>
+                            {{problems?.problem}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Raiz del problema:
+                            </label>
+                            {{problems?.listMaster}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Diagnóstico diferencial
+                                :
+                            </label> {{problems?.differentialDiagnosis }}</span>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+
+
+
+            <!-- plan diagnostico -->
+
+            <nb-card>
+                <nb-card-header>Examen clínico y resultados</nb-card-header>
+                <nb-card-body>
+
+                    <div *ngFor=" let history of clinicHistory.diagnosticPlans; let i = index" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Examen: </label>
+                            {{history?.description}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Laboratorio:
+                            </label>{{history?.labs}} </span>
+                        <span *ngIf="!(history.pdfs === 'N/A')" class="col-md-4 center">
+                            <nb-icon class="changeMouse space" nbTooltip="Descargar pdf" (click)="download(i)"
+                                nbTooltipStatus="success" status="success" icon="download-outline"></nb-icon>
+                        </span>
+                    </div>
+
+                </nb-card-body>
+            </nb-card>
+
+            <!-- Resultados -->
+
+            <nb-card>
+                <nb-card-header>Intrepretación de resultados:</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Intrepretación de resultados: </label>
+                                <span class="posicion">{{
+                                    clinicHistory?.resultClinic?.interpretationResults}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Impresión diagnóstica: <br></label>
+                                <span class="posicion">{{clinicHistory?.resultClinic?.diagnosticImpression}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Antecedentes familiares: <br></label>
-                            <span class="posicion">{{clinicHistory?.pet?.familyBackground}}</span>
+                </nb-card-body>
+            </nb-card>
+
+            <!-- Plan Terapeutico -->
+
+            <!--Constantes fisiologicas-->
+
+            <nb-card>
+                <nb-card-header>Plan terapéutico</nb-card-header>
+                <nb-card-body *ngFor="let therapeuticPlan of clinicHistory.therapeuticPlan">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Tipo de terapia: </label>
+                                <span class="posicion">{{ therapeuticPlan?.therapeuticPlanOption}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Principio activo: <br></label>
+                                <span class="posicion">{{therapeuticPlan?.activePrincipleManage}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Presentación: <br></label>
+                                <span class="posicion">{{therapeuticPlan?.presentation}}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
 
-        <!--Constantes fisiologicas-->
-
-        <nb-card>
-            <nb-card-header>Constantes fisiológicas</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">T.Ll.C.: </label>
-                            <span class="posicion">{{ clinicHistory?.physiologicalConstants?.capillaryFillTime}}</span>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Posología: <br></label>
+                                <span class="posicion">{{therapeuticPlan?.posology}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Dosis total: <br></label>
+                                <span class="posicion">{{therapeuticPlan?.totalDose}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Via: <br></label>
+                                <span class="posicion">{{therapeuticPlan?.via}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">F.C: <br></label>
-                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.heartRate}}</span>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Frecuencia y duración: <br></label>
+                                <span class="posicion">{{therapeuticPlan?.frequencyDuration}}</span>
+                            </div>
                         </div>
+
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">F.R: <br></label>
-                            <span
-                                class="posicion">{{clinicHistory?.physiologicalConstants?.respiratoryFrequency}}</span>
-                        </div>
-                    </div>
-                </div>
+                </nb-card-body>
+            </nb-card>
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Pulso: <br></label>
-                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.pulse}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Temperatura: <br></label>
-                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.temperature}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Peso: <br></label>
-                            <span class="posicion">{{clinicHistory?.physiologicalConstants?.weight}}</span>
-                        </div>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
-
-        <!--Examenes clinicos-->
-
-        <nb-card>
-            <nb-card-header>Exámenes clínicos</nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputFirstName" class="label">Actitud: </label>
-                            <span class="posicion">{{ clinicHistory?.clinicExam?.attitude}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Condición corporal: <br></label>
-                            <span class="posicion">{{clinicHistory?.clinicExam?.bodyCondition}}</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="inputLastName" class="label">Deshidratación <br></label>
-                            <span class="posicion">{{clinicHistory?.clinicExam?.stateDehydration}}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div *ngFor=" let history of clinicHistory.clinicExam.clinicExamClinicHistories" class="item">
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Estado: </label>
-                        {{history?.optionClinicExam}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre examen: </label>
-                        {{history?.clinicExam?.exam}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Observación:
-                        </label> {{history?.observation}}</span>
-                </div>
-
-            </nb-card-body>
-        </nb-card>
-
-
-        <!-- Lista de proeblemas -->
-
-        <nb-card>
-            <nb-card-header>Lista de problemas</nb-card-header>
-            <nb-card-body>
-                <div *ngFor=" let problems of clinicHistory.listProblems" class="item">
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Problema: </label>
-                        {{problems?.problem}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Raiz del problema: </label>
-                        {{problems?.listMaster}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Diagnóstico diferencial :
-                        </label> {{problems?.differentialDiagnosis }}</span>
-                </div>
-            </nb-card-body>
-        </nb-card>
-
-
-
-        <!-- plan diagnostico -->
-
-        <nb-card>
-            <nb-card-header>Examen cl+inico y resultados</nb-card-header>
-            <nb-card-body>
-
-                <div *ngFor=" let history of clinicHistory.diagnosticPlans; let i = index" class="item">
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Examen: </label>
-                        {{history?.description}}</span>
-                    <span class="col-md-4 center"><label for="inputFirstName" class="label">Laboratorio:
-                        </label>{{history?.labs}} </span>
-                    <span class="col-md-4 center">
-                        <nb-icon class="changeMouse space" nbTooltip="Descargar pdf" (click)="download(i)"
-                            nbTooltipStatus="success" status="success" icon="download-outline"></nb-icon>
-                    </span>
-                </div>
-
-            </nb-card-body>
-        </nb-card>
+        </div>
+        <button class="btn btn-success btn-block" (click)="downloadPDF()" [nbSpinner]="loadingLargeGroup"
+            nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="disabledUpdate">Download
+            PDF</button>
 
 
     </nb-layout-column>
