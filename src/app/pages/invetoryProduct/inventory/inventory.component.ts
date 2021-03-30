@@ -56,7 +56,7 @@ export class InventoryComponent implements OnInit {
   *Metodo que permite obtener y listar todos los datos correspondientes a los productos, por medio de un service getProducts que es
   *invocado desde el serviceProduct */
   getProductList(ordenList?) {
-    this.inventoryService.getProductsInventoryPage(this.page).subscribe(
+    this.inventoryService.getProductsInventoryFilters().subscribe(
       product => {
         this.dataPaginator = product;
         this.productList = [];
@@ -70,7 +70,7 @@ export class InventoryComponent implements OnInit {
         this.product.forEach(p => {
           this.productList.push(p);
         });
-        this.getProductListFilter();
+      //  this.getProductListFilter();
       },
     );
   }
@@ -82,19 +82,19 @@ export class InventoryComponent implements OnInit {
    *@author [CadenaCristian]
    *@since 04/01/2021
    *Metodo que permite listar todos los clientes para el filtro*/
-  getProductListFilter() {
-    this.inventoryService.getProductsInventoryFilters().subscribe(
-      product => {
-        this.paginationService.paginationCount(this.dataPaginator);
-        this.productListFilter = [];
-        this.product = product.products;
-        this.total = product.products.length;
-        this.product.forEach(p => {
-          this.productListFilter.push(p);
-        });
-      },
-    );
-  }
+  // getProductListFilter() {
+  //   this.inventoryService.getProductsInventoryFilters().subscribe(
+  //     product => {
+  //       this.paginationService.paginationCount(this.dataPaginator);
+  //       this.productListFilter = [];
+  //       this.product = product.products;
+  //       this.total = product.products.length;
+  //       this.product.forEach(p => {
+  //         this.productListFilter.push(p);
+  //       });
+  //     },
+  //   );
+  // }
   /*<i>[fin][]</i>
   *@author [CadenaCristian]
   *@since 04/01/2021

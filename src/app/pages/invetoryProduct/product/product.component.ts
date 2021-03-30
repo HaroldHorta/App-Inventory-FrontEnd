@@ -40,19 +40,19 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.paginationService.paginatornumber$.subscribe(data => {
+   /* this.paginationService.paginatornumber$.subscribe(data => {
       this.page = data;
       this.changeDetectorRef.detectChanges();
       this.getProductsList();
-    });
-    this.getProductsList();
+    });*/
+    this.getProductFilter();
   }
 
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
   *@since 27/12/2020
   *Metodo para llamar la lista de productos, con un listado de maximo 10 por pagina*/
-  getProductsList() {
+  /*getProductsList() {
     this.serviceProduct.getProductsFilters(this.page).subscribe(async product => {
       this.dataPaginator = product;
       this.products = product.products;
@@ -60,7 +60,7 @@ export class ProductComponent implements OnInit {
 
     },
     );
-  }
+  }*/
   /*<i>[fin][]</i>
     *@author [CadenaCristian]
     *@since 27/12/2020*/
@@ -73,7 +73,7 @@ export class ProductComponent implements OnInit {
     this.serviceProduct.getProductsFilter().subscribe(async data => {
       this.originalDataProduct = data;
       //  this.pagination = new Array(Math.ceil(data.count / 10));
-      this.paginationService.paginationCount(this.dataPaginator);
+     // this.paginationService.paginationCount(this.dataPaginator);
       this.mainFilter = {
         search: '',
       };
@@ -93,9 +93,9 @@ export class ProductComponent implements OnInit {
   *@since 28/12/2020
   *Metodo para filtrar encargado de detectar algu caracter en el input de search*/
   onSearchChange(search) {
-    if (search.search === '') {
+   /* if (search.search === '') {
       this.hiddenFilters = false;
-    }
+    }*/
     this.mainFilter.search = search.search;
 
     this.updateProducts({
@@ -118,7 +118,7 @@ export class ProductComponent implements OnInit {
     const prevProducts = this.productsFilters;
     let filterAllData = true;
     if ((filter.type === 'search' && filter.change === 1)) {
-      this.hiddenFilters = true;
+     // this.hiddenFilters = true;
       productsSource = this.productsFilters;
       filterAllData = false;
     }

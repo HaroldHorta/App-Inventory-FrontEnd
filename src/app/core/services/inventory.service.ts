@@ -25,9 +25,9 @@ export class InventoryService {
     );
   }
 
-  getProductsInventoryPage(page): Observable<ResponseProductPagination> {
-    return this.http.get(`${endpoint.Units}/page/?page=${page}`).pipe(
-      map(response => response as ResponseProductPagination),
-    );
-  }
+  // getProductsInventoryPage(page): Observable<ResponseProductPagination> {
+  //   return this.http.get(`${endpoint.Units}/page/?page=${page}`).pipe(
+  //     map(response => response as ResponseProductPagination),
+  //   );
+  // }
 }

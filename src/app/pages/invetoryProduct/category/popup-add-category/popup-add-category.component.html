@@ -2,7 +2,7 @@
     <nb-card-header>Categoria</nb-card-header>
     <nb-card-body *ngIf="!categoryEdit">
         <!-- <p *ngIf="!checkOutForm.get('categoria').errors && !checkOutForm.get('categoria')" style="color: red;">* Campo obligatorio *</p> -->
-        <input nbInput type="text" formControlName="description" placeholder="Nombre categoria" onkeypress="return event.charCode >= 65 && event.charCode <= 122">
+        <input nbInput type="text" formControlName="description" placeholder="Nombre categoria">
     </nb-card-body>
     <nb-card-body *ngIf="categoryEdit" [formGroup]="checkOutEdit">
         <input nbInput type="text" formControlName="description" [ngModel]="categoryEdit.description">

@@ -13,26 +13,26 @@
       </div>
     </div>
 
-    
+    <!--
+
     <div *ngIf="!products">
       <nb-card class="inline-form-card">
-          <nb-card-header>Productos</nb-card-header>
-          <nb-card-body>
-              <h6>No se han encontrado productos registrados</h6>
-          </nb-card-body>
+        <nb-card-header>Productos</nb-card-header>
+        <nb-card-body>
+          <h6>No se han encontrado productos registrados</h6>
+        </nb-card-body>
       </nb-card>
-  </div>
-
-    <div class="row show-grid" *ngIf="products">
-      <div class="col-md-12" *ngIf="!hiddenFilters">
+    </div>
+-->
+    <div class="row show-grid">
+      <!--  <div class="col-md-12" *ngIf="!hiddenFilters">
         <ngx-showcase [products]='products'></ngx-showcase>
-      </div>
-      <div class="col-md-12"  *ngIf="hiddenFilters">
+      </div>-->
+      <div class="col-md-12" *ngIf="!hiddenFilters">
         <ngx-showcase [products]='productsFilters'></ngx-showcase>
       </div>
     </div>
   </div>
 </div>
 
-<ngx-paginator *ngIf="products"></ngx-paginator>
-
+<!--<ngx-paginator *ngIf="products"></ngx-paginator>-->
