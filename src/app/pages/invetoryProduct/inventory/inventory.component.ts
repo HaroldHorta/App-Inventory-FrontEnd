@@ -24,10 +24,10 @@ export class InventoryComponent implements OnInit {
   changeDetectorRef: ChangeDetectorRef;
   urls = [];
   productList = [];
-  productListFilter = [];
+ // productListFilter = [];
   searchProduct;
   total: number = 0;
-  hideFilters = false;
+ // hideFilters = false;
   page: number = 0;
   dataPaginator;
 
@@ -225,15 +225,15 @@ export class InventoryComponent implements OnInit {
   *@since 23/12/2020*/
 
 
-  onSelectChange(event) {
+/*  onSelectChange(event) {
 
     if (event === '') {
-      this.hideFilters = false;
+  //    this.hideFilters = false;
     }
     if (event !== '') {
-      this.hideFilters = true;
+    //  this.hideFilters = true;
     }
-  }
+  }*/
 
   ordenAlfabetico() {
     this.product.sort((a, b) => {
