@@ -7,7 +7,7 @@ import { RequestAddVeterinary } from '../models/Request/veterinary/RequestAddVet
 import { ResponseVeterinary } from '../models/Response/veterinary/ResponseVeterinary';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VeterinaryService {
 
@@ -15,25 +15,25 @@ export class VeterinaryService {
   constructor(private http: HttpClient) { }
 
   getVeterinary(): Observable<ResponseVeterinary[]> {
-    return this.http.get(endpoint.Veterinary).pipe(
+    return this.http.get(endpoint.veterinary).pipe(
       map(response => response as ResponseVeterinary[]),
     );
   }
 
   getVeterinaryById(id): Observable<ResponseVeterinary> {
-    return this.http.get<ResponseVeterinary>(`${endpoint.Veterinary}/${id}`);
+    return this.http.get<ResponseVeterinary>(`${endpoint.veterinary}/${id}`);
   }
 
-  getVeterinaryByprofessionalCard(professionalCard:string): Observable<ResponseVeterinary> {
-    return this.http.get<ResponseVeterinary>(`${endpoint.Veterinary}/professionalCard/${professionalCard}`);
+  getVeterinaryByprofessionalCard(professionalCard: string): Observable<ResponseVeterinary> {
+    return this.http.get<ResponseVeterinary>(`${endpoint.veterinary}/professionalCard/${professionalCard}`);
   }
-  
+
   create(veterinary: RequestAddVeterinary): Observable<RequestAddVeterinary> {
-    return this.http.post<RequestAddVeterinary>(endpoint.Veterinary, veterinary, { headers: this.httpHeaders });
+    return this.http.post<RequestAddVeterinary>(endpoint.veterinary, veterinary, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestAddVeterinary> {
-    return this.http.delete<RequestAddVeterinary>(`${endpoint.Veterinary}/${id}`);
+    return this.http.delete<RequestAddVeterinary>(`${endpoint.veterinary}/${id}`);
   }
 
 }

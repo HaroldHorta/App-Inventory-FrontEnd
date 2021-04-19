@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { NbDialogService, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 import { Status } from '../../../core/models/enum/Status.enum';
 import { ResponseProduct } from '../../../core/models/Response/product/ResponseProduct.module';
 import { FileUploadService } from '../../../core/services/file-upload.service';
@@ -11,6 +10,7 @@ import { PopupComponent } from './popup/popup.component';
 import { PopUpdateUnitsComponent } from './pop-update-units/pop-update-units.component';
 import { InventoryService } from '../../../core/services/inventory.service';
 import { PaginationService } from '../../../core/services/pagination.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ngx-inventory',
@@ -22,14 +22,13 @@ export class InventoryComponent implements OnInit {
 
   product: ResponseProduct[];
   changeDetectorRef: ChangeDetectorRef;
-  urls = [];
   productList = [];
- // productListFilter = [];
   searchProduct;
   total: number = 0;
- // hideFilters = false;
   page: number = 0;
   dataPaginator;
+  selectedFiles: FileList;
+  currentFile: File;
 
   constructor(private serviceProduct: ProductService, private inventoryService: InventoryService,
     changeDetectorRef: ChangeDetectorRef,
@@ -60,17 +59,16 @@ export class InventoryComponent implements OnInit {
       product => {
         this.dataPaginator = product;
         this.productList = [];
-        this.product = product.products;
+        this.product = product;
         if (ordenList) {
           this.ordenAlfabetico();
         } else {
           this.ordenMasNuevoMasAntiguo();
         }
-        this.total = product.products.length;
+        this.total = product.length;
         this.product.forEach(p => {
           this.productList.push(p);
         });
-      //  this.getProductListFilter();
       },
     );
   }
@@ -78,26 +76,6 @@ export class InventoryComponent implements OnInit {
   *@author [CadenaCristian]
   *@since 23/12/2020*/
 
-  /*<i>[ini][]</i>
-   *@author [CadenaCristian]
-   *@since 04/01/2021
-   *Metodo que permite listar todos los clientes para el filtro*/
-  // getProductListFilter() {
-  //   this.inventoryService.getProductsInventoryFilters().subscribe(
-  //     product => {
-  //       this.paginationService.paginationCount(this.dataPaginator);
-  //       this.productListFilter = [];
-  //       this.product = product.products;
-  //       this.total = product.products.length;
-  //       this.product.forEach(p => {
-  //         this.productListFilter.push(p);
-  //       });
-  //     },
-  //   );
-  // }
-  /*<i>[fin][]</i>
-  *@author [CadenaCristian]
-  *@since 04/01/2021
 
   /*<i>[ini][]</i>
   *@author [CadenaCristian]
@@ -166,7 +144,7 @@ export class InventoryComponent implements OnInit {
   *producto del cual se quiere cambiar el status y evalua si product.status === 'ACTIVE' o 'INACTIVE'*/
   updateStatus(event, id) {
     let message;
-    let status;
+    let status: Status;
     if (event) {
       message = 'El producto se activo correctamente';
       status = Status.ACTIVE;
@@ -195,45 +173,39 @@ export class InventoryComponent implements OnInit {
  *Metodo que recibe un evento y un ID del producto especifico, el cual abre el explorador de archivos del pc en el cual se este usando y
  *permite subir la imagen que se desea cargar a ese producto, este o no este vacia la imagen del producto*/
   onSelectFile(idProduct, event) {
-    if (event.target.files && event.target.files[0]) {
-      for (let i = 0; i < 1; i++) {
-        const reader = new FileReader();
-        reader.onload = (events: any) => {
-          this.urls.push(events.target.result);
-          const obj = { idProduct: idProduct, dataPhoto: this.urls[0] };
-          this.fileUpload.create(obj).subscribe(() => {
-            this.urls = [];
-            this.productList = [];
-            const type = 'success';
-            const quote = { title: null, body: 'Imagen actualizado correctamente' };
-            this.generalService.showToast(type, quote.title, quote.body);
-            this.getProductList();
-          },
-            (err) => {
-              const type = 'danger';
-              const quote = { title: null, body: err.error.detailMessage };
-              this.generalService.showToast(type, quote.title, quote.body);
-            });
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    }
+    this.selectedFiles = event.target.files;
+    this.currentFile = this.selectedFiles.item(0);
+    this.fileUpload.upload(this.currentFile).subscribe(
+      () => {
+        const type = 'success';
+        const quote = { title: null, body: 'Foto cargada exitosamente' };
+        this.generalService.showToast(type, quote.title, quote.body);
+      },
+      err => {
+        const type = 'danger';
+        const quote = { title: null, body: 'error al cargar la foto' };
+        this.generalService.showToast(type, quote.title, quote.body);
+      });
+
+    const obj = { idProduct: idProduct, dataPhoto: environment.urlServerS3 + this.currentFile.name };
+    this.fileUpload.create(obj).subscribe(() => {
+      this.productList = [];
+      const type = 'success';
+      const quote = { title: null, body: 'Imagen actualizado correctamente' };
+      this.generalService.showToast(type, quote.title, quote.body);
+      this.getProductList();
+    },
+      (err) => {
+        const type = 'danger';
+        const quote = { title: null, body: err.error.detailMessage };
+        this.generalService.showToast(type, quote.title, quote.body);
+      });
+
   }
 
   /*<i>[fin][]</i>
   *@author [CadenaCristian]
   *@since 23/12/2020*/
-
-
-/*  onSelectChange(event) {
-
-    if (event === '') {
-  //    this.hideFilters = false;
-    }
-    if (event !== '') {
-    //  this.hideFilters = true;
-    }
-  }*/
 
   ordenAlfabetico() {
     this.product.sort((a, b) => {

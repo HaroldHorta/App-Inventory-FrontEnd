@@ -18,37 +18,37 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<ResponseCategory[]> {
-    return this.http.get(endpoint.Category).pipe(
+    return this.http.get(endpoint.category).pipe(
       map(response => response as ResponseCategory[]),
     );
   }
 
   getCategoryPage(page): Observable<ResponseCategoryPagination> {
-    return this.http.get(`${endpoint.Category}/page/?page=${page}`).pipe(
+    return this.http.get(`${endpoint.category}/page/?page=${page}`).pipe(
       map(response => response as ResponseCategoryPagination),
     );
   }
 
   getCategoryPageAll(): Observable<ResponseCategoryPagination> {
-    return this.http.get(`${endpoint.Category}/categoryFilter`).pipe(
+    return this.http.get(`${endpoint.category}/categoryFilter`).pipe(
       map(response => response as ResponseCategoryPagination),
     );
   }
 
   getCategory(id): Observable<ResponseCategory> {
-    return this.http.get<ResponseCategory>(`${endpoint.Category}/${id}`);
+    return this.http.get<ResponseCategory>(`${endpoint.category}/${id}`);
   }
 
   create(categoria: RequestCategory): Observable<RequestCategory> {
-    return this.http.post<RequestCategory>(endpoint.Category, categoria, { headers: this.httpHeaders });
+    return this.http.post<RequestCategory>(endpoint.category, categoria, { headers: this.httpHeaders });
   }
 
   update(categoria: RequestUpdateCategory): Observable<RequestUpdateCategory> {
-    return this.http.put<RequestUpdateCategory>(endpoint.Category, categoria, { headers: this.httpHeaders });
+    return this.http.put<RequestUpdateCategory>(endpoint.category, categoria, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateCategory> {
-    return this.http.delete<RequestUpdateCategory>(`${endpoint.Category}/${id}`);
+    return this.http.delete<RequestUpdateCategory>(`${endpoint.category}/${id}`);
   }
 
 }

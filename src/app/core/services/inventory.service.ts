@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { endpoint } from '../infraestructure/endpoint/endpoint';
 import { RequestUpdateUnit } from '../models/Request/product/RequestUpdateUnit';
 import { ResponseProduct } from '../models/Response/product/ResponseProduct.module';
-import { ResponseProductPagination } from '../models/Response/product/ResponseProductPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -16,18 +15,13 @@ export class InventoryService {
   constructor(private http: HttpClient) { }
 
   update(requestUpdateUnit: RequestUpdateUnit): Observable<RequestUpdateUnit> {
-    return this.http.patch<RequestUpdateUnit>(`${endpoint.Units}/unit`, requestUpdateUnit, { headers: this.httpHeaders });
+    return this.http.patch<RequestUpdateUnit>(`${endpoint.inventory}/unit`, requestUpdateUnit, { headers: this.httpHeaders });
   }
 
-  getProductsInventoryFilters(): Observable<ResponseProductPagination> {
-    return this.http.get(`${endpoint.Units}/allProducts`).pipe(
-      map(response => response as ResponseProductPagination),
+  getProductsInventoryFilters(): Observable<ResponseProduct[]> {
+    return this.http.get(`${endpoint.inventory}/inventory`).pipe(
+      map(response => response as ResponseProduct[]),
     );
   }
 
-  // getProductsInventoryPage(page): Observable<ResponseProductPagination> {
-  //   return this.http.get(`${endpoint.Units}/page/?page=${page}`).pipe(
-  //     map(response => response as ResponseProductPagination),
-  //   );
-  // }
 }

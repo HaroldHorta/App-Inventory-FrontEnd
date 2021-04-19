@@ -13,9 +13,9 @@
       </div>
     </div>
 
-    <!--
+  
 
-    <div *ngIf="!products">
+    <div *ngIf="!productsFilters">
       <nb-card class="inline-form-card">
         <nb-card-header>Productos</nb-card-header>
         <nb-card-body>
@@ -23,11 +23,8 @@
         </nb-card-body>
       </nb-card>
     </div>
--->
+
     <div class="row show-grid">
-      <!--  <div class="col-md-12" *ngIf="!hiddenFilters">
-        <ngx-showcase [products]='products'></ngx-showcase>
-      </div>-->
       <div class="col-md-12" *ngIf="!hiddenFilters">
         <ngx-showcase [products]='productsFilters'></ngx-showcase>
       </div>

@@ -17,29 +17,29 @@ export class CashRegisterBaseService {
 
 
   getCashBase(): Observable<ResponseCashBase> {
-    return this.http.get(endpoint.CashBase).pipe(
+    return this.http.get(endpoint.cashBase).pipe(
       map(response => response as ResponseCashBase),
     );
   }
 
   getProductsExpensesFilters(): Observable<ResponseCashRegisterPagination> {
-    return this.http.get(`${endpoint.CashBase}/cashRegisterDailyFilter`).pipe(
+    return this.http.get(`${endpoint.cashBase}/cashRegisterDailyFilter`).pipe(
       map(response => response as ResponseCashRegisterPagination),
     );
   }
 
   getProductsExpensesPage(page): Observable<ResponseCashRegisterPagination> {
-    return this.http.get(`${endpoint.CashBase}/page/?page=${page}`).pipe(
+    return this.http.get(`${endpoint.cashBase}/page/?page=${page}`).pipe(
       map(response => response as ResponseCashRegisterPagination),
     );
   }
 
   createCashBase(cashBase): Observable<ResponseCashBase> {
-    return this.http.post<ResponseCashBase>(`${endpoint.CashBase}/${cashBase}`, { headers: this.httpHeaders });
+    return this.http.post<ResponseCashBase>(`${endpoint.cashBase}/${cashBase}`, { headers: this.httpHeaders });
   }
 
   createCashRegister(): Observable<ResponseCashRegister> {
-    return this.http.post<ResponseCashRegister>(`${endpoint.CashBase}/CashRegister`, { headers: this.httpHeaders });
+    return this.http.post<ResponseCashRegister>(`${endpoint.cashBase}/cashRegister`, { headers: this.httpHeaders });
   }
 
 

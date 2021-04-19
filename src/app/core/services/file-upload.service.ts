@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { endpoint } from '../infraestructure/endpoint/endpoint';
@@ -6,7 +6,7 @@ import { FileInfo } from '../models/Request/base/FileInfo.module';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileUploadService {
 
@@ -14,6 +14,17 @@ export class FileUploadService {
   constructor(private http: HttpClient) { }
 
   create(fileInfo): Observable<FileInfo> {
-    return this.http.post<FileInfo>(endpoint.ProductoWhitPhoto, fileInfo, { headers: this.httpHeaders });
+    return this.http.post<FileInfo>(endpoint.productoWhitPhoto, fileInfo, { headers: this.httpHeaders });
+  }
+
+  upload(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+    const req = new HttpRequest('POST', `${endpoint.productPhoto}/upload`, formData, {
+      responseType: 'json',
+    });
+
+    return this.http.request(req);
   }
 }
