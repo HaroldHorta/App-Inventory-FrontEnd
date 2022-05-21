@@ -17,21 +17,21 @@ export class ExpensesService {
 
 
   getProductsExpensesFilters(): Observable<ResponseExpensesPagination> {
-    return this.http.get(`${endpoint.Expenses}/expensesFilter`).pipe(
+    return this.http.get(`${endpoint.expenses}/expensesFilter`).pipe(
       map(response => response as ResponseExpensesPagination),
     );
   }
 
   getProductsExpensesPage(page): Observable<ResponseExpensesPagination> {
-    return this.http.get(`${endpoint.Expenses}/page/?page=${page}`).pipe(
+    return this.http.get(`${endpoint.expenses}/page/?page=${page}`).pipe(
       map(response => response as ResponseExpensesPagination),
     );
   }
 
   findExpensesById(id: string): Observable<ResponseExpenses> {
-    return this.http.get<ResponseExpenses>(`${endpoint.Expenses}/${id}`);
+    return this.http.get<ResponseExpenses>(`${endpoint.expenses}/${id}`);
   }
   create(expenses): Observable<RequestExpenses> {
-    return this.http.post<RequestExpenses>(endpoint.Expenses, expenses, { headers: this.httpHeaders });
+    return this.http.post<RequestExpenses>(endpoint.expenses, expenses, { headers: this.httpHeaders });
   }
 }

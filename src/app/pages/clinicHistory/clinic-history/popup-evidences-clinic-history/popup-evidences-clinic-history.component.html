@@ -1,0 +1,335 @@
+<nb-card>
+    <nb-card-header>Mascota EquidoDog</nb-card-header>
+    <nb-card-body>
+        <div class="contenedorImg">
+            <img class="img-card" src="{{clinicHistory?.pet?.photo}}" />
+        </div>
+        <div class="contenedorDetalles">
+            <nb-stepper orientation="horizontal">
+                <nb-step [label]="labelOne">
+                    <ng-template #labelOne>Datos Generales Mascotas</ng-template>
+                    <div class="box">
+                        <h6>Datos mascota</h6>
+                        <hr style="border-color:blue;">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputFirstName" class="label">Nombre: </label>
+                                    <span class="posicion">{{ clinicHistory?.pet?.name}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Raza: <br></label>
+                                    <span class="posicion">{{clinicHistory?.pet?.breed?.description}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Especie: <br></label>
+                                    <span class="posicion">{{clinicHistory?.pet?.species?.description}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Sexo: <br></label>
+                                    <span class="posicion">{{clinicHistory?.pet?.sex}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputFirstName" class="label">Nacimiento: </label>
+                                    <span class="posicion">{{ clinicHistory?.pet?.dateBirth | date:'yyyy/MM/dd'}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Edad: <br></label>
+                                    <span class="posicion">{{clinicHistory?.pet?.age}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Color: <br></label>
+                                    <span class="posicion">{{clinicHistory?.pet?.color}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Señas particulares: <br></label>
+                                    <span class="posicion">{{clinicHistory?.pet?.particularSigns}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Motivos de la consulta -->
+
+                    <h6>Motivos consulta</h6>
+                    <hr style="border-color:blue;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Motivos de la consulta: </label>
+                                <span class="posicion">{{ clinicHistory?.reasonOfConsultation}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Anamnésicos: <br></label>
+                                <span class="posicion">{{clinicHistory?.anamnesis}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h6>Examen clínico</h6>
+                    <hr style="border-color:blue;">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputFirstName" class="label">Actitud: </label>
+                                <span class="posicion">{{ clinicHistory?.clinicExam?.attitude}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Condición corporal: <br></label>
+                                <span class="posicion">{{clinicHistory?.clinicExam?.bodyCondition}}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="inputLastName" class="label">Deshidratación <br></label>
+                                <span class="posicion">{{clinicHistory?.clinicExam?.stateDehydration}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6>Examen clínico</h6>
+                    <hr style="border-color:blue;">
+                    <div *ngFor=" let history of clinicHistory.clinicExam.clinicExamClinicHistories" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Estado: </label>
+                            {{history?.optionClinicExam}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Nombre examen: </label>
+                            {{history?.clinicExam?.exam}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Observación:
+                            </label> {{history?.observation}}</span>
+                    </div>
+
+                    <h6>Lista de problemas</h6>
+                    <hr style="border-color:blue;">
+                    <div *ngFor=" let problems of clinicHistory.listProblems" class="item">
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Problema: </label>
+                            {{problems?.problem}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Raiz del problema:
+                            </label>
+                            {{problems?.listMaster}}</span>
+                        <span class="col-md-4 center"><label for="inputFirstName" class="label">Diagnóstico diferencial
+                                :
+                            </label> {{problems?.differentialDiagnosis }}</span>
+                    </div>
+
+                    <div>
+                        <button nbButton disabled nbStepperNext>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+
+                <nb-step [label]="labeltwo">
+                    <ng-template #labeltwo>Examen Clínico</ng-template>
+
+                    <h6>Examen clínico</h6>
+                    <hr style="border-color:blue;">
+                    <div *ngIf="!examHidden">
+                        <div *ngFor=" let history of clinicHistory.diagnosticPlans; let i = index" class="item">
+                            <span class="col-md-4 center"><label for="inputFirstName" class="label">Examen: </label>
+                                {{history?.description}}</span>
+                            <span> <input nbInput type="text" name="search" [(ngModel)]="diagnosticPlans[i].labs"
+                                    autocomplete="on" placeholder="Laboratorio"
+                                    (ngModelChange)='onSelectChange($event,i)'></span>
+                            <input type="file" accept="image/*" (change)="changeListener($event, i,history)">
+
+                        </div>
+
+                        <button style="margin-left: 20px;" class="btn btn-outline-success form-group" type="submit"
+                            (click)="updateDiagnosticPlan()" [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success"
+                            nbSpinnerSize="large" nbSpinnerMessage="" [disabled]="disabledUpdate">Guardar</button>
+
+                    </div>
+
+                    <div *ngIf="examHidden">
+                        <div *ngFor=" let history of clinicHistory.diagnosticPlans; let i = index" class="item">
+                            <span class="col-md-4 center"><label for="inputFirstName" class="label">Examen: </label>
+                                {{history?.description}}</span>
+                            <span>{{history?.labs}} </span>
+                            <span>
+                                <nb-icon class="changeMouse space" nbTooltip="Descargar pdf" (click)="download(i)"
+                                    nbTooltipStatus="success" status="success" icon="download-outline"></nb-icon>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+
+                <!-- Interpretacion de resultados-->
+                <nb-step [label]="labelthree">
+                    <ng-template #labelthree>Intrepretación de resultados</ng-template>
+
+                    <h6>Examen clínico</h6>
+                    <hr style="border-color:blue;">
+                    <div *ngIf="!resultHidden" [formGroup]="checkOutForm">
+
+                        <div class="full-name-inputs form-group">
+                            <textarea formControlName="interpretationResults" nbInput fullWidth
+                                [(ngModel)]="clinicHistory.resultClinic.interpretationResults"
+                                placeholder="Intrepretación de resultados"></textarea>
+                        </div>
+
+                        <div class="full-name-inputs form-group">
+                            <textarea formControlName="diagnosticImpression" nbInput fullWidth
+                                [(ngModel)]="clinicHistory.resultClinic.diagnosticImpression"
+                                placeholder="Impresión diagnóstica"></textarea>
+                        </div>
+
+                        <button style="margin-left: 20px;" class="btn btn-outline-success form-group" type="submit"
+                            (click)="updateInterpretResult(checkOutForm.value )" [nbSpinner]="loadingLargeGroup"
+                            nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage=""
+                            [disabled]="!checkOutForm.valid || disabledUpdate">Guardar</button>
+
+                    </div>
+
+                    <div *ngIf="resultHidden">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputFirstName" class="label">Intrepretación de resultados: </label>
+                                    <span class="posicion">{{
+                                        clinicHistory?.resultClinic?.interpretationResults}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputLastName" class="label">Impresión diagnóstica: <br></label>
+                                    <span class="posicion">{{clinicHistory?.resultClinic?.diagnosticImpression}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+
+
+
+                <nb-step [label]="labelFour">
+                    <ng-template #labelFour>Plan terapéutico</ng-template>
+                    <h4>Lsita de problemas</h4>
+                    <div [formGroup]="checkOutFormTherapeutic" class="example-items-rows">
+
+                        <div class="full-name-inputs form-group">
+                            <div>
+                                <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                    formControlName="activePrincipleManage" placeholder="Principio activo">
+                                <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                    formControlName="presentation" placeholder="Presentación">
+                                <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                    formControlName="posology" placeholder="Posología">
+                                <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                    formControlName="totalDose" placeholder="Dosis total">
+                                <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                    formControlName="via" placeholder="Via">
+                                <input class="form-group" style="margin-right: 2%;" nbInput type="text"
+                                    formControlName="frequencyDuration" placeholder="Frecuencia y duración">
+                            </div>
+                            <div>
+                                <nb-select class="form-group" placeholder="Tipo de terapia:"
+                                    style="margin-right: 2%; width: 250px; " formControlName="therapeuticPlanOption">
+                                    <nb-option *ngFor="let item of therapeuticPlanOption" [value]="item">{{item}}
+                                    </nb-option>
+                                </nb-select>
+
+                                <button class="btn btn-outline-success form-group " style="margin-top: 9px;"
+                                    (click)="addListTherapeuticPlan(checkOutFormTherapeutic.value)"
+                                    [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="control" nbSpinnerSize="large"
+                                    nbSpinnerMessage=""
+                                    [disabled]="!checkOutFormTherapeutic.valid || disableButton">Agregar
+                                    Problema</button>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" *ngIf="hiddenTherapeuticPlan">
+                        <div class="col-md-12">
+                            <nb-card>
+                                <nb-card-header class="item">
+                                    <span>Plan terapéutico</span>
+                                    <span>Principio activo</span>
+                                    <span>presentation</span>
+                                    <span>Posología</span>
+                                    <span>Dosis</span>
+                                    <span>Via</span>
+                                    <span>Frecuencia y duración</span>
+
+                                    <span>Acciones</span>
+                                </nb-card-header>
+                                <nb-list>
+                                    <nb-list-item class="item" *ngFor="let list of therapeuticPlan; let i = index">
+                                        <span>{{list?.therapeuticPlanOption}}</span>
+                                        <span>{{list?.activePrincipleManage}}</span>
+                                        <span>{{list?.presentation}}</span>
+                                        <span>{{list?.posology}}</span>
+                                        <span>{{list?.totalDose}}</span>
+                                        <span>{{list?.via}}</span>
+                                        <span>{{list?.frequencyDuration}}</span>
+
+
+                                        <span>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <nb-icon class="changeMouse" status="danger" nbTooltip="Eliminar"
+                                                        nbTooltipStatus="danger" icon="trash-2-outline"
+                                                        (click)="deleteTherapeuticPlan(i)"></nb-icon>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </nb-list-item>
+
+
+                                </nb-list>
+                            </nb-card>
+                            <button class="btn btn-outline-success form-group " style="margin-top: 7px;"
+                                (click)="updateTherapeuticPlan()" [nbSpinner]="loadingLargeGroup"
+                                nbSpinnerStatus="control" nbSpinnerSize="large" nbSpinnerMessage=""
+                                [disabled]="disableButton">Guardar</button>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button disabled style="float: right;" nbButton nbStepperNext>next</button>
+                    </div>
+                </nb-step>
+
+            </nb-stepper>
+
+
+        </div>
+
+
+    </nb-card-body>
+    <nb-card-footer>
+        <button style="float:right; margin-top: 15px;" class="btn btn-outline-danger  form-group" nbButton
+            (click)="cancel()">Cerrar</button>
+    </nb-card-footer>
+</nb-card>

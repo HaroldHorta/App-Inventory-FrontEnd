@@ -15,14 +15,14 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   getOrders(): Observable<ResponseOrder[]> {
-    return this.http.get<ResponseOrder[]>(endpoint.Order);
+    return this.http.get<ResponseOrder[]>(endpoint.order);
   }
 
   getOrder(id): Observable<ResponseOrder> {
-    return this.http.get<ResponseOrder>(`${endpoint.Order}/${id}`);
+    return this.http.get<ResponseOrder>(`${endpoint.order}/${id}`);
   }
 
   create(order: any): Observable<RequestOrder> {
-    return this.http.post<RequestOrder>(endpoint.Order, order, { headers: this.httpHeaders });
+    return this.http.post<RequestOrder>(endpoint.order, order, { headers: this.httpHeaders });
   }
 }

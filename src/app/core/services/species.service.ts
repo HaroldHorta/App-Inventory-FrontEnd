@@ -16,24 +16,24 @@ export class SpeciesService {
   constructor(private http: HttpClient) { }
 
   getSpecies(): Observable<ResponseSpecies[]> {
-    return this.http.get(endpoint.Species).pipe(
+    return this.http.get(endpoint.species).pipe(
       map(response => response as ResponseSpecies[]),
     );
   }
 
   getSpeciesById(id): Observable<ResponseSpecies> {
-    return this.http.get<ResponseSpecies>(`${endpoint.Species}/${id}`);
+    return this.http.get<ResponseSpecies>(`${endpoint.species}/${id}`);
   }
 
   create(species: RequestSpecies): Observable<RequestSpecies> {
-    return this.http.post<RequestSpecies>(endpoint.Species, species, { headers: this.httpHeaders });
+    return this.http.post<RequestSpecies>(endpoint.species, species, { headers: this.httpHeaders });
   }
 
   update(species: RequestUpdateSpecies): Observable<RequestUpdateSpecies> {
-    return this.http.put<RequestUpdateSpecies>(endpoint.Species, species, { headers: this.httpHeaders });
+    return this.http.put<RequestUpdateSpecies>(endpoint.species, species, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateSpecies> {
-    return this.http.delete<RequestUpdateSpecies>(`${endpoint.Species}/${id}`);
+    return this.http.delete<RequestUpdateSpecies>(`${endpoint.species}/${id}`);
   }
 }

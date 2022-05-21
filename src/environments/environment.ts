@@ -11,6 +11,8 @@
 export const environment = {
   production: false,
   serverUrl: 'http://localhost:8282/api',
+  serverS3: 'http://localhost:8080',
+  urlServerS3: 'http://localhost:8080/files/',
    // serverUrl: 'https://equidog-qa.herokuapp.com/api',
   // production: false,
 };

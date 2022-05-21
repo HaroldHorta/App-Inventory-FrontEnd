@@ -15,24 +15,24 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
   getTickets(): Observable<ResponseTicket[]> {
-    return this.http.get(endpoint.Ticket).pipe(
+    return this.http.get(endpoint.ticket).pipe(
       map(response => response as ResponseTicket[]),
     );
   }
 
   getTicketById(id): Observable<ResponseTicket> {
-    return this.http.get<ResponseTicket>(`${endpoint.Ticket}/${id}`);
+    return this.http.get<ResponseTicket>(`${endpoint.ticket}/${id}`);
   }
 
   getTicketByNroDocument(nroDocument): Observable<ResponseTicket[]> {
-    return this.http.get<ResponseTicket[]>(`${endpoint.Ticket}/nroDocument/${nroDocument}`);
+    return this.http.get<ResponseTicket[]>(`${endpoint.ticket}/nroDocument/${nroDocument}`);
   }
 
   create(ticket): Observable<RequestAddTicket> {
-    return this.http.post<RequestAddTicket>(endpoint.Ticket, ticket, { headers: this.httpHeaders });
+    return this.http.post<RequestAddTicket>(endpoint.ticket, ticket, { headers: this.httpHeaders });
   }
 
   creditCapital(id, creditCapital, creditPayment): Observable<ResponseTicket> {
-    return this.http.patch<ResponseTicket>(`${endpoint.Ticket}/${id}/${creditCapital}/${creditPayment}`, { headers: this.httpHeaders })
+    return this.http.patch<ResponseTicket>(`${endpoint.ticket}/${id}/${creditCapital}/${creditPayment}`, { headers: this.httpHeaders });
   }
 }

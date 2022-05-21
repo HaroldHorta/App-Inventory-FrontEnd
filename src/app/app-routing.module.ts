@@ -11,6 +11,7 @@ import {
 import { TicketGeneratorComponent } from './pages/invetoryProduct/ticket/ticket-generator/ticket-generator.component';
 import { CheckoutComponent } from './pages/invetoryProduct/product/cart/checkout/checkout.component';
 import { ClinicHistoryComponent } from './pages/clinicHistory/clinic-history/clinic-history.component';
+import { DetailsClinicHistoryComponent } from './pages/clinicHistory/clinic-history/details-clinic-history/details-clinic-history.component';
 
 export const routes: Routes = [
   {
@@ -50,17 +51,17 @@ export const routes: Routes = [
   },
   { path: 'pages/checkout/:idOrder', component: CheckoutComponent },
   { path: 'pages/ticket/:idTicket', component: TicketGeneratorComponent },
-  { path: 'pages/clinic-history/:idClinicHistory', component: ClinicHistoryComponent },
+  { path: 'pages/clinic-history/:idClinicHistory', component: DetailsClinicHistoryComponent },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 
 const config: ExtraOptions = {
-  useHash: false,
+  useHash: true,
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
+  imports: [RouterModule.forRoot(routes, config, )],
   exports: [RouterModule],
 })
 export class AppRoutingModule {

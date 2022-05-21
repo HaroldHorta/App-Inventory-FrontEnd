@@ -1,13 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NbDialogRef, NB_DOCUMENT } from '@nebular/theme';
+import { NbDialogRef } from '@nebular/theme';
 import { ResponseCategory } from '../../../../core/models/Response/category/ResponseCategory.module';
 import { ResponseProduct } from '../../../../core/models/Response/product/ResponseProduct.module';
 import { CategoryService } from '../../../../core/services/category.service';
 import { FileUploadService } from '../../../../core/services/file-upload.service';
 import { GeneralService } from '../../../../core/services/general.service';
 import { ProductService } from '../../../../core/services/product.service';
-
+import * as uuid from 'uuid';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ngx-popup',
@@ -28,13 +29,15 @@ export class PopupComponent implements OnInit {
   selectedItemEdit;
   loadingLargeGroup = false;
   disabledUpdate = false;
-
+  NameProduct = uuid.v4();
+  selectedFiles: FileList;
+  currentFile: File;
   ngOnInit(): void {
     this.getCategoryList();
     this.productEdit;
   }
 
-  constructor(private serviceProduct: ProductService, private fileUpload: FileUploadService,
+  constructor(private uploadService: FileUploadService,
     private generalService: GeneralService, protected ref: NbDialogRef<PopupComponent>,
     private serviceCategory: CategoryService, private formBuilder: FormBuilder, private productService: ProductService) {
     this.checkOutForm = this.formBuilder.group({
@@ -44,7 +47,7 @@ export class PopupComponent implements OnInit {
       priceBuy: ['', [Validators.required]],
       priceSell: ['', [Validators.required]],
       unit: ['', [Validators.required]],
-      photo: [''],
+      photo: [null],
     });
     this.checkOutFormEdit = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -54,6 +57,8 @@ export class PopupComponent implements OnInit {
       priceSell: ['', [Validators.required]],
       unit: ['', [Validators.required]],
     });
+
+
   }
 
   /*<i>[ini][]</i>
@@ -81,6 +86,9 @@ export class PopupComponent implements OnInit {
     *@author [CadenaCristian]
     *@since 24/12/2020*/
 
+  onFileSelect(event) {
+    this.selectedFiles = event.target.files;
+  }
 
   /*<i>[ini][]</i>
  *@author [CadenaCristian]
@@ -94,27 +102,6 @@ export class PopupComponent implements OnInit {
     *@author [CadenaCristian]
     *@since 25/12/2020*/
 
-  /*<i>[ini][]</i>
- *@author [CadenaCristian]
- *@since 25/12/2020
- *Este metodo se usa para poder seleccionar una foto desde el explorador de archivos,
-  *este metodo recibe un evento, el cual obtiene el nombre
- de la imagen que se quiere agregar, en la ruta event.target.files*/
-  urls = [];
-  onSelectFile(event) {
-    if (event.target.files && event.target.files[0]) {
-      for (let i = 0; i < 1; i++) {
-        const reader = new FileReader();
-        reader.onload = (events: any) => {
-          this.urls.push(events.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    }
-  }
-  /*<i>[fin][]</i>
-    *@author [CadenaCristian]
-    *@since 25/12/2020*/
 
   /*<i>[ini][]</i>
 *@author [CadenaCristian]
@@ -122,12 +109,35 @@ export class PopupComponent implements OnInit {
 *Este metodo recibe un checkOutForm que contiene todos los values de cada uno de los input que se usaron en el formulario y se
 debe realizar un push a una constante para poder darle la forma que recibe el backend en forma de JSON*/
   addProduct(product) {
-    product.photo = this.urls[0];
     this.loadingLargeGroup = true;
     this.disabledUpdate = true;
+    if (this.selectedFiles === undefined) {
+      product.photo = environment.urlServerS3 + 'noImage.jpg';
+    } else {
+      this.currentFile = this.selectedFiles.item(0);
+      this.uploadService.upload(this.currentFile).subscribe(
+        () => {
+          product.photo = environment.urlServerS3 + this.currentFile.name;
+          const type = 'success';
+          const quote = { title: null, body: 'Foto cargada exitosamente' };
+          this.generalService.showToast(type, quote.title, quote.body);
+        },
+        err => {
+          const type = 'danger';
+          const quote = { title: null, body: 'error al cargar la foto' };
+          this.generalService.showToast(type, quote.title, quote.body);
+        });
+
+      this.selectedFiles = undefined;
+    }
+
+
+
     const data = [];
     data.push({ id: product.categoryId.id, description: product.categoryId.description });
     product.categoryId = data;
+
+
     this.productService.create(JSON.stringify(product)).subscribe(
       () => {
         this.ref.close(product);

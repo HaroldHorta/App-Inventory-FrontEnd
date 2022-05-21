@@ -6,4 +6,6 @@
 export const environment = {
   production: true,
   serverUrl: '/api',
+  serverS3: 'http://localhost:8080',
+  urlServerS3: 'http://localhost:8080/files/',
 };

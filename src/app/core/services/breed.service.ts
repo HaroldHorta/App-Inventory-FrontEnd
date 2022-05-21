@@ -19,37 +19,37 @@ export class BreedService {
   constructor(private http: HttpClient) { }
 
   getBreed(): Observable<ResponseBreed[]> {
-    return this.http.get(endpoint.Breed).pipe(
+    return this.http.get(endpoint.breed).pipe(
       map(response => response as ResponseBreed[]),
     );
   }
 
   getBreedPage(page): Observable<ResponseBreedPagination> {
-    return this.http.get(`${endpoint.Breed}/page/?page=${page}`).pipe(
+    return this.http.get(`${endpoint.breed}/page/?page=${page}`).pipe(
       map(response => response as ResponseBreedPagination),
     );
   }
 
   getBreedPageAll(): Observable<ResponseBreedPagination> {
-    return this.http.get(`${endpoint.Breed}/breedFilter`).pipe(
+    return this.http.get(`${endpoint.breed}/breedFilter`).pipe(
       map(response => response as ResponseBreedPagination),
     );
   }
 
   getBreedById(id): Observable<ResponseBreed> {
-    return this.http.get<ResponseBreed>(`${endpoint.Breed}/${id}`);
+    return this.http.get<ResponseBreed>(`${endpoint.breed}/${id}`);
   }
 
   create(breed: RequestBreed): Observable<RequestBreed> {
-    return this.http.post<RequestBreed>(endpoint.Breed, breed, { headers: this.httpHeaders });
+    return this.http.post<RequestBreed>(endpoint.breed, breed, { headers: this.httpHeaders });
   }
 
   update(breed: RequestUpdateBreed): Observable<RequestUpdateBreed> {
-    return this.http.put<RequestUpdateBreed>(endpoint.Breed, breed, { headers: this.httpHeaders });
+    return this.http.put<RequestUpdateBreed>(endpoint.breed, breed, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateBreed> {
-    return this.http.delete<RequestUpdateBreed>(`${endpoint.Breed}/${id}`);
+    return this.http.delete<RequestUpdateBreed>(`${endpoint.breed}/${id}`);
   }
 
 }

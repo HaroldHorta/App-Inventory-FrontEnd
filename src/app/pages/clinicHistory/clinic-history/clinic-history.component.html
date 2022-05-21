@@ -41,7 +41,7 @@
                     <span>Historia Clinica</span>
                 </nb-card-header>
                 <nb-list>
-                    <nb-list-item class="item" *ngFor="let clinicHistory of clinicHistory" >
+                    <nb-list-item class="item" *ngFor="let clinicHistory of clinicHistory">
                         <span>{{clinicHistory?.createAt | date:'yyyy/MM/dd'}}</span>
                         <span>{{clinicHistory?.pet?.name}}</span>
                         <span>{{clinicHistory?.pet?.species?.description}}</span>
@@ -49,9 +49,14 @@
                         <span>{{clinicHistory?.pet?.color}}</span>
                         <span>{{clinicHistory?.pet?.age}}</span>
                         <span>
-                            <nb-icon class="changeMouse" nbTooltip="Nueva Historia Clínica" nbTooltipStatus="success"
-                                status="success" (click)="openClinicHistory(clinicHistory.id)" icon="book-open-outline">
-                            </nb-icon>
+                            <nb-icon class="changeMouse" nbTooltip="Completar Historia Clínica" nbTooltipStatus="success"
+                            status="success" (click)="openModalEvidences(clinicHistory)" icon="calendar-outline"></nb-icon>
+                 
+                            <a class="navf" [routerLink]="['/pages/clinic-history/', clinicHistory.id]" target="_blank">
+                                <nb-icon class="changeMouse" nbTooltip="Certificado historia clínica"
+                                    nbTooltipStatus="success" status="success" icon="book-open-outline">
+                                </nb-icon>
+                            </a>
                         </span>
                     </nb-list-item>
                 </nb-list>

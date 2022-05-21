@@ -17,39 +17,39 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getCustomers(): Observable<ResponseCustomer[]> {
-    return this.http.get(endpoint.Customer).pipe(
+    return this.http.get(endpoint.customer).pipe(
       map(response => response as ResponseCustomer[]),
     );
   }
 
   getCustomerPageAll(): Observable<ResponseCustomerPagination> {
-    return this.http.get(`${endpoint.Customer}/customerFilter`).pipe(
+    return this.http.get(`${endpoint.customer}/customerFilter`).pipe(
       map(response => response as ResponseCustomerPagination),
     );
   }
 
   getCustomerPage(page): Observable<ResponseCustomerPagination> {
-    return this.http.get(`${endpoint.Customer}/page/?page=${page}`).pipe(
+    return this.http.get(`${endpoint.customer}/page/?page=${page}`).pipe(
       map(response => response as ResponseCustomerPagination),
     );
   }
 
   findCustomerById(id: string): Observable<ResponseCustomer> {
-    return this.http.get<ResponseCustomer>(`${endpoint.Customer}/${id}`);
+    return this.http.get<ResponseCustomer>(`${endpoint.customer}/${id}`);
   }
   findCustomerByNroDocument(nroDocument: string): Observable<ResponseCustomer> {
-    return this.http.get<ResponseCustomer>(`${endpoint.Customer}/nroDocument/${nroDocument}`);
+    return this.http.get<ResponseCustomer>(`${endpoint.customer}/nroDocument/${nroDocument}`);
   }
 
   create(customer): Observable<RequestCustomer> {
-    return this.http.post<RequestCustomer>(endpoint.Customer, customer, { headers: this.httpHeaders });
+    return this.http.post<RequestCustomer>(endpoint.customer, customer, { headers: this.httpHeaders });
   }
 
   update(id, customer): Observable<RequestUpdateCustomer> {
-    return this.http.put<RequestUpdateCustomer>(`${endpoint.Customer}/update/${id}`, customer, { headers: this.httpHeaders });
+    return this.http.put<RequestUpdateCustomer>(`${endpoint.customer}/update/${id}`, customer, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateCustomer> {
-    return this.http.delete<RequestUpdateCustomer>(`${endpoint.Customer}/${id}`);
+    return this.http.delete<RequestUpdateCustomer>(`${endpoint.customer}/${id}`);
   }
 }

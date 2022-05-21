@@ -9,34 +9,34 @@ import { ResponseVaccinations } from '../models/Response/vaccination/ResponseVac
 import { Vaccination } from '../models/Response/vaccination/vaccination';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VaccinationService {
 
-  
+
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
 
   getVaccionation(): Observable<Vaccination[]> {
-    return this.http.get(endpoint.Vaccinations).pipe(
+    return this.http.get(endpoint.vaccinations).pipe(
       map(response => response as Vaccination[]),
     );
   }
 
   getVaccionationById(id): Observable<Vaccination> {
-    return this.http.get<Vaccination>(`${endpoint.Vaccinations}/${id}`);
+    return this.http.get<Vaccination>(`${endpoint.vaccinations}/${id}`);
   }
 
   create(vaccinations: RequestVaccination): Observable<RequestVaccination> {
-    return this.http.post<RequestVaccination>(endpoint.Vaccinations, vaccinations, { headers: this.httpHeaders });
+    return this.http.post<RequestVaccination>(endpoint.vaccinations, vaccinations, { headers: this.httpHeaders });
   }
 
   update(vaccinations: RequestUpdateVaccination): Observable<RequestUpdateVaccination> {
-    return this.http.put<RequestUpdateVaccination>(endpoint.Vaccinations, vaccinations, { headers: this.httpHeaders });
+    return this.http.put<RequestUpdateVaccination>(endpoint.vaccinations, vaccinations, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestUpdateVaccination> {
-    return this.http.delete<RequestUpdateVaccination>(`${endpoint.Vaccinations}/${id}`);
+    return this.http.delete<RequestUpdateVaccination>(`${endpoint.vaccinations}/${id}`);
   }
 
 }

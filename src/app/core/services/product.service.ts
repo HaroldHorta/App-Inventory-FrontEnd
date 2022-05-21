@@ -7,7 +7,6 @@ import { ResponseProduct } from '../models/Response/product/ResponseProduct.modu
 import { RequestAddProduct } from '../models/Request/product/RequestAddProduct';
 import { RequestUpdateProduct } from '../models/Request/product/RequestUpdateProduct';
 import { Status } from '../models/enum/Status.enum';
-import { ResponseProductPagination } from '../models/Response/product/ResponseProductPagination';
 
 @Injectable({
   providedIn: 'root',
@@ -15,36 +14,30 @@ import { ResponseProductPagination } from '../models/Response/product/ResponsePr
 export class ProductService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   constructor(private http: HttpClient) { }
 
-  getProductsFilter(): Observable<ResponseProductPagination> {
-    return this.http.get(`${endpoint.Product}/productsFilter`).pipe(
-      map(response => response as ResponseProductPagination),
-    );
-  }
-
-
-  getProductsFilters(page): Observable<ResponseProductPagination> {
-    return this.http.get(`${endpoint.Product}/page/?page=${page}`).pipe(
-      map(response => response as ResponseProductPagination),
+  getProductsFilter(): Observable<ResponseProduct[]> {
+    return this.http.get(`${endpoint.product}/products`).pipe(
+      map(response => response as ResponseProduct[]),
     );
   }
 
   getProductByid(id: string): Observable<ResponseProduct> {
-    return this.http.get<ResponseProduct>(`${endpoint.Product}/${id}`);
+    return this.http.get<ResponseProduct>(`${endpoint.product}/${id}`);
   }
   getProductByCategory(id: string): Observable<ResponseProduct[]> {
-    return this.http.get<ResponseProduct[]>(`${endpoint.Product}/category/${id}`);
+    return this.http.get<ResponseProduct[]>(`${endpoint.product}/category/${id}`);
   }
 
   create(product): Observable<RequestAddProduct> {
-    return this.http.post<RequestAddProduct>(endpoint.Product, product, { headers: this.httpHeaders });
+    return this.http.post<RequestAddProduct>(endpoint.product, product, { headers: this.httpHeaders });
   }
 
   update(id, product: RequestUpdateProduct): Observable<RequestUpdateProduct> {
-    return this.http.put<RequestUpdateProduct>(`${endpoint.Product}/${id}`, product, { headers: this.httpHeaders });
+    return this.http.put<RequestUpdateProduct>(`${endpoint.product}/${id}`, product, { headers: this.httpHeaders });
   }
   updateStatus(id: string, status: Status): Observable<any> {
-    return this.http.patch<ResponseProduct>(`${endpoint.Product}/${id}/status/${status}`, { headers: this.httpHeaders });
+    return this.http.patch<ResponseProduct>(`${endpoint.product}/${id}/status/${status}`, { headers: this.httpHeaders });
   }
 }

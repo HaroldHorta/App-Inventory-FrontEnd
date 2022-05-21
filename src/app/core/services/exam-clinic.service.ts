@@ -7,30 +7,30 @@ import { RequestAddClinicExam } from '../models/Request/examclinic/RequestAddCli
 import { ResponseClinicExam } from '../models/Response/examclinic/ResponseClinicExam';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExamClinicService {
 
-  
+
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) { }
-  
+
   getClinicExam(): Observable<ResponseClinicExam[]> {
-    return this.http.get(endpoint.ClinicExam).pipe(
+    return this.http.get(endpoint.clinicExam).pipe(
       map(response => response as ResponseClinicExam[]),
     );
   }
 
   getClinicExamById(id): Observable<ResponseClinicExam> {
-    return this.http.get<ResponseClinicExam>(`${endpoint.ClinicExam}/${id}`);
+    return this.http.get<ResponseClinicExam>(`${endpoint.clinicExam}/${id}`);
   }
 
   create(exam: RequestAddClinicExam): Observable<RequestAddClinicExam> {
-    return this.http.post<RequestAddClinicExam>(endpoint.ClinicExam, exam, { headers: this.httpHeaders });
+    return this.http.post<RequestAddClinicExam>(endpoint.clinicExam, exam, { headers: this.httpHeaders });
   }
 
   delete(id: string): Observable<RequestAddClinicExam> {
-    return this.http.delete<RequestAddClinicExam>(`${endpoint.ClinicExam}/${id}`);
+    return this.http.delete<RequestAddClinicExam>(`${endpoint.clinicExam}/${id}`);
   }
 
 }
